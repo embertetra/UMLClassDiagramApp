@@ -1,5 +1,7 @@
 package raf.dsw.classycraft.app.gui.swing.view;
 
+import raf.dsw.classycraft.app.controller.ActionManager;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,12 +10,17 @@ public class MainFrame extends JFrame {
 
     //buduca polja za sve komponente view-a na glavnom prozoru
 
+    ActionManager actionManager;
+    AboutUsFrame aboutUsFrame;
 
     private MainFrame(){
 
     }
 
     private void initialize(){
+        actionManager = new ActionManager();
+        aboutUsFrame = new AboutUsFrame();
+
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
         int screenHeight = screenSize.height;
@@ -28,6 +35,9 @@ public class MainFrame extends JFrame {
 
         MyToolBar toolBar = new MyToolBar();
         add(toolBar, BorderLayout.NORTH);
+
+
+
     }
 
     public static MainFrame getInstance()
@@ -38,5 +48,13 @@ public class MainFrame extends JFrame {
             instance.initialize();
         }
         return instance;
+    }
+
+    public ActionManager getActionManager() {
+        return actionManager;
+    }
+
+    public AboutUsFrame getAboutUsFrame() {
+        return aboutUsFrame;
     }
 }
