@@ -9,9 +9,6 @@ import java.awt.*;
 import java.net.URL;
 
 public class AboutUsFrame extends JFrame {
-    //buduca polja za sve komponente view-a na glavnom prozoru
-
-
     public AboutUsFrame(){
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
