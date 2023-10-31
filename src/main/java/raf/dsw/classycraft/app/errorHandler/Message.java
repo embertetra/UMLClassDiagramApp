@@ -12,9 +12,6 @@ public class Message {
         this.poruka = poruka;
         this.messageType = messageType;
 
-
-
-
     }
 
     public String getPoruka() {
