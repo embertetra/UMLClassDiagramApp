@@ -4,16 +4,17 @@ import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 public class ApplicationFramework {
 
-    private static ApplicationFramework instance;
-
     //buduca polja za model celog projekta
+    protected ClassyRepository classyRepository;
+
+    public void initialize(ClassyRepository classyRepository){
+        MainFrame.getInstance().setVisible(true);
+        this.classyRepository = classyRepository;
+    }
+    private static ApplicationFramework instance;
 
     private ApplicationFramework(){
 
-    }
-
-    public void initialize(){
-        MainFrame.getInstance().setVisible(true);
     }
 
     public static ApplicationFramework getInstance(){
@@ -21,5 +22,13 @@ public class ApplicationFramework {
             instance = new ApplicationFramework();
         }
         return instance;
+    }
+
+    public void setClassyRepository(ClassyRepository classyRepository) {
+        this.classyRepository = classyRepository;
+    }
+
+    public ClassyRepository getClassyRepository() {
+        return classyRepository;
     }
 }
