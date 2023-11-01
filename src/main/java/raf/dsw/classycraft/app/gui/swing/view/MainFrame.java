@@ -1,6 +1,7 @@
 package raf.dsw.classycraft.app.gui.swing.view;
 
 import raf.dsw.classycraft.app.controller.ActionManager;
+import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.Message;
 import raf.dsw.classycraft.app.errorHandler.MessageGenerator;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
@@ -16,7 +17,6 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     ActionManager actionManager;
     AboutUsFrame aboutUsFrame;
-    MessageGenerator messageGenerator;
 
     private MainFrame() {
 
@@ -25,8 +25,9 @@ public class MainFrame extends JFrame implements ISubscriber {
     private void initialize() {
         actionManager = new ActionManager();
         aboutUsFrame = new AboutUsFrame();
-        messageGenerator = new MessageGenerator();
-        messageGenerator.getSubscribers().add(this);
+
+        ApplicationFramework.getInstance().getMessageGenerator().getSubscribers().add(this);
+
 
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
@@ -76,14 +77,6 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     public void setActionManager(ActionManager actionManager) {
         this.actionManager = actionManager;
-    }
-
-    public MessageGenerator getMessageGenerator() {
-        return messageGenerator;
-    }
-
-    public void setMessageGenerator(MessageGenerator messageGenerator) {
-        this.messageGenerator = messageGenerator;
     }
 
 }

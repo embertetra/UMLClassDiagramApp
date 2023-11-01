@@ -1,7 +1,9 @@
 package raf.dsw.classycraft.app.errorHandler;
 
-public interface Logger {
+import raf.dsw.classycraft.app.observer.ISubscriber;
 
+public interface Logger extends ISubscriber {
 
+        void log(Object notification);
 
 }
