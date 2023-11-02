@@ -7,20 +7,23 @@ import javax.swing.*;
 
 public class ApplicationFramework {
 
-    private static ApplicationFramework instance;
-
     //sva polja modela projekta
+  
+    private static ApplicationFramework instance;
+  
     MessageGenerator messageGenerator;
     Logger fileLogger;
     Logger consoleLogger;
+  
+    protected ClassyRepository classyRepository;
 
     private ApplicationFramework(){
-
         messageGenerator = new MessageGenerator();
-
     }
 
-    public void initialize(){
+    public void initialize(ClassyRepository classyRepository){
+  
+        this.classyRepository = classyRepository;
 
         LoggerFactory loggerFactory = new LoggerFactory();
         fileLogger = loggerFactory.createLogger(LoggerType.FILE);
@@ -36,6 +39,13 @@ public class ApplicationFramework {
         return instance;
     }
 
+    public void setClassyRepository(ClassyRepository classyRepository) {
+        this.classyRepository = classyRepository;
+    }
+
+    public ClassyRepository getClassyRepository() {
+        return classyRepository;
+      
     public MessageGenerator getMessageGenerator() {
         return messageGenerator;
     }
