@@ -1,25 +1,33 @@
 package raf.dsw.classycraft.app.gui.swing.view;
 
 import raf.dsw.classycraft.app.controller.ActionManager;
+import raf.dsw.classycraft.app.core.ApplicationFramework;
+import raf.dsw.classycraft.app.errorHandler.Message;
+import raf.dsw.classycraft.app.errorHandler.MessageGenerator;
+import raf.dsw.classycraft.app.errorHandler.MessageType;
+import raf.dsw.classycraft.app.observer.ISubscriber;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements ISubscriber {
     private static MainFrame instance;
 
-    //buduca polja za sve komponente view-a na glavnom prozoru
+    //sva view polja projekta
 
     ActionManager actionManager;
     AboutUsFrame aboutUsFrame;
 
-    private MainFrame(){
+    private MainFrame() {
 
     }
 
-    private void initialize(){
+    private void initialize() {
         actionManager = new ActionManager();
         aboutUsFrame = new AboutUsFrame();
+
+        ApplicationFramework.getInstance().getMessageGenerator().getSubscribers().add(this);
+
 
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
@@ -37,13 +45,22 @@ public class MainFrame extends JFrame {
         add(toolBar, BorderLayout.NORTH);
 
 
-
     }
 
-    public static MainFrame getInstance()
-    {
-        if(instance == null)
-        {
+    @Override
+    public void update(Object notification) {
+        Message message = (Message) notification;
+        if (message.getMessageType() == MessageType.INFO) {
+            JOptionPane.showMessageDialog(MainFrame.getInstance(), message.getPoruka(), "INFO", JOptionPane.INFORMATION_MESSAGE);
+        } else if (message.getMessageType() == MessageType.ERROR) {
+            JOptionPane.showMessageDialog(MainFrame.getInstance(), message.getPoruka(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else if (message.getMessageType() == MessageType.WARNING) {
+            JOptionPane.showMessageDialog(MainFrame.getInstance(), message.getPoruka(), "WARNING", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    public static MainFrame getInstance() {
+        if (instance == null) {
             instance = new MainFrame();
             instance.initialize();
         }
@@ -57,4 +74,9 @@ public class MainFrame extends JFrame {
     public AboutUsFrame getAboutUsFrame() {
         return aboutUsFrame;
     }
+
+    public void setActionManager(ActionManager actionManager) {
+        this.actionManager = actionManager;
+    }
+
 }
