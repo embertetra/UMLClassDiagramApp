@@ -2,7 +2,6 @@ package raf.dsw.classycraft.app.errorHandler;
 
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 

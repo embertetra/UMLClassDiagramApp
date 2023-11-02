@@ -1,8 +1,5 @@
 package raf.dsw.classycraft.app.gui.swing.view;
 
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderPane;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
