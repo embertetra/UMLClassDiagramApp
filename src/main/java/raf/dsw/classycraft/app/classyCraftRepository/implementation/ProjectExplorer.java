@@ -2,6 +2,9 @@ package raf.dsw.classycraft.app.classyCraftRepository.implementation;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
+import raf.dsw.classycraft.app.core.ApplicationFramework;
+import raf.dsw.classycraft.app.errorHandler.MessageType;
+import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 public class ProjectExplorer extends ClassyNodeComposite {
     // root klasa = postoji samo jedna instanca
@@ -22,6 +25,9 @@ public class ProjectExplorer extends ClassyNodeComposite {
 
     @Override
     public void removeChild(ClassyNode child) {
-        // poziva se message generator za ispis greske
-    }
+        if(child != null && child instanceof Project){
+            for(ClassyNode c: this.getChildren())
+                if(c.equals(child))
+                    this.getChildren().remove(c);
+        }    }
 }

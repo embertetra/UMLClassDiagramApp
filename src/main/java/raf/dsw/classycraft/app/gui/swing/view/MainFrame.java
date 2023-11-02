@@ -4,6 +4,8 @@ import raf.dsw.classycraft.app.controller.ActionManager;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.Message;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
+import raf.dsw.classycraft.app.gui.swing.tree.ClassyTree;
+import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
 import raf.dsw.classycraft.app.observer.ISubscriber;
 
 import javax.swing.*;
@@ -14,8 +16,9 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     //sva view polja projekta
 
-    ActionManager actionManager;
-    AboutUsFrame aboutUsFrame;
+    private ActionManager actionManager;
+    private AboutUsFrame aboutUsFrame;
+    private ClassyTree classyTree;
 
     private MainFrame() {
 
@@ -24,6 +27,7 @@ public class MainFrame extends JFrame implements ISubscriber {
     private void initialize() {
         actionManager = new ActionManager();
         aboutUsFrame = new AboutUsFrame();
+        classyTree = new ClassyTreeImplementation();
 
         ApplicationFramework.getInstance().getMessageGenerator().getSubscribers().add(this);
 
@@ -43,7 +47,15 @@ public class MainFrame extends JFrame implements ISubscriber {
         MyToolBar toolBar = new MyToolBar();
         add(toolBar, BorderLayout.NORTH);
 
+        JTree projectExplorer = classyTree.generateTree(ApplicationFramework.getInstance().getClassyRepository().getRoot());
+        JPanel desktop = new JPanel();
 
+        JScrollPane scrollPane = new JScrollPane(projectExplorer);
+        scrollPane.setMinimumSize(new Dimension(200, 150));
+        JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scrollPane, desktop);
+        getContentPane().add(split, BorderLayout.CENTER);
+        split.setDividerLocation(250);
+        split.setOneTouchExpandable(true);
     }
 
     @Override
