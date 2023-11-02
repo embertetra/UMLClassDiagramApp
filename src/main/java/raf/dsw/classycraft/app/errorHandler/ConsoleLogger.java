@@ -1,8 +1,6 @@
 package raf.dsw.classycraft.app.errorHandler;
 
-import com.sun.tools.javac.Main;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
-import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 public class ConsoleLogger implements Logger{
 

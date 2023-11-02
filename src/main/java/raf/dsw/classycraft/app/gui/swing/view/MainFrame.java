@@ -3,7 +3,6 @@ package raf.dsw.classycraft.app.gui.swing.view;
 import raf.dsw.classycraft.app.controller.ActionManager;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.Message;
-import raf.dsw.classycraft.app.errorHandler.MessageGenerator;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.observer.ISubscriber;
 

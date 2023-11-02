@@ -1,6 +1,5 @@
 package raf.dsw.classycraft.app.core;
 
-import com.sun.tools.javac.Main;
 import raf.dsw.classycraft.app.errorHandler.*;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
