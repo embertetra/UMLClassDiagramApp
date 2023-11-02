@@ -1,12 +1,10 @@
-package raf.dsw.classycraft.app.gui.swing.classyCraftRepository;
+package raf.dsw.classycraft.app.classyCraftRepository;
 
 import raf.dsw.classycraft.app.core.ClassyRepository;
-import raf.dsw.classycraft.app.gui.swing.classyCraftRepository.composite.ClassyNode;
-import raf.dsw.classycraft.app.gui.swing.classyCraftRepository.composite.ClassyNodeComposite;
-import raf.dsw.classycraft.app.gui.swing.classyCraftRepository.implementation.Project;
-import raf.dsw.classycraft.app.gui.swing.classyCraftRepository.implementation.ProjectExplorer;
-
-import java.util.Random;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.ProjectExplorer;
 
 public class ClassyRepositoryImplementation implements ClassyRepository {
 

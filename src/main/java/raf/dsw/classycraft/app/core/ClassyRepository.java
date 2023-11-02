@@ -1,8 +1,8 @@
 package raf.dsw.classycraft.app.core;
 
-import raf.dsw.classycraft.app.gui.swing.classyCraftRepository.composite.ClassyNode;
-import raf.dsw.classycraft.app.gui.swing.classyCraftRepository.composite.ClassyNodeComposite;
-import raf.dsw.classycraft.app.gui.swing.classyCraftRepository.implementation.ProjectExplorer;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.ProjectExplorer;
 
 public interface ClassyRepository {
     ProjectExplorer getRoot();

@@ -1,4 +1,4 @@
-package raf.dsw.classycraft.app.gui.swing.classyCraftRepository.composite;
+package raf.dsw.classycraft.app.classyCraftRepository.composite;
 
 public abstract class ClassyNode {
 

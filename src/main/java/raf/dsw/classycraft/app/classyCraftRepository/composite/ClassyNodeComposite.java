@@ -1,4 +1,4 @@
-package raf.dsw.classycraft.app.gui.swing.classyCraftRepository.composite;
+package raf.dsw.classycraft.app.classyCraftRepository.composite;
 
 import java.util.ArrayList;
 import java.util.List;
