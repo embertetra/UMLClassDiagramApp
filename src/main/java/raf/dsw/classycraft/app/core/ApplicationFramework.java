@@ -3,26 +3,26 @@ package raf.dsw.classycraft.app.core;
 import raf.dsw.classycraft.app.errorHandler.*;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
-import javax.swing.*;
-
 public class ApplicationFramework {
 
     //sva polja modela projekta
-  
+
     private static ApplicationFramework instance;
-  
+
     MessageGenerator messageGenerator;
     Logger fileLogger;
     Logger consoleLogger;
-  
+
     protected ClassyRepository classyRepository;
 
-    private ApplicationFramework(){
-        messageGenerator = new MessageGenerator();
+    private ApplicationFramework() {
+
     }
 
-    public void initialize(ClassyRepository classyRepository){
-  
+    public void initialize(ClassyRepository classyRepository) {
+
+        messageGenerator = new MessageGenerator();
+
         this.classyRepository = classyRepository;
 
         LoggerFactory loggerFactory = new LoggerFactory();
@@ -32,8 +32,8 @@ public class ApplicationFramework {
         MainFrame.getInstance().setVisible(true);
     }
 
-    public static ApplicationFramework getInstance(){
-        if(instance==null){
+    public static ApplicationFramework getInstance() {
+        if (instance == null) {
             instance = new ApplicationFramework();
         }
         return instance;
@@ -45,7 +45,8 @@ public class ApplicationFramework {
 
     public ClassyRepository getClassyRepository() {
         return classyRepository;
-      
+    }
+
     public MessageGenerator getMessageGenerator() {
         return messageGenerator;
     }
