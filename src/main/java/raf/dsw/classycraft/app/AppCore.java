@@ -11,7 +11,6 @@ public class AppCore {
         ClassyRepository classyRepository = new ClassyRepositoryImplementation();
         appCore.initialize(classyRepository);
 
-        ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Marta mi daje stres", MessageType.ERROR);
 
     }
 }
