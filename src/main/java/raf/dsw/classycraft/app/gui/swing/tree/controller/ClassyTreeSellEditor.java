@@ -1,6 +1,8 @@
 package raf.dsw.classycraft.app.gui.swing.tree.controller;
 
+import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
+import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeCellEditor;
@@ -44,5 +46,14 @@ public class ClassyTreeSellEditor extends DefaultTreeCellEditor implements Actio
 
         ClassyTreeItem clicked = (ClassyTreeItem) clickedOn;
         clicked.setName(e.getActionCommand());
+
+
+
+        //obraditi slucaj ako je uneto vec postojece ime
+
+
+
+        ClassyTreeImplementation cti = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
+        SwingUtilities.updateComponentTreeUI(cti.getTreeView());
     }
 }
