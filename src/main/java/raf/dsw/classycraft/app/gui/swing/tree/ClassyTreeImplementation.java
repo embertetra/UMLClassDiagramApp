@@ -7,6 +7,8 @@ import raf.dsw.classycraft.app.classyCraftRepository.implementation.ProjectExplo
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
+import raf.dsw.classycraft.app.gui.swing.tree.model.childFactory.ChildFactory;
+import raf.dsw.classycraft.app.gui.swing.tree.model.childFactory.ChildType;
 import raf.dsw.classycraft.app.gui.swing.tree.view.ClassyTreeView;
 
 import javax.swing.*;
@@ -50,8 +52,11 @@ public class ClassyTreeImplementation implements ClassyTree{
 
     private ClassyNode createChild(ClassyNode parent){
         //PROMENITI!!!
+        ChildFactory childFactory = new ChildFactory();
         if(parent instanceof ProjectExplorer)
-            return new Project("Project" + new Random().nextInt(100), parent);
+            return childFactory.createChild("projekat",parent, ChildType.PROJECT);
+        else if(parent instanceof Project)
+            return childFactory.createChild("projekat",parent, ChildType.PACKAGE);
         return null;
     }
 

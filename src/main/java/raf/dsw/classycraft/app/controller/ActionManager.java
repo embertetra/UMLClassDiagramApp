@@ -5,10 +5,12 @@ public class ActionManager {
     //sve akcije projekta
     ExitAction exitAction;
     AboutUsAction aboutUsAction;
+    NewChildAction newChildAction;
 
     public ActionManager() {
         exitAction = new ExitAction();
         aboutUsAction = new AboutUsAction();
+        newChildAction = new NewChildAction();
     }
 
     public ExitAction getExitAction() {
@@ -17,5 +19,9 @@ public class ActionManager {
 
     public AboutUsAction getAboutUsAction() {
         return aboutUsAction;
+    }
+
+    public NewChildAction getNewChildAction() {
+        return newChildAction;
     }
 }

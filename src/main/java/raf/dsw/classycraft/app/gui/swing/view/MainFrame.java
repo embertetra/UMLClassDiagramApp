@@ -90,4 +90,11 @@ public class MainFrame extends JFrame implements ISubscriber {
         this.actionManager = actionManager;
     }
 
+    public ClassyTree getClassyTree() {
+        return classyTree;
+    }
+
+    public void setClassyTree(ClassyTree classyTree) {
+        this.classyTree = classyTree;
+    }
 }
