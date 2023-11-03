@@ -36,4 +36,6 @@ public abstract class ClassyNodeComposite extends ClassyNode{
     public void setChildren(List<ClassyNode> children) {
         this.children = children;
     }
+
+
 }

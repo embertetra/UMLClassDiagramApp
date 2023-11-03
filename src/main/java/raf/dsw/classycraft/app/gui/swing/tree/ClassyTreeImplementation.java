@@ -2,6 +2,7 @@ package raf.dsw.classycraft.app.gui.swing.tree;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Package;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.ProjectExplorer;
@@ -36,7 +37,7 @@ public class ClassyTreeImplementation implements ClassyTree{
     @Override
     public void addChild(ClassyTreeItem parent) {
         if(!(parent.getClassyNode() instanceof ClassyNodeComposite)) {
-            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Ne moze da se napravi dete Dijagramu!", MessageType.ERROR);
+            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Dijagram ne moze imati podklasu!", MessageType.ERROR);
             return;
         }
 
@@ -62,11 +63,27 @@ public class ClassyTreeImplementation implements ClassyTree{
 
         if(parent instanceof ProjectExplorer){
             childFactory = factoryUtils.getChildFactory(FactoryType.PROJECT);
-            return childFactory.orderChild("projekat", parent);
+
+            int cnt = 1;
+            Project project = new Project("Project" + String.valueOf(cnt), parent);
+            while(((ProjectExplorer) parent).getChildren().contains(project)){
+                cnt++;
+                project = new Project("Project" + String.valueOf(cnt), parent);
+            }
+
+            return childFactory.orderChild(project.getName(), parent);
         }
         else if(parent instanceof Project){
             childFactory = factoryUtils.getChildFactory(FactoryType.PACKAGE);
-            return childFactory.orderChild("paket", parent);
+
+            int cnt = 1;
+            Package pck = new Package("Package" + String.valueOf(cnt), parent);
+            while(((Project) parent).getChildren().contains(pck)){
+                cnt++;
+                pck = new Package("Package" + String.valueOf(cnt), parent);
+            }
+
+            return childFactory.orderChild(pck.getName(), parent);
         }
         else if(parent instanceof Package){
 
@@ -80,16 +97,33 @@ public class ClassyTreeImplementation implements ClassyTree{
 
             if(n == 1){
                 childFactory = factoryUtils.getChildFactory(FactoryType.PACKAGE);
-                return  childFactory.orderChild("podpaket", parent);
+
+                int cnt = 1;
+                Package pck = new Package("SubPackage" + String.valueOf(cnt), parent);
+                while(((Package) parent).getChildren().contains(pck)){
+                    cnt++;
+                    pck = new Package("SubPackage" + String.valueOf(cnt), parent);
+                }
+
+                return  childFactory.orderChild(pck.getName(), parent);
             }
             else if(n == 0){
                 childFactory = factoryUtils.getChildFactory(FactoryType.DIAGRAM);
-                return  childFactory.orderChild("dijagram", parent);
+
+                int cnt = 1;
+                Dijagram dijagram = new Dijagram("Dijagram" + String.valueOf(cnt), parent);
+                while(((Package) parent).getChildren().contains(dijagram)){
+                    cnt++;
+                    dijagram = new Dijagram("Dijagram" + String.valueOf(cnt), parent);
+                }
+
+                return  childFactory.orderChild(dijagram.getName(), parent);
             }
         }
         return null;
     }
 
-
-
+    public ClassyTreeView getTreeView() {
+        return treeView;
+    }
 }

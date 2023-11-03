@@ -6,11 +6,11 @@ import raf.dsw.classycraft.app.errorHandler.Message;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTree;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
+import raf.dsw.classycraft.app.gui.swing.tree.view.ClassyTreeView;
 import raf.dsw.classycraft.app.observer.ISubscriber;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.concurrent.Semaphore;
 
 public class MainFrame extends JFrame implements ISubscriber {
     private static MainFrame instance;

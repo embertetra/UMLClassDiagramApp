@@ -33,9 +33,12 @@ public class Package extends ClassyNodeComposite {
     @Override
     public void removeChild(ClassyNode child) {
         if(child != null && child instanceof Package){
-            for(ClassyNode c: this.getChildren())
-                if(c.equals(child))
-                    this.getChildren().remove(c);
+                if(getChildren().contains(child))
+                    getChildren().remove(child);
+        }
+        else if(child != null && child instanceof Dijagram){
+            if(getChildren().contains(child))
+                getChildren().remove(child);
         }
     }
 }

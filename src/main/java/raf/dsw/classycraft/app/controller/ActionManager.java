@@ -7,10 +7,13 @@ public class ActionManager {
     AboutUsAction aboutUsAction;
     NewChildAction newChildAction;
 
+    RemoveChild removeChild;
+
     public ActionManager() {
         exitAction = new ExitAction();
         aboutUsAction = new AboutUsAction();
         newChildAction = new NewChildAction();
+        removeChild = new RemoveChild();
     }
 
     public ExitAction getExitAction() {
@@ -23,5 +26,9 @@ public class ActionManager {
 
     public NewChildAction getNewChildAction() {
         return newChildAction;
+    }
+
+    public RemoveChild getRemoveChild() {
+        return removeChild;
     }
 }
