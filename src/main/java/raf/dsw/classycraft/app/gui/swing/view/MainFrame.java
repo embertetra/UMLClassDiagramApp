@@ -6,7 +6,6 @@ import raf.dsw.classycraft.app.errorHandler.Message;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTree;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
-import raf.dsw.classycraft.app.gui.swing.tree.view.ClassyTreeView;
 import raf.dsw.classycraft.app.observer.ISubscriber;
 
 import javax.swing.*;
@@ -22,6 +21,7 @@ public class MainFrame extends JFrame implements ISubscriber {
     private ClassyTree classyTree;
     private MyMenyBar menu;
     private MyToolBar toolBar;
+    private JTabbedPane jTabbedPane;
 
 
     private MainFrame() {
@@ -54,10 +54,34 @@ public class MainFrame extends JFrame implements ISubscriber {
 
         JTree projectExplorer = classyTree.generateTree(ApplicationFramework.getInstance().getClassyRepository().getRoot());
         JPanel desktop = new JPanel();
-
         JScrollPane scrollPane = new JScrollPane(projectExplorer);
         scrollPane.setMinimumSize(new Dimension(200, 150));
         JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scrollPane, desktop);
+
+        ///dodavanje JTabba na main frame i labele
+
+        ///kreiranje labela
+        ///ostaje da se alignuju labele na levo!!!!
+        JLabel nazivProjekta = new JLabel("Naziv projekta");
+        JLabel nazivAutora = new JLabel("Naziv autora");
+
+        ///kreiranje JTabba
+
+        jTabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.WRAP_TAB_LAYOUT);
+        JPanel test = new JPanel();
+        jTabbedPane.addTab("asdasd", test);
+
+
+        ///spajanje
+        JPanel rightSide = new JPanel();
+        BoxLayout box = new BoxLayout(rightSide, BoxLayout.Y_AXIS);
+        rightSide.setLayout(box);
+        rightSide.add(nazivProjekta);
+        rightSide.add(nazivAutora);
+        rightSide.add(jTabbedPane);
+
+        split.add(rightSide, JSplitPane.RIGHT);
+
         getContentPane().add(split, BorderLayout.CENTER);
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);
@@ -109,5 +133,9 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     public MyToolBar getToolBar() {
         return toolBar;
+    }
+
+    public JTabbedPane getjTabbedPane() {
+        return jTabbedPane;
     }
 }
