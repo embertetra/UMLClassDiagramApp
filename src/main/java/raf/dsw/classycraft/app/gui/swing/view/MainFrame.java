@@ -10,6 +10,7 @@ import raf.dsw.classycraft.app.observer.ISubscriber;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.concurrent.Semaphore;
 
 public class MainFrame extends JFrame implements ISubscriber {
     private static MainFrame instance;
@@ -19,9 +20,9 @@ public class MainFrame extends JFrame implements ISubscriber {
     private ActionManager actionManager;
     private AboutUsFrame aboutUsFrame;
     private ClassyTree classyTree;
-    private PackageOrDiagram packageOrDiagram;
     private MyMenyBar menu;
     private MyToolBar toolBar;
+
 
     private MainFrame() {
 
@@ -31,7 +32,6 @@ public class MainFrame extends JFrame implements ISubscriber {
         actionManager = new ActionManager();
         aboutUsFrame = new AboutUsFrame();
         classyTree = new ClassyTreeImplementation();
-        packageOrDiagram = new PackageOrDiagram();
         //packageOrDiagram.setVisible(true);
 
         ApplicationFramework.getInstance().getMessageGenerator().getSubscribers().add(this);
@@ -103,7 +103,11 @@ public class MainFrame extends JFrame implements ISubscriber {
         this.classyTree = classyTree;
     }
 
-    public PackageOrDiagram getPackageOrDiagram() {
-        return packageOrDiagram;
+    public MyMenyBar getMenu() {
+        return menu;
+    }
+
+    public MyToolBar getToolBar() {
+        return toolBar;
     }
 }

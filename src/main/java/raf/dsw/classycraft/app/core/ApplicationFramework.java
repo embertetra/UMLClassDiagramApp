@@ -3,6 +3,9 @@ package raf.dsw.classycraft.app.core;
 import raf.dsw.classycraft.app.errorHandler.*;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Semaphore;
+
 public class ApplicationFramework {
 
     //sva polja modela projekta
@@ -12,6 +15,7 @@ public class ApplicationFramework {
     MessageGenerator messageGenerator;
     Logger fileLogger;
     Logger consoleLogger;
+    CountDownLatch countDownLatch;
 
     protected ClassyRepository classyRepository;
 
@@ -31,6 +35,7 @@ public class ApplicationFramework {
 
         MainFrame.getInstance().setVisible(true);
     }
+
 
     public static ApplicationFramework getInstance() {
         if (instance == null) {
@@ -70,4 +75,6 @@ public class ApplicationFramework {
     public void setConsoleLogger(Logger consoleLogger) {
         this.consoleLogger = consoleLogger;
     }
+
+
 }

@@ -41,11 +41,13 @@ public class ClassyTreeImplementation implements ClassyTree{
         }
 
         ClassyNode child = createChild(parent.getClassyNode());
-        parent.add(new ClassyTreeItem(child)); //prikazuje se u JTree-u
-        ((ClassyNodeComposite) parent.getClassyNode()).addChild(child); // dodaje se u modelu addChild()
+        if(child != null) {
+            parent.add(new ClassyTreeItem(child)); //prikazuje se u JTree-u
+            ((ClassyNodeComposite) parent.getClassyNode()).addChild(child); // dodaje se u modelu addChild()
 
-        treeView.expandPath(treeView.getSelectionPath());
-        SwingUtilities.updateComponentTreeUI(treeView);
+            treeView.expandPath(treeView.getSelectionPath());
+            SwingUtilities.updateComponentTreeUI(treeView);
+        }
     }
 
     @Override
@@ -66,15 +68,28 @@ public class ClassyTreeImplementation implements ClassyTree{
             childFactory = factoryUtils.getChildFactory(FactoryType.PACKAGE);
             return childFactory.orderChild("paket", parent);
         }
-        /*else if(parent instanceof Package){
-            MainFrame.getInstance().getPackageOrDiagram().setVisible(true);
+        else if(parent instanceof Package){
 
+            Object[] options = {"Dijagram", "Podpaket"};
 
+            int n = JOptionPane.showOptionDialog(MainFrame.getInstance(),
+                    "Da li zelite da kreirate dijagram ili podpaket?", "Kreiranje", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                    null,     //default ikonica
+                    options,  //opcije
+                    options[0]); //selektovan po defaultu
 
+            if(n == 1){
+                childFactory = factoryUtils.getChildFactory(FactoryType.PACKAGE);
+                return  childFactory.orderChild("podpaket", parent);
+            }
+            else if(n == 0){
+                childFactory = factoryUtils.getChildFactory(FactoryType.DIAGRAM);
+                return  childFactory.orderChild("dijagram", parent);
+            }
+            else if(n == -1){
 
-            System.out.println("test123");
-            return null;
-        }*/
+            }
+        }
         return null;
     }
 
