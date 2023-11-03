@@ -2,24 +2,28 @@ package raf.dsw.classycraft.app.gui.swing.tree;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.Package;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.ProjectExplorer;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.tree.model.childFactory.ChildFactory;
-import raf.dsw.classycraft.app.gui.swing.tree.model.childFactory.ChildType;
+import raf.dsw.classycraft.app.gui.swing.tree.model.childFactory.FactoryType;
+import raf.dsw.classycraft.app.gui.swing.tree.model.childFactory.FactoryUtils;
 import raf.dsw.classycraft.app.gui.swing.tree.view.ClassyTreeView;
+import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
-import java.util.Random;
 
 public class ClassyTreeImplementation implements ClassyTree{
 
     private ClassyTreeView treeView;
 
     private DefaultTreeModel treeModel;
+
+    private ChildFactory childFactory;
 
     @Override
     public ClassyTreeView generateTree(ProjectExplorer projectExplorer) {
@@ -51,13 +55,29 @@ public class ClassyTreeImplementation implements ClassyTree{
 
 
     private ClassyNode createChild(ClassyNode parent){
-        //PROMENITI!!!
-        ChildFactory childFactory = new ChildFactory();
-        if(parent instanceof ProjectExplorer)
-            return childFactory.createChild("projekat",parent, ChildType.PROJECT);
-        else if(parent instanceof Project)
-            return childFactory.createChild("projekat",parent, ChildType.PACKAGE);
+
+        FactoryUtils factoryUtils = new FactoryUtils();
+
+        if(parent instanceof ProjectExplorer){
+            childFactory = factoryUtils.getChildFactory(FactoryType.PROJECT);
+            return childFactory.orderChild("projekat", parent);
+        }
+        else if(parent instanceof Project){
+            childFactory = factoryUtils.getChildFactory(FactoryType.PACKAGE);
+            return childFactory.orderChild("paket", parent);
+        }
+        /*else if(parent instanceof Package){
+            MainFrame.getInstance().getPackageOrDiagram().setVisible(true);
+
+
+
+
+            System.out.println("test123");
+            return null;
+        }*/
         return null;
     }
+
+
 
 }

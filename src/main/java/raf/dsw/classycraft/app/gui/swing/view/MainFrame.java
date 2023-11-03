@@ -19,6 +19,9 @@ public class MainFrame extends JFrame implements ISubscriber {
     private ActionManager actionManager;
     private AboutUsFrame aboutUsFrame;
     private ClassyTree classyTree;
+    private PackageOrDiagram packageOrDiagram;
+    private MyMenyBar menu;
+    private MyToolBar toolBar;
 
     private MainFrame() {
 
@@ -28,6 +31,8 @@ public class MainFrame extends JFrame implements ISubscriber {
         actionManager = new ActionManager();
         aboutUsFrame = new AboutUsFrame();
         classyTree = new ClassyTreeImplementation();
+        packageOrDiagram = new PackageOrDiagram();
+        //packageOrDiagram.setVisible(true);
 
         ApplicationFramework.getInstance().getMessageGenerator().getSubscribers().add(this);
 
@@ -41,10 +46,10 @@ public class MainFrame extends JFrame implements ISubscriber {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("ClassyCrafT");
 
-        MyMenyBar menu = new MyMenyBar();
+        menu = new MyMenyBar();
         setJMenuBar(menu);
 
-        MyToolBar toolBar = new MyToolBar();
+        toolBar = new MyToolBar();
         add(toolBar, BorderLayout.NORTH);
 
         JTree projectExplorer = classyTree.generateTree(ApplicationFramework.getInstance().getClassyRepository().getRoot());
@@ -96,5 +101,9 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     public void setClassyTree(ClassyTree classyTree) {
         this.classyTree = classyTree;
+    }
+
+    public PackageOrDiagram getPackageOrDiagram() {
+        return packageOrDiagram;
     }
 }
