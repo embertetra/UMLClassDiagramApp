@@ -58,7 +58,7 @@ public class ClassyTreeImplementation implements ClassyTree{
 
     private ClassyNode createChild(ClassyNode parent){
 
-        FactoryUtils factoryUtils = new FactoryUtils();
+        FactoryUtils factoryUtils = ApplicationFramework.getInstance().getFactoryUtils();
 
         if(parent instanceof ProjectExplorer){
             childFactory = factoryUtils.getChildFactory(FactoryType.PROJECT);
@@ -85,9 +85,6 @@ public class ClassyTreeImplementation implements ClassyTree{
             else if(n == 0){
                 childFactory = factoryUtils.getChildFactory(FactoryType.DIAGRAM);
                 return  childFactory.orderChild("dijagram", parent);
-            }
-            else if(n == -1){
-
             }
         }
         return null;

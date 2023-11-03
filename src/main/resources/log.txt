@@ -5,3 +5,5 @@
 [ERROR] [03.11.2023. 14:44] [Nije selektovan roditelj]
 [ERROR] [03.11.2023. 15:10] [Ne moze da se napravi dete Dijagramu!]
 [ERROR] [03.11.2023. 15:13] [Ne moze da se napravi dete Dijagramu!]
+[ERROR] [03.11.2023. 15:31] [Ne moze da se napravi dete Dijagramu!]
+[ERROR] [03.11.2023. 15:31] [Ne moze da se napravi dete Dijagramu!]
