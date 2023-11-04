@@ -1,5 +1,7 @@
 package raf.dsw.classycraft.app.gui.swing.tree.controller;
 
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
@@ -45,8 +47,21 @@ public class ClassyTreeSellEditor extends DefaultTreeCellEditor implements Actio
             return;
 
         ClassyTreeItem clicked = (ClassyTreeItem) clickedOn;
+        String old = clicked.getClassyNode().getName();
         clicked.setName(e.getActionCommand());
 
+        ///promena imena za project u JTabbu
+        ClassyTreeItem selected = MainFrame.getInstance().getClassyTree().getSelectedNode();
+        if(selected.getClassyNode() instanceof Project)
+            MainFrame.getInstance().getPackageView().promeniNazivProjekta(e.getActionCommand());
+
+        ///promena imena za dijagram na JTabbu
+        if(selected.getClassyNode() instanceof Dijagram){
+            int totalTabs = MainFrame.getInstance().getPackageView().getjTabbedPane().getTabCount();
+            for (int i=0;i<totalTabs;i++)
+                if(MainFrame.getInstance().getPackageView().getjTabbedPane().getTitleAt(i).equals(old))
+                    MainFrame.getInstance().getPackageView().getjTabbedPane().setTitleAt(i, e.getActionCommand());
+        }
 
 
         //obraditi slucaj ako je uneto vec postojece ime

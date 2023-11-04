@@ -5,6 +5,7 @@ import javafx.scene.layout.Pane;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Package;
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.tree.view.ClassyTreeView;
@@ -33,9 +34,17 @@ public class MouseListener {
                             for (ClassyNode c : ((Package) selected.getClassyNode()).getChildren()) {
                                 if (c instanceof Dijagram) {
                                     MainFrame.getInstance().getPackageView().getjTabbedPane().addTab(c.getName(), new JPanel());
-                                    MainFrame.getInstance().getPackageView().setParent(selected.getClassyNode());
                                 }
                             }
+                            MainFrame.getInstance().getPackageView().setParent(selected.getClassyNode());
+
+                            ClassyNode parent = selected.getClassyNode();
+                            while(true){
+                                if(parent instanceof Project)
+                                    break;
+                                else parent = parent.getParent();
+                            }
+                            MainFrame.getInstance().getPackageView().promeniNazivProjekta(parent.getName());
 
                         }
                     }

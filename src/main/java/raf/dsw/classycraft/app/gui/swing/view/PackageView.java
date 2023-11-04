@@ -3,6 +3,9 @@ package raf.dsw.classycraft.app.gui.swing.view;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.ProjectExplorer;
+import raf.dsw.classycraft.app.jTabbedElements.NotificationJTabbed;
 import raf.dsw.classycraft.app.observer.ISubscriber;
 
 import javax.swing.*;
@@ -17,8 +20,8 @@ public class PackageView implements ISubscriber {
     public PackageView() {
         this.parent = null;
 
-        nazivProjekta = new JLabel("Projekat");
-        nazivAutora = new JLabel("Autor");
+        nazivProjekta = new JLabel("        ");
+        nazivAutora = new JLabel("          ");
 
         jTabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.WRAP_TAB_LAYOUT);
 
@@ -28,6 +31,10 @@ public class PackageView implements ISubscriber {
         rightSide.add(nazivProjekta);
         rightSide.add(nazivAutora);
         rightSide.add(jTabbedPane);
+    }
+
+    public void promeniNazivProjekta(String string){
+        nazivProjekta.setText(string);
     }
 
     public JTabbedPane getjTabbedPane() {
@@ -48,21 +55,61 @@ public class PackageView implements ISubscriber {
 
     @Override
     public void update(Object notification) {
-        ClassyNodeComposite parent2 = (ClassyNodeComposite) notification;
-        int brojac = 0;
-        if (this.parent != null && parent2.getName().equals(this.parent.getName())) {
-            for (ClassyNode c : parent2.getChildren()) {
-                int totalTabs = jTabbedPane.getTabCount();
-                for (int i = 0; i < totalTabs; i++) {
-                    if (c.getName().equals(jTabbedPane.getTitleAt(i)) && c instanceof Dijagram) brojac = 1;
+        NotificationJTabbed poruka = (NotificationJTabbed) notification;
+        ClassyNodeComposite parent2 = poruka.getParent();
+        int totalTabs;
+        int brojac;
+
+        if (poruka.getOznaka() == 0) {
+            brojac = 0;
+            if (this.parent != null && parent2.getName().equals(this.parent.getName())) {
+                for (ClassyNode c : parent2.getChildren()) {
+                    totalTabs = jTabbedPane.getTabCount();
+                    for (int i = 0; i < totalTabs; i++) {
+                        if (c.getName().equals(jTabbedPane.getTitleAt(i)) && c instanceof Dijagram) brojac = 1;
+                    }
+                    if (brojac == 0 && c instanceof Dijagram) {
+                        jTabbedPane.addTab(c.getName(), new JPanel());
+                    }
+                    brojac = 0;
                 }
-                if (brojac == 0 && c instanceof Dijagram) {
-                    jTabbedPane.addTab(c.getName(), new JPanel());
+            }
+        }
+        else if(poruka.getOznaka() == 1){
+            brojac = 0;
+            if (this.parent != null && parent2.getName().equals(this.parent.getName())){
+                totalTabs = jTabbedPane.getTabCount();
+                for(int i=0; i<totalTabs; i++){
+                    for(ClassyNode c : parent2.getChildren()){
+                        if(jTabbedPane.getTitleAt(i).equals(c.getName()))brojac = 1;
+                    }
+                    if(brojac == 0)
+                        jTabbedPane.removeTabAt(i);
+                    brojac = 0;
+                    totalTabs = jTabbedPane.getTabCount();
                 }
-                brojac = 0;
+            }
+        }
+        else if(poruka.getOznaka() == 2){
+            System.out.println(parent.getName() + " " + parent2.getName());
+            if (this.parent != null && parent2.getName().equals(this.parent.getName())){
+                jTabbedPane.removeAll();
+                promeniNazivProjekta("      ");
+            }
+        }
+        else if(poruka.getOznaka() == 3){
+            while(true){
+                if(parent instanceof Project)
+                    break;
+                else parent = parent.getParent();
+            }
+            if(parent.getName().equals(parent2.getName())) {
+                jTabbedPane.removeAll();
+                promeniNazivProjekta("      ");
             }
         }
     }
+
     public void setParent(ClassyNode parent) {
         this.parent = parent;
     }

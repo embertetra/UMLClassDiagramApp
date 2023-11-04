@@ -4,6 +4,7 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.gui.swing.view.PackageView;
+import raf.dsw.classycraft.app.jTabbedElements.NotificationJTabbed;
 import raf.dsw.classycraft.app.observer.IPublisher;
 import raf.dsw.classycraft.app.observer.ISubscriber;
 
@@ -28,7 +29,7 @@ public class Package extends ClassyNodeComposite implements IPublisher {
             Dijagram dijagram = (Dijagram) child;
             if (!this.getChildren().contains(dijagram)) {
                 this.getChildren().add(dijagram);
-                notifySubscribers(this);
+                notifySubscribers(new NotificationJTabbed(this, 0));
             }
         } else if (child != null && child instanceof Package) {
             Package p = (Package) child;
@@ -41,11 +42,15 @@ public class Package extends ClassyNodeComposite implements IPublisher {
     @Override
     public void removeChild(ClassyNode child) {
         if (child != null && child instanceof Package) {
-            if (getChildren().contains(child))
+            if (getChildren().contains(child)) {
                 getChildren().remove(child);
+                notifySubscribers(new NotificationJTabbed((ClassyNodeComposite) child, 2));
+            }
         } else if (child != null && child instanceof Dijagram) {
-            if (getChildren().contains(child))
+            if (getChildren().contains(child)) {
                 getChildren().remove(child);
+                notifySubscribers(new NotificationJTabbed(this, 1));
+            }
         }
     }
 
