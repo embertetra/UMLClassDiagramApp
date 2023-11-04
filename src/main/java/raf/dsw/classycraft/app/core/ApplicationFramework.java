@@ -1,5 +1,6 @@
 package raf.dsw.classycraft.app.core;
 
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.Package;
 import raf.dsw.classycraft.app.errorHandler.*;
 import raf.dsw.classycraft.app.gui.swing.tree.model.childFactory.ChildFactory;
 import raf.dsw.classycraft.app.gui.swing.tree.model.childFactory.FactoryUtils;
@@ -18,7 +19,6 @@ public class ApplicationFramework {
     private Logger fileLogger;
     private Logger consoleLogger;
     private FactoryUtils factoryUtils;
-
     protected ClassyRepository classyRepository;
 
     private ApplicationFramework() {
@@ -83,4 +83,5 @@ public class ApplicationFramework {
     public FactoryUtils getFactoryUtils() {
         return factoryUtils;
     }
+
 }

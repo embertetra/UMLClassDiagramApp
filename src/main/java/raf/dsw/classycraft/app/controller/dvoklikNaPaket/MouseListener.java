@@ -1,13 +1,16 @@
-package raf.dsw.classycraft.app.controller;
+package raf.dsw.classycraft.app.controller.dvoklikNaPaket;
 
 import com.sun.tools.javac.Main;
+import javafx.scene.layout.Pane;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Package;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.tree.view.ClassyTreeView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
+import javax.swing.*;
 import javax.swing.tree.TreePath;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -24,9 +27,16 @@ public class MouseListener {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     ClassyTreeItem selected = (ClassyTreeItem) MainFrame.getInstance().getClassyTree().getSelectedNode();
-                    if ((selected.getClassyNode() instanceof Package)){
+                    if ((selected.getClassyNode() instanceof Package)) {
                         if (e.getClickCount() == 2) {
-                            ///NAPRAVI ZA JTABBED
+                            MainFrame.getInstance().getPackageView().getjTabbedPane().removeAll();
+                            for (ClassyNode c : ((Package) selected.getClassyNode()).getChildren()) {
+                                if (c instanceof Dijagram) {
+                                    MainFrame.getInstance().getPackageView().getjTabbedPane().addTab(c.getName(), new JPanel());
+                                    MainFrame.getInstance().getPackageView().setParent(selected.getClassyNode());
+                                }
+                            }
+
                         }
                     }
                 }

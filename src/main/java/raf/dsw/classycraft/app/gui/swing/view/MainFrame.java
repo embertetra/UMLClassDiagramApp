@@ -21,7 +21,7 @@ public class MainFrame extends JFrame implements ISubscriber {
     private ClassyTree classyTree;
     private MyMenyBar menu;
     private MyToolBar toolBar;
-    private JTabbedPane jTabbedPane;
+    private PackageView packageView;
 
 
     private MainFrame() {
@@ -32,7 +32,7 @@ public class MainFrame extends JFrame implements ISubscriber {
         actionManager = new ActionManager();
         aboutUsFrame = new AboutUsFrame();
         classyTree = new ClassyTreeImplementation();
-        //packageOrDiagram.setVisible(true);
+        packageView = new PackageView();
 
         ApplicationFramework.getInstance().getMessageGenerator().getSubscribers().add(this);
 
@@ -58,29 +58,7 @@ public class MainFrame extends JFrame implements ISubscriber {
         scrollPane.setMinimumSize(new Dimension(200, 150));
         JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scrollPane, desktop);
 
-        ///dodavanje JTabba na main frame i labele
-
-        ///kreiranje labela
-        ///ostaje da se alignuju labele na levo!!!!
-        JLabel nazivProjekta = new JLabel("Naziv projekta");
-        JLabel nazivAutora = new JLabel("Naziv autora");
-
-        ///kreiranje JTabba
-
-        jTabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.WRAP_TAB_LAYOUT);
-        JPanel test = new JPanel();
-        jTabbedPane.addTab("asdasd", test);
-
-
-        ///spajanje
-        JPanel rightSide = new JPanel();
-        BoxLayout box = new BoxLayout(rightSide, BoxLayout.Y_AXIS);
-        rightSide.setLayout(box);
-        rightSide.add(nazivProjekta);
-        rightSide.add(nazivAutora);
-        rightSide.add(jTabbedPane);
-
-        split.add(rightSide, JSplitPane.RIGHT);
+        split.add(packageView.getRightSide(), JSplitPane.RIGHT);
 
         getContentPane().add(split, BorderLayout.CENTER);
         split.setDividerLocation(250);
@@ -135,7 +113,11 @@ public class MainFrame extends JFrame implements ISubscriber {
         return toolBar;
     }
 
-    public JTabbedPane getjTabbedPane() {
-        return jTabbedPane;
+    public PackageView getPackageView() {
+        return packageView;
+    }
+
+    public void setPackageView(PackageView packageView) {
+        this.packageView = packageView;
     }
 }
