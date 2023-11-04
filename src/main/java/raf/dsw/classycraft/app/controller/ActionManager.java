@@ -6,7 +6,7 @@ public class ActionManager {
     ExitAction exitAction;
     AboutUsAction aboutUsAction;
     NewChildAction newChildAction;
-
+    MouseListener mouseListener;
     RemoveChild removeChild;
 
     public ActionManager() {
@@ -14,6 +14,7 @@ public class ActionManager {
         aboutUsAction = new AboutUsAction();
         newChildAction = new NewChildAction();
         removeChild = new RemoveChild();
+        //mouseListener = new MouseListener();
     }
 
     public ExitAction getExitAction() {
@@ -30,5 +31,13 @@ public class ActionManager {
 
     public RemoveChild getRemoveChild() {
         return removeChild;
+    }
+
+    public MouseListener getMouseListener() {
+        return mouseListener;
+    }
+
+    public void setMouseListener(MouseListener mouseListener) {
+        this.mouseListener = mouseListener;
     }
 }
