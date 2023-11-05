@@ -1,7 +1,13 @@
 package raf.dsw.classycraft.app.core;
 
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.Package;
 import raf.dsw.classycraft.app.errorHandler.*;
+import raf.dsw.classycraft.app.gui.swing.tree.model.childFactory.ChildFactory;
+import raf.dsw.classycraft.app.gui.swing.tree.model.childFactory.FactoryUtils;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
+
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Semaphore;
 
 public class ApplicationFramework {
 
@@ -9,10 +15,10 @@ public class ApplicationFramework {
 
     private static ApplicationFramework instance;
 
-    MessageGenerator messageGenerator;
-    Logger fileLogger;
-    Logger consoleLogger;
-
+    private MessageGenerator messageGenerator;
+    private Logger fileLogger;
+    private Logger consoleLogger;
+    private FactoryUtils factoryUtils;
     protected ClassyRepository classyRepository;
 
     private ApplicationFramework() {
@@ -20,6 +26,8 @@ public class ApplicationFramework {
     }
 
     public void initialize(ClassyRepository classyRepository) {
+
+        factoryUtils = new FactoryUtils();
 
         messageGenerator = new MessageGenerator();
 
@@ -31,6 +39,7 @@ public class ApplicationFramework {
 
         MainFrame.getInstance().setVisible(true);
     }
+
 
     public static ApplicationFramework getInstance() {
         if (instance == null) {
@@ -70,4 +79,9 @@ public class ApplicationFramework {
     public void setConsoleLogger(Logger consoleLogger) {
         this.consoleLogger = consoleLogger;
     }
+
+    public FactoryUtils getFactoryUtils() {
+        return factoryUtils;
+    }
+
 }

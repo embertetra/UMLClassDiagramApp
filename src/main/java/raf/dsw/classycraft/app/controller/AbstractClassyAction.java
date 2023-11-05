@@ -6,7 +6,7 @@ import java.net.URL;
 
 public abstract class AbstractClassyAction extends AbstractAction {
 
-    public Icon LoadIcon(String fileName){
+    public Icon loadIcon(String fileName){
 
 
         Icon icon = null;

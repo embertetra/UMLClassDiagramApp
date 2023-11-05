@@ -1,0 +1,20 @@
+package raf.dsw.classycraft.app.gui.swing.tree.controller;
+
+import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
+
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.TreePath;
+
+public class ClassyTreeSelectionListerer implements TreeSelectionListener {
+    // prati da li se promenila selekcija na stablu
+
+    // valueChange() - reaguje svaki put kada korisnik selektuje drugi cvor
+    @Override
+    public void valueChanged(TreeSelectionEvent e) {
+        TreePath path = e.getPath();
+        ClassyTreeItem treeItemSelected = (ClassyTreeItem) path.getLastPathComponent();
+        System.out.println("Selektovani cvor: " + treeItemSelected.getClassyNode().getName());
+        System.out.println("Get path: " + e.getPath());
+    }
+}
