@@ -51,7 +51,7 @@ public class RemoveChild extends AbstractClassyAction{
                 }
 
             }
-            else {
+            else if(!(selected.getClassyNode() instanceof ProjectExplorer)){
                 MainFrame.getInstance().getClassyTree().getSelectedNode().removeFromParent();
                 ClassyNodeComposite cns = (ClassyNodeComposite) selected.getClassyNode().getParent();
                 if(cns.getChildren().contains(selected.getClassyNode()))

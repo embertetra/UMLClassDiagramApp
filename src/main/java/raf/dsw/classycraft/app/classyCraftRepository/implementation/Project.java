@@ -41,7 +41,7 @@ public class Project extends ClassyNodeComposite implements IPublisher {
         if (child != null && child instanceof Package) {
             if (getChildren().contains(child)) {
                 getChildren().remove(child);
-                notifySubscribers(new NotificationJTabbed(this, 3));
+                notifySubscribers(new NotificationJTabbed((ClassyNodeComposite) child, 3));
             }
         }
     }

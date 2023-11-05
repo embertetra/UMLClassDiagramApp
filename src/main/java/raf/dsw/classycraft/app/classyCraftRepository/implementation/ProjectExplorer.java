@@ -42,7 +42,7 @@ public class ProjectExplorer extends ClassyNodeComposite implements IPublisher {
                 if (MainFrame.getInstance().getPackageView() == null)
                     MainFrame.getInstance().setPackageView(new PackageView());
                 addSubscriber(MainFrame.getInstance().getPackageView());
-                notifySubscribers(new NotificationJTabbed((ClassyNodeComposite) child, 3));
+                notifySubscribers(new NotificationJTabbed((ClassyNodeComposite) child, 5));
             }
         }
     }

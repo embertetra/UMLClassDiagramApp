@@ -1,8 +1,10 @@
 package raf.dsw.classycraft.app.gui.swing.view;
 
+import javafx.scene.Parent;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.Package;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
 import raf.dsw.classycraft.app.jTabbedElements.NotificationJTabbed;
 import raf.dsw.classycraft.app.observer.ISubscriber;
@@ -35,15 +37,14 @@ public class PackageView implements ISubscriber {
         rightSide.add(jTabbedPane);
     }
 
-    public void addInTabList(DijaframView dijaframView){
-        if(tabovi == null){
+    public void addInTabList(DijaframView dijaframView) {
+        if (tabovi == null) {
             tabovi = new ArrayList<>();
             tabovi.add(dijaframView);
-        }
-        else tabovi.add(dijaframView);
+        } else tabovi.add(dijaframView);
     }
 
-    public void promeniNazivProjekta(String string){
+    public void promeniNazivProjekta(String string) {
         nazivProjekta.setText(string);
     }
 
@@ -84,42 +85,58 @@ public class PackageView implements ISubscriber {
                     brojac = 0;
                 }
             }
-        }
-        else if(poruka.getOznaka() == 1){
+        } else if (poruka.getOznaka() == 1) {
             brojac = 0;
-            if (this.parent != null && parent2.getName().equals(this.parent.getName())){
+            if (this.parent != null && parent2.getName().equals(this.parent.getName())) {
                 totalTabs = jTabbedPane.getTabCount();
-                for(int i=0; i<totalTabs; i++){
-                    for(ClassyNode c : parent2.getChildren()){
-                        if(jTabbedPane.getTitleAt(i).equals(c.getName()))brojac = 1;
+                for (int i = 0; i < totalTabs; i++) {
+                    for (ClassyNode c : parent2.getChildren()) {
+                        if (jTabbedPane.getTitleAt(i).equals(c.getName())) brojac = 1;
                     }
-                    if(brojac == 0)
+                    if (brojac == 0)
                         jTabbedPane.removeTabAt(i);
                     brojac = 0;
                     totalTabs = jTabbedPane.getTabCount();
                 }
             }
-        }
-        else if(poruka.getOznaka() == 2){
+        } else if (poruka.getOznaka() == 2) {
             System.out.println(parent.getName() + " " + parent2.getName());
-            if (this.parent != null && parent2.getName().equals(this.parent.getName())){
+            if (this.parent != null && parent2.getName().equals(this.parent.getName())) {
                 jTabbedPane.removeAll();
                 promeniNazivProjekta("      ");
             }
-        }
-        else if(poruka.getOznaka() == 3){
-            while(true){
-                if(parent instanceof Project)
+        } else if (poruka.getOznaka() == 3) {
+            ClassyNode pck = poruka.getParent();
+            ClassyNode tmp = parent;
+            while (true) {
+                ClassyNode tmp2 = tmp.getParent();
+                if (tmp2 instanceof Project)
                     break;
-                else parent = parent.getParent();
+                else tmp = tmp.getParent();
             }
-            if(parent.getName().equals(parent2.getName())) {
+            if (tmp.getName().equals(pck.getName())) {
                 jTabbedPane.removeAll();
-                promeniNazivProjekta("      ");
+                nazivProjekta.setText("    ");
+            }
+        } else if (poruka.getOznaka() == 4) {
+            if (poruka.getParent().getName().equals(nazivProjekta.getText())) {
+                nazivProjekta.setText(poruka.getNewName());
+            }
+        } else if (poruka.getOznaka() == 5) {
+
+            if (parent != null) {
+                ClassyNode p = this.parent;
+                while (true) {
+                    if (p instanceof Project)
+                        break;
+                    else p = p.getParent();
+                }
+                if (p.getName().equals(poruka.getParent().getName())) {
+                    jTabbedPane.removeAll();
+                    nazivProjekta.setText("    ");
+                }
             }
         }
-        else if(poruka.getOznaka() == 4)
-            nazivProjekta.setText(poruka.getNewName());
     }
 
     public void setParent(ClassyNode parent) {

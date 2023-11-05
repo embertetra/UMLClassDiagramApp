@@ -29,7 +29,7 @@ public class MouseListener {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     ClassyTreeItem selected = (ClassyTreeItem) MainFrame.getInstance().getClassyTree().getSelectedNode();
-                    if ((selected.getClassyNode() instanceof Package)) {
+                    if ((selected instanceof ClassyTreeItem && selected.getClassyNode() instanceof Package)) {
                         if (e.getClickCount() == 2) {
                             MainFrame.getInstance().getPackageView().getjTabbedPane().removeAll();
                             for (ClassyNode c : ((Package) selected.getClassyNode()).getChildren()) {

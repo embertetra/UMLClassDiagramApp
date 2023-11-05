@@ -52,22 +52,8 @@ public class ClassyTreeSellEditor extends DefaultTreeCellEditor implements Actio
             return;
 
         ClassyTreeItem clicked = (ClassyTreeItem) clickedOn;
-        ClassyNodeComposite cnc = (ClassyNodeComposite) clicked.getClassyNode().getParent();
         String old = clicked.getClassyNode().getName();
-        clicked.setName(e.getActionCommand());
-
-        ///promena imena za project u JTabbu
-        ClassyTreeItem selected = MainFrame.getInstance().getClassyTree().getSelectedNode();
-        if(selected.getClassyNode() instanceof Project){
-            Project project = (Project) selected.getClassyNode();
-            project.notifySubscribers(new NotificationJTabbed(e.getActionCommand(), 4));
-        }
-
-        ///promena imena za dijagram na JTabbu
-        if(selected.getClassyNode() instanceof Dijagram){
-            Dijagram dijagram = (Dijagram) selected.getClassyNode();
-            dijagram.notifySubscribers(new NotificationDijagramView(dijagram, e.getActionCommand(), old));
-        }
+        ClassyNodeComposite cnc = (ClassyNodeComposite) clicked.getClassyNode().getParent();
 
         if(clicked.getClassyNode().getName().equals(e.getActionCommand())) {
             clicked.setName(e.getActionCommand());
@@ -76,14 +62,24 @@ public class ClassyTreeSellEditor extends DefaultTreeCellEditor implements Actio
             SwingUtilities.updateComponentTreeUI(cti.getTreeView());
             return;
         }
-
         for(ClassyNode c: cnc.getChildren()){
             if(c.getName().equals(e.getActionCommand())){
                 ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Uneto ime je vec u upotrebi!", MessageType.ERROR);
                 return;
             }
         }
-
+        ///promena imena za project u JTabbu
+        ClassyTreeItem selected = MainFrame.getInstance().getClassyTree().getSelectedNode();
+        if(selected.getClassyNode() instanceof Project){
+            Project project = (Project) selected.getClassyNode();
+            ///project se ne sme promeniti u JTabbu ako nije taj project prikazan u view
+            project.notifySubscribers(new NotificationJTabbed(project, e.getActionCommand(), 4));
+        }
+        ///promena imena za dijagram na JTabbu
+        else if(selected.getClassyNode() instanceof Dijagram){
+            Dijagram dijagram = (Dijagram) selected.getClassyNode();
+            dijagram.notifySubscribers(new NotificationDijagramView(dijagram, e.getActionCommand(), old));
+        }
         clicked.setName(e.getActionCommand());
 
         ClassyTreeImplementation cti = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
