@@ -118,6 +118,8 @@ public class PackageView implements ISubscriber {
                 promeniNazivProjekta("      ");
             }
         }
+        else if(poruka.getOznaka() == 4)
+            nazivProjekta.setText(poruka.getNewName());
     }
 
     public void setParent(ClassyNode parent) {

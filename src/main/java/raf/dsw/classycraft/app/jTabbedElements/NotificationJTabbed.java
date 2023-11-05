@@ -5,6 +5,7 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposi
 public class NotificationJTabbed {
 
     ClassyNodeComposite parent;
+    String newName;
     int oznaka; /// 0-dodaj dijagram, 1-izbrisi dijagram, 2-brisanje podpaketa, 3-paket/project
 
     public NotificationJTabbed(ClassyNodeComposite parent, int oznaka) {
@@ -12,6 +13,11 @@ public class NotificationJTabbed {
         this.parent = parent;
         this.oznaka = oznaka;
 
+    }
+
+    public NotificationJTabbed(String newName, int oznaka) {
+        this.newName = newName;
+        this.oznaka = oznaka;
     }
 
     public ClassyNodeComposite getParent() {
@@ -28,5 +34,9 @@ public class NotificationJTabbed {
 
     public void setOznaka(int oznaka) {
         this.oznaka = oznaka;
+    }
+
+    public String getNewName() {
+        return newName;
     }
 }
