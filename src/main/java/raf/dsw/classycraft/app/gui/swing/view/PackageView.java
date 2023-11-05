@@ -4,7 +4,6 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
-import raf.dsw.classycraft.app.classyCraftRepository.implementation.ProjectExplorer;
 import raf.dsw.classycraft.app.jTabbedElements.NotificationJTabbed;
 import raf.dsw.classycraft.app.observer.ISubscriber;
 

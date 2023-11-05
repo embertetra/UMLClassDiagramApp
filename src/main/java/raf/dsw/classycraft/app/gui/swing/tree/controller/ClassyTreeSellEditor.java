@@ -5,6 +5,7 @@ import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
+import raf.dsw.classycraft.app.jTabbedElements.NotificationDijagramView;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeCellEditor;
@@ -57,10 +58,8 @@ public class ClassyTreeSellEditor extends DefaultTreeCellEditor implements Actio
 
         ///promena imena za dijagram na JTabbu
         if(selected.getClassyNode() instanceof Dijagram){
-            int totalTabs = MainFrame.getInstance().getPackageView().getjTabbedPane().getTabCount();
-            for (int i=0;i<totalTabs;i++)
-                if(MainFrame.getInstance().getPackageView().getjTabbedPane().getTitleAt(i).equals(old))
-                    MainFrame.getInstance().getPackageView().getjTabbedPane().setTitleAt(i, e.getActionCommand());
+            Dijagram dijagram = (Dijagram) selected.getClassyNode();
+            dijagram.notifySubscribers(new NotificationDijagramView(dijagram, e.getActionCommand(), old));
         }
 
 

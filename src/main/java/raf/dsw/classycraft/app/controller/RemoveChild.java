@@ -28,18 +28,18 @@ public class RemoveChild extends AbstractClassyAction{
     public void actionPerformed(ActionEvent e) {
         ClassyTreeItem selected = (ClassyTreeItem) MainFrame.getInstance().getClassyTree().getSelectedNode();
         if(selected != null) {
-            if(selected.getClassyNode() instanceof ProjectExplorer)
-                ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("ProjectExplorer nije moguce obrisati!", MessageType.ERROR);
-            else {
-                MainFrame.getInstance().getClassyTree().getSelectedNode().removeFromParent();
-                ClassyNodeComposite cns = (ClassyNodeComposite) selected.getClassyNode().getParent();
-                if(cns.getChildren().contains(selected.getClassyNode()))
-                    cns.removeChild(selected.getClassyNode());
-                ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
-                SwingUtilities.updateComponentTreeUI(classyTreeImplementation.getTreeView());
-            }
-            ClassyTreeImplementation cti = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
-            cti.getTreeView().clearSelection();
+                if(selected.getClassyNode() instanceof ProjectExplorer)
+                    ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("ProjectExplorer nije moguce obrisati!", MessageType.ERROR);
+                else {
+                    MainFrame.getInstance().getClassyTree().getSelectedNode().removeFromParent();
+                    ClassyNodeComposite cns = (ClassyNodeComposite) selected.getClassyNode().getParent();
+                    if(cns.getChildren().contains(selected.getClassyNode()))
+                        cns.removeChild(selected.getClassyNode());
+                    ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
+                    SwingUtilities.updateComponentTreeUI(classyTreeImplementation.getTreeView());
+                }
+                ClassyTreeImplementation cti = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
+                cti.getTreeView().clearSelection();
         }
         else
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije selektovano polje za brisanje", MessageType.ERROR);
