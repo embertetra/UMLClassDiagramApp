@@ -19,14 +19,13 @@ public class FileLogger implements Logger {
         Message message = (Message)notification;
 
         try {
-            FileWriter fw = new FileWriter("/Users/dicifor/Desktop/dizajn-softvera-projekat-tim_dimitrijemitic_martaljiljak/src/main/resources/log.txt", true);
+            FileWriter fw = new FileWriter("C:\\Users\\ljilj\\Desktop\\dizajn-softvera-projekat-tim_dimitrijemitic_martaljiljak\\src\\main\\resources\\log.txt", true);
 
             fw.append("[" + message.getMessageType() + "] [" + message.getDtf().format(message.getNow()) + "] [" + message.getPoruka() + "]" + "\n");
             fw.flush();
 
         } catch (IOException e) {
             System.out.println("Nema fajla");
-            //throw new RuntimeException(e);
         }
 
     }

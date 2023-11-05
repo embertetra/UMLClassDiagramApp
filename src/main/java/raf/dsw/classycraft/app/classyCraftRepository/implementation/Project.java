@@ -14,6 +14,7 @@ import java.util.List;
 public class Project extends ClassyNodeComposite implements IPublisher {
 
     private List<ISubscriber> subscribers;
+    private String autor;
 
     public Project(String name, ClassyNode parent) {
         super(name, parent);
@@ -21,10 +22,11 @@ public class Project extends ClassyNodeComposite implements IPublisher {
         if (MainFrame.getInstance().getPackageView() == null)
             MainFrame.getInstance().setPackageView(new PackageView());
 
+        autor = "unkown";
+
         addSubscriber(MainFrame.getInstance().getPackageView());
 
     }
-
 
     @Override
     public void addChild(ClassyNode child) {
@@ -70,5 +72,13 @@ public class Project extends ClassyNodeComposite implements IPublisher {
                 i.update(notification);
             }
         }
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
     }
 }

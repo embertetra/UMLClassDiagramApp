@@ -15,7 +15,7 @@ public class Message {
         this.poruka = poruka;
         this.messageType = messageType;
 
-        dtf = DateTimeFormatter.ofPattern("dd.MM.YYYY. HH:mm");
+        dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm");
         now = LocalDateTime.now();
 
     }
@@ -24,31 +24,16 @@ public class Message {
         return poruka;
     }
 
-    public void setPoruka(String poruka) {
-        this.poruka = poruka;
-    }
-
     public MessageType getMessageType() {
         return messageType;
-    }
-
-    public void setMessageType(MessageType messageType) {
-        this.messageType = messageType;
     }
 
     public DateTimeFormatter getDtf() {
         return dtf;
     }
 
-    public void setDtf(DateTimeFormatter dtf) {
-        this.dtf = dtf;
-    }
-
     public LocalDateTime getNow() {
         return now;
     }
 
-    public void setNow(LocalDateTime now) {
-        this.now = now;
-    }
 }

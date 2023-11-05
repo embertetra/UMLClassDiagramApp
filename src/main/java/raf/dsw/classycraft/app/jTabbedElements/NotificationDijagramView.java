@@ -19,10 +19,6 @@ public class NotificationDijagramView {
         return newName;
     }
 
-    public void setNewName(String newName) {
-        this.newName = newName;
-    }
-
     public ClassyNode getChild() {
         return child;
     }

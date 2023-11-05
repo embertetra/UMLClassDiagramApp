@@ -33,8 +33,8 @@ public class AboutUsFrame extends JFrame {
         }
 
         JLabel lblSlika = new JLabel();
-        JLabel lblClan1 = new JLabel("Dimitrije Mitic");
-        JLabel lblClan2 = new JLabel("Marta Ljiljak");
+        JLabel lblClan1 = new JLabel("Marta Ljiljak");
+        JLabel lblClan2 = new JLabel("Dimitrije Mitic");
 
         lblSlika.setIcon(icon);
         lblSlika.setHorizontalAlignment(0);

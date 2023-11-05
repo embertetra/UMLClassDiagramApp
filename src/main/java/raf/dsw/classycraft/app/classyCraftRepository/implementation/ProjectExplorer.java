@@ -2,8 +2,6 @@ package raf.dsw.classycraft.app.classyCraftRepository.implementation;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
-import raf.dsw.classycraft.app.core.ApplicationFramework;
-import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.gui.swing.view.PackageView;
 import raf.dsw.classycraft.app.jTabbedElements.NotificationJTabbed;

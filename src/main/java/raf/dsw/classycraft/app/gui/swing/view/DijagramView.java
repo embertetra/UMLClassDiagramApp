@@ -2,30 +2,21 @@ package raf.dsw.classycraft.app.gui.swing.view;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
-import raf.dsw.classycraft.app.classyCraftRepository.implementation.Package;
 import raf.dsw.classycraft.app.jTabbedElements.NotificationDijagramView;
 import raf.dsw.classycraft.app.observer.ISubscriber;
 
 import javax.swing.*;
 
-public class DijaframView extends JPanel implements ISubscriber {
+public class DijagramView extends JPanel implements ISubscriber {
 
     ClassyNode classyNode;
 
-    public DijaframView(ClassyNode classyNode) {
+    public DijagramView(ClassyNode classyNode) {
         if (classyNode != null) {
             this.classyNode = classyNode;
             Dijagram dijagram = (Dijagram) classyNode;
             dijagram.addSubscriber(this);
         }
-    }
-
-    public ClassyNode getClassyNode() {
-        return classyNode;
-    }
-
-    public void setClassyNode(ClassyNode classyNode) {
-        this.classyNode = classyNode;
     }
 
     @Override

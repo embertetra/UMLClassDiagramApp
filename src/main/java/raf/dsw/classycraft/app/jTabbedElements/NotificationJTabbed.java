@@ -6,7 +6,7 @@ public class NotificationJTabbed {
 
     ClassyNodeComposite parent;
     String newName;
-    int oznaka; /// 0-dodaj dijagram, 1-izbrisi dijagram, 2-brisanje podpaketa, 3-paket/project, 4-menjanje imena projekta, 5 brisanje projecta
+    int oznaka; /// 0-dodaj dijagram, 1-izbrisi dijagram, 2-brisanje podpaketa, 3-paket, 4-menjanje imena projekta, 5 brisanje projecta
 
     public NotificationJTabbed(ClassyNodeComposite parent, int oznaka) {
 
@@ -35,10 +35,6 @@ public class NotificationJTabbed {
 
     public int getOznaka() {
         return oznaka;
-    }
-
-    public void setOznaka(int oznaka) {
-        this.oznaka = oznaka;
     }
 
     public String getNewName() {

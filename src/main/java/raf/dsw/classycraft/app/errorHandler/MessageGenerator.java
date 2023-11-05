@@ -50,7 +50,4 @@ public class MessageGenerator implements IPublisher {
         return subscribers;
     }
 
-    public void setSubscribers(List<ISubscriber> subscribers) {
-        this.subscribers = subscribers;
-    }
 }
