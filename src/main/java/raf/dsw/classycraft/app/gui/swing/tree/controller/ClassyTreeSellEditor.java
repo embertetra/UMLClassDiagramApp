@@ -1,5 +1,9 @@
 package raf.dsw.classycraft.app.gui.swing.tree.controller;
 
+import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
+import raf.dsw.classycraft.app.core.ApplicationFramework;
+import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
@@ -30,7 +34,7 @@ public class ClassyTreeSellEditor extends DefaultTreeCellEditor implements Actio
         return false;
     }
 
-    //getTreeCellEditorComponent - metoda menja textBox na novi tekst (arg0 - gde se desilo, arg1 - na sta je kliknuto)
+    //getTreeCellEditorComponent - metoda menja textBox na novi tekst (arg0 - gde se desilo, arg1 - obj na koji je kliknuto)
     public Component getTreeCellEditorComponent(JTree arg0, Object arg1, boolean arg2, boolean arg3, boolean agr4, int arg5){
         super.getTreeCellEditorComponent(arg0, arg1, arg2, arg3, agr4, arg5);
         clickedOn = arg1;
@@ -45,13 +49,24 @@ public class ClassyTreeSellEditor extends DefaultTreeCellEditor implements Actio
             return;
 
         ClassyTreeItem clicked = (ClassyTreeItem) clickedOn;
+        ClassyNodeComposite cnc = (ClassyNodeComposite) clicked.getClassyNode().getParent();
+
+        if(clicked.getClassyNode().getName().equals(e.getActionCommand())) {
+            clicked.setName(e.getActionCommand());
+
+            ClassyTreeImplementation cti = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
+            SwingUtilities.updateComponentTreeUI(cti.getTreeView());
+            return;
+        }
+
+        for(ClassyNode c: cnc.getChildren()){
+            if(c.getName().equals(e.getActionCommand())){
+                ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Uneto ime je vec u upotrebi!", MessageType.ERROR);
+                return;
+            }
+        }
+
         clicked.setName(e.getActionCommand());
-
-
-
-        //obraditi slucaj ako je uneto vec postojece ime
-
-
 
         ClassyTreeImplementation cti = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
         SwingUtilities.updateComponentTreeUI(cti.getTreeView());

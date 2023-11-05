@@ -2,9 +2,6 @@ package raf.dsw.classycraft.app.classyCraftRepository.implementation;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
-import raf.dsw.classycraft.app.core.ApplicationFramework;
-import raf.dsw.classycraft.app.errorHandler.MessageType;
-import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 public class ProjectExplorer extends ClassyNodeComposite {
     // root klasa = postoji samo jedna instanca
