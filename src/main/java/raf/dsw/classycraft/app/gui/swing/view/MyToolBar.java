@@ -1,7 +1,6 @@
 package raf.dsw.classycraft.app.gui.swing.view;
 
 import raf.dsw.classycraft.app.controller.ExitAction;
-import raf.dsw.classycraft.app.controller.RemoveChild;
 
 import javax.swing.*;
 

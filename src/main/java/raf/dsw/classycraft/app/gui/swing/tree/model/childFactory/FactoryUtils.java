@@ -1,8 +1,5 @@
 package raf.dsw.classycraft.app.gui.swing.tree.model.childFactory;
 
-import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
-
-
 public class FactoryUtils {
 
     public FactoryUtils() {
