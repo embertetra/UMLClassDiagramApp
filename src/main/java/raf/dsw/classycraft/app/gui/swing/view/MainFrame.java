@@ -1,6 +1,5 @@
 package raf.dsw.classycraft.app.gui.swing.view;
 
-import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.controller.ActionManager;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.Message;
@@ -23,7 +22,7 @@ public class MainFrame extends JFrame implements ISubscriber {
     private MyMenyBar menu;
     private MyToolBar toolBar;
     private PackageView packageView;
-    private DijaframView dijaframView;
+    private DijagramView dijagramView;
 
 
     private MainFrame() {
@@ -35,7 +34,7 @@ public class MainFrame extends JFrame implements ISubscriber {
         aboutUsFrame = new AboutUsFrame();
         classyTree = new ClassyTreeImplementation();
         packageView = new PackageView();
-        dijaframView = new DijaframView(null);
+        dijagramView = new DijagramView(null);
 
         ApplicationFramework.getInstance().getMessageGenerator().getSubscribers().add(this);
 
@@ -124,7 +123,7 @@ public class MainFrame extends JFrame implements ISubscriber {
         this.packageView = packageView;
     }
 
-    public DijaframView getDijaframView() {
-        return dijaframView;
+    public DijagramView getDijaframView() {
+        return dijagramView;
     }
 }

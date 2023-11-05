@@ -10,12 +10,14 @@ public class ActionManager {
     NewChildAction newChildAction;
     MouseListener mouseListener;
     RemoveChild removeChild;
+    AutorAction autorAction;
 
     public ActionManager() {
         exitAction = new ExitAction();
         aboutUsAction = new AboutUsAction();
         newChildAction = new NewChildAction();
         removeChild = new RemoveChild();
+        autorAction = new AutorAction();
         //mouseListener = new MouseListener();
     }
 
@@ -41,5 +43,9 @@ public class ActionManager {
 
     public void setMouseListener(MouseListener mouseListener) {
         this.mouseListener = mouseListener;
+    }
+
+    public AutorAction getAutorAction() {
+        return autorAction;
     }
 }
