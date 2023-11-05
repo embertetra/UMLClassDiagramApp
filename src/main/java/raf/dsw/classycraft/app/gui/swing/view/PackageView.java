@@ -107,7 +107,6 @@ public class PackageView implements ISubscriber {
                     if(tmp.getName().equals(poruka.getParent().getName())){
                         jTabbedPane.removeAll();
                         parent = null;
-                        tabovi.clear();
                         return;
                     }
                     tmp = tmp.getParent();
@@ -129,7 +128,6 @@ public class PackageView implements ISubscriber {
                 if (tmp.getName().equals(pck.getName())) {
                     jTabbedPane.removeAll();
                     parent = null;
-                    tabovi.clear();
                 }
             }
         }
@@ -151,7 +149,6 @@ public class PackageView implements ISubscriber {
                 if (p.getName().equals(poruka.getParent().getName())) {
                     jTabbedPane.removeAll();
                     parent = null;
-                    tabovi.clear();
                     nazivProjekta.setText("    ");
                     nazivAutora.setText("    ");
                 }
