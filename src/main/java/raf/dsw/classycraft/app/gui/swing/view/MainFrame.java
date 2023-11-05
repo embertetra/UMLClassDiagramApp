@@ -1,5 +1,6 @@
 package raf.dsw.classycraft.app.gui.swing.view;
 
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.controller.ActionManager;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.Message;
@@ -21,6 +22,8 @@ public class MainFrame extends JFrame implements ISubscriber {
     private ClassyTree classyTree;
     private MyMenyBar menu;
     private MyToolBar toolBar;
+    private PackageView packageView;
+    private DijaframView dijaframView;
 
 
     private MainFrame() {
@@ -31,7 +34,8 @@ public class MainFrame extends JFrame implements ISubscriber {
         actionManager = new ActionManager();
         aboutUsFrame = new AboutUsFrame();
         classyTree = new ClassyTreeImplementation();
-        //packageOrDiagram.setVisible(true);
+        packageView = new PackageView();
+        dijaframView = new DijaframView(null);
 
         ApplicationFramework.getInstance().getMessageGenerator().getSubscribers().add(this);
 
@@ -53,10 +57,12 @@ public class MainFrame extends JFrame implements ISubscriber {
 
         JTree projectExplorer = classyTree.generateTree(ApplicationFramework.getInstance().getClassyRepository().getRoot());
         JPanel desktop = new JPanel();
-
         JScrollPane scrollPane = new JScrollPane(projectExplorer);
         scrollPane.setMinimumSize(new Dimension(200, 150));
         JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scrollPane, desktop);
+
+        split.add(packageView.getRightSide(), JSplitPane.RIGHT);
+
         getContentPane().add(split, BorderLayout.CENTER);
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);
@@ -108,5 +114,17 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     public MyToolBar getToolBar() {
         return toolBar;
+    }
+
+    public PackageView getPackageView() {
+        return packageView;
+    }
+
+    public void setPackageView(PackageView packageView) {
+        this.packageView = packageView;
+    }
+
+    public DijaframView getDijaframView() {
+        return dijaframView;
     }
 }

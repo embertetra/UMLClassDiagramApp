@@ -1,12 +1,15 @@
 package raf.dsw.classycraft.app.gui.swing.tree.controller;
-
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
+import raf.dsw.classycraft.app.jTabbedElements.NotificationDijagramView;
+import raf.dsw.classycraft.app.jTabbedElements.NotificationJTabbed;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeCellEditor;
@@ -50,6 +53,21 @@ public class ClassyTreeSellEditor extends DefaultTreeCellEditor implements Actio
 
         ClassyTreeItem clicked = (ClassyTreeItem) clickedOn;
         ClassyNodeComposite cnc = (ClassyNodeComposite) clicked.getClassyNode().getParent();
+        String old = clicked.getClassyNode().getName();
+        clicked.setName(e.getActionCommand());
+
+        ///promena imena za project u JTabbu
+        ClassyTreeItem selected = MainFrame.getInstance().getClassyTree().getSelectedNode();
+        if(selected.getClassyNode() instanceof Project){
+            Project project = (Project) selected.getClassyNode();
+            project.notifySubscribers(new NotificationJTabbed(e.getActionCommand(), 4));
+        }
+
+        ///promena imena za dijagram na JTabbu
+        if(selected.getClassyNode() instanceof Dijagram){
+            Dijagram dijagram = (Dijagram) selected.getClassyNode();
+            dijagram.notifySubscribers(new NotificationDijagramView(dijagram, e.getActionCommand(), old));
+        }
 
         if(clicked.getClassyNode().getName().equals(e.getActionCommand())) {
             clicked.setName(e.getActionCommand());

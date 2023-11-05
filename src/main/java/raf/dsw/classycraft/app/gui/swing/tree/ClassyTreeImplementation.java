@@ -6,6 +6,7 @@ import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Package;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.ProjectExplorer;
+import raf.dsw.classycraft.app.controller.dvoklikNaPaket.MouseListener;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
@@ -31,6 +32,7 @@ public class ClassyTreeImplementation implements ClassyTree{
         ClassyTreeItem root = new ClassyTreeItem(projectExplorer);
         treeModel = new DefaultTreeModel(root);
         treeView = new ClassyTreeView(treeModel);
+        MainFrame.getInstance().getActionManager().setMouseListener(new MouseListener());
         return treeView;
     }
 
