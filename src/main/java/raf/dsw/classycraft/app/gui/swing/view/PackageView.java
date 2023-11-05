@@ -107,16 +107,19 @@ public class PackageView implements ISubscriber {
             }
         } else if (poruka.getOznaka() == 3) {
             ClassyNode pck = poruka.getParent();
-            ClassyNode tmp = parent;
-            while (true) {
-                ClassyNode tmp2 = tmp.getParent();
-                if (tmp2 instanceof Project)
-                    break;
-                else tmp = tmp.getParent();
-            }
-            if (tmp.getName().equals(pck.getName())) {
-                jTabbedPane.removeAll();
-                nazivProjekta.setText("    ");
+            if (parent != null) {
+                ClassyNode tmp = parent;
+                while (true) {
+                    ClassyNode tmp2 = tmp.getParent();
+                    if (tmp2 instanceof Project)
+                        break;
+                    else tmp = tmp.getParent();
+                }
+
+                if (tmp.getName().equals(pck.getName())) {
+                    jTabbedPane.removeAll();
+                    nazivProjekta.setText("    ");
+                }
             }
         } else if (poruka.getOznaka() == 4) {
             if (poruka.getParent().getName().equals(nazivProjekta.getText())) {
