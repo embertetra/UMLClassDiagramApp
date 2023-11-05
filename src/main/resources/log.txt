@@ -61,3 +61,4 @@
 [ERROR] [05.11.2023. 15:44] [ProjectExplorer nije moguce obrisati!]
 [ERROR] [05.11.2023. 15:46] [Nije selektovano polje za brisanje]
 [ERROR] [05.11.2023. 15:49] [Uneto ime je vec u upotrebi!]
+[ERROR] [05.11.2023. 19:09] [Nije selektovan roditelj]
