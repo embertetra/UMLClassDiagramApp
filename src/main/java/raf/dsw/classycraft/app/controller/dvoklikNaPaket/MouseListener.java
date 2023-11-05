@@ -9,6 +9,7 @@ import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.tree.view.ClassyTreeView;
+import raf.dsw.classycraft.app.gui.swing.view.DijaframView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 import javax.swing.*;
@@ -33,7 +34,14 @@ public class MouseListener {
                             MainFrame.getInstance().getPackageView().getjTabbedPane().removeAll();
                             for (ClassyNode c : ((Package) selected.getClassyNode()).getChildren()) {
                                 if (c instanceof Dijagram) {
-                                    MainFrame.getInstance().getPackageView().getjTabbedPane().addTab(c.getName(), new JPanel());
+
+                                    ///dodavanje tabova u listu i u sam JTabb
+                                    ///Kad se bude crtalo ovde treba dodati proveru da li taj dijagramView vec postoji
+                                    ///kako bi uzeo vec postojeci sa crtezom a ne kreirao novi svaki put
+                                    DijaframView dijaframView = new DijaframView(c);
+                                    MainFrame.getInstance().getPackageView().addInTabList(dijaframView);
+                                    MainFrame.getInstance().getPackageView().getjTabbedPane().addTab(c.getName(), dijaframView);
+
                                 }
                             }
                             MainFrame.getInstance().getPackageView().setParent(selected.getClassyNode());

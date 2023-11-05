@@ -9,6 +9,8 @@ import raf.dsw.classycraft.app.jTabbedElements.NotificationJTabbed;
 import raf.dsw.classycraft.app.observer.ISubscriber;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PackageView implements ISubscriber {
     private JTabbedPane jTabbedPane;
@@ -16,6 +18,7 @@ public class PackageView implements ISubscriber {
     JLabel nazivAutora;
     JPanel rightSide;
     ClassyNode parent;
+    List<DijaframView> tabovi;
 
     public PackageView() {
         this.parent = null;
@@ -31,6 +34,14 @@ public class PackageView implements ISubscriber {
         rightSide.add(nazivProjekta);
         rightSide.add(nazivAutora);
         rightSide.add(jTabbedPane);
+    }
+
+    public void addInTabList(DijaframView dijaframView){
+        if(tabovi == null){
+            tabovi = new ArrayList<>();
+            tabovi.add(dijaframView);
+        }
+        else tabovi.add(dijaframView);
     }
 
     public void promeniNazivProjekta(String string){
@@ -112,5 +123,9 @@ public class PackageView implements ISubscriber {
 
     public void setParent(ClassyNode parent) {
         this.parent = parent;
+    }
+
+    public List<DijaframView> getTabovi() {
+        return tabovi;
     }
 }
