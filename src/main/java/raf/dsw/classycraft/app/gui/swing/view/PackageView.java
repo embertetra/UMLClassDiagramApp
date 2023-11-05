@@ -54,14 +54,6 @@ public class PackageView implements ISubscriber {
         return jTabbedPane;
     }
 
-    public JLabel getNazivProjekta() {
-        return nazivProjekta;
-    }
-
-    public JLabel getNazivAutora() {
-        return nazivAutora;
-    }
-
     public JPanel getRightSide() {
         return rightSide;
     }
@@ -185,10 +177,6 @@ public class PackageView implements ISubscriber {
 
     public void setParent(ClassyNode parent) {
         this.parent = parent;
-    }
-
-    public List<DijagramView> getTabovi() {
-        return tabovi;
     }
 
 }

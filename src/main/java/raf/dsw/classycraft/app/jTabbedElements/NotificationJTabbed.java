@@ -37,10 +37,6 @@ public class NotificationJTabbed {
         return oznaka;
     }
 
-    public void setOznaka(int oznaka) {
-        this.oznaka = oznaka;
-    }
-
     public String getNewName() {
         return newName;
     }

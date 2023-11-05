@@ -26,8 +26,4 @@ public class ClassyRepositoryImplementation implements ClassyRepository {
                 parent.getChildren().add(project);
         }
     }
-
-    public void setProjectExplorer(ProjectExplorer root) {
-        this.projectExplorer = root;
-    }
 }

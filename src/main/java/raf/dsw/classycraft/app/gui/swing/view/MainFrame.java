@@ -15,7 +15,6 @@ public class MainFrame extends JFrame implements ISubscriber {
     private static MainFrame instance;
 
     //sva view polja projekta
-
     private ActionManager actionManager;
     private AboutUsFrame aboutUsFrame;
     private ClassyTree classyTree;
@@ -95,24 +94,8 @@ public class MainFrame extends JFrame implements ISubscriber {
         return aboutUsFrame;
     }
 
-    public void setActionManager(ActionManager actionManager) {
-        this.actionManager = actionManager;
-    }
-
     public ClassyTree getClassyTree() {
         return classyTree;
-    }
-
-    public void setClassyTree(ClassyTree classyTree) {
-        this.classyTree = classyTree;
-    }
-
-    public MyMenyBar getMenu() {
-        return menu;
-    }
-
-    public MyToolBar getToolBar() {
-        return toolBar;
     }
 
     public PackageView getPackageView() {
@@ -123,7 +106,4 @@ public class MainFrame extends JFrame implements ISubscriber {
         this.packageView = packageView;
     }
 
-    public DijagramView getDijaframView() {
-        return dijagramView;
-    }
 }

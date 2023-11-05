@@ -15,7 +15,7 @@ public class AutorAction extends AbstractClassyAction{
 
     public AutorAction(){
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(null));
-        putValue(SMALL_ICON, loadIcon("/images/add.png")); // zameniti ikonicuuuuuuuuuuu
+        putValue(SMALL_ICON, loadIcon("/images/autor.png"));
         putValue(NAME, "Add autor");
         putValue(SHORT_DESCRIPTION, "Add autor");
     }

@@ -26,8 +26,4 @@ public class ClassyTreeItem extends DefaultMutableTreeNode{
         return classyNode;
     }
 
-    public void setClassyNode(ClassyNode classyNode) {
-        this.classyNode = classyNode;
-    }
-
 }

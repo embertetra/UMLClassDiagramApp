@@ -26,7 +26,6 @@ public class FileLogger implements Logger {
 
         } catch (IOException e) {
             System.out.println("Nema fajla");
-            //throw new RuntimeException(e);
         }
 
     }

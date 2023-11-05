@@ -13,7 +13,7 @@ public class NewChildAction extends AbstractClassyAction{
 
     public NewChildAction() {
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
-        putValue(SMALL_ICON, loadIcon("/images/add.png"));
+        putValue(SMALL_ICON, loadIcon("/images/plus.png"));
         putValue(NAME, "New child");
         putValue(SHORT_DESCRIPTION, "New child");
     }

@@ -19,14 +19,6 @@ public class DijagramView extends JPanel implements ISubscriber {
         }
     }
 
-    public ClassyNode getClassyNode() {
-        return classyNode;
-    }
-
-    public void setClassyNode(ClassyNode classyNode) {
-        this.classyNode = classyNode;
-    }
-
     @Override
     public void update(Object notification) {
         NotificationDijagramView poruka = (NotificationDijagramView) notification;
