@@ -24,8 +24,7 @@ public class AutorAction extends AbstractClassyAction{
         ClassyTreeItem selected = (ClassyTreeItem) MainFrame.getInstance().getClassyTree().getSelectedNode();
         if(selected != null && selected.getClassyNode() instanceof Project){
             String input = JOptionPane.showInputDialog("Uneti ime autora:","");
-            ((Project) selected.getClassyNode()).setAutor(input);
-            ((Project) selected.getClassyNode()).notifySubscribers(new NotificationJTabbed((ClassyNodeComposite) selected.getClassyNode(), input, 6));
+            ((Project) selected.getClassyNode()).setNewAutor(new NotificationJTabbed((ClassyNodeComposite) selected.getClassyNode(), input, 6));
         }
         else
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Potrebno je selektovati projekat pri dodeli autora!", MessageType.ERROR);

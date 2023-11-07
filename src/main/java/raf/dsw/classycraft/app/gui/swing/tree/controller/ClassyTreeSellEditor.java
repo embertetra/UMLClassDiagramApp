@@ -56,21 +56,21 @@ public class ClassyTreeSellEditor extends DefaultTreeCellEditor implements Actio
         String old = clicked.getClassyNode().getName();
         ClassyNodeComposite cnc = (ClassyNodeComposite) clicked.getClassyNode().getParent();
 
+        ///pokusaj promene imena PE
         if(clicked.getClassyNode() instanceof ProjectExplorer){
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Ne mozete menjati ime ProjectExplorer-a", MessageType.ERROR);
             ClassyTreeImplementation cti = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
             SwingUtilities.updateComponentTreeUI(cti.getTreeView());
             return;
         }
-
         ///ako nam je ime isto kao sto je i bilo do sada
-        if(clicked.getClassyNode().getName().equals(e.getActionCommand())) {
+        else if(clicked.getClassyNode().getName().equals(e.getActionCommand())) {
             clicked.setName(e.getActionCommand());
-
             ClassyTreeImplementation cti = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
             SwingUtilities.updateComponentTreeUI(cti.getTreeView());
             return;
         }
+        ///ako je unet prazan string
         else if(e.getActionCommand().equals("")){
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Ne mozete uneti prazno ime", MessageType.INFO);
             return;
@@ -86,13 +86,12 @@ public class ClassyTreeSellEditor extends DefaultTreeCellEditor implements Actio
         ClassyTreeItem selected = MainFrame.getInstance().getClassyTree().getSelectedNode();
         if(selected.getClassyNode() instanceof Project){
             Project project = (Project) selected.getClassyNode();
-            ///project se ne sme promeniti u JTabbu ako nije taj project prikazan u view
-            project.notifySubscribers(new NotificationJTabbed(project, e.getActionCommand(), 4));
+            project.setNameInJTabb(new NotificationJTabbed(project, e.getActionCommand(), 4));
         }
         ///promena imena za dijagram na JTabbu
         else if(selected.getClassyNode() instanceof Dijagram){
             Dijagram dijagram = (Dijagram) selected.getClassyNode();
-            dijagram.notifySubscribers(new NotificationDijagramView(dijagram, e.getActionCommand(), old));
+            dijagram.setNameInJTabb(new NotificationDijagramView(dijagram, e.getActionCommand(), old));
         }
         clicked.setName(e.getActionCommand());
 

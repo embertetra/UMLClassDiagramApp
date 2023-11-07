@@ -1,9 +1,6 @@
 package raf.dsw.classycraft.app.classyCraftRepository.implementation;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
-import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
-import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
-import raf.dsw.classycraft.app.gui.swing.view.PackageView;
 import raf.dsw.classycraft.app.observer.IPublisher;
 import raf.dsw.classycraft.app.observer.ISubscriber;
 
@@ -15,12 +12,9 @@ public class Dijagram extends ClassyNode implements IPublisher {
     private List<ISubscriber> subscribers;
     public Dijagram(String name, ClassyNode parent) {
         super(name, parent);
-
-        if (MainFrame.getInstance().getDijagramView() == null)
-            MainFrame.getInstance().setDijagramView(new DijagramView(null));
-
-        addSubscriber(MainFrame.getInstance().getDijagramView());
-
+    }
+    public void setNameInJTabb(Object notification){
+        notifySubscribers(notification);
     }
 
     @Override

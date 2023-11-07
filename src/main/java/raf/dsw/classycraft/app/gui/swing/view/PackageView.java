@@ -65,7 +65,9 @@ public class PackageView implements ISubscriber {
                         if (c.getName().equals(jTabbedPane.getTitleAt(i)) && c instanceof Dijagram) brojac = 1;
                     }
                     if (brojac == 0 && c instanceof Dijagram) {
-                        jTabbedPane.addTab(c.getName(), new DijagramView(c));
+                        DijagramView dijagramView = new DijagramView(c);
+                        ((Dijagram) c).addSubscriber(dijagramView);
+                        jTabbedPane.addTab(c.getName(), dijagramView);
                     }
                     brojac = 0;
                 }

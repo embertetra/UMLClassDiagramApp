@@ -4,6 +4,7 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Package;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.ProjectExplorer;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.tree.view.ClassyTreeView;
@@ -27,17 +28,17 @@ public class MouseListener {
                     ClassyTreeItem selected = (ClassyTreeItem) MainFrame.getInstance().getClassyTree().getSelectedNode();
                     if ((selected instanceof ClassyTreeItem && selected.getClassyNode() instanceof Package)) {
                         if (e.getClickCount() == 2) {
+                            ((Package) selected.getClassyNode()).addSubscriber(MainFrame.getInstance().getPackageView());
                             MainFrame.getInstance().getPackageView().getjTabbedPane().removeAll();
                             for (ClassyNode c : ((Package) selected.getClassyNode()).getChildren()) {
                                 if (c instanceof Dijagram) {
-
                                     ///dodavanje tabova u listu i u sam JTabb
                                     ///Kad se bude crtalo ovde treba dodati proveru da li taj dijagramView vec postoji
                                     ///kako bi uzeo vec postojeci sa crtezom a ne kreirao novi svaki put
                                     DijagramView dijagramView = new DijagramView(c);
-                                    MainFrame.getInstance().getPackageView().addInTabList(dijagramView);
+                                    ((Dijagram) c).addSubscriber(dijagramView);
+                                    //MainFrame.getInstance().getPackageView().addInTabList(dijagramView);
                                     MainFrame.getInstance().getPackageView().getjTabbedPane().addTab(c.getName(), dijagramView);
-
                                 }
                             }
                             //setovanje parenta packageView-u
@@ -54,7 +55,9 @@ public class MouseListener {
                                     parent = parent.getParent();
                                 }
                             }
+                            ((Project) parent).addSubscriber(MainFrame.getInstance().getPackageView());
                             MainFrame.getInstance().getPackageView().promeniNazivProjekta(parent.getName());
+                            ((ProjectExplorer)parent.getParent()).addSubscriber(MainFrame.getInstance().getPackageView());
 
                         }
                     }
