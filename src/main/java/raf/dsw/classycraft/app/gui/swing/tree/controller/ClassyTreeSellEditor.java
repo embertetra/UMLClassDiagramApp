@@ -1,6 +1,7 @@
 package raf.dsw.classycraft.app.gui.swing.tree.controller;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.ProjectExplorer;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
@@ -55,6 +56,14 @@ public class ClassyTreeSellEditor extends DefaultTreeCellEditor implements Actio
         String old = clicked.getClassyNode().getName();
         ClassyNodeComposite cnc = (ClassyNodeComposite) clicked.getClassyNode().getParent();
 
+        if(clicked.getClassyNode() instanceof ProjectExplorer){
+            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Ne mozete menjati ime ProjectExplorer-a", MessageType.ERROR);
+            ClassyTreeImplementation cti = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
+            SwingUtilities.updateComponentTreeUI(cti.getTreeView());
+            return;
+        }
+
+        ///ako nam je ime isto kao sto je i bilo do sada
         if(clicked.getClassyNode().getName().equals(e.getActionCommand())) {
             clicked.setName(e.getActionCommand());
 
@@ -62,6 +71,11 @@ public class ClassyTreeSellEditor extends DefaultTreeCellEditor implements Actio
             SwingUtilities.updateComponentTreeUI(cti.getTreeView());
             return;
         }
+        else if(e.getActionCommand().equals("")){
+            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Ne mozete uneti prazno ime", MessageType.INFO);
+            return;
+        }
+        ///ako uneto ime vec postoji
         for(ClassyNode c: cnc.getChildren()){
             if(c.getName().equals(e.getActionCommand())){
                 ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Uneto ime je vec u upotrebi!", MessageType.ERROR);

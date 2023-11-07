@@ -26,8 +26,8 @@ public class PackageView implements ISubscriber {
 
         nazivProjekta = new JLabel("        ");
         nazivAutora = new JLabel("          ");
-        nazivProjekta.setBorder(new EmptyBorder(new Insets(0,10,0,0)));
-        nazivAutora.setBorder(new EmptyBorder(new Insets(0,10,0,0)));
+        nazivProjekta.setBorder(new EmptyBorder(new Insets(0, 10, 0, 0)));
+        nazivAutora.setBorder(new EmptyBorder(new Insets(0, 10, 0, 0)));
 
         jTabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.WRAP_TAB_LAYOUT);
 
@@ -46,22 +46,6 @@ public class PackageView implements ISubscriber {
             tabovi = new ArrayList<>();
             tabovi.add(dijagramView);
         } else tabovi.add(dijagramView);
-    }
-
-    public void promeniNazivProjekta(String string) {
-        nazivProjekta.setText(string);
-    }
-
-    public void promeniNazivAutora(String string){
-        nazivAutora.setText(string);
-    }
-
-    public JTabbedPane getjTabbedPane() {
-        return jTabbedPane;
-    }
-
-    public JPanel getRightSide() {
-        return rightSide;
     }
 
     @Override
@@ -107,9 +91,9 @@ public class PackageView implements ISubscriber {
         ///update obrisanih podpaketa
         else if (poruka.getOznaka() == 2) {
             ClassyNode tmp = parent;
-            if(parent !=null){
-                while(!(tmp instanceof Project)){
-                    if(tmp.getName().equals(poruka.getParent().getName())){
+            if (parent != null) {
+                while (!(tmp instanceof Project)) {
+                    if (tmp.getName().equals(poruka.getParent().getName())) {
                         jTabbedPane.removeAll();
                         parent = null;
                         return;
@@ -160,16 +144,16 @@ public class PackageView implements ISubscriber {
             }
         }
         ///Update promena autora
-        else if(poruka.getOznaka() == 6){
+        else if (poruka.getOznaka() == 6) {
 
-            if(parent != null){
+            if (parent != null) {
                 ClassyNode p = this.parent;
-                while(true){
-                    if(p instanceof Project)
+                while (true) {
+                    if (p instanceof Project)
                         break;
                     else p = p.getParent();
                 }
-                if (p.getName().equals(poruka.getParent().getName())){
+                if (p.getName().equals(poruka.getParent().getName())) {
                     nazivAutora.setText(poruka.getNewName());
                 }
             }
@@ -179,6 +163,22 @@ public class PackageView implements ISubscriber {
 
     public void setParent(ClassyNode parent) {
         this.parent = parent;
+    }
+
+    public void promeniNazivProjekta(String string) {
+        nazivProjekta.setText(string);
+    }
+
+    public void promeniNazivAutora(String string) {
+        nazivAutora.setText(string);
+    }
+
+    public JTabbedPane getjTabbedPane() {
+        return jTabbedPane;
+    }
+
+    public JPanel getRightSide() {
+        return rightSide;
     }
 
 }

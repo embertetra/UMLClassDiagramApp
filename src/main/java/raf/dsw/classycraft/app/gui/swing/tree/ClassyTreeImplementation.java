@@ -63,6 +63,7 @@ public class ClassyTreeImplementation implements ClassyTree{
 
         FactoryUtils factoryUtils = ApplicationFramework.getInstance().getFactoryUtils();
 
+        ///pravljenje projekta
         if(parent instanceof ProjectExplorer){
             childFactory = factoryUtils.getChildFactory(FactoryType.PROJECT);
 
@@ -75,6 +76,7 @@ public class ClassyTreeImplementation implements ClassyTree{
 
             return childFactory.orderChild(project.getName(), parent);
         }
+        ///pravljenje paketa
         else if(parent instanceof Project){
             childFactory = factoryUtils.getChildFactory(FactoryType.PACKAGE);
 
@@ -87,6 +89,7 @@ public class ClassyTreeImplementation implements ClassyTree{
 
             return childFactory.orderChild(pck.getName(), parent);
         }
+        ///pravljenje dijagrama ili podpaketa
         else if(parent instanceof Package){
 
             Object[] options = {"Dijagram", "Podpaket"};

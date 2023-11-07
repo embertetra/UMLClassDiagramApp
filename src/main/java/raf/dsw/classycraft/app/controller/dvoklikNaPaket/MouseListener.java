@@ -40,8 +40,10 @@ public class MouseListener {
 
                                 }
                             }
+                            //setovanje parenta packageView-u
                             MainFrame.getInstance().getPackageView().setParent(selected.getClassyNode());
 
+                            ///ispisivanje projekta i autora na packageView
                             ClassyNode parent = selected.getClassyNode();
                             while(true){
                                 if(parent instanceof Project) {

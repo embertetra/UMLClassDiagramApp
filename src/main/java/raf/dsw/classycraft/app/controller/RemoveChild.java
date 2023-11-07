@@ -27,8 +27,10 @@ public class RemoveChild extends AbstractClassyAction{
         ClassyTreeItem selected = (ClassyTreeItem) MainFrame.getInstance().getClassyTree().getSelectedNode();
         if(selected != null) {
 
+            ///ako korisnik zeli da obrise ProjectExplorer
             if(selected.getClassyNode() instanceof ProjectExplorer)
                 ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("ProjectExplorer nije moguce obrisati!", MessageType.ERROR);
+            ///ako zeli da obrise prjekat
             if(selected.getClassyNode() instanceof Project){
 
                 Object[] options = {"Da", "Ne"};
@@ -50,7 +52,7 @@ public class RemoveChild extends AbstractClassyAction{
                     SwingUtilities.updateComponentTreeUI(classyTreeImplementation.getTreeView());
                 }
 
-            }
+            }///ako zeli da obrise paket ili dijagram
             else if(!(selected.getClassyNode() instanceof ProjectExplorer)){
                 MainFrame.getInstance().getClassyTree().getSelectedNode().removeFromParent();
                 ClassyNodeComposite cns = (ClassyNodeComposite) selected.getClassyNode().getParent();
@@ -59,10 +61,11 @@ public class RemoveChild extends AbstractClassyAction{
                 ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
                 SwingUtilities.updateComponentTreeUI(classyTreeImplementation.getTreeView());
             }
-
+                ///brise selekciju nakon brisanja
                 ClassyTreeImplementation cti = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
                 cti.getTreeView().clearSelection();
         }
+        ///ako nista nije selektovano
         else
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije selektovano polje za brisanje", MessageType.ERROR);
     }
