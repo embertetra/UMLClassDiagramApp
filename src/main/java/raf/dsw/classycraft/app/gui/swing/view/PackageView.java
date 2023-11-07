@@ -8,6 +8,8 @@ import raf.dsw.classycraft.app.jTabbedElements.NotificationJTabbed;
 import raf.dsw.classycraft.app.observer.ISubscriber;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,15 +26,19 @@ public class PackageView implements ISubscriber {
 
         nazivProjekta = new JLabel("        ");
         nazivAutora = new JLabel("          ");
+        nazivProjekta.setBorder(new EmptyBorder(new Insets(0,10,0,0)));
+        nazivAutora.setBorder(new EmptyBorder(new Insets(0,10,0,0)));
 
         jTabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.WRAP_TAB_LAYOUT);
 
         rightSide = new JPanel();
         BoxLayout box = new BoxLayout(rightSide, BoxLayout.Y_AXIS);
+        jTabbedPane.setAlignmentX(-1);
         rightSide.setLayout(box);
         rightSide.add(nazivProjekta);
         rightSide.add(nazivAutora);
         rightSide.add(jTabbedPane);
+
     }
 
     public void addInTabList(DijagramView dijagramView) {
@@ -75,7 +81,7 @@ public class PackageView implements ISubscriber {
                         if (c.getName().equals(jTabbedPane.getTitleAt(i)) && c instanceof Dijagram) brojac = 1;
                     }
                     if (brojac == 0 && c instanceof Dijagram) {
-                        jTabbedPane.addTab(c.getName(), new JPanel());
+                        jTabbedPane.addTab(c.getName(), new DijagramView(c));
                     }
                     brojac = 0;
                 }
@@ -92,7 +98,6 @@ public class PackageView implements ISubscriber {
                     }
                     if (brojac == 0) {
                         jTabbedPane.removeTabAt(i);
-                        //tabovi.remove(i);
                     }
                     brojac = 0;
                     totalTabs = jTabbedPane.getTabCount();

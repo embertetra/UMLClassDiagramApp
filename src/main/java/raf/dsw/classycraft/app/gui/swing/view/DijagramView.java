@@ -23,12 +23,14 @@ public class DijagramView extends JPanel implements ISubscriber {
     public void update(Object notification) {
         NotificationDijagramView poruka = (NotificationDijagramView) notification;
         Dijagram dijagram = (Dijagram) poruka.getChild();
-        if (dijagram.getParent().equals(classyNode.getParent())) {
-            int numTabs = MainFrame.getInstance().getPackageView().getjTabbedPane().getTabCount();
-            for (int i = 0; i < numTabs; i++) {
-                if (MainFrame.getInstance().getPackageView().getjTabbedPane().getTitleAt(i).equals(poruka.getOldName())) {
-                    MainFrame.getInstance().getPackageView().getjTabbedPane().setTitleAt(i, poruka.getNewName());
-                    classyNode.setName(poruka.getNewName());
+        if (classyNode != null) {
+            if (dijagram.getParent().equals(classyNode.getParent())) {
+                int numTabs = MainFrame.getInstance().getPackageView().getjTabbedPane().getTabCount();
+                for (int i = 0; i < numTabs; i++) {
+                    if (MainFrame.getInstance().getPackageView().getjTabbedPane().getTitleAt(i).equals(poruka.getOldName())) {
+                        MainFrame.getInstance().getPackageView().getjTabbedPane().setTitleAt(i, poruka.getNewName());
+                        classyNode.setName(poruka.getNewName());
+                    }
                 }
             }
         }

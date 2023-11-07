@@ -106,4 +106,11 @@ public class MainFrame extends JFrame implements ISubscriber {
         this.packageView = packageView;
     }
 
+    public DijagramView getDijagramView() {
+        return dijagramView;
+    }
+
+    public void setDijagramView(DijagramView dijagramView) {
+        this.dijagramView = dijagramView;
+    }
 }
