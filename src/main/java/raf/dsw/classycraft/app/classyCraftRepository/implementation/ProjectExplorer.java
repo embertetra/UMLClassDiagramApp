@@ -2,8 +2,6 @@ package raf.dsw.classycraft.app.classyCraftRepository.implementation;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
-import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
-import raf.dsw.classycraft.app.gui.swing.view.PackageView;
 import raf.dsw.classycraft.app.jTabbedElements.NotificationJTabbed;
 import raf.dsw.classycraft.app.observer.IPublisher;
 import raf.dsw.classycraft.app.observer.ISubscriber;
@@ -36,10 +34,6 @@ public class ProjectExplorer extends ClassyNodeComposite implements IPublisher {
         if (child != null && child instanceof Project) {
             if (getChildren().contains(child)) {
                 getChildren().remove(child);
-
-                if (MainFrame.getInstance().getPackageView() == null)
-                    MainFrame.getInstance().setPackageView(new PackageView());
-                addSubscriber(MainFrame.getInstance().getPackageView());
                 notifySubscribers(new NotificationJTabbed((ClassyNodeComposite) child, 5));
             }
         }

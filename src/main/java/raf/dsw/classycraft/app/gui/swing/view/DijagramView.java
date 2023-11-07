@@ -14,8 +14,6 @@ public class DijagramView extends JPanel implements ISubscriber {
     public DijagramView(ClassyNode classyNode) {
         if (classyNode != null) {
             this.classyNode = classyNode;
-            Dijagram dijagram = (Dijagram) classyNode;
-            dijagram.addSubscriber(this);
         }
     }
 
