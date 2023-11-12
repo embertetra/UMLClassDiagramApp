@@ -143,6 +143,10 @@ public class PackageView implements ISubscriber {
                     nazivProjekta.setText("    ");
                     nazivAutora.setText("    ");
                 }
+
+            } else if (poruka.getParent().getName().equals(this.getNazivProjekta().getText())) {
+                promeniNazivProjekta("    ");
+                promeniNazivAutora("     ");
             }
         }
         ///Update promena autora
@@ -183,4 +187,7 @@ public class PackageView implements ISubscriber {
         return rightSide;
     }
 
+    public JLabel getNazivProjekta() {
+        return nazivProjekta;
+    }
 }
