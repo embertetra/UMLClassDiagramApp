@@ -20,24 +20,42 @@ public class PackageView implements ISubscriber {
     JPanel rightSide;
     ClassyNode parent;
     List<DijagramView> tabovi;
+    JPanel toolMenu;
+    JPanel downSide;
 
     public PackageView() {
         this.parent = null;
 
-        nazivProjekta = new JLabel("        ");
-        nazivAutora = new JLabel("          ");
-        nazivProjekta.setBorder(new EmptyBorder(new Insets(0, 10, 0, 0)));
-        nazivAutora.setBorder(new EmptyBorder(new Insets(0, 10, 0, 0)));
+        nazivProjekta = new JLabel("    ");
+        nazivAutora = new JLabel("  ");
+        nazivProjekta.setBorder(new EmptyBorder(new Insets(0, 0, 0, 50)));
+        nazivAutora.setBorder(new EmptyBorder(new Insets(0, 0, 0, 50)));
+
+        nazivProjekta.setAlignmentX(Component.CENTER_ALIGNMENT);
+        nazivAutora.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         jTabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.WRAP_TAB_LAYOUT);
 
+        toolMenu = new JPanel();
+        toolMenu.setLayout(new BoxLayout(toolMenu, BoxLayout.Y_AXIS));
+        toolMenu.add(new JLabel("stanje1"));
+        toolMenu.add(new JLabel("stanje2"));
+        toolMenu.add(new JLabel("stanje3"));
+        toolMenu.add(new JLabel("stanje4"));
+        toolMenu.setAlignmentY(Component.TOP_ALIGNMENT);
+
+        downSide = new JPanel();
+        downSide.setLayout(new BoxLayout(downSide, BoxLayout.X_AXIS));
+        downSide.add(jTabbedPane);
+        downSide.add(toolMenu);
+
+
         rightSide = new JPanel();
         BoxLayout box = new BoxLayout(rightSide, BoxLayout.Y_AXIS);
-        jTabbedPane.setAlignmentX(-1);
         rightSide.setLayout(box);
         rightSide.add(nazivProjekta);
         rightSide.add(nazivAutora);
-        rightSide.add(jTabbedPane);
+        rightSide.add(downSide);
 
     }
 
@@ -151,7 +169,6 @@ public class PackageView implements ISubscriber {
         }
         ///Update promena autora
         else if (poruka.getOznaka() == 6) {
-
             if (parent != null) {
                 ClassyNode p = this.parent;
                 while (true) {
@@ -163,7 +180,6 @@ public class PackageView implements ISubscriber {
                     nazivAutora.setText(poruka.getNewName());
                 }
             }
-
         }
     }
 
