@@ -1,18 +1,33 @@
 package raf.dsw.classycraft.app.classyCraftRepository.implementation;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
 import raf.dsw.classycraft.app.observer.IPublisher;
 import raf.dsw.classycraft.app.observer.ISubscriber;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Dijagram extends ClassyNode implements IPublisher {
+public class Dijagram extends ClassyNodeComposite implements IPublisher {
 
     private List<ISubscriber> subscribers;
     public Dijagram(String name, ClassyNode parent) {
         super(name, parent);
     }
+
+    @Override
+    public void addChild(ClassyNode child) {
+        if(child != null && child instanceof DijagramElement)
+            getChildren().add(child);
+    }
+
+    @Override
+    public void removeChild(ClassyNode child) {
+        if(child != null && getChildren().contains(child))
+            getChildren().remove(child);
+    }
+
     public void setNameInJTabb(Object notification){
         notifySubscribers(notification);
     }
