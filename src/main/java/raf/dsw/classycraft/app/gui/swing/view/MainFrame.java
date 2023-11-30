@@ -22,10 +22,10 @@ public class MainFrame extends JFrame implements ISubscriber {
     private MyToolBar toolBar;
     private PackageView packageView;
     private DijagramView dijagramView;
+    private ToolBarStates toolBarStates;
 
 
     private MainFrame() {
-
     }
 
     private void initialize() {
@@ -34,6 +34,7 @@ public class MainFrame extends JFrame implements ISubscriber {
         classyTree = new ClassyTreeImplementation();
         packageView = new PackageView();
         dijagramView = new DijagramView(null);
+        toolBarStates = new ToolBarStates();
 
         ApplicationFramework.getInstance().getMessageGenerator().getSubscribers().add(this);
 
@@ -86,6 +87,12 @@ public class MainFrame extends JFrame implements ISubscriber {
         return instance;
     }
 
+    public ToolBarStates getToolBarStates() {
+        if(toolBarStates != null)
+            return toolBarStates;
+        else return new ToolBarStates();
+    }
+
     public ActionManager getActionManager() {
         return actionManager;
     }
@@ -100,17 +107,5 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     public PackageView getPackageView() {
         return packageView;
-    }
-
-    public void setPackageView(PackageView packageView) {
-        this.packageView = packageView;
-    }
-
-    public DijagramView getDijagramView() {
-        return dijagramView;
-    }
-
-    public void setDijagramView(DijagramView dijagramView) {
-        this.dijagramView = dijagramView;
     }
 }
