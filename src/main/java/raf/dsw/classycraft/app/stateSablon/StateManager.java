@@ -43,4 +43,7 @@ public class StateManager {
     public void setSelection(){
         currentState = selection;
     }
+    public AddInterclass getAddInterclass() {
+        return addInterclass;
+    }
 }

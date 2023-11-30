@@ -24,6 +24,7 @@ public class PackageView implements ISubscriber {
     private JPanel toolMenu;
     private JPanel downSide;
     private StateManager stateManager;
+    private JPanel x;
 
     public PackageView() {
         this.parent = null;
@@ -41,18 +42,14 @@ public class PackageView implements ISubscriber {
 
         toolMenu = new JPanel();
         toolMenu.setLayout(new BoxLayout(toolMenu, BoxLayout.Y_AXIS));
-        /*toolMenu.add(MainFrame.getInstance().getActionManager().getAddInterclassAction());
-        toolMenu.add(new JLabel("stanje2"));
-        toolMenu.add(new JLabel("stanje3"));
-        toolMenu.add(new JLabel("stanje4"));*/
         toolMenu.add(MainFrame.getInstance().getToolBarStates());
-        toolMenu.setAlignmentY(Component.TOP_ALIGNMENT);
+        toolMenu.setAlignmentX(Component.CENTER_ALIGNMENT);
+        toolMenu.setAlignmentY(Component.CENTER_ALIGNMENT);
 
         downSide = new JPanel();
         downSide.setLayout(new BoxLayout(downSide, BoxLayout.X_AXIS));
         downSide.add(jTabbedPane);
         downSide.add(toolMenu);
-
 
         rightSide = new JPanel();
         BoxLayout box = new BoxLayout(rightSide, BoxLayout.Y_AXIS);
@@ -62,8 +59,9 @@ public class PackageView implements ISubscriber {
         rightSide.add(downSide);
 
     }
-    public void test(){
-        stateManager.getCurrentState().test();
+
+    public JPanel getX() {
+        return x;
     }
 
     public void addInTabList(DijagramView dijagramView) {
@@ -192,6 +190,17 @@ public class PackageView implements ISubscriber {
 
     //metode koje su unutar State intefrejsa
 
+    public void misKliknut(int x, int y, DijagramView dijagramView){
+        stateManager.getCurrentState().misKliknut(x,y,dijagramView);
+    }
+
+    public void misOtpusten(int x, int y, DijagramView dijagramView){
+        stateManager.getCurrentState().misOtpusten(x,y,dijagramView);
+    }
+
+    public void misPrivucen(int x, int y, DijagramView dijagramView){
+        stateManager.getCurrentState().misPrivucen(x,y,dijagramView);
+    }
 
     ///
 

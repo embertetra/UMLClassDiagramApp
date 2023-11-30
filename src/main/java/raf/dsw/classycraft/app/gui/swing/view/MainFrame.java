@@ -60,6 +60,7 @@ public class MainFrame extends JFrame implements ISubscriber {
         scrollPane.setMinimumSize(new Dimension(200, 150));
         JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scrollPane, desktop);
 
+        //split.add(packageView.getRightSide(), JSplitPane.RIGHT);
         split.add(packageView.getRightSide(), JSplitPane.RIGHT);
 
         getContentPane().add(split, BorderLayout.CENTER);
