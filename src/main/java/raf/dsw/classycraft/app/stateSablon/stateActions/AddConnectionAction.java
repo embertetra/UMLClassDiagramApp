@@ -2,10 +2,7 @@ package raf.dsw.classycraft.app.stateSablon.stateActions;
 
 import raf.dsw.classycraft.app.controller.AbstractClassyAction;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
-
-import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 
 public class AddConnectionAction extends AbstractClassyAction {
 
