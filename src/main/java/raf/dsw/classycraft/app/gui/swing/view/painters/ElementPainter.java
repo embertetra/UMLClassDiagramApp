@@ -16,4 +16,8 @@ public abstract class ElementPainter {
     public abstract void draw(Graphics2D g);
 
     public abstract boolean elementAt(DijagramElement dijagramElement, Point point);
+
+    public DijagramElement getElement() {
+        return element;
+    }
 }

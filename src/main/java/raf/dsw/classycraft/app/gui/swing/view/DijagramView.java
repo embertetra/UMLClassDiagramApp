@@ -1,9 +1,11 @@
 package raf.dsw.classycraft.app.gui.swing.view;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Vidljivost;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.KlasaPainter;
@@ -13,6 +15,7 @@ import raf.dsw.classycraft.app.observer.ISubscriber;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,17 +23,25 @@ public class DijagramView extends JPanel implements ISubscriber {
 
     ClassyNode classyNode;
 
-    private List<ElementPainter> elementPainterList;
+    private List<ElementPainter> elementPainterList = new ArrayList<>();
 
     public DijagramView(ClassyNode classyNode) {
         if (classyNode != null) {
             this.classyNode = classyNode;
         }
         this.addMouseListener(new MouseController(this));
+        elementPainterList = new ArrayList<>();
     }
 
     @Override
     public void update(Object notification) {
+
+        if(notification.equals("state")) {
+            repaint();
+            System.out.println("obavio repaint " + elementPainterList.size());
+            return;
+        }
+
         NotificationDijagramView poruka = (NotificationDijagramView) notification;
         Dijagram dijagram = (Dijagram) poruka.getChild();
         if (classyNode != null) {
@@ -45,17 +56,16 @@ public class DijagramView extends JPanel implements ISubscriber {
             }
         }
     }
-////////////////////////////////////////////
     @Override
-    public void paintComponents(Graphics g) {
-        super.paintComponents(g);
-
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        System.out.println("usao");
         Graphics2D g2 = (Graphics2D) g;
+        g2.setComposite(AlphaComposite.getInstance(3, 0.8F));
 
-
-        for(ElementPainter x : elementPainterList)
-            x.draw(g2);
-
+        for(ElementPainter x : elementPainterList) {
+            ((KlasaPainter)x).draw(g2);
+        }
         System.out.println("Izvrsen paintComponent");
     }
 
@@ -65,5 +75,9 @@ public class DijagramView extends JPanel implements ISubscriber {
 
     public void setElementPainterList(List<ElementPainter> elementPainterList) {
         this.elementPainterList = elementPainterList;
+    }
+
+    public ClassyNode getClassyNode() {
+        return classyNode;
     }
 }

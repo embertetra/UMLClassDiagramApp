@@ -14,16 +14,11 @@ public class KlasaPainter extends InterclassPainter {
 
     @Override
     public void draw(Graphics2D g) {
+
         g.setPaint(Color.BLUE);
-        g.draw(shape);
+        g.setStroke(new BasicStroke(10));
         Klasa k = (Klasa) this.element;
-        g.drawString(k.getNaziv(), (int) (k.getPosition().getX()+10), (int) (k.getPosition().getY()+10));
-
-
-        /*
-        g.setStroke(dijagramElement.getStroke());
-        g.drawRect(); // (x, y) - gore levo, with, hight
-         */
+        g.drawRect(k.getPosition().x, k.getPosition().y, 100,100);
     }
 
     @Override

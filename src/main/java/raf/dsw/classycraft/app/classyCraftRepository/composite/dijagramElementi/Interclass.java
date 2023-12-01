@@ -24,6 +24,13 @@ public abstract class Interclass extends DijagramElement {
         this.size = size;
         this.position = position;
     }
+    public Interclass(String name, ClassyNode parent, int stroke, String naziv, Vidljivost vidljivost, Point position) {
+        super(name, parent, stroke);
+        this.naziv = naziv;
+        this.vidljivost = vidljivost;
+        this.size = size;
+        this.position = position;
+    }
 
     public String getNaziv() {
         return naziv;

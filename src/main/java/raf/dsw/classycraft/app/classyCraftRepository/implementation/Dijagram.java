@@ -12,14 +12,22 @@ import java.util.List;
 public class Dijagram extends ClassyNodeComposite implements IPublisher {
 
     private List<ISubscriber> subscribers;
+
+    public List<ISubscriber> getSubscribers() {
+        return subscribers;
+    }
+
     public Dijagram(String name, ClassyNode parent) {
         super(name, parent);
+        subscribers = new ArrayList<>();
     }
 
     @Override
     public void addChild(ClassyNode child) {
-        if(child != null && child instanceof DijagramElement)
+        if (child != null && child instanceof DijagramElement) {
             getChildren().add(child);
+            notifySubscribers("state");
+        }
     }
 
     @Override

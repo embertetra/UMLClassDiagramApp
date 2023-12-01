@@ -13,6 +13,10 @@ public abstract class DijagramElement extends ClassyNode {
         this.color = color;
         this.stroke = stroke;
     }
+    public DijagramElement(String name, ClassyNode parent, int stroke) {
+        super(name, parent);
+        this.stroke = stroke;
+    }
     public DijagramElement(String name, ClassyNode parent) {
         super(name, parent);
     }

@@ -19,6 +19,10 @@ public class Klasa extends Interclass {
         super(name, parent, color, stroke, naziv, vidljivost, size, position);
     }
 
+    public Klasa(String name, ClassyNode parent, int stroke, String naziv, Vidljivost vidljivost, Point position) {
+        super(name, parent, stroke, naziv, vidljivost, position);
+    }
+
     public List<ClassContent> getClassContentList() {
         return classContentList;
     }
@@ -26,4 +30,5 @@ public class Klasa extends Interclass {
     public void setClassContentList(List<ClassContent> classContentList) {
         this.classContentList = classContentList;
     }
+
 }
