@@ -13,10 +13,6 @@ public class Dijagram extends ClassyNodeComposite implements IPublisher {
 
     private List<ISubscriber> subscribers;
 
-    public List<ISubscriber> getSubscribers() {
-        return subscribers;
-    }
-
     public Dijagram(String name, ClassyNode parent) {
         super(name, parent);
         subscribers = new ArrayList<>();

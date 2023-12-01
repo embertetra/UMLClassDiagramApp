@@ -38,7 +38,6 @@ public class DijagramView extends JPanel implements ISubscriber {
 
         if(notification.equals("state")) {
             repaint();
-            System.out.println("obavio repaint " + elementPainterList.size());
             return;
         }
 
@@ -59,12 +58,11 @@ public class DijagramView extends JPanel implements ISubscriber {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        System.out.println("usao");
         Graphics2D g2 = (Graphics2D) g;
         g2.setComposite(AlphaComposite.getInstance(3, 0.8F));
 
         for(ElementPainter x : elementPainterList) {
-            ((KlasaPainter)x).draw(g2);
+            x.draw(g2);
         }
         System.out.println("Izvrsen paintComponent");
     }

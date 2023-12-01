@@ -15,10 +15,10 @@ public class EnumPainter extends InterclassPainter {
 
     @Override
     public void draw(Graphics2D g) {
-        g.setPaint(Color.GREEN);
-        g.draw(shape);
+        g.setPaint(Color.RED);
+        g.setStroke(new BasicStroke(10));
         EnumM e = (EnumM) this.element;
-        g.drawString(e.getNaziv(), (int)e.getPosition().getX()+10, (int)e.getPosition().getY()+10);
+        g.drawRect(e.getPosition().x, e.getPosition().y, 100,100);
     }
 
     @Override

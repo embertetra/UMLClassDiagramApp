@@ -16,4 +16,7 @@ public class EnumM extends Interclass {
     public EnumM(String name, ClassyNode parent, Color color, int stroke, String naziv, Vidljivost vidljivost, int size, Point position) {
         super(name, parent, color, stroke, naziv, vidljivost, size, position);
     }
+    public EnumM(String name, ClassyNode parent, int stroke, String naziv, Vidljivost vidljivost, Point position) {
+        super(name, parent, stroke, naziv, vidljivost, position);
+    }
 }

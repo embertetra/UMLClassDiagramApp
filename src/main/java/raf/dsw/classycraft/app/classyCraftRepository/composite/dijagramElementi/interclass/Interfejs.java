@@ -19,6 +19,9 @@ public class Interfejs extends Interclass {
     public Interfejs(String name, ClassyNode parent, Color color, int stroke, String naziv, Vidljivost vidljivost, int size, Point position) {
         super(name, parent, color, stroke, naziv, vidljivost, size, position);
     }
+    public Interfejs(String name, ClassyNode parent, int stroke, String naziv, Vidljivost vidljivost, Point position) {
+        super(name, parent, stroke, naziv, vidljivost, position);
+    }
 
     public List<Metode> getMetodeList() {
         return metodeList;
