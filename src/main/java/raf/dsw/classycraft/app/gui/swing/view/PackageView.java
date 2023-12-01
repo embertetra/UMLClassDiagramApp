@@ -6,6 +6,7 @@ import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
 import raf.dsw.classycraft.app.jTabbedElements.NotificationJTabbed;
 import raf.dsw.classycraft.app.observer.ISubscriber;
+import raf.dsw.classycraft.app.stateSablon.StateManager;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -15,30 +16,52 @@ import java.util.List;
 
 public class PackageView implements ISubscriber {
     private JTabbedPane jTabbedPane;
-    JLabel nazivProjekta;
-    JLabel nazivAutora;
-    JPanel rightSide;
-    ClassyNode parent;
-    List<DijagramView> tabovi;
+    private JLabel nazivProjekta;
+    private JLabel nazivAutora;
+    private JPanel rightSide;
+    private ClassyNode parent;
+    private List<DijagramView> tabovi;
+    private JPanel toolMenu;
+    private JPanel downSide;
+    private StateManager stateManager;
+    private JPanel x;
 
     public PackageView() {
         this.parent = null;
+        stateManager = new StateManager();
 
-        nazivProjekta = new JLabel("        ");
-        nazivAutora = new JLabel("          ");
-        nazivProjekta.setBorder(new EmptyBorder(new Insets(0, 10, 0, 0)));
-        nazivAutora.setBorder(new EmptyBorder(new Insets(0, 10, 0, 0)));
+        nazivProjekta = new JLabel("    ");
+        nazivAutora = new JLabel("  ");
+        nazivProjekta.setBorder(new EmptyBorder(new Insets(0, 0, 0, 50)));
+        nazivAutora.setBorder(new EmptyBorder(new Insets(0, 0, 0, 50)));
+
+        nazivProjekta.setAlignmentX(Component.CENTER_ALIGNMENT);
+        nazivAutora.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         jTabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.WRAP_TAB_LAYOUT);
 
+        toolMenu = new JPanel();
+        toolMenu.setLayout(new BoxLayout(toolMenu, BoxLayout.Y_AXIS));
+        toolMenu.add(MainFrame.getInstance().getToolBarStates());
+        toolMenu.setAlignmentX(Component.CENTER_ALIGNMENT);
+        toolMenu.setAlignmentY(Component.CENTER_ALIGNMENT);
+
+        downSide = new JPanel();
+        downSide.setLayout(new BoxLayout(downSide, BoxLayout.X_AXIS));
+        downSide.add(jTabbedPane);
+        downSide.add(toolMenu);
+
         rightSide = new JPanel();
         BoxLayout box = new BoxLayout(rightSide, BoxLayout.Y_AXIS);
-        jTabbedPane.setAlignmentX(-1);
         rightSide.setLayout(box);
         rightSide.add(nazivProjekta);
         rightSide.add(nazivAutora);
-        rightSide.add(jTabbedPane);
+        rightSide.add(downSide);
 
+    }
+
+    public JPanel getX() {
+        return x;
     }
 
     public void addInTabList(DijagramView dijagramView) {
@@ -151,7 +174,6 @@ public class PackageView implements ISubscriber {
         }
         ///Update promena autora
         else if (poruka.getOznaka() == 6) {
-
             if (parent != null) {
                 ClassyNode p = this.parent;
                 while (true) {
@@ -163,8 +185,47 @@ public class PackageView implements ISubscriber {
                     nazivAutora.setText(poruka.getNewName());
                 }
             }
-
         }
+    }
+
+    //metode koje su unutar State intefrejsa
+
+    public void misKliknut(int x, int y, DijagramView dijagramView){
+        stateManager.getCurrentState().misKliknut(x,y,dijagramView);
+    }
+
+    public void misOtpusten(int x, int y, DijagramView dijagramView){
+        stateManager.getCurrentState().misOtpusten(x,y,dijagramView);
+    }
+
+    public void misPrivucen(int x, int y, DijagramView dijagramView){
+        stateManager.getCurrentState().misPrivucen(x,y,dijagramView);
+    }
+
+    ///
+
+    public void startAddInterclassState() {
+        stateManager.setAddInterclass();
+    }
+
+    public void startAddConnectionState() {
+        stateManager.setAddConnection();
+    }
+
+    public void startAddContentState() {
+        stateManager.setAddContent();
+    }
+
+    public void startDeleteState() {
+        stateManager.setDelete();
+    }
+
+    public void startSelectionState() {
+        stateManager.setSelection();
+    }
+
+    public StateManager getStateManager() {
+        return stateManager;
     }
 
     public void setParent(ClassyNode parent) {
