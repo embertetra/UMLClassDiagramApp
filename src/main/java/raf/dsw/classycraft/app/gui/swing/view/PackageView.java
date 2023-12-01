@@ -6,6 +6,7 @@ import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
 import raf.dsw.classycraft.app.jTabbedElements.NotificationJTabbed;
 import raf.dsw.classycraft.app.observer.ISubscriber;
+import raf.dsw.classycraft.app.stateSablon.StateManager;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -15,16 +16,19 @@ import java.util.List;
 
 public class PackageView implements ISubscriber {
     private JTabbedPane jTabbedPane;
-    JLabel nazivProjekta;
-    JLabel nazivAutora;
-    JPanel rightSide;
-    ClassyNode parent;
-    List<DijagramView> tabovi;
-    JPanel toolMenu;
-    JPanel downSide;
+    private JLabel nazivProjekta;
+    private JLabel nazivAutora;
+    private JPanel rightSide;
+    private ClassyNode parent;
+    private List<DijagramView> tabovi;
+    private JPanel toolMenu;
+    private JPanel downSide;
+    private StateManager stateManager;
+    private JPanel x;
 
     public PackageView() {
         this.parent = null;
+        stateManager = new StateManager();
 
         nazivProjekta = new JLabel("    ");
         nazivAutora = new JLabel("  ");
@@ -38,17 +42,14 @@ public class PackageView implements ISubscriber {
 
         toolMenu = new JPanel();
         toolMenu.setLayout(new BoxLayout(toolMenu, BoxLayout.Y_AXIS));
-        toolMenu.add(new JLabel("stanje1"));
-        toolMenu.add(new JLabel("stanje2"));
-        toolMenu.add(new JLabel("stanje3"));
-        toolMenu.add(new JLabel("stanje4"));
-        toolMenu.setAlignmentY(Component.TOP_ALIGNMENT);
+        toolMenu.add(MainFrame.getInstance().getToolBarStates());
+        toolMenu.setAlignmentX(Component.CENTER_ALIGNMENT);
+        toolMenu.setAlignmentY(Component.CENTER_ALIGNMENT);
 
         downSide = new JPanel();
         downSide.setLayout(new BoxLayout(downSide, BoxLayout.X_AXIS));
         downSide.add(jTabbedPane);
         downSide.add(toolMenu);
-
 
         rightSide = new JPanel();
         BoxLayout box = new BoxLayout(rightSide, BoxLayout.Y_AXIS);
@@ -57,6 +58,10 @@ public class PackageView implements ISubscriber {
         rightSide.add(nazivAutora);
         rightSide.add(downSide);
 
+    }
+
+    public JPanel getX() {
+        return x;
     }
 
     public void addInTabList(DijagramView dijagramView) {
@@ -181,6 +186,46 @@ public class PackageView implements ISubscriber {
                 }
             }
         }
+    }
+
+    //metode koje su unutar State intefrejsa
+
+    public void misKliknut(int x, int y, DijagramView dijagramView){
+        stateManager.getCurrentState().misKliknut(x,y,dijagramView);
+    }
+
+    public void misOtpusten(int x, int y, DijagramView dijagramView){
+        stateManager.getCurrentState().misOtpusten(x,y,dijagramView);
+    }
+
+    public void misPrivucen(int x, int y, DijagramView dijagramView){
+        stateManager.getCurrentState().misPrivucen(x,y,dijagramView);
+    }
+
+    ///
+
+    public void startAddInterclassState() {
+        stateManager.setAddInterclass();
+    }
+
+    public void startAddConnectionState() {
+        stateManager.setAddConnection();
+    }
+
+    public void startAddContentState() {
+        stateManager.setAddContent();
+    }
+
+    public void startDeleteState() {
+        stateManager.setDelete();
+    }
+
+    public void startSelectionState() {
+        stateManager.setSelection();
+    }
+
+    public StateManager getStateManager() {
+        return stateManager;
     }
 
     public void setParent(ClassyNode parent) {
