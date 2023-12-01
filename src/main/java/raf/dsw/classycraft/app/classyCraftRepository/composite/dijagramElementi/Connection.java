@@ -18,4 +18,20 @@ public abstract class Connection extends DijagramElement {
         this.from = from;
         this.to = to;
     }
+
+    public Interclass getFrom() {
+        return from;
+    }
+
+    public void setFrom(Interclass from) {
+        this.from = from;
+    }
+
+    public Interclass getTo() {
+        return to;
+    }
+
+    public void setTo(Interclass to) {
+        this.to = to;
+    }
 }

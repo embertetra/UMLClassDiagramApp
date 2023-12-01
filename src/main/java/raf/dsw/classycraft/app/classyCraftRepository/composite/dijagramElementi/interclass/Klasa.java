@@ -15,7 +15,15 @@ public class Klasa extends Interclass {
         super(name, parent);
     }
 
-    public Klasa(String name, ClassyNode parent, Color color, int stroke, String naziv, Vidljivost vidljivost, int size, int position, Point location) {
-        super(name, parent, color, stroke, naziv, vidljivost, size, position, location);
+    public Klasa(String name, ClassyNode parent, Color color, int stroke, String naziv, Vidljivost vidljivost, int size, Point position) {
+        super(name, parent, color, stroke, naziv, vidljivost, size, position);
+    }
+
+    public List<ClassContent> getClassContentList() {
+        return classContentList;
+    }
+
+    public void setClassContentList(List<ClassContent> classContentList) {
+        this.classContentList = classContentList;
     }
 }

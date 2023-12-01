@@ -16,4 +16,20 @@ public abstract class DijagramElement extends ClassyNode {
     public DijagramElement(String name, ClassyNode parent) {
         super(name, parent);
     }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public int getStroke() {
+        return stroke;
+    }
+
+    public void setStroke(int stroke) {
+        this.stroke = stroke;
+    }
 }
