@@ -1,5 +1,6 @@
 package raf.dsw.classycraft.app.gui.swing.view;
 
+import javafx.util.Pair;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
@@ -9,27 +10,48 @@ import raf.dsw.classycraft.app.observer.ISubscriber;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DijagramView extends JPanel implements ISubscriber {
 
     ClassyNode classyNode;
-
-    private List<ElementPainter> elementPainterList = new ArrayList<>();
-
+    private List<ElementPainter> elementPainterList;
+    private Pair<Point, Point> line;
+    private MouseMotionListener mml;
     public DijagramView(ClassyNode classyNode) {
         if (classyNode != null) {
             this.classyNode = classyNode;
         }
         this.addMouseListener(new MouseController(this));
         elementPainterList = new ArrayList<>();
-    }
 
+        createMML();
+    }
+    private void createMML(){
+        mml = new MouseMotionListener() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                line = new Pair<>(line.getKey(), new Point(e.getX(), e.getY()));
+                repaint();
+            }
+            @Override
+            public void mouseMoved(MouseEvent e) {
+            }
+        };
+    }
+    public void setMML(){
+        this.addMouseMotionListener(mml);
+    }
+    public void removeMML(){
+        this.removeMouseMotionListener(mml);
+    }
     @Override
     public void update(Object notification) {
 
-        if(notification.equals("state")) {
+        if (notification.equals("state")) {
             repaint();
             return;
         }
@@ -48,12 +70,13 @@ public class DijagramView extends JPanel implements ISubscriber {
             }
         }
     }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
 
-        for(ElementPainter x : elementPainterList) {
+        for (ElementPainter x : elementPainterList) {
             x.draw(g2);
 
         }
@@ -61,6 +84,8 @@ public class DijagramView extends JPanel implements ISubscriber {
 
 
     }
+
+
 
     public List<ElementPainter> getElementPainterList() {
         return elementPainterList;
@@ -72,5 +97,13 @@ public class DijagramView extends JPanel implements ISubscriber {
 
     public ClassyNode getClassyNode() {
         return classyNode;
+    }
+
+    public Pair<Point, Point> getLine() {
+        return line;
+    }
+
+    public void setLine(Pair<Point, Point> line) {
+        this.line = line;
     }
 }

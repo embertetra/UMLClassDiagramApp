@@ -1,5 +1,6 @@
 package raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection;
 
+import javafx.util.Pair;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Connection;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
@@ -7,7 +8,6 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.
 import java.awt.*;
 
 public class Agregacija extends Connection {
-
     public Agregacija(String name, ClassyNode parent) {
         super(name, parent);
     }
