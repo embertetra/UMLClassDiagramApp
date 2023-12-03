@@ -19,6 +19,7 @@ public class KlasaPainter extends InterclassPainter {
         g.setStroke(new BasicStroke(10));
         Klasa k = (Klasa) this.element;
         g.drawRect(k.getPosition().x, k.getPosition().y, 100,100);
+
     }
 
     @Override
