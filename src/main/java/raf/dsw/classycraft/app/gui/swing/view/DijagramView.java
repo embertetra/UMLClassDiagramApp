@@ -1,14 +1,8 @@
 package raf.dsw.classycraft.app.gui.swing.view;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Vidljivost;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.KlasaPainter;
 import raf.dsw.classycraft.app.controller.MouseController;
 import raf.dsw.classycraft.app.jTabbedElements.NotificationDijagramView;
 import raf.dsw.classycraft.app.observer.ISubscriber;
@@ -16,7 +10,6 @@ import raf.dsw.classycraft.app.observer.ISubscriber;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class DijagramView extends JPanel implements ISubscriber {
