@@ -195,7 +195,7 @@ public class PackageView implements ISubscriber {
     }
 
     public void misOtpusten(int x, int y, DijagramView dijagramView){
-        stateManager.getCurrentState().misOtpusten(x,y,dijagramView);
+        stateManager.getCurrentState(). misOtpusten(x,y,dijagramView);
     }
 
     public void misPrivucen(int x, int y, DijagramView dijagramView){

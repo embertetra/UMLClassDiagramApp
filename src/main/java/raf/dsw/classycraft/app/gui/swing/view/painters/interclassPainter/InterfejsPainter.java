@@ -15,10 +15,11 @@ public class InterfejsPainter extends InterclassPainter {
 
     @Override
     public void draw(Graphics2D g) {
-        g.setPaint(Color.GREEN);
+        g.setPaint(Color.BLACK);
         g.setStroke(new BasicStroke(this.element.getStroke()));
         Interfejs i = (Interfejs) this.element;
-        g.drawRect(i.getPosition().x, i.getPosition().y, 100,100);
+        g.drawRect(i.getPosition().x-50, i.getPosition().y-50, 100,100);
+        g.drawString("I", i.getPosition().x-40, i.getPosition().y-30);
     }
 
     @Override

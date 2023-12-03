@@ -59,12 +59,14 @@ public class DijagramView extends JPanel implements ISubscriber {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        g2.setComposite(AlphaComposite.getInstance(3, 0.8F));
 
         for(ElementPainter x : elementPainterList) {
             x.draw(g2);
+
         }
         System.out.println("Izvrsen paintComponent");
+
+
     }
 
     public List<ElementPainter> getElementPainterList() {
