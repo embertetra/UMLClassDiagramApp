@@ -1,11 +1,9 @@
 package raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass;
 
-import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.ClassContent;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
 
 import java.awt.*;
-import java.sql.ClientInfoStatus;
 import java.util.ArrayList;
 import java.util.List;
 

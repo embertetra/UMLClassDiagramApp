@@ -1,6 +1,5 @@
 package raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass;
 
-import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.ClassContent;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Metode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
