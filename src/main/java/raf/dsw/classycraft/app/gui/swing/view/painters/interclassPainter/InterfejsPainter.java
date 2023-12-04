@@ -23,7 +23,7 @@ public class InterfejsPainter extends InterclassPainter {
     }
 
     @Override
-    public boolean elementAt(DijagramElement dijagramElement, Point point) {
+    public boolean elementAt(Point point) {
         return this.getShape().contains(point);
     }
 

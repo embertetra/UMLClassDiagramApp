@@ -12,7 +12,7 @@ public class Agregacija extends Connection {
         super(name, parent);
     }
 
-    public Agregacija(String name, ClassyNode parent, Color color, int stroke, Interclass from, Interclass to) {
-        super(name, parent, color, stroke, from, to);
+    public Agregacija(String name, ClassyNode parent, int stroke, Interclass from, Interclass to) {
+        super(name, parent, stroke, from, to);
     }
 }

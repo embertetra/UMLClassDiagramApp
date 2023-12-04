@@ -34,8 +34,10 @@ public class DijagramView extends JPanel implements ISubscriber {
         mml = new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                line = new Pair<>(line.getKey(), new Point(e.getX(), e.getY()));
-                repaint();
+                if(line!=null && line.getKey() != null) {
+                    line = new Pair<>(line.getKey(), new Point(e.getX(), e.getY()));
+                    repaint();
+                }
             }
             @Override
             public void mouseMoved(MouseEvent e) {
@@ -75,6 +77,9 @@ public class DijagramView extends JPanel implements ISubscriber {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+
+        if(line != null && line.getKey()!= null && line.getValue() != null && line.getKey().x != -1 && line.getKey().y != -1)
+            g2.drawLine(line.getKey().x, line.getKey().y, line.getValue().x, line.getValue().y);
 
         for (ElementPainter x : elementPainterList) {
             x.draw(g2);

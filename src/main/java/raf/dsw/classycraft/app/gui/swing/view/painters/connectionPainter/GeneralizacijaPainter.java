@@ -16,7 +16,7 @@ public class GeneralizacijaPainter extends ConnectionPainter {
     }
 
     @Override
-    public boolean elementAt(DijagramElement dijagramElement, Point point) {
+    public boolean elementAt(Point point) {
         return false;
     }
 }

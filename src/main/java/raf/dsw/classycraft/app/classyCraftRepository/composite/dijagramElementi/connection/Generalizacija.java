@@ -12,7 +12,7 @@ public class Generalizacija extends Connection {
         super(name, parent);
     }
 
-    public Generalizacija(String name, ClassyNode parent, Color color, int stroke, Interclass from, Interclass to) {
-        super(name, parent, color, stroke, from, to);
+    public Generalizacija(String name, ClassyNode parent, int stroke, Interclass from, Interclass to) {
+        super(name, parent, stroke, from, to);
     }
 }
