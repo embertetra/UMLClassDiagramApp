@@ -37,7 +37,7 @@ public class KlasaPainter extends InterclassPainter {
         //odredjivanje sirine, visine reda i ukupne visine
         width = maxDuzina(g);
         int heightRed = g.getFontMetrics().getHeight();
-        heightUkupno = g.getFontMetrics().getHeight() * k.getClassContentList().size() + heightRed;
+        heightUkupno = heightRed * k.getClassContentList().size() + heightRed;
 
         shape = new Rectangle(k.getPosition().x - width / 2 - 5, k.getPosition().y - heightUkupno / 2, width + 10, heightUkupno + 10);
         g.draw(shape);
@@ -49,7 +49,7 @@ public class KlasaPainter extends InterclassPainter {
             String string;
             if (c instanceof Atributi) {
                 Atributi a = (Atributi) c;
-                string = a.getVidljivost() + a.getNaziv() + " : " + a.getTip();
+                string = a.getVidljivost() + a.getNaziv() + ": " + a.getTip();
                 g.drawString(string, k.getPosition().x - width / 2, k.getPosition().y - heightUkupno / 2 + brojac * heightRed);
                 brojac++;
             }
@@ -59,7 +59,7 @@ public class KlasaPainter extends InterclassPainter {
             String string;
             if (c instanceof Metode) {
                 Metode m = (Metode) c;
-                string = m.getVidljivost() + m.getNaziv() + "() : " + m.getTip();
+                string = m.getVidljivost() + m.getNaziv() + "(): " + m.getTip();
                 g.drawString(string, k.getPosition().x - width / 2, k.getPosition().y - heightUkupno / 2 + brojac * heightRed);
                 brojac++;
             }
@@ -73,7 +73,7 @@ public class KlasaPainter extends InterclassPainter {
         String string;
 
         for (ClassContent c : ((Klasa) element).getClassContentList()) {
-            string = c.getVidljivost() + c.getNaziv() + " : " + c.getTip();
+            string = c.getVidljivost() + c.getNaziv() + ": " + c.getTip();
             width = g.getFontMetrics().stringWidth(string);
             if (c instanceof Metode) {
                 width += g.getFontMetrics().stringWidth("()");
