@@ -4,7 +4,10 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Vidljivost;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
+import raf.dsw.classycraft.app.core.ApplicationFramework;
+import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
+import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.EnumPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.InterfejsPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.KlasaPainter;
@@ -21,6 +24,13 @@ public class AddInterclass implements State {
 
         Dijagram d = (Dijagram)dijagramView.getClassyNode();
         d.addSubscriber(dijagramView);
+
+        for(ElementPainter ep : dijagramView.getElementPainterList()){
+            if(ep.elementAt(new Point(x,y))){
+                ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("nije moguce postaviti interklasu na zeljeno mesto", MessageType.ERROR);
+                return;
+            }
+        }
 
         if(interclass.equals("class")){
             Klasa klasa = new Klasa("name", dijagramView.getClassyNode(), 2, "naziv", Vidljivost.PUBLIC, new Point(x,y));

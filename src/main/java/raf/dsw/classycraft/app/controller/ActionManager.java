@@ -17,6 +17,7 @@ public class ActionManager {
     private AddInterclassAction addInterclassAction;
     private DeleteAction deleteAction;
     private SelectionAction selectionAction;
+    private MouseStateAction mouseStateAction;
 
 
     public ActionManager() {
@@ -30,6 +31,7 @@ public class ActionManager {
         addInterclassAction = new AddInterclassAction();
         deleteAction = new DeleteAction();
         selectionAction = new SelectionAction();
+        mouseStateAction = new MouseStateAction();
     }
 
     public AboutUsAction getAboutUsAction() {
@@ -69,5 +71,9 @@ public class ActionManager {
 
     public SelectionAction getSelectionAction() {
         return selectionAction;
+    }
+
+    public MouseStateAction getMouseStateAction() {
+        return mouseStateAction;
     }
 }

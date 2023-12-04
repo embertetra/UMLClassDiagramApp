@@ -202,6 +202,12 @@ public class PackageView implements ISubscriber {
     public void misPrivucen(int x, int y, DijagramView dijagramView){
         stateManager.getCurrentState().misPrivucen(x,y,dijagramView);
     }
+    public void startMouseState(){
+        stateManager.setMouse();
+        if(jTabbedPane.getSelectedComponent()!=null) {
+            ((DijagramView) jTabbedPane.getSelectedComponent()).removeMML();
+        }
+    }
 
     public void startAddInterclassState() {
         stateManager.setAddInterclass();
@@ -217,14 +223,23 @@ public class PackageView implements ISubscriber {
 
     public void startAddContentState() {
         stateManager.setAddContent();
+        if(jTabbedPane.getSelectedComponent()!=null) {
+            ((DijagramView) jTabbedPane.getSelectedComponent()).removeMML();
+        }
     }
 
     public void startDeleteState() {
         stateManager.setDelete();
+        if(jTabbedPane.getSelectedComponent()!=null) {
+            ((DijagramView) jTabbedPane.getSelectedComponent()).removeMML();
+        }
     }
 
     public void startSelectionState() {
         stateManager.setSelection();
+        if(jTabbedPane.getSelectedComponent()!=null) {
+            ((DijagramView) jTabbedPane.getSelectedComponent()).removeMML();
+        }
     }
 
     public StateManager getStateManager() {

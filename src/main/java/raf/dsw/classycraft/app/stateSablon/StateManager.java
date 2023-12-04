@@ -9,6 +9,7 @@ public class StateManager {
     private AddInterclass addInterclass;
     private Delete delete;
     private Selection selection;
+    private Mouse mouse;
     private State currentState;
 
     public StateManager() {
@@ -17,6 +18,7 @@ public class StateManager {
         addInterclass = new AddInterclass();
         delete = new Delete();
         selection = new Selection();
+        mouse = new Mouse();
         currentState = null;
     }
 
@@ -27,7 +29,9 @@ public class StateManager {
     public void setAddConnection(){
         currentState = addConnection;
     }
-
+    public void setMouse(){
+        currentState = mouse;
+    }
     public void setAddContent(){
         currentState = addContent;
     }

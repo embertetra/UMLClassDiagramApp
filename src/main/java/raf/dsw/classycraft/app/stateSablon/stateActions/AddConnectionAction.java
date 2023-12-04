@@ -13,9 +13,6 @@ public class AddConnectionAction extends AbstractClassyAction {
         putValue(SMALL_ICON, loadIcon("/images/connection.png"));
         putValue(NAME, "");
         putValue(SHORT_DESCRIPTION, "");
-
-
-
     }
 
     @Override

@@ -7,6 +7,7 @@ public class ToolBarStates extends JToolBar {
     public ToolBarStates() {
         super(VERTICAL);
         setFloatable(false);
+        add(MainFrame.getInstance().getActionManager().getMouseStateAction());
         add(MainFrame.getInstance().getActionManager().getAddInterclassAction());
         add(MainFrame.getInstance().getActionManager().getAddConnectionAction());
         add(MainFrame.getInstance().getActionManager().getAddContectAction());
