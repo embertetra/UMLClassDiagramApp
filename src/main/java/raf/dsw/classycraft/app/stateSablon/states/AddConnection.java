@@ -11,6 +11,7 @@ import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.AgregacijaPainter;
+import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.GeneralizacijaPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.KompozicijaPainter;
 import raf.dsw.classycraft.app.stateSablon.State;
 
@@ -63,12 +64,22 @@ public class AddConnection implements State {
             }
         }
         else if(connection.equals("generalizacija")){
-
+            for(ElementPainter e : dijagramView.getElementPainterList()){
+                if(e instanceof InterclassPainter) {
+                    if (e.elementAt(new Point(x, y))){
+                        g.setTo((Interclass) e.getElement());
+                    }
+                }
+            }
+            if(g.getTo() != null){
+                GeneralizacijaPainter gp = new GeneralizacijaPainter(g);
+                dijagramView.getElementPainterList().add(gp);
+                d.addChild(g);
+            }
         }
         else if(connection.equals("zavisnost")){
 
         }
-
         dijagramView.setLine(new Pair<>(new Point(-1,-1), new Point(0,0)));
         dijagramView.repaint();
     }
@@ -99,6 +110,16 @@ public class AddConnection implements State {
                 }
 
             } else if (connection.equals("generalizacija")) {
+
+                g = new Generalizacija("generalizacija", dijagramView.getClassyNode(), 2, null, null);
+                for (ElementPainter e : dijagramView.getElementPainterList()) {
+                    if (e instanceof InterclassPainter) {
+                        if (e.elementAt(new Point(x, y))) {
+                            g.setFrom((Interclass) e.getElement());
+                            dijagramView.setLine(new Pair<>(new Point(x, y), null));
+                        }
+                    }
+                }
 
             } else if (connection.equals("zavisnost")) {
 

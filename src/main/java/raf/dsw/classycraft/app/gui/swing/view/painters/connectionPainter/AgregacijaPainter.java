@@ -39,59 +39,58 @@ public class AgregacijaPainter extends ConnectionPainter {
         int idx1 = 0;
         for(int i=0;i<=3;i++){
             for(int j=0;j<=3;j++){
-                assert kpFrom != null;
-                assert kpTo != null;
-                double c = Math.sqrt(Math.pow(kpFrom.getConnectionPoints().get(i).x - kpTo.getConnectionPoints().get(j).x,2)+
-                        Math.pow(kpFrom.getConnectionPoints().get(i).y - kpTo.getConnectionPoints().get(j).y,2));
-                if(c<min){
-                    min=c;
-                    point1 = kpFrom.getConnectionPoints().get(i);
-                    point2 = kpTo.getConnectionPoints().get(j);
-                    idx1 = i;
+                if(kpFrom != null && kpTo != null) {
+                    double c = Math.sqrt(Math.pow(kpFrom.getConnectionPoints().get(i).x - kpTo.getConnectionPoints().get(j).x, 2) +
+                            Math.pow(kpFrom.getConnectionPoints().get(i).y - kpTo.getConnectionPoints().get(j).y, 2));
+                    if (c < min) {
+                        min = c;
+                        point1 = kpFrom.getConnectionPoints().get(i);
+                        point2 = kpTo.getConnectionPoints().get(j);
+                        idx1 = i;
+                    }
                 }
             }
         }
         Shape shape = new GeneralPath();
-        if(idx1 == 3){///desno
-            ((GeneralPath)shape).moveTo(point1.x, point1.y);
-            ((GeneralPath)shape).lineTo(point1.x + 10, point1.y-10);
-            ((GeneralPath)shape).lineTo(point1.x + 2*10, point1.y);
-            ((GeneralPath)shape).lineTo(point2.x, point2.y);
-            ((GeneralPath)shape).lineTo(point1.x + 2*10, point1.y);
-            ((GeneralPath)shape).lineTo(point1.x + 10, point1.y+10);
-            ((GeneralPath)shape).lineTo(point1.x, point1.y);
-            ((GeneralPath)shape).closePath();
-        }
-        else if(idx1 == 0){///gore
-            ((GeneralPath)shape).moveTo(point1.x, point1.y);
-            ((GeneralPath)shape).lineTo(point1.x - 10, point1.y-10);
-            ((GeneralPath)shape).lineTo(point1.x, point1.y-2*10);
-            ((GeneralPath)shape).lineTo(point2.x, point2.y);
-            ((GeneralPath)shape).lineTo(point1.x, point1.y-2*10);
-            ((GeneralPath)shape).lineTo(point1.x + 10, point1.y-10);
-            ((GeneralPath)shape).lineTo(point1.x, point1.y);
-            ((GeneralPath)shape).closePath();
-        }
-        else if(idx1 == 1){///dole
-            ((GeneralPath)shape).moveTo(point1.x, point1.y);
-            ((GeneralPath)shape).lineTo(point1.x+10, point1.y+10);
-            ((GeneralPath)shape).lineTo(point1.x, point1.y+2*10);
-            ((GeneralPath)shape).lineTo(point2.x, point2.y);
-            ((GeneralPath)shape).lineTo(point1.x, point1.y+2*10);
-            ((GeneralPath)shape).lineTo(point1.x-10, point1.y+10);
-            ((GeneralPath)shape).lineTo(point1.x, point1.y);
-            ((GeneralPath)shape).closePath();
+        if(point1 != null && point2!=null) {
+            if (idx1 == 3) {///desno
+                ((GeneralPath) shape).moveTo(point1.x, point1.y);
+                ((GeneralPath) shape).lineTo(point1.x + 10, point1.y - 10);
+                ((GeneralPath) shape).lineTo(point1.x + 2 * 10, point1.y);
+                ((GeneralPath) shape).lineTo(point2.x, point2.y);
+                ((GeneralPath) shape).lineTo(point1.x + 2 * 10, point1.y);
+                ((GeneralPath) shape).lineTo(point1.x + 10, point1.y + 10);
+                ((GeneralPath) shape).lineTo(point1.x, point1.y);
+                ((GeneralPath) shape).closePath();
+            } else if (idx1 == 0) {///gore
+                ((GeneralPath) shape).moveTo(point1.x, point1.y);
+                ((GeneralPath) shape).lineTo(point1.x - 10, point1.y - 10);
+                ((GeneralPath) shape).lineTo(point1.x, point1.y - 2 * 10);
+                ((GeneralPath) shape).lineTo(point2.x, point2.y);
+                ((GeneralPath) shape).lineTo(point1.x, point1.y - 2 * 10);
+                ((GeneralPath) shape).lineTo(point1.x + 10, point1.y - 10);
+                ((GeneralPath) shape).lineTo(point1.x, point1.y);
+                ((GeneralPath) shape).closePath();
+            } else if (idx1 == 1) {///dole
+                ((GeneralPath) shape).moveTo(point1.x, point1.y);
+                ((GeneralPath) shape).lineTo(point1.x + 10, point1.y + 10);
+                ((GeneralPath) shape).lineTo(point1.x, point1.y + 2 * 10);
+                ((GeneralPath) shape).lineTo(point2.x, point2.y);
+                ((GeneralPath) shape).lineTo(point1.x, point1.y + 2 * 10);
+                ((GeneralPath) shape).lineTo(point1.x - 10, point1.y + 10);
+                ((GeneralPath) shape).lineTo(point1.x, point1.y);
+                ((GeneralPath) shape).closePath();
 
-        }
-        else if(idx1 == 2){///levo
-            ((GeneralPath)shape).moveTo(point1.x, point1.y);
-            ((GeneralPath)shape).lineTo(point1.x-10, point1.y+10);
-            ((GeneralPath)shape).lineTo(point1.x-20, point1.y);
-            ((GeneralPath)shape).lineTo(point2.x, point2.y);
-            ((GeneralPath)shape).lineTo(point1.x-20, point1.y);
-            ((GeneralPath)shape).lineTo(point1.x-10, point1.y-10);
-            ((GeneralPath)shape).lineTo(point1.x, point1.y);
-            ((GeneralPath)shape).closePath();
+            } else if (idx1 == 2) {///levo
+                ((GeneralPath) shape).moveTo(point1.x, point1.y);
+                ((GeneralPath) shape).lineTo(point1.x - 10, point1.y + 10);
+                ((GeneralPath) shape).lineTo(point1.x - 20, point1.y);
+                ((GeneralPath) shape).lineTo(point2.x, point2.y);
+                ((GeneralPath) shape).lineTo(point1.x - 20, point1.y);
+                ((GeneralPath) shape).lineTo(point1.x - 10, point1.y - 10);
+                ((GeneralPath) shape).lineTo(point1.x, point1.y);
+                ((GeneralPath) shape).closePath();
+            }
         }
         g.draw(shape);
     }
