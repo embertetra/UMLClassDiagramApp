@@ -196,20 +196,23 @@ public class PackageView implements ISubscriber {
 
     public void misOtpusten(int x, int y, DijagramView dijagramView){
         stateManager.getCurrentState().misOtpusten(x,y,dijagramView);
+
     }
 
     public void misPrivucen(int x, int y, DijagramView dijagramView){
         stateManager.getCurrentState().misPrivucen(x,y,dijagramView);
     }
 
-    ///
-
     public void startAddInterclassState() {
         stateManager.setAddInterclass();
+        if(jTabbedPane.getSelectedComponent()!=null) {
+            ((DijagramView) jTabbedPane.getSelectedComponent()).removeMML();
+        }
     }
 
     public void startAddConnectionState() {
         stateManager.setAddConnection();
+        ((DijagramView)jTabbedPane.getSelectedComponent()).setMML();
     }
 
     public void startAddContentState() {
@@ -250,5 +253,9 @@ public class PackageView implements ISubscriber {
 
     public JLabel getNazivProjekta() {
         return nazivProjekta;
+    }
+
+    public ClassyNode getParent() {
+        return parent;
     }
 }

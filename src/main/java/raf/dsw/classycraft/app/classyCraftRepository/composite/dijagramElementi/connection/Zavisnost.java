@@ -12,7 +12,7 @@ public class Zavisnost extends Connection {
         super(name, parent);
     }
 
-    public Zavisnost(String name, ClassyNode parent, Color color, int stroke, Interclass from, Interclass to) {
-        super(name, parent, color, stroke, from, to);
+    public Zavisnost(String name, ClassyNode parent, int stroke, Interclass from, Interclass to) {
+        super(name, parent, stroke, from, to);
     }
 }

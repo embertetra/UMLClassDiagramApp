@@ -1,6 +1,10 @@
 package raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter;
 
+import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Atributi;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.ClassContent;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Metode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
 import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
 
@@ -8,26 +12,90 @@ import java.awt.*;
 
 public class KlasaPainter extends InterclassPainter {
     protected Shape shape;
+
     public KlasaPainter(DijagramElement element) {
         super(element);
+
+        /*
+        ///test primeri
+        Klasa k = (Klasa) this.element;
+        k.getClassContentList().add(new Atributi(Vidljivost.PRIVATE, "String", "test1"));
+        k.getClassContentList().add(new Metode(Vidljivost.PROTECTED, "void", "test2"));
+        k.getClassContentList().add(new Atributi(Vidljivost.PUBLIC, "boolean", "test3"));
+        k.getClassContentList().add(new Metode(Vidljivost.PROTECTED, "void", "test4testetsttest"));
+        */
     }
 
     @Override
     public void draw(Graphics2D g) {
-        g.setPaint(Color.BLUE);
-        g.draw(shape);
+        g.setPaint(Color.BLACK);
+        g.setStroke(new BasicStroke(this.element.getStroke()));
         Klasa k = (Klasa) this.element;
-        g.drawString(k.getNaziv(), (int) (k.getPosition().getX()+10), (int) (k.getPosition().getY()+10));
 
+        //odredjivanje sirine, visine reda i ukupne visine
+        width = maxDuzina(g);
+        int heightRed = g.getFontMetrics().getHeight();
+        heightUkupno = heightRed * k.getClassContentList().size() + heightRed;
 
-        /*
-        g.setStroke(dijagramElement.getStroke());
-        g.drawRect(); // (x, y) - gore levo, with, hight
-         */
+        shape = new Rectangle(k.getPosition().x - width / 2 - 5, k.getPosition().y - heightUkupno / 2, width + 10, heightUkupno + 10);
+        g.draw(shape);
+        g.drawString("C", k.getPosition().x - width / 2, k.getPosition().y - heightUkupno / 2 + heightRed);
+
+        //crtanje atributa
+        int brojac = 2;
+        for (ClassContent c : k.getClassContentList()) {
+            String string;
+            if (c instanceof Atributi) {
+                Atributi a = (Atributi) c;
+                string = a.getVidljivost() + a.getNaziv() + ": " + a.getTip();
+                g.drawString(string, k.getPosition().x - width / 2, k.getPosition().y - heightUkupno / 2 + brojac * heightRed);
+                brojac++;
+            }
+        }
+        //crtanje metoda
+        for (ClassContent c : k.getClassContentList()) {
+            String string;
+            if (c instanceof Metode) {
+                Metode m = (Metode) c;
+                string = m.getVidljivost() + m.getNaziv() + "(): " + m.getTip();
+                g.drawString(string, k.getPosition().x - width / 2, k.getPosition().y - heightUkupno / 2 + brojac * heightRed);
+                brojac++;
+            }
+        }
+        setConnectionPoints();
+    }
+
+    public int maxDuzina(Graphics2D g) {
+        int max = 0;
+        int width = 0;
+        String string;
+
+        for (ClassContent c : ((Klasa) element).getClassContentList()) {
+            string = c.getVidljivost() + c.getNaziv() + ": " + c.getTip();
+            width = g.getFontMetrics().stringWidth(string);
+            if (c instanceof Metode) {
+                width += g.getFontMetrics().stringWidth("()");
+            }
+            if (width > max) max = width;
+        }
+        string = "C " + ((Klasa) element).getNaziv();
+        width = g.getFontMetrics().stringWidth(string);
+        if (width > max) max = width;
+        return max;
+    }
+
+    public void setConnectionPoints(){
+        Interclass i = (Interclass)element;
+        int width2 = width + 10;
+        int height2 = heightUkupno + 5;
+        connectionPoints.add(new Point(i.getPosition().x, i.getPosition().y - height2/2));//gore 0
+        connectionPoints.add(new Point(i.getPosition().x, i.getPosition().y + height2/2 + 8));//dole 1
+        connectionPoints.add(new Point(i.getPosition().x-width2/2, i.getPosition().y));//levo 2
+        connectionPoints.add(new Point(i.getPosition().x+width2/2, i.getPosition().y));//desno 3
     }
 
     @Override
-    public boolean elementAt(DijagramElement dijagramElement, Point point) {
+    public boolean elementAt(Point point) {
         return this.getShape().contains(point);
     }
 
@@ -37,5 +105,13 @@ public class KlasaPainter extends InterclassPainter {
 
     public void setShape(Shape shape) {
         this.shape = shape;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeightUkupno() {
+        return heightUkupno;
     }
 }

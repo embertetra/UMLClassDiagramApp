@@ -46,4 +46,8 @@ public class StateManager {
     public AddInterclass getAddInterclass() {
         return addInterclass;
     }
+
+    public AddConnection getAddConnection() {
+        return addConnection;
+    }
 }

@@ -12,7 +12,7 @@ public class Kompozicija extends Connection {
         super(name, parent);
     }
 
-    public Kompozicija(String name, ClassyNode parent, Color color, int stroke, Interclass from, Interclass to) {
-        super(name, parent, color, stroke, from, to);
+    public Kompozicija(String name, ClassyNode parent, int stroke, Interclass from, Interclass to) {
+        super(name, parent, stroke, from, to);
     }
 }

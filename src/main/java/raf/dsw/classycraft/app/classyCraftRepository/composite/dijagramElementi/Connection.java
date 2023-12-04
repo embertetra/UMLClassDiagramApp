@@ -13,8 +13,8 @@ public abstract class Connection extends DijagramElement {
     public Connection(String name, ClassyNode parent) {
         super(name, parent);
     }
-    public Connection(String name, ClassyNode parent, Color color, int stroke, Interclass from, Interclass to) {
-        super(name, parent, color, stroke);
+    public Connection(String name, ClassyNode parent, int stroke, Interclass from, Interclass to) {
+        super(name, parent, stroke);
         this.from = from;
         this.to = to;
     }
