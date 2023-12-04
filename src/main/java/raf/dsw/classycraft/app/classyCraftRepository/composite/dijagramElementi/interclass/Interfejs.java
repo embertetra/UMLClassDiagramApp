@@ -1,11 +1,11 @@
 package raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass;
 
-import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.ClassContent;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Metode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Interfejs extends Interclass {
@@ -21,6 +21,7 @@ public class Interfejs extends Interclass {
     }
     public Interfejs(String name, ClassyNode parent, int stroke, String naziv, Vidljivost vidljivost, Point position) {
         super(name, parent, stroke, naziv, vidljivost, position);
+        metodeList = new ArrayList<>();
     }
 
     public List<Metode> getMetodeList() {
