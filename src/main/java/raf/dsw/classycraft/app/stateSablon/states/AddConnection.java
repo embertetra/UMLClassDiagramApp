@@ -11,6 +11,7 @@ import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.Agregac
 import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.AsocijacijaPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.GeneralizacijaPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.KompozicijaPainter;
+import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.ZavisnostPainter;
 import raf.dsw.classycraft.app.stateSablon.State;
 
 import java.awt.*;
@@ -77,7 +78,16 @@ public class AddConnection implements State {
             }
         }
         else if(connection.equals("zavisnost")){
-
+            for(ElementPainter e : dijagramView.getElementPainterList()){
+                if(e instanceof InterclassPainter)
+                    if(e.elementAt(new Point(x, y)))
+                        z.setTo((Interclass) e.getElement());
+            }
+            if(z.getTo() != null){
+                ZavisnostPainter zp = new ZavisnostPainter(z);
+                dijagramView.getElementPainterList().add(zp);
+                d.addChild(z);
+            }
         }
         else if(connection.equals("asocijacija")){
 
@@ -138,7 +148,14 @@ public class AddConnection implements State {
                 }
 
             } else if (connection.equals("zavisnost")) {
-
+                  z = new Zavisnost("zavisnost", dijagramView.getClassyNode(), 2, null, null);
+                  for(ElementPainter e : dijagramView.getElementPainterList()){
+                    if (e instanceof InterclassPainter)
+                        if (e.elementAt(new Point(x, y))){
+                            z.setFrom((Interclass) e.getElement());
+                            dijagramView.setLine(new Pair<>(new Point(x, y), null));
+                        }
+                }
             } else if(connection.equals("asocijacija")){
                 as = new Asocijacija("asocijacija", dijagramView.getClassyNode(), 2, null, null);
                 for (ElementPainter e : dijagramView.getElementPainterList()) {
@@ -149,6 +166,7 @@ public class AddConnection implements State {
                         }
                     }
                 }
+
             }
         }
 

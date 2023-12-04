@@ -29,8 +29,8 @@ public class KompozicijaPainter extends ConnectionPainter {
         for (ElementPainter e : d.getElementPainterList()){
             if(e instanceof InterclassPainter){
                 InterclassPainter ip = (InterclassPainter) e;
-                if(ip.getElement() == k.getFrom())kpFrom = ip;
-                else if(ip.getElement() == k.getTo())kpTo = ip;
+                if(ip.getElement() == k.getFrom()) kpFrom = ip;
+                else if(ip.getElement() == k.getTo()) kpTo = ip;
             }
         }
         double min = 1e9;
