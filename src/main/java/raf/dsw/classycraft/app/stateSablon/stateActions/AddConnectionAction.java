@@ -22,7 +22,7 @@ public class AddConnectionAction extends AbstractClassyAction {
     public void actionPerformed(ActionEvent e) {
         if(MainFrame.getInstance().getPackageView().getParent() != null && MainFrame.getInstance().getPackageView().getjTabbedPane().getTabCount() > 0) {
 
-            Object[] options = {"Agregacija", "Generalizacija", "Kompozicija", "Zavisnost"};
+            Object[] options = {"Agregacija", "Generalizacija", "Kompozicija", "Zavisnost", "Asocijacija"};
             int n = JOptionPane.showOptionDialog(MainFrame.getInstance(), "Odaberite vezu:", "", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
             if (n == 0)
                 MainFrame.getInstance().getPackageView().getStateManager().getAddConnection().setConnection("agregacija");
@@ -32,6 +32,9 @@ public class AddConnectionAction extends AbstractClassyAction {
                 MainFrame.getInstance().getPackageView().getStateManager().getAddConnection().setConnection("kompozicija");
             else if (n == 3)
                 MainFrame.getInstance().getPackageView().getStateManager().getAddConnection().setConnection("zavisnost");
+            else if (n == 4)
+                MainFrame.getInstance().getPackageView().getStateManager().getAddConnection().setConnection("asocijacija");
+
 
             MainFrame.getInstance().getPackageView().startAddConnectionState();
         }
