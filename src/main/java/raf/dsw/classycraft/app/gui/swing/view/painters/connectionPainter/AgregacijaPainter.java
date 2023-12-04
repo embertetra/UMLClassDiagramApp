@@ -7,15 +7,22 @@ import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ConnectionPainter;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AgregacijaPainter extends ConnectionPainter {
+    private List<Point> connectionPointsFrom;
+    private List<Point> connectionPointsTo;
     public AgregacijaPainter(DijagramElement element) {
         super(element);
+        connectionPointsFrom = new ArrayList<>();
+        connectionPointsTo = new ArrayList<>();
     }
 
     @Override
     public void draw(Graphics2D g) {
         Agregacija a = (Agregacija)element;
+        //connectionPointsFrom.add(new Point(a.getFrom().getPosition().x, a.getFrom().getPosition().y-))
 
         g.setPaint(Color.BLACK);
         g.setStroke(new BasicStroke(3));

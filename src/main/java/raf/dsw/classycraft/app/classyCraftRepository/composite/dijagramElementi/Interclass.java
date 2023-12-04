@@ -28,7 +28,6 @@ public abstract class Interclass extends DijagramElement {
         super(name, parent, stroke);
         this.naziv = naziv;
         this.vidljivost = vidljivost;
-        this.size = size;
         this.position = position;
     }
 

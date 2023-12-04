@@ -203,8 +203,6 @@ public class PackageView implements ISubscriber {
         stateManager.getCurrentState().misPrivucen(x,y,dijagramView);
     }
 
-    ///
-
     public void startAddInterclassState() {
         stateManager.setAddInterclass();
         ((DijagramView)jTabbedPane.getSelectedComponent()).removeMML();
