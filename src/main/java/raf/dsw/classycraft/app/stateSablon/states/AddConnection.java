@@ -2,15 +2,13 @@ package raf.dsw.classycraft.app.stateSablon.states;
 
 import javafx.util.Pair;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Agregacija;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Generalizacija;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Kompozicija;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Zavisnost;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.*;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.AgregacijaPainter;
+import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.AsocijacijaPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.GeneralizacijaPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.KompozicijaPainter;
 import raf.dsw.classycraft.app.stateSablon.State;
@@ -24,6 +22,7 @@ public class AddConnection implements State {
     private Kompozicija k;
     private Generalizacija g;
     private Zavisnost z;
+    private Asocijacija as;
     @Override
     public void misKliknut(int x, int y, DijagramView dijagramView) {
 
@@ -80,6 +79,23 @@ public class AddConnection implements State {
         else if(connection.equals("zavisnost")){
 
         }
+        else if(connection.equals("asocijacija")){
+
+            for(ElementPainter e : dijagramView.getElementPainterList()){
+                if(e instanceof InterclassPainter) {
+                    if (e.elementAt(new Point(x, y))){
+                        as.setTo((Interclass) e.getElement());
+                    }
+                }
+            }
+            if(as.getTo() != null){
+                AsocijacijaPainter asp = new AsocijacijaPainter(as);
+                dijagramView.getElementPainterList().add(asp);
+                d.addChild(as);
+            }
+
+        }
+
         dijagramView.setLine(new Pair<>(new Point(-1,-1), new Point(0,0)));
         dijagramView.repaint();
     }
@@ -123,6 +139,16 @@ public class AddConnection implements State {
 
             } else if (connection.equals("zavisnost")) {
 
+            } else if(connection.equals("asocijacija")){
+                as = new Asocijacija("asocijacija", dijagramView.getClassyNode(), 2, null, null);
+                for (ElementPainter e : dijagramView.getElementPainterList()) {
+                    if (e instanceof InterclassPainter) {
+                        if (e.elementAt(new Point(x, y))) {
+                            as.setFrom((Interclass) e.getElement());
+                            dijagramView.setLine(new Pair<>(new Point(x, y), null));
+                        }
+                    }
+                }
             }
         }
 
