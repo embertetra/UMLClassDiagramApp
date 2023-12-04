@@ -205,7 +205,9 @@ public class PackageView implements ISubscriber {
 
     public void startAddInterclassState() {
         stateManager.setAddInterclass();
-        ((DijagramView)jTabbedPane.getSelectedComponent()).removeMML();
+        if(jTabbedPane.getSelectedComponent()!=null) {
+            ((DijagramView) jTabbedPane.getSelectedComponent()).removeMML();
+        }
     }
 
     public void startAddConnectionState() {

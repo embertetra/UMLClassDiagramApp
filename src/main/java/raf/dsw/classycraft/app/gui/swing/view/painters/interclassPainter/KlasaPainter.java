@@ -6,11 +6,9 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Meto
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Vidljivost;
 import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class KlasaPainter extends InterclassPainter {
     protected Shape shape;
@@ -90,10 +88,10 @@ public class KlasaPainter extends InterclassPainter {
         Interclass i = (Interclass)element;
         int width2 = width + 10;
         int height2 = heightUkupno + 5;
-        connectionPoints.add(new Point(i.getPosition().x, i.getPosition().y - height2/2));
-        connectionPoints.add(new Point(i.getPosition().x, i.getPosition().y + height2/2 + 8));
-        connectionPoints.add(new Point(i.getPosition().x-width2/2, i.getPosition().y));
-        connectionPoints.add(new Point(i.getPosition().x+width2/2, i.getPosition().y));
+        connectionPoints.add(new Point(i.getPosition().x, i.getPosition().y - height2/2));//gore 0
+        connectionPoints.add(new Point(i.getPosition().x, i.getPosition().y + height2/2 + 8));//dole 1
+        connectionPoints.add(new Point(i.getPosition().x-width2/2, i.getPosition().y));//levo 2
+        connectionPoints.add(new Point(i.getPosition().x+width2/2, i.getPosition().y));//desno 3
     }
 
     @Override

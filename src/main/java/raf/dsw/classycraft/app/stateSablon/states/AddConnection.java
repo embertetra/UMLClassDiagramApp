@@ -3,12 +3,15 @@ package raf.dsw.classycraft.app.stateSablon.states;
 import javafx.util.Pair;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Agregacija;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Generalizacija;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Kompozicija;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Zavisnost;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.AgregacijaPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.KlasaPainter;
+import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.KompozicijaPainter;
 import raf.dsw.classycraft.app.stateSablon.State;
 
 import java.awt.*;
@@ -17,6 +20,9 @@ public class AddConnection implements State {
 
     private String connection;
     private Agregacija a;
+    private Kompozicija k;
+    private Generalizacija g;
+    private Zavisnost z;
     @Override
     public void misKliknut(int x, int y, DijagramView dijagramView) {
 
@@ -42,10 +48,21 @@ public class AddConnection implements State {
                 d.addChild(a);
             }
         }
-        else if(connection.equals("generalizacija")){
-
-        }
         else if(connection.equals("kompozicija")){
+            for(ElementPainter e : dijagramView.getElementPainterList()){
+                if(e instanceof InterclassPainter) {
+                    if (e.elementAt(new Point(x, y))){
+                        k.setTo((Interclass) e.getElement());
+                    }
+                }
+            }
+            if(k.getTo() != null){
+                KompozicijaPainter kp = new KompozicijaPainter(k);
+                dijagramView.getElementPainterList().add(kp);
+                d.addChild(k);
+            }
+        }
+        else if(connection.equals("generalizacija")){
 
         }
         else if(connection.equals("zavisnost")){
@@ -58,28 +75,35 @@ public class AddConnection implements State {
 
     @Override
     public void misPrivucen(int x, int y, DijagramView dijagramView) {
-
-        if(connection.equals("agregacija")){
-            a = new Agregacija("agregacija", dijagramView.getClassyNode(),2, null, null);
-            for(ElementPainter e : dijagramView.getElementPainterList()){
-                if(e instanceof KlasaPainter) {
-                    if (e.elementAt(new Point(x, y))){
-                        a.setFrom((Interclass) e.getElement());
-                        dijagramView.setLine(new Pair<>(new Point(x,y), null));
+        if(connection != null) {
+            if (connection.equals("agregacija")) {
+                a = new Agregacija("agregacija", dijagramView.getClassyNode(), 2, null, null);
+                for (ElementPainter e : dijagramView.getElementPainterList()) {
+                    if (e instanceof InterclassPainter) {
+                        if (e.elementAt(new Point(x, y))) {
+                            a.setFrom((Interclass) e.getElement());
+                            dijagramView.setLine(new Pair<>(new Point(x, y), null));
+                        }
                     }
                 }
+            } else if (connection.equals("kompozicija")) {
+
+                k = new Kompozicija("kompozicija", dijagramView.getClassyNode(), 2, null, null);
+                for (ElementPainter e : dijagramView.getElementPainterList()) {
+                    if (e instanceof InterclassPainter) {
+                        if (e.elementAt(new Point(x, y))) {
+                            k.setFrom((Interclass) e.getElement());
+                            dijagramView.setLine(new Pair<>(new Point(x, y), null));
+                        }
+                    }
+                }
+
+            } else if (connection.equals("generalizacija")) {
+
+            } else if (connection.equals("zavisnost")) {
+
             }
         }
-        else if(connection.equals("generalizacija")){
-
-        }
-        else if(connection.equals("kompozicija")){
-
-        }
-        else if(connection.equals("zavisnost")){
-
-        }
-
 
     }
 

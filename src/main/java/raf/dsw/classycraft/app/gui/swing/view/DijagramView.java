@@ -80,10 +80,8 @@ public class DijagramView extends JPanel implements ISubscriber {
 
         if(line != null && line.getKey()!= null && line.getValue() != null && line.getKey().x != -1 && line.getKey().y != -1)
             g2.drawLine(line.getKey().x, line.getKey().y, line.getValue().x, line.getValue().y);
-
         for (ElementPainter x : elementPainterList) {
             x.draw(g2);
-
         }
         System.out.println("Izvrsen paintComponent");
 
