@@ -30,7 +30,7 @@ public class RemoveChild extends AbstractClassyAction{
             ///ako korisnik zeli da obrise ProjectExplorer
             if(selected.getClassyNode() instanceof ProjectExplorer)
                 ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("ProjectExplorer nije moguce obrisati!", MessageType.ERROR);
-            ///ako zeli da obrise prjekat
+            ///ako zeli da obrise projekat
             if(selected.getClassyNode() instanceof Project){
 
                 Object[] options = {"Da", "Ne"};

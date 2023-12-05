@@ -24,6 +24,8 @@ public class MainFrame extends JFrame implements ISubscriber {
     private DijagramView dijagramView;
     private ToolBarStates toolBarStates;
 
+    private KlasaProzor klasaProzor;
+
     private MainFrame() {
     }
 
@@ -34,6 +36,7 @@ public class MainFrame extends JFrame implements ISubscriber {
         packageView = new PackageView();
         dijagramView = new DijagramView(null);
         toolBarStates = new ToolBarStates();
+        klasaProzor = new KlasaProzor();
 
         ApplicationFramework.getInstance().getMessageGenerator().getSubscribers().add(this);
 
@@ -107,5 +110,9 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     public PackageView getPackageView() {
         return packageView;
+    }
+
+    public KlasaProzor getKlasaProzor() {
+        return klasaProzor;
     }
 }
