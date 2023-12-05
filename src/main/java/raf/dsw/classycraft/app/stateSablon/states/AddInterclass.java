@@ -29,7 +29,6 @@ public class AddInterclass implements State {
         Dijagram d = (Dijagram)dijagramView.getClassyNode();
         d.addSubscriber(dijagramView);
 
-        KlasaPainter kp = new KlasaPainter(new Klasa("klasa", null, 2, "", Vidljivost.PUBLIC, new Point(x,y)));
         Rectangle rec = new Rectangle(x-38,y-23, 76, 46);
         for(ElementPainter ep : dijagramView.getElementPainterList()){
             if(ep instanceof InterclassPainter){

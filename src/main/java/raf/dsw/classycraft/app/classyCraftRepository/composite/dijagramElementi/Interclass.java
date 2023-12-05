@@ -4,7 +4,6 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Vidljivost;
 
 import java.awt.*;
-import java.util.List;
 
 public abstract class Interclass extends DijagramElement {
     private String naziv;
