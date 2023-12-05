@@ -17,14 +17,14 @@ public class KlasaPainter extends InterclassPainter {
     public KlasaPainter(DijagramElement element) {
         super(element);
 
-
+        /*
         ///test primeri
         Klasa k = (Klasa) this.element;
         k.getClassContentList().add(new Atributi(Vidljivost.PRIVATE, "String", "test1"));
         k.getClassContentList().add(new Metode(Vidljivost.PROTECTED, "void", "test2"));
         k.getClassContentList().add(new Atributi(Vidljivost.PUBLIC, "boolean", "test3"));
         k.getClassContentList().add(new Metode(Vidljivost.PROTECTED, "void", "test4testetsttest"));
-
+        */
     }
 
     @Override
