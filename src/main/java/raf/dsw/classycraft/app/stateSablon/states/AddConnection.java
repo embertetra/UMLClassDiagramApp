@@ -26,12 +26,14 @@ public class AddConnection implements State {
     private Asocijacija as;
     @Override
     public void misKliknut(int x, int y, DijagramView dijagramView) {
-
+        dijagramView.getSelectionModel().clear();
+        dijagramView.setSelection(null);
     }
 
     @Override
     public void misOtpusten(int x, int y, DijagramView dijagramView) {
 
+        dijagramView.removeMML();
         Dijagram d = (Dijagram)dijagramView.getClassyNode();
         d.addSubscriber(dijagramView);
 
@@ -112,6 +114,9 @@ public class AddConnection implements State {
 
     @Override
     public void misPrivucen(int x, int y, DijagramView dijagramView) {
+        dijagramView.getSelectionModel().clear();
+        dijagramView.setSelection(null);
+        dijagramView.setMML();
         if(connection != null) {
             if (connection.equals("agregacija")) {
                 a = new Agregacija("agregacija", dijagramView.getClassyNode(), 2, null, null);

@@ -33,8 +33,8 @@ public class ZavisnostPainter extends ConnectionPainter {
             }
         }
         double min = 1e9;
-        Point point1 = null;
-        Point point2 = null;
+        point1 = null;
+        point2 = null;
         int idx1 = 0;
         for(int i=0; i<=3; i++){
             for(int j=0; j<=3; j++){

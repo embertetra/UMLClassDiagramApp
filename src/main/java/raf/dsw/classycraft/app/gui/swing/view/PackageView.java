@@ -60,10 +60,6 @@ public class PackageView implements ISubscriber {
 
     }
 
-    public JPanel getX() {
-        return x;
-    }
-
     public void addInTabList(DijagramView dijagramView) {
         if (tabovi == null) {
             tabovi = new ArrayList<>();
@@ -204,42 +200,33 @@ public class PackageView implements ISubscriber {
     }
     public void startMouseState(){
         stateManager.setMouse();
-        if(jTabbedPane.getSelectedComponent()!=null) {
-            ((DijagramView) jTabbedPane.getSelectedComponent()).removeMML();
-        }
+        ((DijagramView)jTabbedPane.getSelectedComponent()).getSelectionModel().clear();
+        ((DijagramView)jTabbedPane.getSelectedComponent()).setSelection(null);
+        ((DijagramView)jTabbedPane.getSelectedComponent()).repaint();
     }
 
     public void startAddInterclassState() {
         stateManager.setAddInterclass();
-        if(jTabbedPane.getSelectedComponent()!=null) {
-            ((DijagramView) jTabbedPane.getSelectedComponent()).removeMML();
-        }
     }
 
     public void startAddConnectionState() {
         stateManager.setAddConnection();
-        ((DijagramView)jTabbedPane.getSelectedComponent()).setMML();
     }
 
     public void startAddContentState() {
         stateManager.setAddContent();
-        if(jTabbedPane.getSelectedComponent()!=null) {
-            ((DijagramView) jTabbedPane.getSelectedComponent()).removeMML();
-        }
     }
 
     public void startDeleteState() {
         stateManager.setDelete();
         if(jTabbedPane.getSelectedComponent()!=null) {
-            ((DijagramView) jTabbedPane.getSelectedComponent()).removeMML();
+            ((DijagramView) jTabbedPane.getSelectedComponent()).setSelection(null);
+            ((DijagramView) jTabbedPane.getSelectedComponent()).repaint();
         }
     }
 
     public void startSelectionState() {
         stateManager.setSelection();
-        if(jTabbedPane.getSelectedComponent()!=null) {
-            ((DijagramView) jTabbedPane.getSelectedComponent()).removeMML();
-        }
     }
 
     public StateManager getStateManager() {

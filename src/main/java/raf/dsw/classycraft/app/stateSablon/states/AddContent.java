@@ -46,6 +46,11 @@ public class AddContent implements State {
                 MainFrame.getInstance().getEnumProzor().setVisible(true);
             }
         }
+      
+        dijagramView.getSelectionModel().clear();
+        dijagramView.setSelection(null);
+        dijagramView.repaint();
+
     }
 
     @Override
@@ -55,6 +60,8 @@ public class AddContent implements State {
 
     @Override
     public void misPrivucen(int x, int y, DijagramView dijagramView) {
-
+        dijagramView.getSelectionModel().clear();
+        dijagramView.setSelection(null);
+        dijagramView.repaint();
     }
 }
