@@ -60,10 +60,6 @@ public class PackageView implements ISubscriber {
 
     }
 
-    public JPanel getX() {
-        return x;
-    }
-
     public void addInTabList(DijagramView dijagramView) {
         if (tabovi == null) {
             tabovi = new ArrayList<>();
@@ -206,6 +202,11 @@ public class PackageView implements ISubscriber {
         stateManager.setMouse();
         if(jTabbedPane.getSelectedComponent()!=null) {
             ((DijagramView) jTabbedPane.getSelectedComponent()).removeMML();
+            ((DijagramView) jTabbedPane.getSelectedComponent()).setSelection(null);
+            ((DijagramView) jTabbedPane.getSelectedComponent()).getSelectionModel().clear();
+            ((DijagramView) jTabbedPane.getSelectedComponent()).removeSelectionListener();
+
+            ((DijagramView) jTabbedPane.getSelectedComponent()).repaint();
         }
     }
 
@@ -213,18 +214,30 @@ public class PackageView implements ISubscriber {
         stateManager.setAddInterclass();
         if(jTabbedPane.getSelectedComponent()!=null) {
             ((DijagramView) jTabbedPane.getSelectedComponent()).removeMML();
+            ((DijagramView) jTabbedPane.getSelectedComponent()).setSelection(null);
+            ((DijagramView) jTabbedPane.getSelectedComponent()).getSelectionModel().clear();
+            ((DijagramView) jTabbedPane.getSelectedComponent()).repaint();
+            ((DijagramView) jTabbedPane.getSelectedComponent()).removeSelectionListener();
         }
     }
 
     public void startAddConnectionState() {
         stateManager.setAddConnection();
         ((DijagramView)jTabbedPane.getSelectedComponent()).setMML();
+        ((DijagramView) jTabbedPane.getSelectedComponent()).setSelection(null);
+        ((DijagramView) jTabbedPane.getSelectedComponent()).getSelectionModel().clear();
+        ((DijagramView) jTabbedPane.getSelectedComponent()).repaint();
+        ((DijagramView) jTabbedPane.getSelectedComponent()).removeSelectionListener();
     }
 
     public void startAddContentState() {
         stateManager.setAddContent();
         if(jTabbedPane.getSelectedComponent()!=null) {
             ((DijagramView) jTabbedPane.getSelectedComponent()).removeMML();
+            ((DijagramView) jTabbedPane.getSelectedComponent()).setSelection(null);
+            ((DijagramView) jTabbedPane.getSelectedComponent()).getSelectionModel().clear();
+            ((DijagramView) jTabbedPane.getSelectedComponent()).repaint();
+            ((DijagramView) jTabbedPane.getSelectedComponent()).removeSelectionListener();
         }
     }
 
@@ -232,6 +245,9 @@ public class PackageView implements ISubscriber {
         stateManager.setDelete();
         if(jTabbedPane.getSelectedComponent()!=null) {
             ((DijagramView) jTabbedPane.getSelectedComponent()).removeMML();
+            ((DijagramView) jTabbedPane.getSelectedComponent()).setSelection(null);
+            ((DijagramView) jTabbedPane.getSelectedComponent()).repaint();
+            ((DijagramView) jTabbedPane.getSelectedComponent()).removeSelectionListener();
         }
     }
 
@@ -239,6 +255,8 @@ public class PackageView implements ISubscriber {
         stateManager.setSelection();
         if(jTabbedPane.getSelectedComponent()!=null) {
             ((DijagramView) jTabbedPane.getSelectedComponent()).removeMML();
+            ((DijagramView) jTabbedPane.getSelectedComponent()).setSelectionListener();
+
         }
     }
 
