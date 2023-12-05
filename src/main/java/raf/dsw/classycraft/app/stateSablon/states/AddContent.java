@@ -1,7 +1,5 @@
 package raf.dsw.classycraft.app.stateSablon.states;
 
-import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Atributi;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Metode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.EnumM;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Interfejs;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
@@ -16,10 +14,6 @@ import raf.dsw.classycraft.app.stateSablon.State;
 import java.awt.*;
 
 public class AddContent implements State {
-
-    private Atributi a;
-
-    private Metode m;
 
     @Override
     public void misKliknut(int x, int y, DijagramView dijagramView) {
