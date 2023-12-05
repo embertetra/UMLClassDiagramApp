@@ -31,10 +31,8 @@ public class DijagramView extends JPanel implements ISubscriber {
     private MouseMotionListener mml;
     private MouseMotionListener selectionListener;
     private MouseMotionListener translation;
-    private double dx1 = -1;
-    private double dy1 = -1;
-    private double dx2;
-    private double dy2;
+    private Point offSet;
+    private Point diff;
     public DijagramView(ClassyNode classyNode) {
         if (classyNode != null) {
             this.classyNode = classyNode;
@@ -51,8 +49,7 @@ public class DijagramView extends JPanel implements ISubscriber {
         translation = new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                dx2 = e.getX();
-                dy2 = e.getY();
+                diff = new Point(e.getX(), e.getY());
                 repaint();
             }
             @Override
@@ -150,8 +147,10 @@ public class DijagramView extends JPanel implements ISubscriber {
         Graphics2D g2 = (Graphics2D) g;
 
         AffineTransform af = new AffineTransform();
-        af.setToScale(1,1);
-        af.translate(dx2-dx1,dy2-dy1);
+        //af.setToScale(1,1);
+        if(diff != null && offSet != null) {
+            af.translate(diff.x - offSet.x, 0);
+        }
         g2.setTransform(af);
 
         if(line != null && line.getKey()!= null && line.getValue() != null && line.getKey().x != -1 && line.getKey().y != -1)
@@ -207,24 +206,20 @@ public class DijagramView extends JPanel implements ISubscriber {
     public List<Shape> getSelectionModel() {
         return selectionModel;
     }
-    public void setDx1(double dx1) {
-        this.dx1 = dx1;
-    }
-    public void setDy1(double dy1) {
-        this.dy1 = dy1;
-    }
-    public double getDx1() {
-        return dx1;
-    }
-    public double getDy1() {
-        return dy1;
+
+    public Point getOffSet() {
+        return offSet;
     }
 
-    public void setDx2(double dx2) {
-        this.dx2 = dx2;
+    public void setOffSet(Point offSet) {
+        this.offSet = offSet;
     }
 
-    public void setDy2(double dy2) {
-        this.dy2 = dy2;
+    public Point getDiff() {
+        return diff;
+    }
+
+    public void setDiff(Point diff) {
+        this.diff = diff;
     }
 }

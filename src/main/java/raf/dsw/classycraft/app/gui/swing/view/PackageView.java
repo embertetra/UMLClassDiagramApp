@@ -195,7 +195,7 @@ public class PackageView implements ISubscriber {
     }
 
     public void misPrivucen(int x, int y, DijagramView dijagramView){
-        stateManager.getCurrentState().misPrivucen(x,y,dijagramView);
+            stateManager.getCurrentState().misPrivucen(x, y, dijagramView);
     }
     public void startMouseState(){
         stateManager.setMouse();
