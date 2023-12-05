@@ -1,16 +1,12 @@
 package raf.dsw.classycraft.app.gui.swing.view;
 
-
-import raf.dsw.classycraft.app.controller.DodajUKlasuAction;
+import raf.dsw.classycraft.app.controller.DodajUInterfejsAction;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class KlasaProzor extends JFrame {
-
-    private JRadioButton atribut;
-    private JRadioButton metoda;
+public class InterfejsProzor extends JFrame {
 
     private JRadioButton jbPrivate;
     private JRadioButton jbPublic;
@@ -21,11 +17,12 @@ public class KlasaProzor extends JFrame {
     private JRadioButton jbDouble;
     private JRadioButton jbString;
     private JRadioButton jbBoolean;
+
     private JTextField tfNaziv;
 
     private JButton jbDodaj;
 
-    public KlasaProzor(){
+    public InterfejsProzor(){
 
         //namestanje prozora
         Toolkit kit = Toolkit.getDefaultToolkit();
@@ -35,13 +32,7 @@ public class KlasaProzor extends JFrame {
         setSize(screenWidth/3, screenHeight/3);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setTitle("Dodavanje u klasu");
-
-        // atribut ili metoda
-        ButtonGroup bg = new ButtonGroup();
-        atribut = new JRadioButton("Atribut");
-        metoda = new JRadioButton("Metoda");
-        bg.add(atribut); bg.add(metoda);
+        setTitle("Dodavanje u interfejs");
 
         //vidljivost : + - #
         JLabel lbVidljivost = new JLabel("Vidljivost:");
@@ -65,10 +56,7 @@ public class KlasaProzor extends JFrame {
         JLabel lbNaziv = new JLabel("Naziv:");
         tfNaziv = new JTextField();
 
-        JPanel jpAtrMet = new JPanel();
-        jpAtrMet.setAlignmentX(Component.LEFT_ALIGNMENT);
-        jpAtrMet.setLayout(new BoxLayout(jpAtrMet, BoxLayout.X_AXIS));
-        jpAtrMet.add(atribut); jpAtrMet.add(metoda);
+        jbDodaj = new JButton("Dodaj");
 
         JPanel jpVidljivost = new JPanel();
         jpVidljivost.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -80,32 +68,13 @@ public class KlasaProzor extends JFrame {
         jpTip.setLayout(new BoxLayout(jpTip, BoxLayout.X_AXIS));
         jpTip.add(jbInt); jpTip.add(jbFloat); jpTip.add(jbDouble); jpTip.add(jbString); jpTip.add(jbBoolean);
 
-        jbDodaj = new JButton("Dodaj");
-
         JPanel jPanel = new JPanel();
         jPanel.setLayout(new BoxLayout(jPanel, BoxLayout.Y_AXIS));
         jPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        jPanel.add(jpAtrMet); jPanel.add(lbVidljivost); jPanel.add(jpVidljivost);jPanel.add(lbTip);
-        jPanel.add(jpTip); jPanel.add(lbNaziv); jPanel.add(tfNaziv); jPanel.add(jbDodaj);
+        jPanel.add(lbVidljivost); jPanel.add(jpVidljivost);jPanel.add(lbTip); jPanel.add(jpTip); jPanel.add(lbNaziv); jPanel.add(tfNaziv); jPanel.add(jbDodaj);
 
         jPanel.setBorder(new EmptyBorder(new Insets(15, 10, 15, 10)));
         this.add(jPanel);
-    }
-
-    public JRadioButton getAtribut() {
-        return atribut;
-    }
-
-    public void setAtribut(JRadioButton atribut) {
-        this.atribut = atribut;
-    }
-
-    public JRadioButton getMetoda() {
-        return metoda;
-    }
-
-    public void setMetoda(JRadioButton metoda) {
-        this.metoda = metoda;
     }
 
     public JRadioButton getJbPrivate() {

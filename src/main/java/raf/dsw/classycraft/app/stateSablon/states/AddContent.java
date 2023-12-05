@@ -7,6 +7,9 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Interfejs;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
+import raf.dsw.classycraft.app.controller.DodajUEnumAction;
+import raf.dsw.classycraft.app.controller.DodajUInterfejsAction;
+import raf.dsw.classycraft.app.controller.DodajUKlasuAction;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
@@ -32,20 +35,18 @@ public class AddContent implements State {
                interclassPainter = (InterclassPainter) ep;
         }
 
-        assert interclassPainter != null;
-        if(interclassPainter.getElement() instanceof Klasa){
-            MainFrame.getInstance().getKlasaProzor().setVisible(true);
+        if(interclassPainter != null) {
+            if (interclassPainter.getElement() instanceof Klasa) {
+                MainFrame.getInstance().getKlasaProzor().getJbDodaj().setAction(new DodajUKlasuAction(interclassPainter, dijagramView));
+                MainFrame.getInstance().getKlasaProzor().setVisible(true);
+            } else if (interclassPainter.getElement() instanceof Interfejs) {
+                MainFrame.getInstance().getInterfejsProzor().getJbDodaj().setAction(new DodajUInterfejsAction(interclassPainter, dijagramView));
+                MainFrame.getInstance().getInterfejsProzor().setVisible(true);
+            } else if (interclassPainter.getElement() instanceof EnumM) {
+                MainFrame.getInstance().getEnumProzor().getJbDodaj().setAction(new DodajUEnumAction(interclassPainter, dijagramView));
+                MainFrame.getInstance().getEnumProzor().setVisible(true);
+            }
         }
-        else if(interclassPainter.getElement() instanceof Interfejs){
-
-        }
-        else if(interclassPainter.getElement() instanceof EnumM){
-
-        }
-
-
-
-
     }
 
     @Override

@@ -25,6 +25,8 @@ public class MainFrame extends JFrame implements ISubscriber {
     private ToolBarStates toolBarStates;
 
     private KlasaProzor klasaProzor;
+    private InterfejsProzor interfejsProzor;
+    private EnumProzor enumProzor;
 
     private MainFrame() {
     }
@@ -37,6 +39,8 @@ public class MainFrame extends JFrame implements ISubscriber {
         dijagramView = new DijagramView(null);
         toolBarStates = new ToolBarStates();
         klasaProzor = new KlasaProzor();
+        interfejsProzor = new InterfejsProzor();
+        enumProzor = new EnumProzor();
 
         ApplicationFramework.getInstance().getMessageGenerator().getSubscribers().add(this);
 
@@ -114,5 +118,13 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     public KlasaProzor getKlasaProzor() {
         return klasaProzor;
+    }
+
+    public InterfejsProzor getInterfejsProzor() {
+        return interfejsProzor;
+    }
+
+    public EnumProzor getEnumProzor() {
+        return enumProzor;
     }
 }
