@@ -40,7 +40,7 @@ public class InterfejsPainter extends InterclassPainter {
 
         shape = new Rectangle(i.getPosition().x - width/2 - 5, i.getPosition().y - heightUkupno/2, width+10, heightUkupno+10);
         g.draw(shape);
-        g.drawString("I", i.getPosition().x - width/2, i.getPosition().y - heightUkupno/2 + heightRow);
+        g.drawString("I  " + i.getNaziv(), i.getPosition().x - width/2, i.getPosition().y - heightUkupno/2 + heightRow);
 
 
         //crtanje metoda
@@ -64,7 +64,7 @@ public class InterfejsPainter extends InterclassPainter {
             width = g.getFontMetrics().stringWidth(string);
             if(max < width) max = width;
         }
-        string = "I" + ((Interfejs)element).getNaziv();
+        string = "I  " + ((Interfejs)element).getNaziv();
         width = g.getFontMetrics().stringWidth(string);
         if (width > max) max = width;
 

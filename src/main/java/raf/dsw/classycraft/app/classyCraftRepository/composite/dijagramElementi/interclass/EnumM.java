@@ -9,6 +9,7 @@ import java.util.List;
 
 public class EnumM extends Interclass {
 
+    private String naziv;
     private List<String> listEnuma;
 
     public EnumM(String name, ClassyNode parent) {
@@ -20,6 +21,7 @@ public class EnumM extends Interclass {
     }
     public EnumM(String name, ClassyNode parent, int stroke, String naziv, Vidljivost vidljivost, Point position) {
         super(name, parent, stroke, naziv, vidljivost, position);
+        this.naziv = "    ";
         listEnuma = new ArrayList<>();
     }
 
@@ -29,5 +31,14 @@ public class EnumM extends Interclass {
 
     public void setListEnuma(List<String> listEnuma) {
         this.listEnuma = listEnuma;
+    }
+
+    @Override
+    public String getNaziv() {
+        return naziv;
+    }
+
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
     }
 }

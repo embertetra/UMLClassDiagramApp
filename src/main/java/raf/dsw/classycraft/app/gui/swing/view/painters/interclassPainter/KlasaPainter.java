@@ -40,7 +40,7 @@ public class KlasaPainter extends InterclassPainter {
 
         shape = new Rectangle(k.getPosition().x - width / 2 - 5, k.getPosition().y - heightUkupno / 2, width + 10, heightUkupno + 10);
         g.draw(shape);
-        g.drawString("C", k.getPosition().x - width / 2, k.getPosition().y - heightUkupno / 2 + heightRed);
+        g.drawString("C  " + k.getNaziv(), k.getPosition().x - width / 2, k.getPosition().y - heightUkupno / 2 + heightRed);
 
         //crtanje atributa
         int brojac = 2;
@@ -79,9 +79,10 @@ public class KlasaPainter extends InterclassPainter {
             }
             if (width > max) max = width;
         }
-        string = "C " + ((Klasa) element).getNaziv();
+        string = "C  " + ((Klasa) element).getNaziv();
         width = g.getFontMetrics().stringWidth(string);
         if (width > max) max = width;
+
         return max;
     }
 

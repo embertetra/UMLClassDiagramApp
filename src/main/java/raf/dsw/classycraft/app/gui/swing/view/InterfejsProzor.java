@@ -7,6 +7,9 @@ import java.awt.*;
 
 public class InterfejsProzor extends JFrame {
 
+    private JButton jbIme;
+    private JTextField tfIme;
+
     private JRadioButton jbPrivate;
     private JRadioButton jbPublic;
     private JRadioButton jbProtected;
@@ -32,6 +35,11 @@ public class InterfejsProzor extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Dodavanje u interfejs");
+
+        //polje za proenu imena klase
+        JLabel lbIme = new JLabel("Novo ime:");
+        tfIme = new JTextField();
+        jbIme = new JButton("Promeni ime");
 
         //vidljivost : + - #
         JLabel lbVidljivost = new JLabel("Vidljivost:");
@@ -70,7 +78,7 @@ public class InterfejsProzor extends JFrame {
         JPanel jPanel = new JPanel();
         jPanel.setLayout(new BoxLayout(jPanel, BoxLayout.Y_AXIS));
         jPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        jPanel.add(lbVidljivost); jPanel.add(jpVidljivost);jPanel.add(lbTip); jPanel.add(jpTip); jPanel.add(lbNaziv); jPanel.add(tfNaziv); jPanel.add(jbDodaj);
+        jPanel.add(lbIme); jPanel.add(tfIme); jPanel.add(jbIme); jPanel.add(lbVidljivost); jPanel.add(jpVidljivost);jPanel.add(lbTip); jPanel.add(jpTip); jPanel.add(lbNaziv); jPanel.add(tfNaziv); jPanel.add(jbDodaj);
 
         jPanel.setBorder(new EmptyBorder(new Insets(15, 10, 15, 10)));
         this.add(jPanel);
@@ -154,5 +162,21 @@ public class InterfejsProzor extends JFrame {
 
     public void setJbDodaj(JButton jbDodaj) {
         this.jbDodaj = jbDodaj;
+    }
+
+    public JButton getJbIme() {
+        return jbIme;
+    }
+
+    public void setJbIme(JButton jbIme) {
+        this.jbIme = jbIme;
+    }
+
+    public JTextField getTfIme() {
+        return tfIme;
+    }
+
+    public void setTfIme(JTextField tfIme) {
+        this.tfIme = tfIme;
     }
 }

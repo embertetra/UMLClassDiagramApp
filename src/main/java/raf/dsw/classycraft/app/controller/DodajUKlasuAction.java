@@ -18,6 +18,7 @@ import java.awt.event.ActionEvent;
 public class DodajUKlasuAction extends AbstractClassyAction{
 
     private KlasaPainter klasaPainter;
+
     private DijagramView dijagramView;
 
     public DodajUKlasuAction(InterclassPainter interclassPainter, DijagramView d) {

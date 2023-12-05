@@ -10,6 +10,8 @@ import java.util.List;
 
 public class Interfejs extends Interclass {
 
+    private String naziv;
+
     private List<Metode> metodeList;
 
     public Interfejs(String name, ClassyNode parent) {
@@ -21,6 +23,7 @@ public class Interfejs extends Interclass {
     }
     public Interfejs(String name, ClassyNode parent, int stroke, String naziv, Vidljivost vidljivost, Point position) {
         super(name, parent, stroke, naziv, vidljivost, position);
+        this.naziv = "    ";
         metodeList = new ArrayList<>();
     }
 
@@ -30,5 +33,14 @@ public class Interfejs extends Interclass {
 
     public void setMetodeList(List<Metode> metodeList) {
         this.metodeList = metodeList;
+    }
+
+    @Override
+    public String getNaziv() {
+        return naziv;
+    }
+
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
     }
 }

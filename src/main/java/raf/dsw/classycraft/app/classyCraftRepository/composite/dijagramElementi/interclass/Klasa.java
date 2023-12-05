@@ -10,6 +10,8 @@ import java.util.List;
 
 public class Klasa extends Interclass {
 
+    private String naziv;
+
     private List<ClassContent> classContentList;
 
     public Klasa(String name, ClassyNode parent) {
@@ -18,6 +20,7 @@ public class Klasa extends Interclass {
 
     public Klasa(String name, ClassyNode parent, int stroke, String naziv, Vidljivost vidljivost, Point position) {
         super(name, parent, stroke, naziv, vidljivost, position);
+        this.naziv = "    ";
         classContentList = new ArrayList<>();
     }
 
@@ -29,4 +32,12 @@ public class Klasa extends Interclass {
         this.classContentList = classContentList;
     }
 
+    @Override
+    public String getNaziv() {
+        return naziv;
+    }
+
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
+    }
 }
