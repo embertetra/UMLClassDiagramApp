@@ -35,24 +35,12 @@ public abstract class Interclass extends DijagramElement {
         return naziv;
     }
 
-    public void setNaziv(String naziv) {
-        this.naziv = naziv;
-    }
-
     public Vidljivost getVidljivost() {
         return vidljivost;
     }
 
     public void setVidljivost(Vidljivost vidljivost) {
         this.vidljivost = vidljivost;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
     }
 
     public Point getPosition() {
