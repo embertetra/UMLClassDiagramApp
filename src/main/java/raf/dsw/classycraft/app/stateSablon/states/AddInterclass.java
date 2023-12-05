@@ -22,6 +22,8 @@ public class AddInterclass implements State {
     @Override
     public void misKliknut(int x, int y, DijagramView dijagramView) {
 
+        dijagramView.getSelectionModel().clear();
+        dijagramView.setSelection(null);
         Dijagram d = (Dijagram)dijagramView.getClassyNode();
         d.addSubscriber(dijagramView);
 

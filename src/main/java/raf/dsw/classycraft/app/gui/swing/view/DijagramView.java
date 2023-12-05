@@ -58,15 +58,14 @@ public class DijagramView extends JPanel implements ISubscriber {
                     if(el instanceof InterclassPainter){
                         InterclassPainter ip = (InterclassPainter) el;
                         Interclass ic = (Interclass)ip.getElement();
-                        Rectangle rec = new Rectangle(ic.getPosition().x - ip.getWidth()/2 - 10, ic.getPosition().y-ip.getHeightUkupno()/2 - 5,
-                                ip.getWidth() + 20, ip.getHeightUkupno() + 20);
+                        Rectangle rec = new Rectangle(ic.getPosition().x - ip.getWidth()/2 - 5, ic.getPosition().y-ip.getHeightUkupno()/2,
+                                ip.getWidth()+10, ip.getHeightUkupno()+10);
                         if(shape != null && shape.intersects(rec))
-                            selectionModel.add(rec);
+                            selectionModel.add(new Rectangle(rec.x - 5, rec.y - 5, rec.width + 10, rec.height + 10));
                     }
-                    ///ovde ne rade mi lepo veze....
                     else if(el instanceof ConnectionPainter){
                         ConnectionPainter cp = (ConnectionPainter) el;
-                        if(shape != null && shape.intersects(cp.getPoint1().x, cp.getPoint1().y, cp.getPoint2().x, cp.getPoint2().y)){
+                        if(shape != null && cp.getPoint1()!= null && cp.getPoint2() != null && shape.getBounds2D().intersectsLine(cp.getPoint1().x, cp.getPoint1().y, cp.getPoint2().x, cp.getPoint2().y)){
                             Shape shape2 = new GeneralPath();
                             ((GeneralPath)shape2).moveTo(cp.getPoint1().x, cp.getPoint1().y);
                             ((GeneralPath)shape2).lineTo(cp.getPoint1().x, cp.getPoint2().y);
@@ -77,7 +76,6 @@ public class DijagramView extends JPanel implements ISubscriber {
                         }
                     }
                 }
-
             }
             @Override
             public void mouseMoved(MouseEvent e) {

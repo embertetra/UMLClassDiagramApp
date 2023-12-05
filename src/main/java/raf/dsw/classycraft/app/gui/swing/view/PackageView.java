@@ -200,64 +200,33 @@ public class PackageView implements ISubscriber {
     }
     public void startMouseState(){
         stateManager.setMouse();
-        if(jTabbedPane.getSelectedComponent()!=null) {
-            ((DijagramView) jTabbedPane.getSelectedComponent()).removeMML();
-            ((DijagramView) jTabbedPane.getSelectedComponent()).setSelection(null);
-            ((DijagramView) jTabbedPane.getSelectedComponent()).getSelectionModel().clear();
-            ((DijagramView) jTabbedPane.getSelectedComponent()).removeSelectionListener();
-
-            ((DijagramView) jTabbedPane.getSelectedComponent()).repaint();
-        }
+        ((DijagramView)jTabbedPane.getSelectedComponent()).getSelectionModel().clear();
+        ((DijagramView)jTabbedPane.getSelectedComponent()).setSelection(null);
+        ((DijagramView)jTabbedPane.getSelectedComponent()).repaint();
     }
 
     public void startAddInterclassState() {
         stateManager.setAddInterclass();
-        if(jTabbedPane.getSelectedComponent()!=null) {
-            ((DijagramView) jTabbedPane.getSelectedComponent()).removeMML();
-            ((DijagramView) jTabbedPane.getSelectedComponent()).setSelection(null);
-            ((DijagramView) jTabbedPane.getSelectedComponent()).getSelectionModel().clear();
-            ((DijagramView) jTabbedPane.getSelectedComponent()).repaint();
-            ((DijagramView) jTabbedPane.getSelectedComponent()).removeSelectionListener();
-        }
     }
 
     public void startAddConnectionState() {
         stateManager.setAddConnection();
-        ((DijagramView)jTabbedPane.getSelectedComponent()).setMML();
-        ((DijagramView) jTabbedPane.getSelectedComponent()).setSelection(null);
-        ((DijagramView) jTabbedPane.getSelectedComponent()).getSelectionModel().clear();
-        ((DijagramView) jTabbedPane.getSelectedComponent()).repaint();
-        ((DijagramView) jTabbedPane.getSelectedComponent()).removeSelectionListener();
     }
 
     public void startAddContentState() {
         stateManager.setAddContent();
-        if(jTabbedPane.getSelectedComponent()!=null) {
-            ((DijagramView) jTabbedPane.getSelectedComponent()).removeMML();
-            ((DijagramView) jTabbedPane.getSelectedComponent()).setSelection(null);
-            ((DijagramView) jTabbedPane.getSelectedComponent()).getSelectionModel().clear();
-            ((DijagramView) jTabbedPane.getSelectedComponent()).repaint();
-            ((DijagramView) jTabbedPane.getSelectedComponent()).removeSelectionListener();
-        }
     }
 
     public void startDeleteState() {
         stateManager.setDelete();
         if(jTabbedPane.getSelectedComponent()!=null) {
-            ((DijagramView) jTabbedPane.getSelectedComponent()).removeMML();
             ((DijagramView) jTabbedPane.getSelectedComponent()).setSelection(null);
             ((DijagramView) jTabbedPane.getSelectedComponent()).repaint();
-            ((DijagramView) jTabbedPane.getSelectedComponent()).removeSelectionListener();
         }
     }
 
     public void startSelectionState() {
         stateManager.setSelection();
-        if(jTabbedPane.getSelectedComponent()!=null) {
-            ((DijagramView) jTabbedPane.getSelectedComponent()).removeMML();
-            ((DijagramView) jTabbedPane.getSelectedComponent()).setSelectionListener();
-
-        }
     }
 
     public StateManager getStateManager() {

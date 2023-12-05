@@ -8,7 +8,9 @@ public class AddContent implements State {
 
     @Override
     public void misKliknut(int x, int y, DijagramView dijagramView) {
-
+        dijagramView.getSelectionModel().clear();
+        dijagramView.setSelection(null);
+        dijagramView.repaint();
     }
 
     @Override
@@ -18,6 +20,8 @@ public class AddContent implements State {
 
     @Override
     public void misPrivucen(int x, int y, DijagramView dijagramView) {
-
+        dijagramView.getSelectionModel().clear();
+        dijagramView.setSelection(null);
+        dijagramView.repaint();
     }
 }
