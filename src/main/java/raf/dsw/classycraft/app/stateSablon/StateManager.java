@@ -10,6 +10,7 @@ public class StateManager {
     private Delete delete;
     private Selection selection;
     private Mouse mouse;
+    private Move move;
     private State currentState;
 
     public StateManager() {
@@ -19,6 +20,7 @@ public class StateManager {
         delete = new Delete();
         selection = new Selection();
         mouse = new Mouse();
+        move = new Move();
         currentState = null;
     }
 
@@ -28,6 +30,9 @@ public class StateManager {
 
     public void setAddConnection(){
         currentState = addConnection;
+    }
+    public void setMove(){
+        currentState = move;
     }
     public void setMouse(){
         currentState = mouse;

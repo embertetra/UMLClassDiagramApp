@@ -10,6 +10,7 @@ public class ToolBarStates extends JToolBar {
         add(MainFrame.getInstance().getActionManager().getMouseStateAction());
         add(MainFrame.getInstance().getActionManager().getAddInterclassAction());
         add(MainFrame.getInstance().getActionManager().getAddConnectionAction());
+        add(MainFrame.getInstance().getActionManager().getMoveStateAction());
         add(MainFrame.getInstance().getActionManager().getAddContectAction());
         add(MainFrame.getInstance().getActionManager().getSelectionAction());
         add(MainFrame.getInstance().getActionManager().getDeleteAction());

@@ -18,6 +18,7 @@ public class ActionManager {
     private DeleteAction deleteAction;
     private SelectionAction selectionAction;
     private MouseStateAction mouseStateAction;
+    private MoveStateAction moveStateAction;
 
 
     public ActionManager() {
@@ -32,6 +33,7 @@ public class ActionManager {
         deleteAction = new DeleteAction();
         selectionAction = new SelectionAction();
         mouseStateAction = new MouseStateAction();
+        moveStateAction = new MoveStateAction();
     }
 
     public AboutUsAction getAboutUsAction() {
@@ -75,5 +77,9 @@ public class ActionManager {
 
     public MouseStateAction getMouseStateAction() {
         return mouseStateAction;
+    }
+
+    public MoveStateAction getMoveStateAction() {
+        return moveStateAction;
     }
 }

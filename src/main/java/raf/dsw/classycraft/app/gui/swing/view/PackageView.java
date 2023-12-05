@@ -24,7 +24,6 @@ public class PackageView implements ISubscriber {
     private JPanel toolMenu;
     private JPanel downSide;
     private StateManager stateManager;
-    private JPanel x;
 
     public PackageView() {
         this.parent = null;
@@ -215,6 +214,9 @@ public class PackageView implements ISubscriber {
 
     public void startAddContentState() {
         stateManager.setAddContent();
+    }
+    public void startMoveState(){
+        stateManager.setMove();
     }
 
     public void startDeleteState() {

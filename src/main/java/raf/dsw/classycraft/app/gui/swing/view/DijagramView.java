@@ -15,6 +15,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,11 @@ public class DijagramView extends JPanel implements ISubscriber {
     private List<Shape> selectionModel;
     private MouseMotionListener mml;
     private MouseMotionListener selectionListener;
+    private MouseMotionListener translation;
+    private double dx1 = -1;
+    private double dy1 = -1;
+    private double dx2;
+    private double dy2;
     public DijagramView(ClassyNode classyNode) {
         if (classyNode != null) {
             this.classyNode = classyNode;
@@ -39,6 +45,26 @@ public class DijagramView extends JPanel implements ISubscriber {
 
         createMML();
         createSelectionListener();
+        createTranslation();
+    }
+    public void createTranslation(){
+        translation = new MouseMotionListener() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                dx2 = e.getX();
+                dy2 = e.getY();
+                repaint();
+            }
+            @Override
+            public void mouseMoved(MouseEvent e) {
+            }
+        };
+    }
+    public void setTranslation(){
+        addMouseMotionListener(translation);
+    }
+    public void removeTranslation(){
+        removeMouseMotionListener(translation);
     }
     private void createSelectionListener(){
         selectionListener = new MouseMotionListener() {
@@ -96,6 +122,7 @@ public class DijagramView extends JPanel implements ISubscriber {
             }
         };
     }
+
     @Override
     public void update(Object notification) {
 
@@ -121,6 +148,11 @@ public class DijagramView extends JPanel implements ISubscriber {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+
+        AffineTransform af = new AffineTransform();
+        af.setToScale(1,1);
+        af.translate(dx2-dx1,dy2-dy1);
+        g2.setTransform(af);
 
         if(line != null && line.getKey()!= null && line.getValue() != null && line.getKey().x != -1 && line.getKey().y != -1)
             g2.drawLine(line.getKey().x, line.getKey().y, line.getValue().x, line.getValue().y);
@@ -156,35 +188,18 @@ public class DijagramView extends JPanel implements ISubscriber {
     public List<ElementPainter> getElementPainterList() {
         return elementPainterList;
     }
-
-    public void setElementPainterList(List<ElementPainter> elementPainterList) {
-        this.elementPainterList = elementPainterList;
-    }
-
     public ClassyNode getClassyNode() {
         return classyNode;
     }
-
-    public Pair<Point, Point> getLine() {
-        return line;
-    }
-
     public void setLine(Pair<Point, Point> line) {
         this.line = line;
     }
-
-    public Rectangle getSelection() {
-        return selection;
-    }
-
     public void setSelection(Rectangle selection) {
         this.selection = selection;
     }
-
     public Shape getShape() {
         return shape;
     }
-
     public void setShape(Shape shape) {
         this.shape = shape;
     }
@@ -192,8 +207,24 @@ public class DijagramView extends JPanel implements ISubscriber {
     public List<Shape> getSelectionModel() {
         return selectionModel;
     }
+    public void setDx1(double dx1) {
+        this.dx1 = dx1;
+    }
+    public void setDy1(double dy1) {
+        this.dy1 = dy1;
+    }
+    public double getDx1() {
+        return dx1;
+    }
+    public double getDy1() {
+        return dy1;
+    }
 
-    public void setSelectionModel(List<Shape> selectionModel) {
-        this.selectionModel = selectionModel;
+    public void setDx2(double dx2) {
+        this.dx2 = dx2;
+    }
+
+    public void setDy2(double dy2) {
+        this.dy2 = dy2;
     }
 }
