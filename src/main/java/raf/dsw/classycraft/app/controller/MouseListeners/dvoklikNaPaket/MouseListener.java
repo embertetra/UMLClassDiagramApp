@@ -1,4 +1,4 @@
-package raf.dsw.classycraft.app.controller.dvoklikNaPaket;
+package raf.dsw.classycraft.app.controller.MouseListeners.dvoklikNaPaket;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
@@ -10,7 +10,6 @@ import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.tree.view.ClassyTreeView;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
-import raf.dsw.classycraft.app.gui.swing.view.PackageView;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

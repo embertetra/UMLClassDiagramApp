@@ -72,6 +72,7 @@ public class InterfejsPainter extends InterclassPainter {
     }
 
     public void setConnectionPoints(){
+        connectionPoints.clear();
         Interclass i = (Interclass)element;
         int width2 = width + 10;
         int height2 = heightUkupno + 5;

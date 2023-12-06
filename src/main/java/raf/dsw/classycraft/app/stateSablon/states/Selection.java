@@ -61,6 +61,7 @@ public class Selection implements State {
     @Override
     public void misOtpusten(int x, int y, DijagramView dijagramView) {
         dijagramView.removeSelectionListener();
+        dijagramView.setSelection(null);
         dijagramView.setShape(null);
         dijagramView.repaint();
     }
@@ -68,6 +69,7 @@ public class Selection implements State {
     @Override
     public void misPrivucen(int x, int y, DijagramView dijagramView) {
         dijagramView.setSelectionListener();
+        dijagramView.getSelectionModel().clear();
         dijagramView.setSelection(new Rectangle(x,y,-1,-1));
     }
 }

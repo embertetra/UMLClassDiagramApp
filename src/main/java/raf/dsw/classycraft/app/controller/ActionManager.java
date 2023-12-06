@@ -1,6 +1,6 @@
 package raf.dsw.classycraft.app.controller;
 
-import raf.dsw.classycraft.app.controller.dvoklikNaPaket.MouseListener;
+import raf.dsw.classycraft.app.controller.MouseListeners.dvoklikNaPaket.MouseListener;
 import raf.dsw.classycraft.app.stateSablon.stateActions.*;
 
 public class ActionManager {

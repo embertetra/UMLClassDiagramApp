@@ -28,8 +28,6 @@ public class MainFrame extends JFrame implements ISubscriber {
     private InterfejsProzor interfejsProzor;
     private EnumProzor enumProzor;
 
-
-
     private MainFrame() {
     }
 

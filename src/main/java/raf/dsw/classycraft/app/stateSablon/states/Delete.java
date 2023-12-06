@@ -1,4 +1,5 @@
 package raf.dsw.classycraft.app.stateSablon.states;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Connection;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ConnectionPainter;
@@ -20,9 +21,9 @@ public class Delete implements State {
         for(Shape s : dijagramView.getSelectionModel()){
             if(s.contains(new Point(x,y)))flag=1;
         }
-        /// treba uraditi da se brise selekcija kada se samo klikne na jednu od selekija!!!!!
         ///brisanje multi selekcije
         if (dijagramView.getSelectionModel().size() > 0 && flag == 1) {
+            System.out.println("usao");
             for (Iterator<ElementPainter> iterator = dijagramView.getElementPainterList().iterator(); iterator.hasNext(); ) {
                 ElementPainter el = iterator.next();
 
@@ -84,6 +85,14 @@ public class Delete implements State {
             //brisanje interclasse
             if (el.elementAt(new Point(x, y))) {
                 Dijagram d = (Dijagram) el.getElement().getParent();
+                for(ElementPainter ep : dijagramView.getElementPainterList()){
+                    if(ep instanceof ConnectionPainter){
+                        ConnectionPainter cp = (ConnectionPainter) ep;
+                        Connection c = (Connection) cp.getElement();
+                        if(c.getFrom() == el.getElement() || c.getTo() == el.getElement())
+                            d.removeChild(c);
+                    }
+                }
                 d.removeChild(el.getElement());
                 iterator.remove();
             }
