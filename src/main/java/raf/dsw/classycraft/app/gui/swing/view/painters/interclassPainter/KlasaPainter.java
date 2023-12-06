@@ -30,7 +30,6 @@ public class KlasaPainter extends InterclassPainter {
         g.setPaint(Color.BLACK);
         g.setStroke(new BasicStroke(this.element.getStroke()));
         Klasa k = (Klasa) this.element;
-
         //odredjivanje sirine, visine reda i ukupne visine
         width = maxDuzina(g);
         int heightRed = g.getFontMetrics().getHeight();
@@ -61,7 +60,7 @@ public class KlasaPainter extends InterclassPainter {
                 brojac++;
             }
         }
-        setConnectionPoints();
+        setConnectionPoints(k.getPosition().x, k.getPosition().y);
     }
 
     public int maxDuzina(Graphics2D g) {
@@ -84,14 +83,15 @@ public class KlasaPainter extends InterclassPainter {
         return max;
     }
 
-    public void setConnectionPoints(){
+    public void setConnectionPoints(int x, int y){
+        connectionPoints.clear();
         Interclass i = (Interclass)element;
         int width2 = width + 10;
         int height2 = heightUkupno + 5;
-        connectionPoints.add(new Point(i.getPosition().x, i.getPosition().y - height2/2));//gore 0
-        connectionPoints.add(new Point(i.getPosition().x, i.getPosition().y + height2/2 + 8));//dole 1
-        connectionPoints.add(new Point(i.getPosition().x-width2/2, i.getPosition().y));//levo 2
-        connectionPoints.add(new Point(i.getPosition().x+width2/2, i.getPosition().y));//desno 3
+        connectionPoints.add(new Point(x, y - height2/2));//gore 0
+        connectionPoints.add(new Point(x, y + height2/2 + 8));//dole 1
+        connectionPoints.add(new Point(x-width2/2, y));//levo 2
+        connectionPoints.add(new Point(x+width2/2, y));//desno 3
     }
 
     @Override

@@ -7,6 +7,8 @@ import java.awt.*;
 public abstract class ConnectionPainter extends ElementPainter {
     protected Point point1;
     protected Point point2;
+    protected Point dragOffset1;
+    protected Point dragOffset2;
 
     public ConnectionPainter(DijagramElement element) {
         super(element);
@@ -26,5 +28,21 @@ public abstract class ConnectionPainter extends ElementPainter {
 
     public void setPoint2(Point point2) {
         this.point2 = point2;
+    }
+
+    public Point getDragOffset1() {
+        return dragOffset1;
+    }
+
+    public void setDragOffset1(Point dragOffset1) {
+        this.dragOffset1 = dragOffset1;
+    }
+
+    public Point getDragOffset2() {
+        return dragOffset2;
+    }
+
+    public void setDragOffset2(Point dragOffset2) {
+        this.dragOffset2 = dragOffset2;
     }
 }

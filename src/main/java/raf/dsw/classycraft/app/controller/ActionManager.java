@@ -1,6 +1,6 @@
 package raf.dsw.classycraft.app.controller;
 
-import raf.dsw.classycraft.app.controller.dvoklikNaPaket.MouseListener;
+import raf.dsw.classycraft.app.controller.MouseListeners.dvoklikNaPaket.MouseListener;
 import raf.dsw.classycraft.app.stateSablon.stateActions.*;
 
 public class ActionManager {
@@ -19,6 +19,7 @@ public class ActionManager {
     private SelectionAction selectionAction;
     private DuplicateAction duplicateAction;
     private MouseStateAction mouseStateAction;
+    private MoveStateAction moveStateAction;
 
 
     public ActionManager() {
@@ -34,6 +35,7 @@ public class ActionManager {
         selectionAction = new SelectionAction();
         duplicateAction = new DuplicateAction();
         mouseStateAction = new MouseStateAction();
+        moveStateAction = new MoveStateAction();
     }
 
     public DuplicateAction getDuplicateAction() {
@@ -81,5 +83,9 @@ public class ActionManager {
 
     public MouseStateAction getMouseStateAction() {
         return mouseStateAction;
+    }
+
+    public MoveStateAction getMoveStateAction() {
+        return moveStateAction;
     }
 }

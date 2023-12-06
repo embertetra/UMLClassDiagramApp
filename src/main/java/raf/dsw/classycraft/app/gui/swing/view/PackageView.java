@@ -24,7 +24,6 @@ public class PackageView implements ISubscriber {
     private JPanel toolMenu;
     private JPanel downSide;
     private StateManager stateManager;
-    private JPanel x;
 
     public PackageView() {
         this.parent = null;
@@ -187,16 +186,18 @@ public class PackageView implements ISubscriber {
     //metode koje su unutar State intefrejsa
 
     public void misKliknut(int x, int y, DijagramView dijagramView){
-        stateManager.getCurrentState().misKliknut(x,y,dijagramView);
+        if(stateManager.getCurrentState() != null)
+            stateManager.getCurrentState().misKliknut(x,y,dijagramView);
     }
 
     public void misOtpusten(int x, int y, DijagramView dijagramView){
-        stateManager.getCurrentState().misOtpusten(x,y,dijagramView);
-
+        if(stateManager.getCurrentState() != null)
+            stateManager.getCurrentState().misOtpusten(x,y,dijagramView);
     }
 
     public void misPrivucen(int x, int y, DijagramView dijagramView){
-        stateManager.getCurrentState().misPrivucen(x,y,dijagramView);
+        if(stateManager.getCurrentState() != null)
+            stateManager.getCurrentState().misPrivucen(x, y, dijagramView);
     }
     public void startMouseState(){
         stateManager.setMouse();
@@ -215,6 +216,9 @@ public class PackageView implements ISubscriber {
 
     public void startAddContentState() {
         stateManager.setAddContent();
+    }
+    public void startMoveState(){
+        stateManager.setMove();
     }
 
     public void startDeleteState() {

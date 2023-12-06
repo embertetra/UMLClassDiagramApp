@@ -10,6 +10,8 @@ public abstract class InterclassPainter extends ElementPainter {
 
     protected int width;
     protected int heightUkupno;
+    protected int xDragOffset;
+    protected int yDragOffset;
 
     protected java.util.List<Point> connectionPoints;
 
@@ -27,5 +29,21 @@ public abstract class InterclassPainter extends ElementPainter {
 
     public List<Point> getConnectionPoints() {
         return connectionPoints;
+    }
+
+    public int getxDragOffset() {
+        return xDragOffset;
+    }
+
+    public void setxDragOffset(int xDragOffset) {
+        this.xDragOffset = xDragOffset;
+    }
+
+    public int getyDragOffset() {
+        return yDragOffset;
+    }
+
+    public void setyDragOffset(int yDragOffset) {
+        this.yDragOffset = yDragOffset;
     }
 }

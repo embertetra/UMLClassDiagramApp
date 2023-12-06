@@ -2,15 +2,18 @@ package raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
+import raf.dsw.classycraft.app.observer.IPublisher;
+import raf.dsw.classycraft.app.observer.ISubscriber;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EnumM extends Interclass {
+public class EnumM extends Interclass implements IPublisher {
 
     private String naziv;
     private List<String> listEnuma;
+    private List<ISubscriber>subscribers;
 
     public EnumM(String name, ClassyNode parent) {
         super(name, parent);
@@ -23,6 +26,7 @@ public class EnumM extends Interclass {
         super(name, parent, stroke, naziv, vidljivost, position);
         this.naziv = "    ";
         listEnuma = new ArrayList<>();
+        subscribers = new ArrayList<>();
     }
 
     public List<String> getListEnuma() {
@@ -34,11 +38,36 @@ public class EnumM extends Interclass {
     }
 
     @Override
+    public void addSubscriber(ISubscriber subscriber) {
+        if (subscriber != null) {
+            if (subscribers == null)
+                this.subscribers = new ArrayList<>();
+            if (!subscribers.contains(subscriber))
+                this.subscribers.add(subscriber);
+        }
+    }
+
+    @Override
+    public void removeSubscriber(ISubscriber subscriber) {
+        if (subscriber != null && subscribers != null && subscribers.contains(subscriber))
+            subscribers.remove(subscriber);
+    }
+
+    @Override
+    public void notifySubscribers(Object notification) {
+        if (subscribers != null && notification != null && !subscribers.isEmpty()) {
+            for (ISubscriber i : subscribers) {
+                i.update(notification);
+            }
+        }
+
+    @Override
     public String getNaziv() {
         return naziv;
     }
 
     public void setNaziv(String naziv) {
         this.naziv = naziv;
+
     }
 }

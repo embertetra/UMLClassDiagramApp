@@ -1,4 +1,4 @@
-package raf.dsw.classycraft.app.controller.dvoklikNaPaket;
+package raf.dsw.classycraft.app.controller.MouseListeners.dvoklikNaPaket;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
@@ -32,9 +32,6 @@ public class MouseListener {
                             MainFrame.getInstance().getPackageView().getjTabbedPane().removeAll();
                             for (ClassyNode c : ((Package) selected.getClassyNode()).getChildren()) {
                                 if (c instanceof Dijagram) {
-                                    ///dodavanje tabova u listu i u sam JTabb
-                                    ///Kad se bude crtalo ovde treba dodati proveru da li taj dijagramView vec postoji
-                                    ///kako bi uzeo vec postojeci sa crtezom a ne kreirao novi svaki put
                                     DijagramView dijagramView = new DijagramView(c);
                                     ((Dijagram) c).addSubscriber(dijagramView);
                                     //MainFrame.getInstance().getPackageView().addInTabList(dijagramView);

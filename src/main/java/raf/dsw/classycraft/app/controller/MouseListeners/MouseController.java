@@ -1,10 +1,11 @@
-package raf.dsw.classycraft.app.controller;
+package raf.dsw.classycraft.app.controller.MouseListeners;
 
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseWheelListener;
 
 public class MouseController implements MouseListener {
     private DijagramView dijagramView;
