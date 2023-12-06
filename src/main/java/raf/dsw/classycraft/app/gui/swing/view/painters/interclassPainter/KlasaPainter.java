@@ -15,11 +15,10 @@ public class KlasaPainter extends InterclassPainter {
 
     public KlasaPainter(DijagramElement element) {
         super(element);
-
         /*
         ///test primeri
         Klasa k = (Klasa) this.element;
-        k.getClassContentList().add(new Atributi(Vidljivost.PRIVATE, "String", "test1"));
+        k.getClassContentList().add(new Atributi(Vidljivost.PRIVATE, "string", "test1"));
         k.getClassContentList().add(new Metode(Vidljivost.PROTECTED, "void", "test2"));
         k.getClassContentList().add(new Atributi(Vidljivost.PUBLIC, "boolean", "test3"));
         k.getClassContentList().add(new Metode(Vidljivost.PROTECTED, "void", "test4testetsttest"));
@@ -38,7 +37,7 @@ public class KlasaPainter extends InterclassPainter {
 
         shape = new Rectangle(k.getPosition().x - width / 2 - 5, k.getPosition().y - heightUkupno / 2, width + 10, heightUkupno + 10);
         g.draw(shape);
-        g.drawString("C", k.getPosition().x - width / 2, k.getPosition().y - heightUkupno / 2 + heightRed);
+        g.drawString("C  " + k.getNaziv(), k.getPosition().x - width / 2, k.getPosition().y - heightUkupno / 2 + heightRed);
 
         //crtanje atributa
         int brojac = 2;
@@ -77,9 +76,10 @@ public class KlasaPainter extends InterclassPainter {
             }
             if (width > max) max = width;
         }
-        string = "C " + ((Klasa) element).getNaziv();
+        string = "C  " + ((Klasa) element).getNaziv();
         width = g.getFontMetrics().stringWidth(string);
         if (width > max) max = width;
+
         return max;
     }
 

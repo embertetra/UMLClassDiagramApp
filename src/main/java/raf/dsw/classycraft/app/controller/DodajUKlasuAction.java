@@ -18,6 +18,7 @@ import java.awt.event.ActionEvent;
 public class DodajUKlasuAction extends AbstractClassyAction{
 
     private KlasaPainter klasaPainter;
+
     private DijagramView dijagramView;
 
     public DodajUKlasuAction(InterclassPainter interclassPainter, DijagramView d) {
@@ -35,20 +36,24 @@ public class DodajUKlasuAction extends AbstractClassyAction{
 
         //greske pri unosu podataka:
         if (!MainFrame.getInstance().getKlasaProzor().getAtribut().isSelected() && !MainFrame.getInstance().getKlasaProzor().getMetoda().isSelected()){
-            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije odabrano da li se dodaje atribut ili metoda.", MessageType.ERROR);
+            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije odabrano da li se dodaje atribut ili metoda!", MessageType.ERROR);
+            return;
         }
         else if(!MainFrame.getInstance().getKlasaProzor().getJbPrivate().isSelected() && !MainFrame.getInstance().getKlasaProzor().getJbPublic().isSelected() && !MainFrame.getInstance().getKlasaProzor().getJbProtected().isSelected()){
-            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije odabrana vidljivost.", MessageType.ERROR);
+            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije odabrana vidljivost!", MessageType.ERROR);
+            return;
         }
         else if(!MainFrame.getInstance().getKlasaProzor().getJbInt().isSelected() &&
                 !MainFrame.getInstance().getKlasaProzor().getJbFloat().isSelected() &&
                 !MainFrame.getInstance().getKlasaProzor().getJbDouble().isSelected() &&
                 !MainFrame.getInstance().getKlasaProzor().getJbString().isSelected() &&
                 !MainFrame.getInstance().getKlasaProzor().getJbBoolean().isSelected()){
-            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije odabran tip.", MessageType.ERROR);
+            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije odabran tip!", MessageType.ERROR);
+            return;
         }
         else if(MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().isEmpty() || MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().equals(" ")){
-            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije upisano ime.", MessageType.ERROR);
+            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije upisano ime!", MessageType.ERROR);
+            return;
         }
 
         Vidljivost vidljivost = null;

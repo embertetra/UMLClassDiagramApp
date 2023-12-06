@@ -3,7 +3,6 @@ package raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.EnumM;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Vidljivost;
 import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
 
 import java.awt.*;
@@ -38,7 +37,7 @@ public class EnumPainter extends InterclassPainter {
 
         shape = new Rectangle(e.getPosition().x - width/2 - 5, e.getPosition().y - heightUkupno/2, width+10, heightUkupno+10);
         g.draw(shape);
-        g.drawString("E", e.getPosition().x - width/2, e.getPosition().y - heightUkupno/2 + rowHight);
+        g.drawString("E  " + e.getNaziv(), e.getPosition().x - width/2, e.getPosition().y - heightUkupno/2 + rowHight);
 
         //cratnje enuma
         int brojac = 2;
@@ -58,7 +57,7 @@ public class EnumPainter extends InterclassPainter {
             width = g.getFontMetrics().stringWidth(s.toUpperCase());
             if (width > max) max = width;
         }
-        String string = "E" + e.getNaziv();
+        String string = "E  " + e.getNaziv();
         width = g.getFontMetrics().stringWidth(string);
         if (width > max) max = width;
 

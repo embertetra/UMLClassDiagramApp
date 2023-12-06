@@ -1,15 +1,25 @@
 package raf.dsw.classycraft.app.gui.swing.view;
 
-
+import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Atributi;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.ClassContent;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Metode;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class KlasaProzor extends JFrame {
 
+    private List<ClassContent> classContentList = new ArrayList<>();
+    private JList<String> lista;
+
     private JRadioButton atribut;
     private JRadioButton metoda;
+
+    private JButton jbIme;
+    private JTextField tfIme;
 
     private JRadioButton jbPrivate;
     private JRadioButton jbPublic;
@@ -35,6 +45,30 @@ public class KlasaProzor extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Dodavanje u klasu");
+
+        //prikaz atributa
+        JLabel lbLista = new JLabel("Lista atributa i metoda:");
+        List<String> listica = new ArrayList<>();
+        lista = new JList<>();
+        if(classContentList != null) {
+            for (ClassContent c : classContentList) {
+                if (c instanceof Atributi)
+                    listica.add(c.getVidljivost() + c.getNaziv() + ": " + c.getTip());
+            }
+            for (ClassContent c : classContentList) {
+                if (c instanceof Metode)
+                    listica.add(c.getVidljivost() + c.getNaziv() + ": " + c.getTip());
+            }
+        }
+        String[] l = new String[listica.size()];
+        for(int i=0; i<listica.size(); i++)
+            l[i] = listica.get(i);
+        lista.setListData(l);
+
+        //polje za proenu imena klase
+        JLabel lbIme = new JLabel("Novo ime:");
+        tfIme = new JTextField();
+        jbIme = new JButton("Promeni ime");
 
         // atribut ili metoda
         ButtonGroup bg = new ButtonGroup();
@@ -84,11 +118,34 @@ public class KlasaProzor extends JFrame {
         JPanel jPanel = new JPanel();
         jPanel.setLayout(new BoxLayout(jPanel, BoxLayout.Y_AXIS));
         jPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        jPanel.add(jpAtrMet); jPanel.add(lbVidljivost); jPanel.add(jpVidljivost);jPanel.add(lbTip);
-        jPanel.add(jpTip); jPanel.add(lbNaziv); jPanel.add(tfNaziv); jPanel.add(jbDodaj);
+
+        jPanel.add(lbLista); jPanel.add(lista);
+        jPanel.add(lbIme); jPanel.add(tfIme); jPanel.add(jbIme);
+        jPanel.add(jpAtrMet);
+        jPanel.add(lbVidljivost); jPanel.add(jpVidljivost);
+        jPanel.add(lbTip); jPanel.add(jpTip);
+        jPanel.add(lbNaziv); jPanel.add(tfNaziv);
+        jPanel.add(jbDodaj);
 
         jPanel.setBorder(new EmptyBorder(new Insets(15, 10, 15, 10)));
         this.add(jPanel);
+    }
+
+    public JList<String> getLista() {
+        return lista;
+    }
+
+    public void setLista(JList<String> lista) {
+        this.lista = lista;
+    }
+
+    public List<ClassContent> getClassContentList() {
+        lista.updateUI();
+        return classContentList;
+    }
+
+    public void setClassContentList(List<ClassContent> classContentList) {
+        this.classContentList = classContentList;
     }
 
     public JRadioButton getAtribut() {
@@ -185,5 +242,21 @@ public class KlasaProzor extends JFrame {
 
     public void setJbDodaj(JButton jbDodaj) {
         this.jbDodaj = jbDodaj;
+    }
+
+    public JButton getJbIme() {
+        return jbIme;
+    }
+
+    public void setJbIme(JButton jbIme) {
+        this.jbIme = jbIme;
+    }
+
+    public JTextField getTfIme() {
+        return tfIme;
+    }
+
+    public void setTfIme(JTextField tfIme) {
+        this.tfIme = tfIme;
     }
 }

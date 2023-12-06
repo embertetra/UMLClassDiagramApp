@@ -11,6 +11,7 @@ import java.util.List;
 
 public class EnumM extends Interclass implements IPublisher {
 
+    private String naziv;
     private List<String> listEnuma;
     private List<ISubscriber>subscribers;
 
@@ -23,6 +24,7 @@ public class EnumM extends Interclass implements IPublisher {
     }
     public EnumM(String name, ClassyNode parent, int stroke, String naziv, Vidljivost vidljivost, Point position) {
         super(name, parent, stroke, naziv, vidljivost, position);
+        this.naziv = "    ";
         listEnuma = new ArrayList<>();
         subscribers = new ArrayList<>();
     }
@@ -34,6 +36,7 @@ public class EnumM extends Interclass implements IPublisher {
     public void setListEnuma(List<String> listEnuma) {
         this.listEnuma = listEnuma;
     }
+
     @Override
     public void addSubscriber(ISubscriber subscriber) {
         if (subscriber != null) {
@@ -57,5 +60,14 @@ public class EnumM extends Interclass implements IPublisher {
                 i.update(notification);
             }
         }
+
+    @Override
+    public String getNaziv() {
+        return naziv;
+    }
+
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
+
     }
 }

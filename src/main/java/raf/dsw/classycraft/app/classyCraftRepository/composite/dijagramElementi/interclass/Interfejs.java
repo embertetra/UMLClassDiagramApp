@@ -12,6 +12,8 @@ import java.util.List;
 
 public class Interfejs extends Interclass implements IPublisher {
 
+    private String naziv;
+
     private List<Metode> metodeList;
     private List<ISubscriber> subscribers;
 
@@ -24,6 +26,7 @@ public class Interfejs extends Interclass implements IPublisher {
     }
     public Interfejs(String name, ClassyNode parent, int stroke, String naziv, Vidljivost vidljivost, Point position) {
         super(name, parent, stroke, naziv, vidljivost, position);
+        this.naziv = "    ";
         metodeList = new ArrayList<>();
         subscribers = new ArrayList<>();
     }
@@ -35,6 +38,7 @@ public class Interfejs extends Interclass implements IPublisher {
     public void setMetodeList(List<Metode> metodeList) {
         this.metodeList = metodeList;
     }
+
     @Override
     public void addSubscriber(ISubscriber subscriber) {
         if (subscriber != null) {
@@ -58,5 +62,14 @@ public class Interfejs extends Interclass implements IPublisher {
                 i.update(notification);
             }
         }
+
+    @Override
+    public String getNaziv() {
+        return naziv;
+    }
+
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
+
     }
 }

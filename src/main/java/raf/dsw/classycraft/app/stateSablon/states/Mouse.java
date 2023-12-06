@@ -6,7 +6,6 @@ import raf.dsw.classycraft.app.stateSablon.State;
 public class Mouse implements State {
     @Override
     public void misKliknut(int x, int y, DijagramView dijagramView) {
-
         dijagramView.getSelectionModel().clear();
         dijagramView.setSelection(null);
         dijagramView.repaint();

@@ -5,10 +5,14 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.
 
 import java.awt.*;
 
-public abstract class Interclass extends DijagramElement{
+public abstract class Interclass extends DijagramElement {
+
     private String naziv;
+
     private Vidljivost vidljivost;
+
     private int size;
+
     private Point position;
 
     public Interclass(String name, ClassyNode parent) {

@@ -36,7 +36,7 @@ public class AddInterclass implements State {
                 Rectangle rectangle = new Rectangle(((Interclass)ip.getElement()).getPosition().x-ip.getWidth()/2,((Interclass)ip.getElement()).getPosition().y-ip.getHeightUkupno()/2,
                         ip.getWidth(), ip.getHeightUkupno());
                 if(rectangle.intersects(rec)) {
-                    ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("nije moguce postaviti interklasu na zeljeno mesto", MessageType.ERROR);
+                    ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije moguce postaviti interklasu na zeljeno mesto!", MessageType.ERROR);
                     return;
                 }
             }

@@ -12,6 +12,8 @@ import java.util.List;
 
 public class Klasa extends Interclass implements IPublisher {
 
+    private String naziv;
+
     private List<ClassContent> classContentList;
     private List<ISubscriber> subscribers;
 
@@ -21,6 +23,7 @@ public class Klasa extends Interclass implements IPublisher {
 
     public Klasa(String name, ClassyNode parent, int stroke, String naziv, Vidljivost vidljivost, Point position) {
         super(name, parent, stroke, naziv, vidljivost, position);
+        this.naziv = "    ";
         classContentList = new ArrayList<>();
         subscribers = new ArrayList<>();
     }
@@ -56,5 +59,12 @@ public class Klasa extends Interclass implements IPublisher {
                 i.update(notification);
             }
         }
+      
+    public String getNaziv() {
+        return naziv;
+    }
+
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
     }
 }
