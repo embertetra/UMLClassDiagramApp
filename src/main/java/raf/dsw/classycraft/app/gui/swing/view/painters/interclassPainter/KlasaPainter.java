@@ -6,7 +6,6 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Meto
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Vidljivost;
 import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
 
 import java.awt.*;
@@ -16,14 +15,14 @@ public class KlasaPainter extends InterclassPainter {
 
     public KlasaPainter(DijagramElement element) {
         super(element);
-
+        /*
         ///test primeri
         Klasa k = (Klasa) this.element;
         k.getClassContentList().add(new Atributi(Vidljivost.PRIVATE, "string", "test1"));
         k.getClassContentList().add(new Metode(Vidljivost.PROTECTED, "void", "test2"));
         k.getClassContentList().add(new Atributi(Vidljivost.PUBLIC, "boolean", "test3"));
         k.getClassContentList().add(new Metode(Vidljivost.PROTECTED, "void", "test4testetsttest"));
-
+        */
     }
 
     @Override

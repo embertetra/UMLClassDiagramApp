@@ -32,11 +32,17 @@ public class PromeniNazivInterfejsaAction extends AbstractClassyAction{
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        //greske pri unosu
         if( MainFrame.getInstance().getInterfejsProzor().getTfIme().getText().isEmpty() || MainFrame.getInstance().getInterfejsProzor().getTfIme().getText().equals(" ") ){
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Novo ime nije pravilno uneto!", MessageType.ERROR);
             return;
         }
+        else if(MainFrame.getInstance().getInterfejsProzor().getTfIme().getText().trim().contains(" ")){
+            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Ime ne sme da sadrzi razmak!", MessageType.ERROR);
+            return;
+        }
 
+        //provera da nije duplikat ime u odnosu na ostale interfejse
         for(ElementPainter o : dijagramView.getElementPainterList()){
             if (o instanceof InterclassPainter){
                 if( ((Interclass) o.getElement()).getNaziv().equals(MainFrame.getInstance().getInterfejsProzor().getTfIme().getText()) ){
@@ -47,6 +53,7 @@ public class PromeniNazivInterfejsaAction extends AbstractClassyAction{
             }
         }
 
+        //menjanje imena
         ((Interfejs) interfejsPainter.getElement()).setNaziv(MainFrame.getInstance().getInterfejsProzor().getTfIme().getText());
         dijagramView.repaint();
         MainFrame.getInstance().getInterfejsProzor().getTfIme().setText("");

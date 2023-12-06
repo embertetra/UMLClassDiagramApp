@@ -33,11 +33,17 @@ public class PromenaNazivaEnumaAction extends AbstractClassyAction{
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        //greske pri unosu
         if( MainFrame.getInstance().getEnumProzor().getTfIme().getText().isEmpty() || MainFrame.getInstance().getEnumProzor().getTfIme().getText().equals(" ") ){
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Novo ime nije pravilno uneto!", MessageType.ERROR);
             return;
         }
+        else if(MainFrame.getInstance().getEnumProzor().getTfIme().getText().trim().contains(" ")){
+            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Ime ne sme da sadrzi razmak!", MessageType.ERROR);
+            return;
+        }
 
+        //provera da nije duplikat ime u odnosu na ostale enume
         for(ElementPainter o : dijagramView.getElementPainterList()){
             if (o instanceof InterclassPainter){
                 if( ((Interclass) o.getElement()).getNaziv().equals(MainFrame.getInstance().getEnumProzor().getTfIme().getText()) ){
@@ -48,6 +54,7 @@ public class PromenaNazivaEnumaAction extends AbstractClassyAction{
             }
         }
 
+        //menjanje imena
         ((EnumM) enumPainter.getElement()).setNaziv(MainFrame.getInstance().getEnumProzor().getTfIme().getText());
         dijagramView.repaint();
         MainFrame.getInstance().getEnumProzor().getTfIme().setText("");

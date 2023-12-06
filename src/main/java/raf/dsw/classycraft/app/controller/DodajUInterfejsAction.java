@@ -33,6 +33,7 @@ public class DodajUInterfejsAction extends AbstractClassyAction{
         //greske pri unosu podataka:
         if(!MainFrame.getInstance().getInterfejsProzor().getJbPrivate().isSelected() && !MainFrame.getInstance().getInterfejsProzor().getJbPublic().isSelected() && !MainFrame.getInstance().getInterfejsProzor().getJbProtected().isSelected()){
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije odabrana vidljivost.", MessageType.ERROR);
+            return;
         }
         else if(!MainFrame.getInstance().getInterfejsProzor().getJbInt().isSelected() &&
                 !MainFrame.getInstance().getInterfejsProzor().getJbFloat().isSelected() &&
@@ -40,9 +41,11 @@ public class DodajUInterfejsAction extends AbstractClassyAction{
                 !MainFrame.getInstance().getInterfejsProzor().getJbString().isSelected() &&
                 !MainFrame.getInstance().getInterfejsProzor().getJbBoolean().isSelected()){
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije odabran tip.", MessageType.ERROR);
+            return;
         }
         else if(MainFrame.getInstance().getInterfejsProzor().getTfNaziv().getText().isEmpty() || MainFrame.getInstance().getInterfejsProzor().getTfNaziv().getText().equals(" ")){
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije upisano ime.", MessageType.ERROR);
+            return;
         }
 
         Vidljivost vidljivost = null;
