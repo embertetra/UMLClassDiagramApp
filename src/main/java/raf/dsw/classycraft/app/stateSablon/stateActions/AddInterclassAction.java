@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 public class AddInterclassAction extends AbstractClassyAction {
 
     public AddInterclassAction() {
-        //putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
         putValue(SMALL_ICON, loadIcon("/images/add.png"));
         putValue(NAME, "");
         putValue(SHORT_DESCRIPTION, "");

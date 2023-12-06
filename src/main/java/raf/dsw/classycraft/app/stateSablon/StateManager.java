@@ -10,6 +10,8 @@ public class StateManager {
     private Delete delete;
     private Selection selection;
     private Mouse mouse;
+
+    private Duplicate duplicate;
     private State currentState;
 
     public StateManager() {
@@ -19,6 +21,7 @@ public class StateManager {
         delete = new Delete();
         selection = new Selection();
         mouse = new Mouse();
+        duplicate = new Duplicate();
         currentState = null;
     }
 
@@ -47,6 +50,8 @@ public class StateManager {
     public void setSelection(){
         currentState = selection;
     }
+
+    public void setDuplicate(){currentState = duplicate;}
     public AddInterclass getAddInterclass() {
         return addInterclass;
     }

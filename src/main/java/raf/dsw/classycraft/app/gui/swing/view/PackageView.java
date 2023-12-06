@@ -229,6 +229,8 @@ public class PackageView implements ISubscriber {
         stateManager.setSelection();
     }
 
+    public void startDuplicateState(){stateManager.setDuplicate();}
+
     public StateManager getStateManager() {
         return stateManager;
     }

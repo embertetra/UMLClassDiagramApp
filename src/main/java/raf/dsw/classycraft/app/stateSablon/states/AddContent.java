@@ -9,6 +9,7 @@ import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
+import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.KlasaPainter;
 import raf.dsw.classycraft.app.stateSablon.State;
 
 import java.awt.*;
@@ -28,6 +29,8 @@ public class AddContent implements State {
 
         if(interclassPainter != null) {
             if (interclassPainter.getElement() instanceof Klasa) {
+                Klasa k = (Klasa) ((KlasaPainter) interclassPainter).getElement();
+                MainFrame.getInstance().getKlasaProzor().setClassContentList(k.getClassContentList());
                 MainFrame.getInstance().getKlasaProzor().getJbIme().setAction(new PromenaNazivaKlaseAction(interclassPainter, dijagramView));
                 MainFrame.getInstance().getKlasaProzor().getJbDodaj().setAction(new DodajUKlasuAction(interclassPainter, dijagramView));
                 MainFrame.getInstance().getKlasaProzor().setVisible(true);
