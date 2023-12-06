@@ -59,6 +59,7 @@ public class Klasa extends Interclass implements IPublisher {
                 i.update(notification);
             }
         }
+    }
       
     public String getNaziv() {
         return naziv;

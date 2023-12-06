@@ -52,7 +52,7 @@ public class DodajUKlasuAction extends AbstractClassyAction{
             return;
         }
         else if(MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().isEmpty() || MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().equals(" ")){
-            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije upisano ime!", MessageType.ERROR);
+            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije upisan naziv!", MessageType.ERROR);
             return;
         }
 

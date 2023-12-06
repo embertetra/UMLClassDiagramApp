@@ -60,6 +60,7 @@ public class EnumM extends Interclass implements IPublisher {
                 i.update(notification);
             }
         }
+    }
 
     @Override
     public String getNaziv() {

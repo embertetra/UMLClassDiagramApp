@@ -62,6 +62,7 @@ public class Interfejs extends Interclass implements IPublisher {
                 i.update(notification);
             }
         }
+    }
 
     @Override
     public String getNaziv() {

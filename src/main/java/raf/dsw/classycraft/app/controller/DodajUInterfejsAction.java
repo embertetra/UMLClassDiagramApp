@@ -44,7 +44,7 @@ public class DodajUInterfejsAction extends AbstractClassyAction{
             return;
         }
         else if(MainFrame.getInstance().getInterfejsProzor().getTfNaziv().getText().isEmpty() || MainFrame.getInstance().getInterfejsProzor().getTfNaziv().getText().equals(" ")){
-            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije upisano ime.", MessageType.ERROR);
+            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije upisan naziv.", MessageType.ERROR);
             return;
         }
 
