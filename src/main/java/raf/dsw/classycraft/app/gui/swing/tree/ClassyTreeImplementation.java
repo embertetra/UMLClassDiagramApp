@@ -33,7 +33,7 @@ public class ClassyTreeImplementation implements ClassyTree{
     @Override
     public void addChild(ClassyTreeItem parent) {
         if(!(parent.getClassyNode() instanceof ClassyNodeComposite)) {
-            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Dijagram ne moze imati podklasu!", MessageType.ERROR);
+            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("DijagramElement ne moze imati podklasu!", MessageType.ERROR);
             return;
         }
 

@@ -29,6 +29,8 @@ public class MouseListener {
                     if ((selected instanceof ClassyTreeItem && selected.getClassyNode() instanceof Package)) {
                         if (e.getClickCount() == 2) {
                             ((Package) selected.getClassyNode()).addSubscriber(MainFrame.getInstance().getPackageView());
+
+                            ///OVO TREBA MENJATIIIIIII, Ako obrisem sve jtabove gubim sve dijagramViewove !>!>!>!>!>!?!
                             MainFrame.getInstance().getPackageView().getjTabbedPane().removeAll();
                             for (ClassyNode c : ((Package) selected.getClassyNode()).getChildren()) {
                                 if (c instanceof Dijagram) {

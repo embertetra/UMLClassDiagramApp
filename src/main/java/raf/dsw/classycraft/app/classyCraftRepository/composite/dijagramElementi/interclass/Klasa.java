@@ -10,7 +10,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Klasa extends Interclass implements IPublisher {
+public class Klasa extends Interclass{
 
     private String naziv;
 
@@ -68,4 +68,5 @@ public class Klasa extends Interclass implements IPublisher {
     public void setNaziv(String naziv) {
         this.naziv = naziv;
     }
+
 }

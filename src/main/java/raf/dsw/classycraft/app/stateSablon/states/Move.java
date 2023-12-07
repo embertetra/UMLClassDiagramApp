@@ -34,10 +34,11 @@ public class Move implements State {
     @Override
     public void misOtpusten(int x, int y, DijagramView dijagramView) {
 
-        ///settovanje novih selekcija
+
         dijagramView.removeTranslation();
         dijagramView.getSelectionModel().clear();
         novaListaSelekcije.clear();
+        ///presek multiselekcija
         if(tmp == 1) {
             for(InterclassPainter ip : shapes) {
                 Interclass ic = (Interclass) ip.getElement();
@@ -46,11 +47,13 @@ public class Move implements State {
                 int brojac = 0;
                 int index = 0;
                 for (ElementPainter ep : dijagramView.getElementPainterList()) {
-                    InterclassPainter classP = (InterclassPainter) ep;
-                    Interclass klasa = (Interclass) classP.getElement();
-                    Rectangle rect = new Rectangle(klasa.getPosition().x - classP.getWidth() / 2 - 10, klasa.getPosition().y - classP.getHeightUkupno() / 2 - 5,
-                            classP.getWidth() + 12, classP.getHeightUkupno() + 12);
-                    if (rect.intersects(myRect)) brojac++;
+                    if(ep instanceof InterclassPainter) {
+                        InterclassPainter classP = (InterclassPainter) ep;
+                        Interclass klasa = (Interclass) classP.getElement();
+                        Rectangle rect = new Rectangle(klasa.getPosition().x - classP.getWidth() / 2 - 10, klasa.getPosition().y - classP.getHeightUkupno() / 2 - 5,
+                                classP.getWidth() + 12, classP.getHeightUkupno() + 12);
+                        if (rect.intersects(myRect)) brojac++;
+                    }
                 }
                 if (brojac > 1) {
 
@@ -62,6 +65,7 @@ public class Move implements State {
                     break;
                 }
             }
+            ///settovanje novih selekcija
             for (InterclassPainter ip : shapes) {
                 Interclass ic = (Interclass) ip.getElement();
                 Shape s = new Rectangle(ic.getPosition().x - ip.getWidth() / 2 - 10, ic.getPosition().y - ip.getHeightUkupno() / 2 - 5,
@@ -113,13 +117,14 @@ public class Move implements State {
 
         ///move multiselekcije
         shapes.clear();
+        oldPoints.clear();
         if(dijagramView.getSelectionModel() != null && dijagramView.getSelectionModel().size() > 0){
             for(ElementPainter ep : dijagramView.getElementPainterList()){
                 if(ep instanceof InterclassPainter){
                     InterclassPainter ip = (InterclassPainter) ep;
                     Interclass ic = (Interclass) ip.getElement();
                     for(Shape s : dijagramView.getSelectionModel()){
-                        if(s.intersects(new Rectangle(ic.getPosition().x, ic.getPosition().y, ip.getWidth(),ip.getHeightUkupno()))) {
+                        if(s.intersects(new Rectangle(ic.getPosition().x - ip.getWidth()/2, ic.getPosition().y-ip.getHeightUkupno()/2, ip.getWidth(),ip.getHeightUkupno()))) {
                             shapes.add(ip);
                             oldPoints.add(new Point(ic.getPosition().x, ic.getPosition().y));
                         }

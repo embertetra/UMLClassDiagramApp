@@ -10,7 +10,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Interfejs extends Interclass implements IPublisher {
+public class Interfejs extends Interclass{
 
     private String naziv;
 

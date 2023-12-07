@@ -2,10 +2,11 @@ package raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Vidljivost;
+import raf.dsw.classycraft.app.observer.IPublisher;
 
 import java.awt.*;
 
-public abstract class Interclass extends DijagramElement {
+public abstract class Interclass extends DijagramElement implements IPublisher {
 
     private String naziv;
 
@@ -51,5 +52,6 @@ public abstract class Interclass extends DijagramElement {
 
     public void setPosition(Point position) {
         this.position = position;
+        notifySubscribers("state");
     }
 }

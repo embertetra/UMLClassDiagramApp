@@ -9,7 +9,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EnumM extends Interclass implements IPublisher {
+public class EnumM extends Interclass{
 
     private String naziv;
     private List<String> listEnuma;
