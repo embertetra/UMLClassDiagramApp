@@ -32,37 +32,33 @@ public class MouseListener {
                     if(selected != null)
                         selectedNode = selected.getClassyNode();
                     PackageView paket = null;
-                    if ((selected instanceof ClassyTreeItem && selectedNode != null && selectedNode instanceof Package)) {
+                    if ((selected instanceof ClassyTreeItem &&  selectedNode instanceof Package)) {
                         if (e.getClickCount() == 2) {
-                            /*
                             for (PackageView p : MainFrame.getInstance().getListaPackageView()) {
                                 if (p.getClassyNode().getName().equals(selectedNode.getName())) {
                                     paket = p;
                                 }
                             }
                             if (paket == null) {
-                                System.out.println("nul je");
                                 paket = new PackageView();
-                                MainFrame.getInstance().setPackageView(paket);
-                                ((Package) selectedNode).addSubscriber(MainFrame.getInstance().getPackageView());
+                                paket.setClassyTreeItem(selected);
+                                MainFrame.getInstance().getListaPackageView().add(paket);
+                                //MainFrame.getInstance().setPackageView(paket);
+                                ((Package) selectedNode).addSubscriber(paket);
                                 paket.setClassyNode(selectedNode);
                                 for (ClassyNode c : ((Package) selectedNode).getChildren()) {
                                     if (c instanceof Dijagram) {
                                         DijagramView dijagramView = new DijagramView(c);
                                         ((Dijagram) c).addSubscriber(dijagramView);
-                                        paket.getjTabbedPane().addTab(c.getName(), dijagramView);
+                                        //MainFrame.getInstance().getPackageView().getjTabbedPane().addTab(c.getName(), dijagramView);
+                                        paket.getjTabbedPane().addTab(c.getName(),dijagramView);
                                     }
                                 }
                                 MainFrame.getInstance().setPackageView(paket);
-                                MainFrame.getInstance().getListaPackageView().add(paket);
-
                             } else {
-                                System.out.println("nije null");
                                 MainFrame.getInstance().setPackageView(paket);
                             }
-                            System.out.println(paket.getjTabbedPane().getTabCount());
-                            */
-
+                            /*
                             ///OVO TREBA MENJATIIIIIII, Ako obrisem sve jtabove gubim sve dijagramViewove !>!>!>!>!>!?!
                             ((Package) selected.getClassyNode()).addSubscriber(MainFrame.getInstance().getPackageView());
                             MainFrame.getInstance().getPackageView().getjTabbedPane().removeAll();
@@ -76,7 +72,7 @@ public class MouseListener {
                             }
                             //setovanje parenta packageView-u
                             MainFrame.getInstance().getPackageView().setClassyNode(selected.getClassyNode());
-
+                            */
 
                             ///ispisivanje projekta i autora na packageView trebalo bi da ostaje kao i pre
                             while(true){
@@ -91,7 +87,6 @@ public class MouseListener {
                             ((Project) selectedNode).addSubscriber(MainFrame.getInstance().getPackageView());
                             MainFrame.getInstance().getPackageView().promeniNazivProjekta(selectedNode.getName());
                             ((ProjectExplorer)selectedNode.getParent()).addSubscriber(MainFrame.getInstance().getPackageView());
-
                         }
                     }
                 }

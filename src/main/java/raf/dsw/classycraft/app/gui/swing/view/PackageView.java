@@ -4,12 +4,14 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
+import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.jTabbedElements.NotificationJTabbed;
 import raf.dsw.classycraft.app.observer.ISubscriber;
 import raf.dsw.classycraft.app.stateSablon.StateManager;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.tools.Tool;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,7 @@ public class PackageView implements ISubscriber {
     private JPanel toolMenu;
     private JPanel downSide;
     private StateManager stateManager;
+    private ClassyTreeItem classyTreeItem;
 
     public PackageView() {
         this.classyNode = null;
@@ -41,7 +44,8 @@ public class PackageView implements ISubscriber {
 
         toolMenu = new JPanel();
         toolMenu.setLayout(new BoxLayout(toolMenu, BoxLayout.Y_AXIS));
-        toolMenu.add(MainFrame.getInstance().getToolBarStates());
+        //toolMenu.add(MainFrame.getInstance().getToolBarStates());
+        toolMenu.add(new ToolBarStates());
         toolMenu.setAlignmentX(Component.CENTER_ALIGNMENT);
         toolMenu.setAlignmentY(Component.CENTER_ALIGNMENT);
 
@@ -272,5 +276,13 @@ public class PackageView implements ISubscriber {
 
     public JPanel getDownSide() {
         return downSide;
+    }
+
+    public ClassyTreeItem getClassyTreeItem() {
+        return classyTreeItem;
+    }
+
+    public void setClassyTreeItem(ClassyTreeItem classyTreeItem) {
+        this.classyTreeItem = classyTreeItem;
     }
 }

@@ -156,6 +156,7 @@ public class Move implements State {
                     InterclassPainter ip = (InterclassPainter) ep;
                     Interclass ic = (Interclass) ip.getElement();
                     if (ip.elementAt(new Point(x, y))) {
+                        System.out.println("ulazimmmm");
                         ip.setxDragOffset(x - ic.getPosition().x);
                         ip.setyDragOffset(y - ic.getPosition().y);
                         oldPoint = new Point(ic.getPosition().x, ic.getPosition().y);
@@ -189,10 +190,12 @@ public class Move implements State {
                     ConnectionPainter cp = (ConnectionPainter) ep;
                     Interclass from = ((Connection) ep.getElement()).getFrom();
                     Interclass to = ((Connection) ep.getElement()).getTo();
-                    cp.setDragOffset1(new Point(dijagramView.getStartPoint().x - from.getPosition().x,
-                            dijagramView.getStartPoint().y - from.getPosition().y));
-                    cp.setDragOffset2(new Point(dijagramView.getStartPoint().x - to.getPosition().x,
-                            dijagramView.getStartPoint().y - to.getPosition().y));
+                    if(dijagramView.getStartPoint() != null && from != null && to != null) {
+                        cp.setDragOffset1(new Point(dijagramView.getStartPoint().x - from.getPosition().x,
+                                dijagramView.getStartPoint().y - from.getPosition().y));
+                        cp.setDragOffset2(new Point(dijagramView.getStartPoint().x - to.getPosition().x,
+                                dijagramView.getStartPoint().y - to.getPosition().y));
+                    }
                 }
             }
             dijagramView.repaint();

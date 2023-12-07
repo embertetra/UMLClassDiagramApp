@@ -1,5 +1,4 @@
 package raf.dsw.classycraft.app.stateSablon.states;
-import com.sun.tools.javac.Main;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.EnumM;
@@ -7,7 +6,6 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Vidljivost;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
-import raf.dsw.classycraft.app.classyCraftRepository.implementation.Package;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
@@ -20,8 +18,8 @@ import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.Interfe
 import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.KlasaPainter;
 import raf.dsw.classycraft.app.stateSablon.State;
 
-import javax.swing.tree.TreeNode;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 
 public class AddInterclass implements State {
 
@@ -29,6 +27,7 @@ public class AddInterclass implements State {
 
     @Override
     public void misKliknut(int x, int y, DijagramView dijagramView) {
+        dijagramView.repaint();
 
         dijagramView.getSelectionModel().clear();
         dijagramView.setSelection(null);
@@ -48,9 +47,13 @@ public class AddInterclass implements State {
             }
         }
         if(interclass != null) {
+            AffineTransform at = dijagramView.getAt();
 
+            ///odredjivanje dijaframa unutar stabla
             ClassyTreeItem item = null;
-            ClassyTreeItem selected = MainFrame.getInstance().getClassyTree().getSelectedNode();
+            //ClassyTreeItem selected = MainFrame.getInstance().getClassyTree().getSelectedNode();
+            ClassyNode tmp = MainFrame.getInstance().getPackageView().getClassyNode();
+            ClassyTreeItem selected = MainFrame.getInstance().getPackageView().getClassyTreeItem();
             for(int i=0; i<selected.getChildCount(); i++){
                 ClassyTreeItem c = (ClassyTreeItem)selected.getChildAt(i);
                 ClassyNode cn = c.getClassyNode();
@@ -59,7 +62,7 @@ public class AddInterclass implements State {
             }
 
             if (interclass.equals("class")) {
-                Klasa klasa = new Klasa("Interclass", dijagramView.getClassyNode(), 2, "naziv", Vidljivost.PUBLIC, new Point(x, y));
+                Klasa klasa = new Klasa("Interclass", dijagramView.getClassyNode(), 2, "naziv", Vidljivost.PUBLIC, new Point(x,y));
                 klasa.addSubscriber(dijagramView);
                 KlasaPainter klasaPainter = new KlasaPainter(klasa);
                 dijagramView.getElementPainterList().add(klasaPainter);
@@ -87,12 +90,10 @@ public class AddInterclass implements State {
 
     @Override
     public void misOtpusten(int x, int y, DijagramView dijagramView) {
-
     }
 
     @Override
     public void misPrivucen(int x, int y, DijagramView dijagramView) {
-
     }
 
     public void setInterclass(String interclass) {

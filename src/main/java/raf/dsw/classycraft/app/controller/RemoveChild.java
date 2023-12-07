@@ -2,6 +2,7 @@ package raf.dsw.classycraft.app.controller;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.Package;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.ProjectExplorer;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
@@ -10,6 +11,7 @@ import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
+import raf.dsw.classycraft.app.gui.swing.view.PackageView;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 
 import javax.swing.*;
@@ -73,6 +75,15 @@ public class RemoveChild extends AbstractClassyAction{
             }
             ///ako zeli da obrise paket ili dijagram
             else if(!(selected.getClassyNode() instanceof ProjectExplorer)){
+                if(selected.getClassyNode() instanceof Package){
+                    for(Iterator<PackageView> iterator = MainFrame.getInstance().getListaPackageView().iterator(); iterator.hasNext();){
+                        PackageView pv = iterator.next();
+                        if(pv.getClassyNode() == selected.getClassyNode()){
+                            iterator.remove();
+                            System.out.println(pv.getClassyNode().getName());
+                        }
+                    }
+                }
                 MainFrame.getInstance().getClassyTree().getSelectedNode().removeFromParent();
                 ClassyNodeComposite cns = (ClassyNodeComposite) selected.getClassyNode().getParent();
                 if(cns.getChildren().contains(selected.getClassyNode()))

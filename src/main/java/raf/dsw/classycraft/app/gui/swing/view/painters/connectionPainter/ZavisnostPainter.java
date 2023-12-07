@@ -55,6 +55,7 @@ public class ZavisnostPainter extends ConnectionPainter {
         if(point1 != null && point2 != null){
 
             if(idx1 == 0){ //gore
+                System.out.println("usao gore");
                 ((GeneralPath)shape).moveTo(point2.x, point2.y);
                 ((GeneralPath)shape).lineTo(point2.x - 10, point2.y + 10);
                 ((GeneralPath)shape).lineTo(point2.x, point2.y);
@@ -65,6 +66,7 @@ public class ZavisnostPainter extends ConnectionPainter {
                 ((GeneralPath)shape).closePath();
             }
             else if(idx1 == 1){ //dole
+                System.out.println("usao dole");
                 ((GeneralPath)shape).moveTo(point2.x, point2.y);
                 ((GeneralPath)shape).lineTo(point2.x + 10, point2.y - 10);
                 ((GeneralPath)shape).lineTo(point2.x, point2.y);
@@ -75,16 +77,18 @@ public class ZavisnostPainter extends ConnectionPainter {
                 ((GeneralPath)shape).closePath();
             }
             else if(idx1 == 2){ //levo
+                System.out.println("usao levo");
                 ((GeneralPath)shape).moveTo(point2.x, point2.y);
-                ((GeneralPath)shape).lineTo(point2.x + 10, point2.y-10);
+                ((GeneralPath)shape).lineTo(point2.x + 10, point2.y + 10);
                 ((GeneralPath)shape).lineTo(point2.x, point2.y);
-                ((GeneralPath)shape).lineTo(point2.x + 10, point2.y+10);
+                ((GeneralPath)shape).lineTo(point2.x + 10, point2.y-10);
                 ((GeneralPath)shape).lineTo(point2.x, point2.y);
                 g.setStroke(new BasicStroke(element.getStroke(), BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{5}, 0));
                 ((GeneralPath)shape).lineTo(point1.x, point1.y);
                 ((GeneralPath)shape).closePath();
             }
             else if(idx1 == 3){ //desno
+                System.out.println("usao desno");
                 ((GeneralPath)shape).moveTo(point2.x, point2.y);
                 ((GeneralPath)shape).lineTo(point2.x - 10, point2.y-10);
                 ((GeneralPath)shape).lineTo(point2.x, point2.y);

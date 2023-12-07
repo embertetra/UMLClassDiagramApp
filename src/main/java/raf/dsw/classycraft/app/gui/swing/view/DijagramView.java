@@ -31,6 +31,7 @@ public class DijagramView extends JPanel implements ISubscriber {
     private List<InterclassPainter> moveSelections;
 
 
+
     /// zoom deo
 
     private Point startPoint;
@@ -41,7 +42,7 @@ public class DijagramView extends JPanel implements ISubscriber {
     private double zoomFactor = 1;
     private double prevZoomFactor = 1;
     private boolean zoomer;
-
+    AffineTransform at = new AffineTransform();
     public DijagramView(ClassyNode classyNode) {
         if (classyNode != null) {
             this.classyNode = classyNode;
@@ -82,6 +83,7 @@ public class DijagramView extends JPanel implements ISubscriber {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+        AffineTransform save = ((Graphics2D) g).getTransform();
         if (zoomer) {
             double xRel = MouseInfo.getPointerInfo().getLocation().x - getLocationOnScreen().x;
             double yRel = MouseInfo.getPointerInfo().getLocation().y - getLocationOnScreen().y;
@@ -92,7 +94,7 @@ public class DijagramView extends JPanel implements ISubscriber {
             zoomer = false;
         }
 
-        AffineTransform at = new AffineTransform();
+        at = new AffineTransform();
         at.translate(xOffset, yOffset);
         at.scale(zoomFactor, zoomFactor);
         g2.transform(at);
@@ -116,6 +118,7 @@ public class DijagramView extends JPanel implements ISubscriber {
             x.draw(g2);
         }
         System.out.println("Izvrsen paintComponent");
+        //((Graphics2D) g).setTransform(save);
     }
 
     public void setTranslation() {
@@ -198,5 +201,33 @@ public class DijagramView extends JPanel implements ISubscriber {
     }
     public void setZoomer(boolean zoomer) {
         this.zoomer = zoomer;
+    }
+
+    public AffineTransform getAt() {
+        return at;
+    }
+
+    public double getPrevZoomFactor() {
+        return prevZoomFactor;
+    }
+
+    public void setxOffset(double xOffset) {
+        this.xOffset = xOffset;
+    }
+
+    public void setyOffset(double yOffset) {
+        this.yOffset = yOffset;
+    }
+
+    public double getxOffset() {
+        return xOffset;
+    }
+
+    public double getyOffset() {
+        return yOffset;
+    }
+
+    public void setAt(AffineTransform at) {
+        this.at = at;
     }
 }

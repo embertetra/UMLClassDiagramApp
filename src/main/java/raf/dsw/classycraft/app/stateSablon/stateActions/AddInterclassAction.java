@@ -1,5 +1,6 @@
 package raf.dsw.classycraft.app.stateSablon.stateActions;
 import raf.dsw.classycraft.app.controller.AbstractClassyAction;
+import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 import javax.swing.*;

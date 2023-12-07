@@ -8,6 +8,9 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.
 import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.GeneralPath;
+import java.awt.geom.PathIterator;
 
 public class KlasaPainter extends InterclassPainter {
     protected Shape shape;
@@ -29,12 +32,14 @@ public class KlasaPainter extends InterclassPainter {
         g.setPaint(Color.BLACK);
         g.setStroke(new BasicStroke(this.element.getStroke()));
         Klasa k = (Klasa) this.element;
+        AffineTransform at = g.getTransform();
         //odredjivanje sirine, visine reda i ukupne visine
         width = maxDuzina(g);
         int heightRed = g.getFontMetrics().getHeight();
         heightUkupno = heightRed * k.getClassContentList().size() + heightRed;
 
         shape = new Rectangle(k.getPosition().x - width / 2 - 5, k.getPosition().y - heightUkupno / 2, width + 10, heightUkupno + 10);
+
         g.draw(shape);
         g.drawString("C  " + k.getNaziv(), k.getPosition().x - width / 2, k.getPosition().y - heightUkupno / 2 + heightRed);
 
