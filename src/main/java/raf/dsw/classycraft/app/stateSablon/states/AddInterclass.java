@@ -7,7 +7,6 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Vidljivost;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
-import raf.dsw.classycraft.app.classyCraftRepository.implementation.Package;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
@@ -20,7 +19,6 @@ import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.Interfe
 import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.KlasaPainter;
 import raf.dsw.classycraft.app.stateSablon.State;
 
-import javax.swing.tree.TreeNode;
 import java.awt.*;
 
 public class AddInterclass implements State {
@@ -49,8 +47,11 @@ public class AddInterclass implements State {
         }
         if(interclass != null) {
 
+            ///odredjivanje dijaframa unutar stabla
             ClassyTreeItem item = null;
-            ClassyTreeItem selected = MainFrame.getInstance().getClassyTree().getSelectedNode();
+            //ClassyTreeItem selected = MainFrame.getInstance().getClassyTree().getSelectedNode();
+            ClassyNode tmp = MainFrame.getInstance().getPackageView().getClassyNode();
+            ClassyTreeItem selected = MainFrame.getInstance().getPackageView().getClassyTreeItem();
             for(int i=0; i<selected.getChildCount(); i++){
                 ClassyTreeItem c = (ClassyTreeItem)selected.getChildAt(i);
                 ClassyNode cn = c.getClassyNode();

@@ -31,6 +31,13 @@ public class MainFrame extends JFrame implements ISubscriber {
     private EnumProzor enumProzor;
     private List<PackageView> listaPackageView;
 
+
+    JSplitPane split;
+    JPanel desktop;
+    JScrollPane scrollPane;
+
+
+
     private MainFrame() {
     }
 
@@ -65,10 +72,10 @@ public class MainFrame extends JFrame implements ISubscriber {
         add(toolBar, BorderLayout.NORTH);
 
         JTree projectExplorer = classyTree.generateTree(ApplicationFramework.getInstance().getClassyRepository().getRoot());
-        JPanel desktop = new JPanel();
-        JScrollPane scrollPane = new JScrollPane(projectExplorer);
+        desktop = new JPanel();
+        scrollPane = new JScrollPane(projectExplorer);
         scrollPane.setMinimumSize(new Dimension(200, 150));
-        JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scrollPane, desktop);
+        split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scrollPane, desktop);
 
         split.add(packageView.getRightSide(), JSplitPane.RIGHT);
 
@@ -137,5 +144,7 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     public void setPackageView(PackageView packageView) {
         this.packageView = packageView;
+        //split.add(packageView.getRightSide(), JSplitPane.RIGHT);
+        split.setRightComponent(packageView.getRightSide());
     }
 }

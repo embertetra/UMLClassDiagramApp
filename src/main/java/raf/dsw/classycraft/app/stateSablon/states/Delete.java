@@ -26,7 +26,7 @@ public class Delete implements State {
 
         ///pronalazenje dijagrama u stablu
         ClassyTreeItem item = null;
-        ClassyTreeItem selected = MainFrame.getInstance().getClassyTree().getSelectedNode();
+        ClassyTreeItem selected = MainFrame.getInstance().getPackageView().getClassyTreeItem();
         for(int i=0; i<selected.getChildCount(); i++){
             ClassyTreeItem c = (ClassyTreeItem)selected.getChildAt(i);
             ClassyNode cn = c.getClassyNode();
