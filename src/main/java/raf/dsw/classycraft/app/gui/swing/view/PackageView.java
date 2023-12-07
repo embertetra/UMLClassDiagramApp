@@ -202,7 +202,8 @@ public class PackageView implements ISubscriber {
     public void startMouseState(){
         if(stateManager.getCurrentState() != null) {
             stateManager.setMouse();
-            ((DijagramView) jTabbedPane.getSelectedComponent()).getSelectionModel().clear();
+            if(((DijagramView) jTabbedPane.getSelectedComponent()).getSelectionModel() != null)
+                ((DijagramView) jTabbedPane.getSelectedComponent()).getSelectionModel().clear();
             ((DijagramView) jTabbedPane.getSelectedComponent()).setSelection(null);
             ((DijagramView) jTabbedPane.getSelectedComponent()).repaint();
         }
