@@ -12,8 +12,12 @@ import java.util.List;
 
 public class KlasaProzor extends JFrame {
 
-    private List<ClassContent> classContentList = new ArrayList<>();
-    private JList<String> lista;
+    private List<ClassContent> classContentList;
+    private JList<ClassContent> lista;
+    private DefaultListModel<ClassContent> defaultListModel;
+
+    private JButton jbPromeni;
+    private JButton jbObrisi;
 
     private JRadioButton atribut;
     private JRadioButton metoda;
@@ -30,6 +34,8 @@ public class KlasaProzor extends JFrame {
     private JRadioButton jbDouble;
     private JRadioButton jbString;
     private JRadioButton jbBoolean;
+    private JRadioButton jbVoid;
+
     private JTextField tfNaziv;
 
     private JButton jbDodaj;
@@ -46,26 +52,33 @@ public class KlasaProzor extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Dodavanje u klasu");
 
-        //prikaz atributa
+        //prikaz atributa i metoda
         JLabel lbLista = new JLabel("Lista atributa i metoda:");
-        List<String> listica = new ArrayList<>();
+        defaultListModel = new DefaultListModel<>();
         lista = new JList<>();
+        lista.setModel(defaultListModel);
         if(classContentList != null) {
+        System.out.println("ccList je " + classContentList);
             for (ClassContent c : classContentList) {
                 if (c instanceof Atributi)
-                    listica.add(c.getVidljivost() + c.getNaziv() + ": " + c.getTip());
+                    defaultListModel.addElement(c);
             }
             for (ClassContent c : classContentList) {
                 if (c instanceof Metode)
-                    listica.add(c.getVidljivost() + c.getNaziv() + ": " + c.getTip());
+                    defaultListModel.addElement(c);
             }
         }
-        String[] l = new String[listica.size()];
-        for(int i=0; i<listica.size(); i++)
-            l[i] = listica.get(i);
-        lista.setListData(l);
+        lista.updateUI();
+        //dugmad za promenu ili brisanje vec postojeceg atributa / metode
+        jbPromeni = new JButton("Promeni");
+        jbObrisi = new JButton("Obrisi");
+        //horizontalno grupisanje
+        JPanel jpPromeniObrisi = new JPanel();
+        jpPromeniObrisi.setAlignmentX(Component.LEFT_ALIGNMENT);
+        jpPromeniObrisi.setLayout(new BoxLayout(jpPromeniObrisi, BoxLayout.X_AXIS));
+        jpPromeniObrisi.add(jbPromeni); jpPromeniObrisi.add(jbObrisi);
 
-        //polje za proenu imena klase
+        //polje za promenu imena klase
         JLabel lbIme = new JLabel("Novo ime:");
         tfIme = new JTextField();
         jbIme = new JButton("Promeni ime");
@@ -75,6 +88,11 @@ public class KlasaProzor extends JFrame {
         atribut = new JRadioButton("Atribut");
         metoda = new JRadioButton("Metoda");
         bg.add(atribut); bg.add(metoda);
+        //horizontalno grupisanje
+        JPanel jpAtrMet = new JPanel();
+        jpAtrMet.setAlignmentX(Component.LEFT_ALIGNMENT);
+        jpAtrMet.setLayout(new BoxLayout(jpAtrMet, BoxLayout.X_AXIS));
+        jpAtrMet.add(atribut); jpAtrMet.add(metoda);
 
         //vidljivost : + - #
         JLabel lbVidljivost = new JLabel("Vidljivost:");
@@ -83,6 +101,11 @@ public class KlasaProzor extends JFrame {
         jbPublic = new JRadioButton("public");
         jbProtected = new JRadioButton("protected");
         bgVidljivost.add(jbPrivate); bgVidljivost.add(jbPublic); bgVidljivost.add(jbProtected);
+        //horizontalno grupisanje
+        JPanel jpVidljivost = new JPanel();
+        jpVidljivost.setAlignmentX(Component.LEFT_ALIGNMENT);
+        jpVidljivost.setLayout(new BoxLayout(jpVidljivost, BoxLayout.X_AXIS));
+        jpVidljivost.add(jbPrivate); jpVidljivost.add(jbPublic); jpVidljivost.add(jbProtected);
 
         // tip
         JLabel lbTip = new JLabel("Tip:");
@@ -92,34 +115,29 @@ public class KlasaProzor extends JFrame {
         jbDouble = new JRadioButton("double");
         jbString = new JRadioButton("string");
         jbBoolean = new JRadioButton("boolean");
-        bgTip.add(jbInt); bgTip.add(jbFloat); bgTip.add(jbDouble); bgTip.add(jbString); bgTip.add(jbBoolean);
+        jbVoid = new JRadioButton("void");
+        bgTip.add(jbInt); bgTip.add(jbFloat); bgTip.add(jbDouble); bgTip.add(jbString); bgTip.add(jbBoolean); bgTip.add(jbVoid);
+        //horizontalno grupisanje
+        JPanel jpTip = new JPanel();
+        jpTip.setAlignmentX(Component.LEFT_ALIGNMENT);
+        jpTip.setLayout(new BoxLayout(jpTip, BoxLayout.X_AXIS));
+        jpTip.add(jbInt); jpTip.add(jbFloat); jpTip.add(jbDouble); jpTip.add(jbString); jpTip.add(jbBoolean); jpTip.add(jbVoid);
 
         //naziv
         JLabel lbNaziv = new JLabel("Naziv:");
         tfNaziv = new JTextField();
 
-        JPanel jpAtrMet = new JPanel();
-        jpAtrMet.setAlignmentX(Component.LEFT_ALIGNMENT);
-        jpAtrMet.setLayout(new BoxLayout(jpAtrMet, BoxLayout.X_AXIS));
-        jpAtrMet.add(atribut); jpAtrMet.add(metoda);
-
-        JPanel jpVidljivost = new JPanel();
-        jpVidljivost.setAlignmentX(Component.LEFT_ALIGNMENT);
-        jpVidljivost.setLayout(new BoxLayout(jpVidljivost, BoxLayout.X_AXIS));
-        jpVidljivost.add(jbPrivate); jpVidljivost.add(jbPublic); jpVidljivost.add(jbProtected);
-
-        JPanel jpTip = new JPanel();
-        jpTip.setAlignmentX(Component.LEFT_ALIGNMENT);
-        jpTip.setLayout(new BoxLayout(jpTip, BoxLayout.X_AXIS));
-        jpTip.add(jbInt); jpTip.add(jbFloat); jpTip.add(jbDouble); jpTip.add(jbString); jpTip.add(jbBoolean);
-
+        //dugme za dodavanje atributa / metoda u klasu
         jbDodaj = new JButton("Dodaj");
 
+
+        //glavni JPanel:
         JPanel jPanel = new JPanel();
         jPanel.setLayout(new BoxLayout(jPanel, BoxLayout.Y_AXIS));
         jPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        jPanel.add(lbLista); jPanel.add(lista);
+        jPanel.add(lbLista); jPanel.add(new JScrollPane(lista));
+        jPanel.add(jpPromeniObrisi);
         jPanel.add(lbIme); jPanel.add(tfIme); jPanel.add(jbIme);
         jPanel.add(jpAtrMet);
         jPanel.add(lbVidljivost); jPanel.add(jpVidljivost);
@@ -131,132 +149,88 @@ public class KlasaProzor extends JFrame {
         this.add(jPanel);
     }
 
-    public JList<String> getLista() {
-        return lista;
-    }
-
-    public void setLista(JList<String> lista) {
-        this.lista = lista;
-    }
-
     public List<ClassContent> getClassContentList() {
-        lista.updateUI();
         return classContentList;
     }
 
     public void setClassContentList(List<ClassContent> classContentList) {
         this.classContentList = classContentList;
+        lista.updateUI();
+    }
+
+    public JList<ClassContent> getLista() {
+        return lista;
+    }
+
+    public DefaultListModel<ClassContent> getDefaultListModel() {
+        return defaultListModel;
+    }
+
+    public JButton getJbPromeni() {
+        return jbPromeni;
+    }
+
+    public JButton getJbObrisi() {
+        return jbObrisi;
     }
 
     public JRadioButton getAtribut() {
         return atribut;
     }
 
-    public void setAtribut(JRadioButton atribut) {
-        this.atribut = atribut;
-    }
-
     public JRadioButton getMetoda() {
         return metoda;
-    }
-
-    public void setMetoda(JRadioButton metoda) {
-        this.metoda = metoda;
-    }
-
-    public JRadioButton getJbPrivate() {
-        return jbPrivate;
-    }
-
-    public void setJbPrivate(JRadioButton jbPrivate) {
-        this.jbPrivate = jbPrivate;
-    }
-
-    public JRadioButton getJbPublic() {
-        return jbPublic;
-    }
-
-    public void setJbPublic(JRadioButton jbPublic) {
-        this.jbPublic = jbPublic;
-    }
-
-    public JRadioButton getJbProtected() {
-        return jbProtected;
-    }
-
-    public void setJbProtected(JRadioButton jbProtected) {
-        this.jbProtected = jbProtected;
-    }
-
-    public JRadioButton getJbInt() {
-        return jbInt;
-    }
-
-    public void setJbInt(JRadioButton jbInt) {
-        this.jbInt = jbInt;
-    }
-
-    public JRadioButton getJbFloat() {
-        return jbFloat;
-    }
-
-    public void setJbFloat(JRadioButton jbFloat) {
-        this.jbFloat = jbFloat;
-    }
-
-    public JRadioButton getJbDouble() {
-        return jbDouble;
-    }
-
-    public void setJbDouble(JRadioButton jbDouble) {
-        this.jbDouble = jbDouble;
-    }
-
-    public JRadioButton getJbString() {
-        return jbString;
-    }
-
-    public void setJbString(JRadioButton jbString) {
-        this.jbString = jbString;
-    }
-
-    public JRadioButton getJbBoolean() {
-        return jbBoolean;
-    }
-
-    public void setJbBoolean(JRadioButton jbBoolean) {
-        this.jbBoolean = jbBoolean;
-    }
-
-    public JTextField getTfNaziv() {
-        return tfNaziv;
-    }
-
-    public void setTfNaziv(JTextField tfNaziv) {
-        this.tfNaziv = tfNaziv;
-    }
-
-    public JButton getJbDodaj() {
-        return jbDodaj;
-    }
-
-    public void setJbDodaj(JButton jbDodaj) {
-        this.jbDodaj = jbDodaj;
     }
 
     public JButton getJbIme() {
         return jbIme;
     }
 
-    public void setJbIme(JButton jbIme) {
-        this.jbIme = jbIme;
-    }
-
     public JTextField getTfIme() {
         return tfIme;
     }
 
-    public void setTfIme(JTextField tfIme) {
-        this.tfIme = tfIme;
+    public JRadioButton getJbPrivate() {
+        return jbPrivate;
+    }
+
+    public JRadioButton getJbPublic() {
+        return jbPublic;
+    }
+
+    public JRadioButton getJbProtected() {
+        return jbProtected;
+    }
+
+    public JRadioButton getJbInt() {
+        return jbInt;
+    }
+
+    public JRadioButton getJbFloat() {
+        return jbFloat;
+    }
+
+    public JRadioButton getJbDouble() {
+        return jbDouble;
+    }
+
+    public JRadioButton getJbString() {
+        return jbString;
+    }
+
+    public JRadioButton getJbBoolean() {
+        return jbBoolean;
+    }
+
+    public JTextField getTfNaziv() {
+        return tfNaziv;
+    }
+
+    public JButton getJbDodaj() {
+        return jbDodaj;
+    }
+
+    public JRadioButton getJbVoid() {
+        return jbVoid;
     }
 }

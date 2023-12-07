@@ -11,8 +11,8 @@ public class AddConnectionAction extends AbstractClassyAction {
     public AddConnectionAction() {
         //putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
         putValue(SMALL_ICON, loadIcon("/images/connection.png"));
-        putValue(NAME, "");
-        putValue(SHORT_DESCRIPTION, "");
+        putValue(NAME, "Dodaj vezu");
+        putValue(SHORT_DESCRIPTION, "Dodaj vezu");
     }
 
     @Override

@@ -47,12 +47,22 @@ public class DodajUKlasuAction extends AbstractClassyAction{
                 !MainFrame.getInstance().getKlasaProzor().getJbFloat().isSelected() &&
                 !MainFrame.getInstance().getKlasaProzor().getJbDouble().isSelected() &&
                 !MainFrame.getInstance().getKlasaProzor().getJbString().isSelected() &&
-                !MainFrame.getInstance().getKlasaProzor().getJbBoolean().isSelected()){
+                !MainFrame.getInstance().getKlasaProzor().getJbBoolean().isSelected() &&
+                !MainFrame.getInstance().getKlasaProzor().getJbVoid().isSelected()){
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije odabran tip!", MessageType.ERROR);
             return;
         }
         else if(MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().isEmpty() || MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().equals(" ")){
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije upisan naziv!", MessageType.ERROR);
+            return;
+        }
+        else if(MainFrame.getInstance().getKlasaProzor().getAtribut().isSelected() && MainFrame.getInstance().getKlasaProzor().getJbVoid().isSelected()){
+            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Atribut ne moze imati tip void!", MessageType.ERROR);
+            return;
+        }
+        else if(MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().trim().contains(" ")){
+            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Naziv ne sme da sadrzi razmak!", MessageType.ERROR);
+            MainFrame.getInstance().getKlasaProzor().getTfNaziv().setText("");
             return;
         }
 
@@ -67,23 +77,27 @@ public class DodajUKlasuAction extends AbstractClassyAction{
         else if(MainFrame.getInstance().getKlasaProzor().getJbDouble().isSelected()) tip = "double";
         else if(MainFrame.getInstance().getKlasaProzor().getJbString().isSelected()) tip = "string";
         else if(MainFrame.getInstance().getKlasaProzor().getJbBoolean().isSelected()) tip = "boolean";
+        else if(MainFrame.getInstance().getKlasaProzor().getJbVoid().isSelected()) tip = "void";
 
         String naziv = MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().toLowerCase();
 
         //provera da li je duplikat
         for(ClassContent c : ((Klasa) klasaPainter.getElement()).getClassContentList())
             if(c.getNaziv().equals(naziv)) {
-                ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Zeljeno ime je vec rezervisano!", MessageType.ERROR);
+                ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Zeljen naziv je zauzet!", MessageType.ERROR);
                 MainFrame.getInstance().getKlasaProzor().getTfNaziv().setText("");
                 return;
             }
 
-        if(MainFrame.getInstance().getKlasaProzor().getAtribut().isSelected())
+        if(MainFrame.getInstance().getKlasaProzor().getAtribut().isSelected()) {
             ((Klasa) klasaPainter.getElement()).getClassContentList().add(new Atributi(vidljivost, tip, naziv));
-        else if(MainFrame.getInstance().getKlasaProzor().getMetoda().isSelected())
+        }
+        else if(MainFrame.getInstance().getKlasaProzor().getMetoda().isSelected()) {
             ((Klasa) klasaPainter.getElement()).getClassContentList().add(new Metode(vidljivost, tip, naziv));
+        }
 
         dijagramView.repaint();
         MainFrame.getInstance().getKlasaProzor().getTfNaziv().setText("");
+        //MainFrame.getInstance().getKlasaProzor().getLista().revalidate();
     }
 }

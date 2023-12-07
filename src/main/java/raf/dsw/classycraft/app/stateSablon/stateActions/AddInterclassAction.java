@@ -9,8 +9,8 @@ public class AddInterclassAction extends AbstractClassyAction {
 
     public AddInterclassAction() {
         putValue(SMALL_ICON, loadIcon("/images/add.png"));
-        putValue(NAME, "");
-        putValue(SHORT_DESCRIPTION, "");
+        putValue(NAME, "Dodaj klasu/interfejs/enum");
+        putValue(SHORT_DESCRIPTION, "Dodaj klasu/interfejs/enum");
     }
 
     @Override

@@ -9,8 +9,8 @@ public class DuplicateAction extends AbstractClassyAction {
 
     public DuplicateAction(){
         putValue(SMALL_ICON, loadIcon("/images/duplicate.png"));
-        putValue(NAME, "");
-        putValue(SHORT_DESCRIPTION, "");
+        putValue(NAME, "Napravi kopiju");
+        putValue(SHORT_DESCRIPTION, "Napravi kopiju");
     }
 
     @Override

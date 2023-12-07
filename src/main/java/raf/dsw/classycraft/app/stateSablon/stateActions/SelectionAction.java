@@ -10,8 +10,8 @@ public class SelectionAction extends AbstractClassyAction {
     public SelectionAction() {
         //putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
         putValue(SMALL_ICON, loadIcon("/images/select.png"));
-        putValue(NAME, "");
-        putValue(SHORT_DESCRIPTION, "");
+        putValue(NAME, "Selektuj");
+        putValue(SHORT_DESCRIPTION, "Selektuj");
     }
 
     @Override

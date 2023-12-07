@@ -30,7 +30,7 @@ public class DodajUEnumAction extends AbstractClassyAction{
 
         //greske pri unosu podataka:
         if(MainFrame.getInstance().getEnumProzor().getTfNaziv().getText().isEmpty() || MainFrame.getInstance().getEnumProzor().getTfNaziv().getText().equals(" ")){
-            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije upisan naziv!", MessageType.ERROR);
+            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije upisan naziv enuma!", MessageType.ERROR);
             return;
         }
 
@@ -38,10 +38,16 @@ public class DodajUEnumAction extends AbstractClassyAction{
 
         //provera da li je duplikat
         if(((EnumM) enumPainter.getElement()).getListEnuma().contains(naziv)){
-            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Zeljeno ime je vec rezervisano!", MessageType.ERROR);
+            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Zeljen naziv je zauzet!", MessageType.ERROR);
             MainFrame.getInstance().getEnumProzor().getTfNaziv().setText("");
             return;
         }
+        else if(naziv.trim().contains(" ")){
+            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Naziv enuma ne sme da sadrzi razmak!", MessageType.ERROR);
+            MainFrame.getInstance().getEnumProzor().getTfNaziv().setText("");
+            return;
+        }
+
         ((EnumM) enumPainter.getElement()).getListEnuma().add(naziv);
 
         dijagramView.repaint();

@@ -27,10 +27,6 @@ public class Klasa extends Interclass{
         subscribers = new ArrayList<>();
     }
 
-    public List<ClassContent> getClassContentList() {
-        return classContentList;
-    }
-
     public void setClassContentList(List<ClassContent> classContentList) {
         this.classContentList = classContentList;
     }
@@ -59,7 +55,11 @@ public class Klasa extends Interclass{
             }
         }
     }
-      
+
+    public List<ClassContent> getClassContentList() {
+        return classContentList;
+    }
+
     public String getNaziv() {
         return naziv;
     }

@@ -1,11 +1,22 @@
 package raf.dsw.classycraft.app.gui.swing.view;
 
 
+import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Metode;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class InterfejsProzor extends JFrame {
+
+    private List<Metode> metodeList = new ArrayList<>();
+    private DefaultListModel<Metode> defaultListModel = new DefaultListModel<>();
+    private  JList<Metode> lista = new JList<>();
+
+    private JButton jbPromeni;
+    private JButton jbObrisi;
 
     private JButton jbIme;
     private JTextField tfIme;
@@ -19,6 +30,7 @@ public class InterfejsProzor extends JFrame {
     private JRadioButton jbDouble;
     private JRadioButton jbString;
     private JRadioButton jbBoolean;
+    private JRadioButton jbVoid;
 
     private JTextField tfNaziv;
 
@@ -36,6 +48,26 @@ public class InterfejsProzor extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Dodavanje u interfejs");
 
+        //prikaz metoda
+        JLabel lbLista = new JLabel("Lista metoda:");
+        metodeList = new ArrayList<>();
+        defaultListModel = new DefaultListModel<>();
+        lista = new JList<>();
+        lista.setModel(defaultListModel);
+        for(Metode m : metodeList)
+            defaultListModel.addElement(m);
+
+        lista.updateUI();
+
+        //dugmad za promenu ili brisanje vec postojece metode
+        jbPromeni = new JButton("Promeni");
+        jbObrisi = new JButton("Obrisi");
+        //horizontalno grupisanje
+        JPanel jpPromeniObrisi = new JPanel();
+        jpPromeniObrisi.setAlignmentX(Component.LEFT_ALIGNMENT);
+        jpPromeniObrisi.setLayout(new BoxLayout(jpPromeniObrisi, BoxLayout.X_AXIS));
+        jpPromeniObrisi.add(jbPromeni); jpPromeniObrisi.add(jbObrisi);
+
         //polje za proenu imena klase
         JLabel lbIme = new JLabel("Novo ime:");
         tfIme = new JTextField();
@@ -48,6 +80,11 @@ public class InterfejsProzor extends JFrame {
         jbPublic = new JRadioButton("public");
         jbProtected = new JRadioButton("protected");
         bgVidljivost.add(jbPrivate); bgVidljivost.add(jbPublic); bgVidljivost.add(jbProtected);
+        //horizontalno grupisanje
+        JPanel jpVidljivost = new JPanel();
+        jpVidljivost.setAlignmentX(Component.LEFT_ALIGNMENT);
+        jpVidljivost.setLayout(new BoxLayout(jpVidljivost, BoxLayout.X_AXIS));
+        jpVidljivost.add(jbPrivate); jpVidljivost.add(jbPublic); jpVidljivost.add(jbProtected);
 
         // tip
         JLabel lbTip = new JLabel("Tip:");
@@ -57,126 +94,112 @@ public class InterfejsProzor extends JFrame {
         jbDouble = new JRadioButton("double");
         jbString = new JRadioButton("string");
         jbBoolean = new JRadioButton("boolean");
-        bgTip.add(jbInt); bgTip.add(jbFloat); bgTip.add(jbDouble); bgTip.add(jbString); bgTip.add(jbBoolean);
-
-        //naziv
-        JLabel lbNaziv = new JLabel("Naziv:");
-        tfNaziv = new JTextField();
-
-        jbDodaj = new JButton("Dodaj");
-
-        JPanel jpVidljivost = new JPanel();
-        jpVidljivost.setAlignmentX(Component.LEFT_ALIGNMENT);
-        jpVidljivost.setLayout(new BoxLayout(jpVidljivost, BoxLayout.X_AXIS));
-        jpVidljivost.add(jbPrivate); jpVidljivost.add(jbPublic); jpVidljivost.add(jbProtected);
-
+        jbVoid = new JRadioButton("void");
+        bgTip.add(jbInt); bgTip.add(jbFloat); bgTip.add(jbDouble); bgTip.add(jbString); bgTip.add(jbBoolean); bgTip.add(jbVoid);
+        //horizontalno grupisanje
         JPanel jpTip = new JPanel();
         jpTip.setAlignmentX(Component.LEFT_ALIGNMENT);
         jpTip.setLayout(new BoxLayout(jpTip, BoxLayout.X_AXIS));
         jpTip.add(jbInt); jpTip.add(jbFloat); jpTip.add(jbDouble); jpTip.add(jbString); jpTip.add(jbBoolean);
 
+        //naziv
+        JLabel lbNaziv = new JLabel("Naziv:");
+        tfNaziv = new JTextField();
+
+        //dugme za dodavanje atributa / metoda u klasu
+        jbDodaj = new JButton("Dodaj");
+
+        //glavni JPanel:
         JPanel jPanel = new JPanel();
         jPanel.setLayout(new BoxLayout(jPanel, BoxLayout.Y_AXIS));
         jPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        jPanel.add(lbIme); jPanel.add(tfIme); jPanel.add(jbIme); jPanel.add(lbVidljivost); jPanel.add(jpVidljivost);jPanel.add(lbTip); jPanel.add(jpTip); jPanel.add(lbNaziv); jPanel.add(tfNaziv); jPanel.add(jbDodaj);
+
+        //lista metoda
+        jPanel.add(lbLista); jPanel.add(new JScrollPane(lista));
+        jPanel.add(jpPromeniObrisi);
+        jPanel.add(lbIme); jPanel.add(tfIme); jPanel.add(jbIme);
+        jPanel.add(lbVidljivost); jPanel.add(jpVidljivost);
+        jPanel.add(lbTip); jPanel.add(jpTip);
+        jPanel.add(lbNaziv); jPanel.add(tfNaziv);
+        jPanel.add(jbDodaj);
 
         jPanel.setBorder(new EmptyBorder(new Insets(15, 10, 15, 10)));
         this.add(jPanel);
     }
 
-    public JRadioButton getJbPrivate() {
-        return jbPrivate;
+    public void setMetodeList(List<Metode> metodeList) {
+        this.metodeList = metodeList;
     }
 
-    public void setJbPrivate(JRadioButton jbPrivate) {
-        this.jbPrivate = jbPrivate;
+    public List<Metode> getMetodeList() {
+        return metodeList;
     }
 
-    public JRadioButton getJbPublic() {
-        return jbPublic;
+    public DefaultListModel<Metode> getDefaultListModel() {
+        return defaultListModel;
     }
 
-    public void setJbPublic(JRadioButton jbPublic) {
-        this.jbPublic = jbPublic;
+    public JList<Metode> getLista() {
+        return lista;
     }
 
-    public JRadioButton getJbProtected() {
-        return jbProtected;
+    public JButton getJbPromeni() {
+        return jbPromeni;
     }
 
-    public void setJbProtected(JRadioButton jbProtected) {
-        this.jbProtected = jbProtected;
+    public JButton getJbObrisi() {
+        return jbObrisi;
     }
 
-    public JRadioButton getJbInt() {
-        return jbInt;
-    }
-
-    public void setJbInt(JRadioButton jbInt) {
-        this.jbInt = jbInt;
-    }
-
-    public JRadioButton getJbFloat() {
-        return jbFloat;
-    }
-
-    public void setJbFloat(JRadioButton jbFloat) {
-        this.jbFloat = jbFloat;
-    }
-
-    public JRadioButton getJbDouble() {
-        return jbDouble;
-    }
-
-    public void setJbDouble(JRadioButton jbDouble) {
-        this.jbDouble = jbDouble;
-    }
-
-    public JRadioButton getJbString() {
-        return jbString;
-    }
-
-    public void setJbString(JRadioButton jbString) {
-        this.jbString = jbString;
-    }
-
-    public JRadioButton getJbBoolean() {
-        return jbBoolean;
-    }
-
-    public void setJbBoolean(JRadioButton jbBoolean) {
-        this.jbBoolean = jbBoolean;
-    }
-
-    public JTextField getTfNaziv() {
-        return tfNaziv;
-    }
-
-    public void setTfNaziv(JTextField tfNaziv) {
-        this.tfNaziv = tfNaziv;
-    }
-
-    public JButton getJbDodaj() {
-        return jbDodaj;
-    }
-
-    public void setJbDodaj(JButton jbDodaj) {
-        this.jbDodaj = jbDodaj;
+    public JRadioButton getJbVoid() {
+        return jbVoid;
     }
 
     public JButton getJbIme() {
         return jbIme;
     }
 
-    public void setJbIme(JButton jbIme) {
-        this.jbIme = jbIme;
-    }
-
     public JTextField getTfIme() {
         return tfIme;
     }
 
-    public void setTfIme(JTextField tfIme) {
-        this.tfIme = tfIme;
+    public JRadioButton getJbPrivate() {
+        return jbPrivate;
+    }
+
+    public JRadioButton getJbPublic() {
+        return jbPublic;
+    }
+
+    public JRadioButton getJbProtected() {
+        return jbProtected;
+    }
+
+    public JRadioButton getJbInt() {
+        return jbInt;
+    }
+
+    public JRadioButton getJbFloat() {
+        return jbFloat;
+    }
+
+    public JRadioButton getJbDouble() {
+        return jbDouble;
+    }
+
+    public JRadioButton getJbString() {
+        return jbString;
+    }
+
+    public JRadioButton getJbBoolean() {
+        return jbBoolean;
+    }
+
+    public JTextField getTfNaziv() {
+        return tfNaziv;
+    }
+
+    public JButton getJbDodaj() {
+        return jbDodaj;
     }
 }

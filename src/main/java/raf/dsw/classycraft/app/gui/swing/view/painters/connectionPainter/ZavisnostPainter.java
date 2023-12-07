@@ -60,7 +60,7 @@ public class ZavisnostPainter extends ConnectionPainter {
                 ((GeneralPath)shape).lineTo(point2.x, point2.y);
                 ((GeneralPath)shape).lineTo(point2.x + 10, point2.y + 10);
                 ((GeneralPath)shape).lineTo(point2.x, point2.y);
-                g.setStroke(new BasicStroke(element.getStroke(), BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{9}, 0));
+                g.setStroke(new BasicStroke(element.getStroke(), BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{5}, 0));
                 ((GeneralPath)shape).lineTo(point1.x, point1.y);
                 ((GeneralPath)shape).closePath();
             }
@@ -70,7 +70,7 @@ public class ZavisnostPainter extends ConnectionPainter {
                 ((GeneralPath)shape).lineTo(point2.x, point2.y);
                 ((GeneralPath)shape).lineTo(point2.x - 10, point2.y - 10);
                 ((GeneralPath)shape).lineTo(point2.x, point2.y);
-                g.setStroke(new BasicStroke(element.getStroke(), BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{9}, 0));
+                g.setStroke(new BasicStroke(element.getStroke(), BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{5}, 0));
                 ((GeneralPath)shape).lineTo(point1.x, point1.y);
                 ((GeneralPath)shape).closePath();
             }
@@ -80,7 +80,7 @@ public class ZavisnostPainter extends ConnectionPainter {
                 ((GeneralPath)shape).lineTo(point2.x, point2.y);
                 ((GeneralPath)shape).lineTo(point2.x + 10, point2.y+10);
                 ((GeneralPath)shape).lineTo(point2.x, point2.y);
-                g.setStroke(new BasicStroke(element.getStroke(), BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{9}, 0));
+                g.setStroke(new BasicStroke(element.getStroke(), BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{5}, 0));
                 ((GeneralPath)shape).lineTo(point1.x, point1.y);
                 ((GeneralPath)shape).closePath();
             }
@@ -90,12 +90,11 @@ public class ZavisnostPainter extends ConnectionPainter {
                 ((GeneralPath)shape).lineTo(point2.x, point2.y);
                 ((GeneralPath)shape).lineTo(point2.x - 10, point2.y+10);
                 ((GeneralPath)shape).lineTo(point2.x, point2.y);
-                g.setStroke(new BasicStroke(element.getStroke(), BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{9}, 0));
+                g.setStroke(new BasicStroke(element.getStroke(), BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{5}, 0));
                 ((GeneralPath)shape).lineTo(point1.x, point1.y);
                 ((GeneralPath)shape).closePath();
             }
         }
-
         g.draw(shape);
     }
 
