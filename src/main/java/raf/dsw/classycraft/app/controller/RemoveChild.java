@@ -1,17 +1,21 @@
 package raf.dsw.classycraft.app.controller;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.ProjectExplorer;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
+import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
+import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.Iterator;
 
 public class RemoveChild extends AbstractClassyAction{
 
@@ -52,7 +56,22 @@ public class RemoveChild extends AbstractClassyAction{
                     SwingUtilities.updateComponentTreeUI(classyTreeImplementation.getTreeView());
                 }
 
-            }///ako zeli da obrise paket ili dijagram
+            }
+            ///brisanje dijagramElemenata
+            else if(selected.getClassyNode() instanceof DijagramElement){
+                DijagramView dijagramView = (DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent();
+                for (Iterator<ElementPainter> iterator = dijagramView.getElementPainterList().iterator(); iterator.hasNext(); ) {
+                    ElementPainter el = iterator.next();
+                    if(el.getElement() == selected.getClassyNode()) {
+                        iterator.remove();
+                        dijagramView.repaint();
+                        MainFrame.getInstance().getClassyTree().getSelectedNode().removeFromParent();
+                        ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
+                        SwingUtilities.updateComponentTreeUI(classyTreeImplementation.getTreeView());
+                    }
+                }
+            }
+            ///ako zeli da obrise paket ili dijagram
             else if(!(selected.getClassyNode() instanceof ProjectExplorer)){
                 MainFrame.getInstance().getClassyTree().getSelectedNode().removeFromParent();
                 ClassyNodeComposite cns = (ClassyNodeComposite) selected.getClassyNode().getParent();

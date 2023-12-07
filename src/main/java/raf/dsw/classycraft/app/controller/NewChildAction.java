@@ -22,7 +22,7 @@ public class NewChildAction extends AbstractClassyAction{
     public void actionPerformed(ActionEvent e) {
         ClassyTreeItem selected = (ClassyTreeItem) MainFrame.getInstance().getClassyTree().getSelectedNode();
         if(selected != null)
-            MainFrame.getInstance().getClassyTree().addChild(selected);
+            MainFrame.getInstance().getClassyTree().addChild(selected, null);
         else
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije selektovan roditelj", MessageType.ERROR);
     }

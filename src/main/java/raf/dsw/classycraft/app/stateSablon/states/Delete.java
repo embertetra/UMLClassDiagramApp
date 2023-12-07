@@ -1,12 +1,19 @@
 package raf.dsw.classycraft.app.stateSablon.states;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Connection;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
+import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
+import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
+import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ConnectionPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
 import raf.dsw.classycraft.app.stateSablon.State;
 
+import javax.swing.*;
+import javax.swing.tree.TreeNode;
 import java.awt.*;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
@@ -17,13 +24,23 @@ public class Delete implements State {
     @Override
     public void misKliknut(int x, int y, DijagramView dijagramView) {
 
+        ///pronalazenje dijagrama u stablu
+        ClassyTreeItem item = null;
+        ClassyTreeItem selected = MainFrame.getInstance().getClassyTree().getSelectedNode();
+        for(int i=0; i<selected.getChildCount(); i++){
+            ClassyTreeItem c = (ClassyTreeItem)selected.getChildAt(i);
+            ClassyNode cn = c.getClassyNode();
+            if(cn.getName().equals(dijagramView.getClassyNode().getName()))
+                item = c;
+        }
+
         int flag = 0;
         for(Shape s : dijagramView.getSelectionModel()){
             if(s.contains(new Point(x,y)))flag=1;
         }
+
         ///brisanje multi selekcije
         if (dijagramView.getSelectionModel().size() > 0 && flag == 1) {
-            System.out.println("usao");
             for (Iterator<ElementPainter> iterator = dijagramView.getElementPainterList().iterator(); iterator.hasNext(); ) {
                 ElementPainter el = iterator.next();
 
@@ -34,6 +51,20 @@ public class Delete implements State {
                             Dijagram d = (Dijagram) el.getElement().getParent();
                             d.removeChild(el.getElement());
                             iterator.remove();
+                            if(item != null){
+                                for(int i=0; i < item.getChildCount(); i++) {
+                                    if (item.getChildAt(i) != null) {
+                                        TreeNode tn = item.getChildAt(i);
+                                        ClassyNode cn = ((ClassyTreeItem)tn).getClassyNode();
+                                        if (cn instanceof Connection) {
+                                            item.remove(i);
+                                            ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
+                                            SwingUtilities.updateComponentTreeUI(classyTreeImplementation.getTreeView());
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
                             break;
                         }
                     }
@@ -51,6 +82,20 @@ public class Delete implements State {
                             Dijagram d = (Dijagram) el.getElement().getParent();
                             d.removeChild(el.getElement());
                             iterator.remove();
+                            if(item != null){
+                                for(int i=0; i < item.getChildCount(); i++) {
+                                    if (item.getChildAt(i) != null) {
+                                        TreeNode tn = item.getChildAt(i);
+                                        ClassyNode cn = ((ClassyTreeItem)tn).getClassyNode();
+                                        if (cn instanceof Interclass) {
+                                            item.remove(i);
+                                            ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
+                                            SwingUtilities.updateComponentTreeUI(classyTreeImplementation.getTreeView());
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
                             break;
                         }
                     }
@@ -79,6 +124,20 @@ public class Delete implements State {
                     Dijagram d = (Dijagram) el.getElement().getParent();
                     d.removeChild(el.getElement());
                     iterator.remove();
+                    if(item != null){
+                        for(int i=0; i < item.getChildCount(); i++) {
+                            if (item.getChildAt(i) != null) {
+                                TreeNode tn = item.getChildAt(i);
+                                ClassyNode cn = ((ClassyTreeItem)tn).getClassyNode();
+                                if (cn instanceof Connection) {
+                                    item.remove(i);
+                                    ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
+                                    SwingUtilities.updateComponentTreeUI(classyTreeImplementation.getTreeView());
+                                    break;
+                                }
+                            }
+                        }
+                    }
                     return;
                 }
             }
@@ -86,15 +145,45 @@ public class Delete implements State {
             if (el.elementAt(new Point(x, y))) {
                 Dijagram d = (Dijagram) el.getElement().getParent();
                 for(ElementPainter ep : dijagramView.getElementPainterList()){
-                    if(ep instanceof ConnectionPainter){
+                    if(ep instanceof ConnectionPainter) {
                         ConnectionPainter cp = (ConnectionPainter) ep;
                         Connection c = (Connection) cp.getElement();
-                        if(c.getFrom() == el.getElement() || c.getTo() == el.getElement())
+                        if (c.getFrom() == el.getElement() || c.getTo() == el.getElement()) {
                             d.removeChild(c);
+                            if(item != null){
+                                for(int i=0; i < item.getChildCount(); i++) {
+                                    if (item.getChildAt(i) != null) {
+                                        TreeNode tn = item.getChildAt(i);
+                                        ClassyNode cn = ((ClassyTreeItem)tn).getClassyNode();
+                                        if (cn instanceof Connection) {
+                                            item.remove(i);
+                                            ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
+                                            SwingUtilities.updateComponentTreeUI(classyTreeImplementation.getTreeView());
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
                 d.removeChild(el.getElement());
                 iterator.remove();
+                if(item != null){
+                    for(int i=0; i < item.getChildCount(); i++) {
+                        if (item.getChildAt(i) != null) {
+                            TreeNode tn = item.getChildAt(i);
+                            ClassyNode cn = ((ClassyTreeItem)tn).getClassyNode();
+                            if (cn instanceof Interclass) {
+                                item.remove(i);
+                                ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
+                                SwingUtilities.updateComponentTreeUI(classyTreeImplementation.getTreeView());
+                                break;
+                            }
+                        }
+                    }
+
+                }
             }
         }
 

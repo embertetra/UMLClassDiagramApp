@@ -2,7 +2,6 @@ package raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
-import raf.dsw.classycraft.app.observer.IPublisher;
 import raf.dsw.classycraft.app.observer.ISubscriber;
 
 import java.awt.*;

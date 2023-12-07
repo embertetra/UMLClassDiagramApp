@@ -19,14 +19,14 @@ public class PackageView implements ISubscriber {
     private JLabel nazivProjekta;
     private JLabel nazivAutora;
     private JPanel rightSide;
-    private ClassyNode parent;
+    private ClassyNode classyNode;
     private List<DijagramView> tabovi;
     private JPanel toolMenu;
     private JPanel downSide;
     private StateManager stateManager;
 
     public PackageView() {
-        this.parent = null;
+        this.classyNode = null;
         stateManager = new StateManager();
 
         nazivProjekta = new JLabel("    ");
@@ -76,7 +76,7 @@ public class PackageView implements ISubscriber {
         ///Update dodatih dijagrama u stablo, prikaz u JTabbu
         if (poruka.getOznaka() == 0) {
             brojac = 0;
-            if (this.parent != null && parent2.getName().equals(this.parent.getName())) {
+            if (this.classyNode != null && parent2.getName().equals(this.classyNode.getName())) {
                 for (ClassyNode c : parent2.getChildren()) {
                     totalTabs = jTabbedPane.getTabCount();
                     for (int i = 0; i < totalTabs; i++) {
@@ -94,7 +94,7 @@ public class PackageView implements ISubscriber {
         ///Update obrisanih dijagrama u stablo, prikaz u JTabbu
         else if (poruka.getOznaka() == 1) {
             brojac = 0;
-            if (this.parent != null && parent2.getName().equals(this.parent.getName())) {
+            if (this.classyNode != null && parent2.getName().equals(this.classyNode.getName())) {
                 totalTabs = jTabbedPane.getTabCount();
                 for (int i = 0; i < totalTabs; i++) {
                     for (ClassyNode c : parent2.getChildren()) {
@@ -110,12 +110,12 @@ public class PackageView implements ISubscriber {
         }
         ///update obrisanih podpaketa
         else if (poruka.getOznaka() == 2) {
-            ClassyNode tmp = parent;
-            if (parent != null) {
+            ClassyNode tmp = classyNode;
+            if (classyNode != null) {
                 while (!(tmp instanceof Project)) {
                     if (tmp.getName().equals(poruka.getParent().getName())) {
                         jTabbedPane.removeAll();
-                        parent = null;
+                        classyNode = null;
                         return;
                     }
                     tmp = tmp.getParent();
@@ -125,8 +125,8 @@ public class PackageView implements ISubscriber {
         ///update brisanje paketa
         else if (poruka.getOznaka() == 3) {
             ClassyNode pck = poruka.getParent();
-            if (parent != null) {
-                ClassyNode tmp = parent;
+            if (classyNode != null) {
+                ClassyNode tmp = classyNode;
                 while (true) {
                     ClassyNode tmp2 = tmp.getParent();
                     if (tmp2 instanceof Project)
@@ -136,7 +136,7 @@ public class PackageView implements ISubscriber {
 
                 if (tmp.getName().equals(pck.getName())) {
                     jTabbedPane.removeAll();
-                    parent = null;
+                    classyNode = null;
                 }
             }
         }
@@ -148,8 +148,8 @@ public class PackageView implements ISubscriber {
         }
         ///Update brisanje projekta
         else if (poruka.getOznaka() == 5) {
-            if (parent != null) {
-                ClassyNode p = this.parent;
+            if (classyNode != null) {
+                ClassyNode p = this.classyNode;
                 while (true) {
                     if (p instanceof Project)
                         break;
@@ -157,7 +157,7 @@ public class PackageView implements ISubscriber {
                 }
                 if (p.getName().equals(poruka.getParent().getName())) {
                     jTabbedPane.removeAll();
-                    parent = null;
+                    classyNode = null;
                     nazivProjekta.setText("    ");
                     nazivAutora.setText("    ");
                 }
@@ -169,8 +169,8 @@ public class PackageView implements ISubscriber {
         }
         ///Update promena autora
         else if (poruka.getOznaka() == 6) {
-            if (parent != null) {
-                ClassyNode p = this.parent;
+            if (classyNode != null) {
+                ClassyNode p = this.classyNode;
                 while (true) {
                     if (p instanceof Project)
                         break;
@@ -200,10 +200,12 @@ public class PackageView implements ISubscriber {
             stateManager.getCurrentState().misPrivucen(x, y, dijagramView);
     }
     public void startMouseState(){
-        stateManager.setMouse();
-        ((DijagramView)jTabbedPane.getSelectedComponent()).getSelectionModel().clear();
-        ((DijagramView)jTabbedPane.getSelectedComponent()).setSelection(null);
-        ((DijagramView)jTabbedPane.getSelectedComponent()).repaint();
+        if(stateManager.getCurrentState() != null) {
+            stateManager.setMouse();
+            ((DijagramView) jTabbedPane.getSelectedComponent()).getSelectionModel().clear();
+            ((DijagramView) jTabbedPane.getSelectedComponent()).setSelection(null);
+            ((DijagramView) jTabbedPane.getSelectedComponent()).repaint();
+        }
     }
 
     public void startAddInterclassState() {
@@ -239,8 +241,8 @@ public class PackageView implements ISubscriber {
         return stateManager;
     }
 
-    public void setParent(ClassyNode parent) {
-        this.parent = parent;
+    public void setClassyNode(ClassyNode classyNode) {
+        this.classyNode = classyNode;
     }
 
     public void promeniNazivProjekta(String string) {
@@ -263,7 +265,11 @@ public class PackageView implements ISubscriber {
         return nazivProjekta;
     }
 
-    public ClassyNode getParent() {
-        return parent;
+    public ClassyNode getClassyNode() {
+        return classyNode;
+    }
+
+    public JPanel getDownSide() {
+        return downSide;
     }
 }

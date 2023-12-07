@@ -15,7 +15,7 @@ public class AddInterclassAction extends AbstractClassyAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(MainFrame.getInstance().getPackageView().getParent() != null && MainFrame.getInstance().getPackageView().getjTabbedPane().getTabCount() > 0) {
+        if(MainFrame.getInstance().getPackageView().getClassyNode() != null && MainFrame.getInstance().getPackageView().getjTabbedPane().getTabCount() > 0) {
             Object[] options = {"Class", "Interface", "Enum"};
             int n = JOptionPane.showOptionDialog(MainFrame.getInstance(), "Odaberite opciju:", "Interclass", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
             if (n == 0)

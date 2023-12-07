@@ -10,6 +10,8 @@ import raf.dsw.classycraft.app.observer.ISubscriber;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainFrame extends JFrame implements ISubscriber {
     private static MainFrame instance;
@@ -27,6 +29,7 @@ public class MainFrame extends JFrame implements ISubscriber {
     private KlasaProzor klasaProzor;
     private InterfejsProzor interfejsProzor;
     private EnumProzor enumProzor;
+    private List<PackageView> listaPackageView;
 
     private MainFrame() {
     }
@@ -41,6 +44,7 @@ public class MainFrame extends JFrame implements ISubscriber {
         klasaProzor = new KlasaProzor();
         interfejsProzor = new InterfejsProzor();
         enumProzor = new EnumProzor();
+        listaPackageView = new ArrayList<>();
 
         ApplicationFramework.getInstance().getMessageGenerator().getSubscribers().add(this);
 
@@ -125,5 +129,13 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     public EnumProzor getEnumProzor() {
         return enumProzor;
+    }
+
+    public List<PackageView> getListaPackageView() {
+        return listaPackageView;
+    }
+
+    public void setPackageView(PackageView packageView) {
+        this.packageView = packageView;
     }
 }
