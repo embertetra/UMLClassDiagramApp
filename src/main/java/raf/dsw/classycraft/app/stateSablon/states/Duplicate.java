@@ -33,6 +33,7 @@ public class Duplicate implements State {
                     else if (ip instanceof KlasaPainter) {
                         Klasa k = (Klasa) ip.getElement();
                         duplikatK = new Klasa("name", dijagramView.getClassyNode(), 2, k.getNaziv(), k.getVidljivost(), new Point(x + ip.getWidth()/2, y + ip.getHeightUkupno()/2));
+                        duplikatK.setNaziv(k.getNaziv()); duplikatK.setClassContentList(k.getClassContentList());
                         dijagramView.getElementPainterList().add(new KlasaPainter(duplikatK));
                         Dijagram d = (Dijagram) dijagramView.getClassyNode();
                         d.addChild(duplikatK);
@@ -40,6 +41,7 @@ public class Duplicate implements State {
                     } else if (ip instanceof InterfejsPainter) {
                         Interfejs i = (Interfejs) ip.getElement();
                         duplikatI = new Interfejs("name", dijagramView.getClassyNode(), 2, i.getNaziv(), i.getVidljivost(), new Point(x + ip.getWidth()/2, y + ip.getHeightUkupno()/2));
+                        duplikatI.setNaziv(i.getNaziv()); duplikatI.setMetodeList(i.getMetodeList());
                         dijagramView.getElementPainterList().add(new InterfejsPainter(duplikatI));
                         Dijagram d = (Dijagram) dijagramView.getClassyNode();
                         d.addChild(duplikatI);

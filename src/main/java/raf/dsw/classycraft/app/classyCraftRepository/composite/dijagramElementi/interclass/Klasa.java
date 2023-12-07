@@ -28,10 +28,6 @@ public class Klasa extends Interclass implements IPublisher {
         subscribers = new ArrayList<>();
     }
 
-    public List<ClassContent> getClassContentList() {
-        return classContentList;
-    }
-
     public void setClassContentList(List<ClassContent> classContentList) {
         this.classContentList = classContentList;
     }
@@ -60,7 +56,11 @@ public class Klasa extends Interclass implements IPublisher {
             }
         }
     }
-      
+
+    public List<ClassContent> getClassContentList() {
+        return classContentList;
+    }
+
     public String getNaziv() {
         return naziv;
     }

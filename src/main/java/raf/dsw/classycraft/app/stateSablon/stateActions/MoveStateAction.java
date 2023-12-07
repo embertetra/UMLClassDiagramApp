@@ -8,8 +8,8 @@ import java.awt.event.ActionEvent;
 public class MoveStateAction extends AbstractClassyAction {
     public MoveStateAction() {
         putValue(SMALL_ICON, loadIcon("/images/move.png"));
-        putValue(NAME, "");
-        putValue(SHORT_DESCRIPTION, "");
+        putValue(NAME, "Pomeri");
+        putValue(SHORT_DESCRIPTION, "Promeri");
     }
 
     @Override

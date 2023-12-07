@@ -4,7 +4,6 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Atri
 import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.ClassContent;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Metode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
 import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
 
@@ -16,7 +15,7 @@ public class KlasaPainter extends InterclassPainter {
     public KlasaPainter(DijagramElement element) {
         super(element);
         /*
-        ///test primeri
+        //test primeri
         Klasa k = (Klasa) this.element;
         k.getClassContentList().add(new Atributi(Vidljivost.PRIVATE, "string", "test1"));
         k.getClassContentList().add(new Metode(Vidljivost.PROTECTED, "void", "test2"));
@@ -85,7 +84,6 @@ public class KlasaPainter extends InterclassPainter {
 
     public void setConnectionPoints(int x, int y){
         connectionPoints.clear();
-        Interclass i = (Interclass)element;
         int width2 = width + 10;
         int height2 = heightUkupno + 5;
         connectionPoints.add(new Point(x, y - height2/2));//gore 0

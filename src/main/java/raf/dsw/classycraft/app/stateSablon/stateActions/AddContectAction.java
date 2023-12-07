@@ -10,8 +10,8 @@ public class AddContectAction extends AbstractClassyAction {
     public AddContectAction() {
         //putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
         putValue(SMALL_ICON, loadIcon("/images/content.png"));
-        putValue(NAME, "");
-        putValue(SHORT_DESCRIPTION, "");
+        putValue(NAME, "Dodaj sadrzaj");
+        putValue(SHORT_DESCRIPTION, "Dodaj sadrzaj");
     }
 
     @Override

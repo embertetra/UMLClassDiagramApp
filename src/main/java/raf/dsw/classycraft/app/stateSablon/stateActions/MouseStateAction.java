@@ -8,8 +8,8 @@ import java.awt.event.ActionEvent;
 public class MouseStateAction extends AbstractClassyAction {
     public MouseStateAction() {
         putValue(SMALL_ICON, loadIcon("/images/click.png"));
-        putValue(NAME, "");
-        putValue(SHORT_DESCRIPTION, "");
+        putValue(NAME, "Odselektuj");
+        putValue(SHORT_DESCRIPTION, "Odselektuj");
     }
 
     @Override
