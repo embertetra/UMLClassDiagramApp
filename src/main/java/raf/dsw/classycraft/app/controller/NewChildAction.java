@@ -24,7 +24,7 @@ public class NewChildAction extends AbstractClassyAction{
         ClassyTreeItem selected = (ClassyTreeItem) MainFrame.getInstance().getClassyTree().getSelectedNode();
         if(selected != null && !(selected.getClassyNode() instanceof Dijagram))
             MainFrame.getInstance().getClassyTree().addChild(selected, null);
-        else if(selected.getClassyNode() instanceof Dijagram){
+        else if(selected != null && selected.getClassyNode() instanceof Dijagram){
 
         }
         else
