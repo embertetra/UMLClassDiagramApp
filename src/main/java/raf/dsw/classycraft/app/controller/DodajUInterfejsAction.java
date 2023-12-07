@@ -23,8 +23,8 @@ public class DodajUInterfejsAction extends AbstractClassyAction{
         dijagramView = d;
 
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(null));
-        putValue(NAME, "Dodaj");
-        putValue(SHORT_DESCRIPTION, "");
+        putValue(NAME, "Dodaj element");
+        putValue(SHORT_DESCRIPTION, "Dodaj element");
     }
 
     @Override
@@ -81,5 +81,8 @@ public class DodajUInterfejsAction extends AbstractClassyAction{
 
         dijagramView.repaint();
         MainFrame.getInstance().getInterfejsProzor().getTfNaziv().setText("");
+        MainFrame.getInstance().getInterfejsProzor().setMetodeList(((Interfejs) interfejsPainter.getElement()).getMetodeList());
+        MainFrame.getInstance().getInterfejsProzor().getBgVidljivost().clearSelection();
+        MainFrame.getInstance().getInterfejsProzor().getBgTip().clearSelection();
     }
 }

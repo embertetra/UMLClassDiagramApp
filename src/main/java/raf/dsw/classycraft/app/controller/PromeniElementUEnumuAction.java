@@ -11,47 +11,58 @@ import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.EnumPai
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-public class DodajUEnumAction extends AbstractClassyAction{
+public class PromeniElementUEnumuAction extends AbstractClassyAction{
+
     private EnumPainter enumPainter;
     private DijagramView dijagramView;
 
-    public DodajUEnumAction(InterclassPainter interclassPainter, DijagramView d) {
+    public PromeniElementUEnumuAction(InterclassPainter interclassPainter, DijagramView d){
 
         enumPainter = (EnumPainter) interclassPainter;
         dijagramView = d;
 
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(null));
-        putValue(NAME, "Dodaj");
+        putValue(NAME, "Promeni element");
         putValue(SHORT_DESCRIPTION, "");
-    }
 
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        //greske pri unosu podataka:
-        if(MainFrame.getInstance().getEnumProzor().getTfNaziv().getText().isEmpty() || MainFrame.getInstance().getEnumProzor().getTfNaziv().getText().equals(" ")){
-            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije upisan naziv enuma!", MessageType.ERROR);
+        //greske pri unosu:
+        if(MainFrame.getInstance().getEnumProzor().getLista().getSelectedValue() == null){
+            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije odabran element iz liste!", MessageType.ERROR);
             return;
         }
-
-        String naziv = MainFrame.getInstance().getEnumProzor().getTfNaziv().getText().toUpperCase();
-
-        //provera da li je duplikat
-        if(((EnumM) enumPainter.getElement()).getListEnuma().contains(naziv)){
+        else if(MainFrame.getInstance().getEnumProzor().getTfNaziv().getText().isEmpty() || MainFrame.getInstance().getEnumProzor().getTfNaziv().getText().equals(" ")){
+            ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije upisan novi naziv enuma!", MessageType.ERROR);
+            return;
+        }
+        else if(((EnumM) enumPainter.getElement()).getListEnuma().contains(MainFrame.getInstance().getEnumProzor().getTfNaziv().getText().toUpperCase())){
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Zeljen naziv je zauzet!", MessageType.ERROR);
             MainFrame.getInstance().getEnumProzor().getTfNaziv().setText("");
             return;
         }
-        else if(naziv.trim().contains(" ")){
+        else if(MainFrame.getInstance().getEnumProzor().getTfNaziv().getText().toUpperCase().trim().contains(" ")){
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Naziv enuma ne sme da sadrzi razmak!", MessageType.ERROR);
             MainFrame.getInstance().getEnumProzor().getTfNaziv().setText("");
             return;
         }
 
-        ((EnumM) enumPainter.getElement()).getListEnuma().add(naziv);
+        //promena
+        String naziv = MainFrame.getInstance().getEnumProzor().getTfNaziv().getText().toUpperCase();
+
+        int index = 0;
+        for(int i=0; i<((EnumM) enumPainter.getElement()).getListEnuma().size(); i++){
+            if( ((EnumM) enumPainter.getElement()).getListEnuma().get(i).equals(MainFrame.getInstance().getEnumProzor().getLista().getSelectedValue())){
+                index = i;
+            }
+        }
+
+        MainFrame.getInstance().getEnumProzor().getEnumMList().set(index, naziv);
 
         dijagramView.repaint();
-
+        MainFrame.getInstance().getEnumProzor().getTfIme().setText("");
         MainFrame.getInstance().getEnumProzor().getTfNaziv().setText("");
         MainFrame.getInstance().getEnumProzor().setEnumMList(((EnumM) enumPainter.getElement()).getListEnuma());
     }

@@ -57,5 +57,8 @@ public class PromeniNazivInterfejsaAction extends AbstractClassyAction{
         ((Interfejs) interfejsPainter.getElement()).setNaziv(MainFrame.getInstance().getInterfejsProzor().getTfIme().getText());
         dijagramView.repaint();
         MainFrame.getInstance().getInterfejsProzor().getTfIme().setText("");
+
+        MainFrame.getInstance().getInterfejsProzor().getBgVidljivost().clearSelection();
+        MainFrame.getInstance().getInterfejsProzor().getBgTip().clearSelection();
     }
 }

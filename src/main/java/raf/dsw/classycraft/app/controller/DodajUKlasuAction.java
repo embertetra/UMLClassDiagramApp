@@ -18,7 +18,6 @@ import java.awt.event.ActionEvent;
 public class DodajUKlasuAction extends AbstractClassyAction{
 
     private KlasaPainter klasaPainter;
-
     private DijagramView dijagramView;
 
     public DodajUKlasuAction(InterclassPainter interclassPainter, DijagramView d) {
@@ -27,7 +26,7 @@ public class DodajUKlasuAction extends AbstractClassyAction{
         dijagramView = d;
 
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(null));
-        putValue(NAME, "Dodaj");
+        putValue(NAME, "Dodaj element");
         putValue(SHORT_DESCRIPTION, "");
     }
 
@@ -98,6 +97,9 @@ public class DodajUKlasuAction extends AbstractClassyAction{
 
         dijagramView.repaint();
         MainFrame.getInstance().getKlasaProzor().getTfNaziv().setText("");
-        //MainFrame.getInstance().getKlasaProzor().getLista().revalidate();
+        MainFrame.getInstance().getKlasaProzor().setClassContentList(((Klasa) klasaPainter.getElement()).getClassContentList());
+        MainFrame.getInstance().getKlasaProzor().getBg().clearSelection();
+        MainFrame.getInstance().getKlasaProzor().getBgVidljivost().clearSelection();
+        MainFrame.getInstance().getKlasaProzor().getBgTip().clearSelection();
     }
 }

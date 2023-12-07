@@ -11,9 +11,9 @@ import java.util.List;
 
 public class InterfejsProzor extends JFrame {
 
-    private List<Metode> metodeList = new ArrayList<>();
-    private DefaultListModel<Metode> defaultListModel = new DefaultListModel<>();
-    private  JList<Metode> lista = new JList<>();
+    private List<Metode> metodeList;
+    private DefaultListModel<Metode> defaultListModel;
+    private  JList<Metode> lista;
 
     private JButton jbPromeni;
     private JButton jbObrisi;
@@ -21,10 +21,12 @@ public class InterfejsProzor extends JFrame {
     private JButton jbIme;
     private JTextField tfIme;
 
+    private ButtonGroup bgVidljivost;
     private JRadioButton jbPrivate;
     private JRadioButton jbPublic;
     private JRadioButton jbProtected;
 
+    private ButtonGroup bgTip;
     private JRadioButton jbInt;
     private JRadioButton jbFloat;
     private JRadioButton jbDouble;
@@ -57,16 +59,15 @@ public class InterfejsProzor extends JFrame {
         for(Metode m : metodeList)
             defaultListModel.addElement(m);
 
-        lista.updateUI();
-
-        //dugmad za promenu ili brisanje vec postojece metode
-        jbPromeni = new JButton("Promeni");
-        jbObrisi = new JButton("Obrisi");
+        //dugmad
+        jbPromeni = new JButton("Promeni element");
+        jbObrisi = new JButton("Obrisi element");
+        jbDodaj = new JButton("Dodaj");
         //horizontalno grupisanje
         JPanel jpPromeniObrisi = new JPanel();
         jpPromeniObrisi.setAlignmentX(Component.LEFT_ALIGNMENT);
         jpPromeniObrisi.setLayout(new BoxLayout(jpPromeniObrisi, BoxLayout.X_AXIS));
-        jpPromeniObrisi.add(jbPromeni); jpPromeniObrisi.add(jbObrisi);
+        jpPromeniObrisi.add(jbDodaj); jpPromeniObrisi.add(jbPromeni); jpPromeniObrisi.add(jbObrisi);
 
         //polje za proenu imena klase
         JLabel lbIme = new JLabel("Novo ime:");
@@ -75,7 +76,7 @@ public class InterfejsProzor extends JFrame {
 
         //vidljivost : + - #
         JLabel lbVidljivost = new JLabel("Vidljivost:");
-        ButtonGroup bgVidljivost = new ButtonGroup();
+        bgVidljivost = new ButtonGroup();
         jbPrivate = new JRadioButton("private");
         jbPublic = new JRadioButton("public");
         jbProtected = new JRadioButton("protected");
@@ -88,7 +89,7 @@ public class InterfejsProzor extends JFrame {
 
         // tip
         JLabel lbTip = new JLabel("Tip:");
-        ButtonGroup bgTip = new ButtonGroup();
+        bgTip = new ButtonGroup();
         jbInt = new JRadioButton("int");
         jbFloat = new JRadioButton("float");
         jbDouble = new JRadioButton("double");
@@ -106,22 +107,18 @@ public class InterfejsProzor extends JFrame {
         JLabel lbNaziv = new JLabel("Naziv:");
         tfNaziv = new JTextField();
 
-        //dugme za dodavanje atributa / metoda u klasu
-        jbDodaj = new JButton("Dodaj");
-
         //glavni JPanel:
         JPanel jPanel = new JPanel();
         jPanel.setLayout(new BoxLayout(jPanel, BoxLayout.Y_AXIS));
         jPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        //lista metoda
+        jPanel.add(new JLabel("Prilikom promene elementa, selektovati zeljene promene kao i sam element iz liste."));
         jPanel.add(lbLista); jPanel.add(new JScrollPane(lista));
-        jPanel.add(jpPromeniObrisi);
         jPanel.add(lbIme); jPanel.add(tfIme); jPanel.add(jbIme);
         jPanel.add(lbVidljivost); jPanel.add(jpVidljivost);
         jPanel.add(lbTip); jPanel.add(jpTip);
         jPanel.add(lbNaziv); jPanel.add(tfNaziv);
-        jPanel.add(jbDodaj);
+        jPanel.add(jpPromeniObrisi);
 
         jPanel.setBorder(new EmptyBorder(new Insets(15, 10, 15, 10)));
         this.add(jPanel);
@@ -129,6 +126,18 @@ public class InterfejsProzor extends JFrame {
 
     public void setMetodeList(List<Metode> metodeList) {
         this.metodeList = metodeList;
+
+        defaultListModel.clear();
+        for(Metode m : metodeList)
+            defaultListModel.addElement(m);
+    }
+
+    public ButtonGroup getBgVidljivost() {
+        return bgVidljivost;
+    }
+
+    public ButtonGroup getBgTip() {
+        return bgTip;
     }
 
     public List<Metode> getMetodeList() {

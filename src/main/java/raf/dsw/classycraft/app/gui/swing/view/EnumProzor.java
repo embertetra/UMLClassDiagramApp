@@ -45,16 +45,16 @@ public class EnumProzor extends JFrame {
         for(String s : enumMList)
             defaultListModel.addElement(s);
 
-        lista.updateUI();
 
-        //dugmad za promenu ili brisanje vec postojeceg enuma
+        //dugmad
+        jbDodaj = new JButton("Dodaj");
         jbPromeni = new JButton("Promeni");
         jbObrisi = new JButton("Obrisi");
         //horizontalno grupisanje
         JPanel jpPromeniObrisi = new JPanel();
         jpPromeniObrisi.setAlignmentX(Component.LEFT_ALIGNMENT);
         jpPromeniObrisi.setLayout(new BoxLayout(jpPromeniObrisi, BoxLayout.X_AXIS));
-        jpPromeniObrisi.add(jbPromeni); jpPromeniObrisi.add(jbObrisi);
+        jpPromeniObrisi.add(jbDodaj); jpPromeniObrisi.add(jbPromeni); jpPromeniObrisi.add(jbObrisi);
 
         //polje za proenu imena klase
         JLabel lbIme = new JLabel("Novo ime:");
@@ -65,19 +65,17 @@ public class EnumProzor extends JFrame {
         JLabel lbNaziv = new JLabel("Naziv:");
         tfNaziv = new JTextField();
 
-        //dugme za dodavanje enuma
-        jbDodaj = new JButton("Dodaj");
 
         //glavni JPanel:
         JPanel jPanel = new JPanel();
         jPanel.setLayout(new BoxLayout(jPanel, BoxLayout.Y_AXIS));
         jPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
+        jPanel.add(new JLabel("Prilikom promene elementa dodeliti novo ime i selektovati element iz liste."));
         jPanel.add(lbLista); jPanel.add(new JScrollPane(lista));
-        jPanel.add(jpPromeniObrisi);
         jPanel.add(lbIme); jPanel.add(tfIme); jPanel.add(jbIme);
         jPanel.add(lbNaziv); jPanel.add(tfNaziv);
-        jPanel.add(jbDodaj);
+        jPanel.add(jpPromeniObrisi);
 
         jPanel.setBorder(new EmptyBorder(new Insets(15, 10, 15, 10)));
         this.add(jPanel);
@@ -85,6 +83,10 @@ public class EnumProzor extends JFrame {
 
     public void setEnumMList(List<String> enumMList) {
         this.enumMList = enumMList;
+
+        defaultListModel.clear();
+        for(String s : enumMList)
+            defaultListModel.addElement(s);
     }
 
     public List<String> getEnumMList() {

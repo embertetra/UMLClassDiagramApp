@@ -19,16 +19,19 @@ public class KlasaProzor extends JFrame {
     private JButton jbPromeni;
     private JButton jbObrisi;
 
+    private ButtonGroup bg;
     private JRadioButton atribut;
     private JRadioButton metoda;
 
     private JButton jbIme;
     private JTextField tfIme;
 
+    private ButtonGroup bgVidljivost;
     private JRadioButton jbPrivate;
     private JRadioButton jbPublic;
     private JRadioButton jbProtected;
 
+    private ButtonGroup bgTip;
     private JRadioButton jbInt;
     private JRadioButton jbFloat;
     private JRadioButton jbDouble;
@@ -58,7 +61,6 @@ public class KlasaProzor extends JFrame {
         lista = new JList<>();
         lista.setModel(defaultListModel);
         if(classContentList != null) {
-        System.out.println("ccList je " + classContentList);
             for (ClassContent c : classContentList) {
                 if (c instanceof Atributi)
                     defaultListModel.addElement(c);
@@ -68,15 +70,16 @@ public class KlasaProzor extends JFrame {
                     defaultListModel.addElement(c);
             }
         }
-        lista.updateUI();
-        //dugmad za promenu ili brisanje vec postojeceg atributa / metode
+
+        //dugmad
+        jbDodaj = new JButton("Dodaj");
         jbPromeni = new JButton("Promeni");
         jbObrisi = new JButton("Obrisi");
         //horizontalno grupisanje
         JPanel jpPromeniObrisi = new JPanel();
         jpPromeniObrisi.setAlignmentX(Component.LEFT_ALIGNMENT);
         jpPromeniObrisi.setLayout(new BoxLayout(jpPromeniObrisi, BoxLayout.X_AXIS));
-        jpPromeniObrisi.add(jbPromeni); jpPromeniObrisi.add(jbObrisi);
+        jpPromeniObrisi.add(jbDodaj); jpPromeniObrisi.add(jbPromeni); jpPromeniObrisi.add(jbObrisi);
 
         //polje za promenu imena klase
         JLabel lbIme = new JLabel("Novo ime:");
@@ -84,7 +87,7 @@ public class KlasaProzor extends JFrame {
         jbIme = new JButton("Promeni ime");
 
         // atribut ili metoda
-        ButtonGroup bg = new ButtonGroup();
+        bg = new ButtonGroup();
         atribut = new JRadioButton("Atribut");
         metoda = new JRadioButton("Metoda");
         bg.add(atribut); bg.add(metoda);
@@ -96,7 +99,7 @@ public class KlasaProzor extends JFrame {
 
         //vidljivost : + - #
         JLabel lbVidljivost = new JLabel("Vidljivost:");
-        ButtonGroup bgVidljivost = new ButtonGroup();
+        bgVidljivost = new ButtonGroup();
         jbPrivate = new JRadioButton("private");
         jbPublic = new JRadioButton("public");
         jbProtected = new JRadioButton("protected");
@@ -109,7 +112,7 @@ public class KlasaProzor extends JFrame {
 
         // tip
         JLabel lbTip = new JLabel("Tip:");
-        ButtonGroup bgTip = new ButtonGroup();
+        bgTip = new ButtonGroup();
         jbInt = new JRadioButton("int");
         jbFloat = new JRadioButton("float");
         jbDouble = new JRadioButton("double");
@@ -127,23 +130,23 @@ public class KlasaProzor extends JFrame {
         JLabel lbNaziv = new JLabel("Naziv:");
         tfNaziv = new JTextField();
 
-        //dugme za dodavanje atributa / metoda u klasu
-        jbDodaj = new JButton("Dodaj");
-
-
         //glavni JPanel:
         JPanel jPanel = new JPanel();
         jPanel.setLayout(new BoxLayout(jPanel, BoxLayout.Y_AXIS));
         jPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
+        jPanel.add(new JLabel("Prilikom promene elementa, selektovati zeljene promene kao i sam element iz liste."));
         jPanel.add(lbLista); jPanel.add(new JScrollPane(lista));
-        jPanel.add(jpPromeniObrisi);
+
         jPanel.add(lbIme); jPanel.add(tfIme); jPanel.add(jbIme);
         jPanel.add(jpAtrMet);
         jPanel.add(lbVidljivost); jPanel.add(jpVidljivost);
         jPanel.add(lbTip); jPanel.add(jpTip);
         jPanel.add(lbNaziv); jPanel.add(tfNaziv);
-        jPanel.add(jbDodaj);
+        jPanel.add(jpPromeniObrisi);
+
+        bgVidljivost.clearSelection();
+        bgTip.clearSelection();
 
         jPanel.setBorder(new EmptyBorder(new Insets(15, 10, 15, 10)));
         this.add(jPanel);
@@ -156,20 +159,28 @@ public class KlasaProzor extends JFrame {
     public void setClassContentList(List<ClassContent> classContentList) {
         this.classContentList = classContentList;
 
-        if(classContentList != null) {
-            System.out.println("ccList je " + classContentList);
-            for (ClassContent c : classContentList) {
-                if (c instanceof Atributi)
-                    defaultListModel.addElement(c);
-            }
-            for (ClassContent c : classContentList) {
-                if (c instanceof Metode)
-                    defaultListModel.addElement(c);
-            }
+        defaultListModel.clear();
+        for (ClassContent c : classContentList) {
+            if (c instanceof Atributi)
+                defaultListModel.addElement(c);
+        }
+        for (ClassContent c : classContentList) {
+            if (c instanceof Metode)
+                defaultListModel.addElement(c);
         }
 
+    }
 
-        //lista.updateUI();
+    public ButtonGroup getBg() {
+        return bg;
+    }
+
+    public ButtonGroup getBgVidljivost() {
+        return bgVidljivost;
+    }
+
+    public ButtonGroup getBgTip() {
+        return bgTip;
     }
 
     public JList<ClassContent> getLista() {

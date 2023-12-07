@@ -57,5 +57,8 @@ public class PromenaNazivaKlaseAction extends AbstractClassyAction{
         ((Klasa) klasaPainter.getElement()).setNaziv(MainFrame.getInstance().getKlasaProzor().getTfIme().getText());
         dijagramView.repaint();
         MainFrame.getInstance().getKlasaProzor().getTfIme().setText("");
+        MainFrame.getInstance().getKlasaProzor().getBg().clearSelection();
+        MainFrame.getInstance().getKlasaProzor().getBgVidljivost().clearSelection();
+        MainFrame.getInstance().getKlasaProzor().getBgTip().clearSelection();
     }
 }

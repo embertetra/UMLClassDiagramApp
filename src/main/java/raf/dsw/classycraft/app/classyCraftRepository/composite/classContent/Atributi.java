@@ -7,4 +7,16 @@ public class Atributi extends ClassContent {
         super(vidljivost, tip, naziv);
     }
 
+    @Override
+    public String toString() {
+        String s = null;
+        if(vidljivost == Vidljivost.PRIVATE)
+            s = "-" + naziv + ": " + tip;
+        else if(vidljivost == Vidljivost.PUBLIC)
+            s = "+" + naziv + ": " + tip;
+        else if(vidljivost == Vidljivost.PROTECTED)
+            s = "#" + naziv + ": " + tip;
+        return s;
+    }
+
 }
