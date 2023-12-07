@@ -94,7 +94,7 @@ public class DijagramView extends JPanel implements ISubscriber {
             zoomer = false;
         }
 
-        at = new AffineTransform(save);
+        at = new AffineTransform();
         at.translate(xOffset, yOffset);
         at.scale(zoomFactor, zoomFactor);
         g2.transform(at);
@@ -118,7 +118,7 @@ public class DijagramView extends JPanel implements ISubscriber {
             x.draw(g2);
         }
         System.out.println("Izvrsen paintComponent");
-        ((Graphics2D) g).setTransform(save);
+        //((Graphics2D) g).setTransform(save);
     }
 
     public void setTranslation() {
