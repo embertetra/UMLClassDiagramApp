@@ -54,6 +54,7 @@ public class MouseListener {
                                         paket.getjTabbedPane().addTab(c.getName(),dijagramView);
                                     }
                                 }
+                                MainFrame.getInstance().setPackageView(paket);
                             } else {
                                 MainFrame.getInstance().setPackageView(paket);
                             }

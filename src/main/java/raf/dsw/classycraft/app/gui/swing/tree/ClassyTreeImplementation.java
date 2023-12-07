@@ -46,7 +46,6 @@ public class ClassyTreeImplementation implements ClassyTree{
         if(child != null) {
             parent.add(new ClassyTreeItem(child)); //prikazuje se u JTree-u
             if(!(child instanceof DijagramElement)) {
-                System.out.println("Parent" + parent.getClassyNode().getName() + " child" + child.getName());
                 ((ClassyNodeComposite) parent.getClassyNode()).addChild(child); // dodaje se u modelu addChild()
             }
             treeView.expandPath(treeView.getSelectionPath());

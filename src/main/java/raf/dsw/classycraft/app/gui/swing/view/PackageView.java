@@ -80,8 +80,6 @@ public class PackageView implements ISubscriber {
         ///Update dodatih dijagrama u stablo, prikaz u JTabbu
         if (poruka.getOznaka() == 0) {
             brojac = 0;
-            System.out.println(parent2.getName());
-            System.out.println(classyTreeItem.getClassyNode().getName());
             if (this.classyNode != null && parent2.getName().equals(this.classyNode.getName())) {
                 for (ClassyNode c : parent2.getChildren()) {
                     totalTabs = jTabbedPane.getTabCount();
