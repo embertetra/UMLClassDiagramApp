@@ -66,7 +66,7 @@ public class AsocijacijaPainter extends ConnectionPainter {
                 ((GeneralPath) shape).moveTo(point2.x, point2.y);
                 ((GeneralPath) shape).lineTo(point2.x + 10, point2.y - 10);
                 ((GeneralPath) shape).lineTo(point2.x, point2.y);
-                ((GeneralPath) shape).lineTo(point2.x - 10, point2.y + 10);
+                ((GeneralPath) shape).lineTo(point2.x - 10, point2.y - 10);
                 ((GeneralPath) shape).lineTo(point2.x, point2.y);
                 ((GeneralPath) shape).lineTo(point1.x, point1.y);
                 ((GeneralPath) shape).lineTo(point2.x, point2.y);

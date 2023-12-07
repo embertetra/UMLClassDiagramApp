@@ -41,7 +41,7 @@ public class CreateTranslationListener implements MouseMotionListener {
                         Interclass ic = (Interclass) ip.getElement();
                         if (ip == d.getFlag1()) {
                             ic.setPosition(new Point(d.getStartPoint().x + diffX - d.getxDragOffset(), d.getStartPoint().y + diffY - d.getyDragOffset()));
-                            //d.repaint();
+                            //d.repaint();//
                             return;
                         }
                     }
