@@ -61,19 +61,28 @@ public class PromeniElementUKlasiAction extends AbstractClassyAction{
         }
         else if(MainFrame.getInstance().getKlasaProzor().getAtribut().isSelected() && MainFrame.getInstance().getKlasaProzor().getLista().getSelectedValue() instanceof Metode){
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Metoda ne moze da postane atribut!", MessageType.ERROR);
+            MainFrame.getInstance().getKlasaProzor().getBg().clearSelection();
             return;
         }
         else if(MainFrame.getInstance().getKlasaProzor().getMetoda().isSelected() && MainFrame.getInstance().getKlasaProzor().getLista().getSelectedValue() instanceof Atributi){
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Atribut ne moze da postane metoda!", MessageType.ERROR);
+            MainFrame.getInstance().getKlasaProzor().getBg().clearSelection();
             return;
         }
         else if(MainFrame.getInstance().getKlasaProzor().getLista().getSelectedValue() instanceof Atributi && MainFrame.getInstance().getKlasaProzor().getJbVoid().isSelected()){
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Atribut ne moze imati tip void!", MessageType.ERROR);
+            MainFrame.getInstance().getKlasaProzor().getBgTip().clearSelection();
             return;
         }
 
-        //promena
-        Atributi atributi = null; Metode metode = null;
+        //provera da li je promenjeni element duplikat
+        String vidljivost = null;
+        String tip = null;
+        String naziv = null;
+        Vidljivost v = null;
+
+        Atributi atributi = null;
+        Metode metode = null;
         if(MainFrame.getInstance().getKlasaProzor().getLista().getSelectedValue() instanceof Atributi)
             atributi = (Atributi) MainFrame.getInstance().getKlasaProzor().getLista().getSelectedValue();
         else if(MainFrame.getInstance().getKlasaProzor().getLista().getSelectedValue() instanceof Metode)
@@ -82,41 +91,108 @@ public class PromeniElementUKlasiAction extends AbstractClassyAction{
         for(ClassContent c : MainFrame.getInstance().getKlasaProzor().getClassContentList()){
             if(atributi != null && c instanceof Atributi && c.getVidljivost().equals(atributi.getVidljivost()) && c.getTip().equals(atributi.getTip()) && c.getNaziv().equals(atributi.getNaziv())){
 
-                if(MainFrame.getInstance().getKlasaProzor().getJbPrivate().isSelected()) c.setVidljivost(Vidljivost.PRIVATE);
-                else if(MainFrame.getInstance().getKlasaProzor().getJbPublic().isSelected()) c.setVidljivost(Vidljivost.PUBLIC);
-                else if(MainFrame.getInstance().getKlasaProzor().getJbProtected().isSelected()) c.setVidljivost(Vidljivost.PROTECTED);
+                if (c.getVidljivost().equals("+")) v = Vidljivost.PUBLIC;
+                else if (c.getVidljivost().equals("-")) v = Vidljivost.PRIVATE;
+                else if (c.getVidljivost().equals("#")) v = Vidljivost.PROTECTED;
 
-                if(MainFrame.getInstance().getKlasaProzor().getJbInt().isSelected()) c.setTip("int");
-                else if(MainFrame.getInstance().getKlasaProzor().getJbFloat().isSelected()) c.setTip("float");
-                else if(MainFrame.getInstance().getKlasaProzor().getJbDouble().isSelected()) c.setTip("double");
-                else if(MainFrame.getInstance().getKlasaProzor().getJbString().isSelected()) c.setTip("string");
-                else if(MainFrame.getInstance().getKlasaProzor().getJbBoolean().isSelected()) c.setTip("boolean");
+                if(MainFrame.getInstance().getKlasaProzor().getJbPrivate().isSelected()) {
+                    vidljivost = "-"; v = Vidljivost.PRIVATE;
+                }
+                else if(MainFrame.getInstance().getKlasaProzor().getJbPublic().isSelected()) {
+                    vidljivost = "+"; v = Vidljivost.PRIVATE;
+                }
+                else if(MainFrame.getInstance().getKlasaProzor().getJbProtected().isSelected()){
+                    vidljivost = "#"; v = Vidljivost.PROTECTED;
+                }
+                else vidljivost = c.getVidljivost();
 
-                if(MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText() != null && !MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().equals(""))
-                    c.setNaziv(MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText());
+                if(MainFrame.getInstance().getKlasaProzor().getJbInt().isSelected()) tip = "int";
+                else if(MainFrame.getInstance().getKlasaProzor().getJbFloat().isSelected()) tip = "float";
+                else if(MainFrame.getInstance().getKlasaProzor().getJbDouble().isSelected()) tip = "double";
+                else if(MainFrame.getInstance().getKlasaProzor().getJbString().isSelected()) tip = "string";
+                else if(MainFrame.getInstance().getKlasaProzor().getJbBoolean().isSelected()) tip = "boolean";
+                else tip = c.getTip();
+
+                if(MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText() != null && !MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().isEmpty())
+                    naziv = MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText();
+                else
+                    naziv = c.getNaziv();
+
                 break;
             }
-            else if(metode != null){
+            else if(metode != null && c instanceof Metode && c.getVidljivost().equals(metode.getVidljivost()) && c.getTip().equals(metode.getTip()) && c.getNaziv().equals(metode.getNaziv())){
 
-                if(MainFrame.getInstance().getKlasaProzor().getJbPrivate().isSelected()) c.setVidljivost(Vidljivost.PRIVATE);
-                else if(MainFrame.getInstance().getKlasaProzor().getJbPublic().isSelected()) c.setVidljivost(Vidljivost.PUBLIC);
-                else if(MainFrame.getInstance().getKlasaProzor().getJbProtected().isSelected()) c.setVidljivost(Vidljivost.PROTECTED);
+                if (c.getVidljivost().equals("+")) v = Vidljivost.PUBLIC;
+                else if (c.getVidljivost().equals("-")) v = Vidljivost.PRIVATE;
+                else if (c.getVidljivost().equals("#")) v = Vidljivost.PROTECTED;
 
-                if(MainFrame.getInstance().getKlasaProzor().getJbInt().isSelected()) c.setTip("int");
-                else if(MainFrame.getInstance().getKlasaProzor().getJbFloat().isSelected()) c.setTip("float");
-                else if(MainFrame.getInstance().getKlasaProzor().getJbDouble().isSelected()) c.setTip("double");
-                else if(MainFrame.getInstance().getKlasaProzor().getJbString().isSelected()) c.setTip("string");
-                else if(MainFrame.getInstance().getKlasaProzor().getJbBoolean().isSelected()) c.setTip("boolean");
-                else if(MainFrame.getInstance().getKlasaProzor().getJbVoid().isSelected()) c.setTip("void");
+                if(MainFrame.getInstance().getKlasaProzor().getJbPrivate().isSelected()) {
+                    vidljivost = "-"; v = Vidljivost.PRIVATE;
+                }
+                else if(MainFrame.getInstance().getKlasaProzor().getJbPublic().isSelected()) {
+                    vidljivost = "+"; v = Vidljivost.PRIVATE;
+                }
+                else if(MainFrame.getInstance().getKlasaProzor().getJbProtected().isSelected()){
+                    vidljivost = "#"; v = Vidljivost.PROTECTED;
+                }
+                else vidljivost = c.getVidljivost();
 
-                if(MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText() != null && !MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().equals(""))
-                    c.setNaziv(MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText());
+                if(MainFrame.getInstance().getKlasaProzor().getJbInt().isSelected()) tip = "int";
+                else if(MainFrame.getInstance().getKlasaProzor().getJbFloat().isSelected()) tip = "float";
+                else if(MainFrame.getInstance().getKlasaProzor().getJbDouble().isSelected()) tip = "double";
+                else if(MainFrame.getInstance().getKlasaProzor().getJbString().isSelected()) tip = "string";
+                else if(MainFrame.getInstance().getKlasaProzor().getJbBoolean().isSelected()) tip = "boolean";
+                else if(MainFrame.getInstance().getKlasaProzor().getJbVoid().isSelected()) tip = "void";
+                else tip = c.getTip();
+
+                if(MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText() != null && !MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().isEmpty())
+                    naziv = MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText();
+                else
+                    naziv = c.getNaziv();
+
                 break;
+            }
+        }
+        for(ClassContent c : MainFrame.getInstance().getKlasaProzor().getClassContentList()){
+            if (c instanceof Atributi && c.getVidljivost().equals(vidljivost) && c.getTip().equals(tip) && c.getNaziv().equals(naziv)){
+                ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Atribut vec postoji!", MessageType.ERROR);
+                MainFrame.getInstance().getInterfejsProzor().getTfNaziv().setText("");
+                MainFrame.getInstance().getKlasaProzor().getBg().clearSelection();
+                MainFrame.getInstance().getKlasaProzor().getBgVidljivost().clearSelection();
+                MainFrame.getInstance().getKlasaProzor().getBgTip().clearSelection();
+                return;
+            }
+            else if (c instanceof Metode && c.getVidljivost().equals(vidljivost) && c.getTip().equals(tip) && c.getNaziv().equals(naziv)){
+                ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Metoda vec postoji!", MessageType.ERROR);
+                MainFrame.getInstance().getInterfejsProzor().getTfNaziv().setText("");
+                MainFrame.getInstance().getKlasaProzor().getBg().clearSelection();
+                MainFrame.getInstance().getKlasaProzor().getBgVidljivost().clearSelection();
+                MainFrame.getInstance().getKlasaProzor().getBgTip().clearSelection();
+                return;
+            }
+        }
+
+        //promena elementa
+        for(ClassContent c : MainFrame.getInstance().getKlasaProzor().getClassContentList()){
+            if (c instanceof Atributi && metode == null && atributi != null){
+                if(c.getVidljivost().equals(atributi.getVidljivost()) && c.getTip().equals(atributi.getTip()) && c.getNaziv().equals(atributi.getNaziv())){
+                    c.setVidljivost(v);
+                    c.setTip(tip);
+                    c.setNaziv(naziv);
+                }
+            }
+            else if (c instanceof Metode && atributi == null && metode != null){
+                if(c.getVidljivost().equals(metode.getVidljivost()) && c.getTip().equals(metode.getTip()) && c.getNaziv().equals(metode.getNaziv())){
+                    c.setVidljivost(v);
+                    c.setTip(tip);
+                    c.setNaziv(naziv);
+                }
             }
         }
 
         dijagramView.repaint();
         MainFrame.getInstance().getKlasaProzor().setClassContentList(((Klasa) klasaPainter.getElement()).getClassContentList());
+        MainFrame.getInstance().getKlasaProzor().getTfNaziv().setText("");
         MainFrame.getInstance().getKlasaProzor().getBg().clearSelection();
         MainFrame.getInstance().getKlasaProzor().getBgVidljivost().clearSelection();
         MainFrame.getInstance().getKlasaProzor().getBgTip().clearSelection();

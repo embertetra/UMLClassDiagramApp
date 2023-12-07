@@ -7,7 +7,6 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Meto
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class KlasaProzor extends JFrame {
@@ -185,10 +184,6 @@ public class KlasaProzor extends JFrame {
 
     public JList<ClassContent> getLista() {
         return lista;
-    }
-
-    public DefaultListModel<ClassContent> getDefaultListModel() {
-        return defaultListModel;
     }
 
     public JButton getJbPromeni() {

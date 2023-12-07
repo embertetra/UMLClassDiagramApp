@@ -1,6 +1,5 @@
 package raf.dsw.classycraft.app.gui.swing.view;
 
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.EnumM;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -91,10 +90,6 @@ public class EnumProzor extends JFrame {
 
     public List<String> getEnumMList() {
         return enumMList;
-    }
-
-    public DefaultListModel<String> getDefaultListModel() {
-        return defaultListModel;
     }
 
     public JList<String> getLista() {

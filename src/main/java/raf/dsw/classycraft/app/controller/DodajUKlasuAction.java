@@ -82,7 +82,8 @@ public class DodajUKlasuAction extends AbstractClassyAction{
 
         //provera da li je duplikat
         for(ClassContent c : ((Klasa) klasaPainter.getElement()).getClassContentList())
-            if(c.getNaziv().equals(naziv)) {
+            if( (c.getNaziv().equals(naziv) && c instanceof Atributi && MainFrame.getInstance().getKlasaProzor().getAtribut().isSelected())
+            || (c.getNaziv().equals(naziv) && c instanceof Metode && MainFrame.getInstance().getKlasaProzor().getMetoda().isSelected()) ) {
                 ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Zeljen naziv je zauzet!", MessageType.ERROR);
                 MainFrame.getInstance().getKlasaProzor().getTfNaziv().setText("");
                 return;

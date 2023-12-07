@@ -144,10 +144,6 @@ public class InterfejsProzor extends JFrame {
         return metodeList;
     }
 
-    public DefaultListModel<Metode> getDefaultListModel() {
-        return defaultListModel;
-    }
-
     public JList<Metode> getLista() {
         return lista;
     }
