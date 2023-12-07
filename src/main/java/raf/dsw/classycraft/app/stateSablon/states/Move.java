@@ -189,10 +189,12 @@ public class Move implements State {
                     ConnectionPainter cp = (ConnectionPainter) ep;
                     Interclass from = ((Connection) ep.getElement()).getFrom();
                     Interclass to = ((Connection) ep.getElement()).getTo();
-                    cp.setDragOffset1(new Point(dijagramView.getStartPoint().x - from.getPosition().x,
-                            dijagramView.getStartPoint().y - from.getPosition().y));
-                    cp.setDragOffset2(new Point(dijagramView.getStartPoint().x - to.getPosition().x,
-                            dijagramView.getStartPoint().y - to.getPosition().y));
+                    if(dijagramView.getStartPoint() != null && from != null && to != null) {
+                        cp.setDragOffset1(new Point(dijagramView.getStartPoint().x - from.getPosition().x,
+                                dijagramView.getStartPoint().y - from.getPosition().y));
+                        cp.setDragOffset2(new Point(dijagramView.getStartPoint().x - to.getPosition().x,
+                                dijagramView.getStartPoint().y - to.getPosition().y));
+                    }
                 }
             }
             dijagramView.repaint();

@@ -10,6 +10,8 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.GeneralPath;
+import java.awt.geom.NoninvertibleTransformException;
+import java.awt.geom.Point2D;
 
 public class CreateSelectionListener implements MouseMotionListener {
     private DijagramView d;
@@ -19,12 +21,20 @@ public class CreateSelectionListener implements MouseMotionListener {
 
     @Override
     public void mouseDragged(MouseEvent e) {
+
+        Point2D point = e.getPoint();
+        try {
+            point = d.getAt().inverseTransform(e.getPoint(), null);
+        } catch (NoninvertibleTransformException ex) {
+            throw new RuntimeException(ex);
+        }
+
         if (d.getSelection() != null) {
             d.setShape(new GeneralPath());
             ((GeneralPath) d.getShape()).moveTo(d.getSelection().x, d.getSelection().y);
-            ((GeneralPath) d.getShape()).lineTo(e.getX(), d.getSelection().y);
-            ((GeneralPath) d.getShape()).lineTo(e.getX(), e.getY());
-            ((GeneralPath) d.getShape()).lineTo(d.getSelection().x, e.getY());
+            ((GeneralPath) d.getShape()).lineTo(point.getX(), d.getSelection().y);
+            ((GeneralPath) d.getShape()).lineTo(point.getX(), point.getY());
+            ((GeneralPath) d.getShape()).lineTo(d.getSelection().x, point.getY());
             ((GeneralPath) d.getShape()).closePath();
             d.repaint();
         }

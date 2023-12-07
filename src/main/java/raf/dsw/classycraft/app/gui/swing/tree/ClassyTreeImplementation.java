@@ -3,6 +3,7 @@ package raf.dsw.classycraft.app.gui.swing.tree;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.ProjectExplorer;
 import raf.dsw.classycraft.app.controller.MouseListeners.dvoklikNaPaket.MouseListener;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
@@ -36,11 +37,11 @@ public class ClassyTreeImplementation implements ClassyTree{
 
     @Override
     public void addChild(ClassyTreeItem parent, DijagramElement dijagramElement) {
+
         if(parent != null && !(parent.getClassyNode() instanceof ClassyNodeComposite)) {
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("DijagramElement ne moze imati podklasu!", MessageType.ERROR);
             return;
         }
-        assert parent != null;
         ClassyNode child = createChild(parent.getClassyNode(), dijagramElement);
         child.setParent(parent.getClassyNode());
         if(child != null) {

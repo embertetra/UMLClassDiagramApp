@@ -1,5 +1,4 @@
 package raf.dsw.classycraft.app.stateSablon.states;
-import com.sun.tools.javac.Main;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.EnumM;
@@ -20,6 +19,7 @@ import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.KlasaPa
 import raf.dsw.classycraft.app.stateSablon.State;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 
 public class AddInterclass implements State {
 
@@ -27,6 +27,7 @@ public class AddInterclass implements State {
 
     @Override
     public void misKliknut(int x, int y, DijagramView dijagramView) {
+        dijagramView.repaint();
 
         dijagramView.getSelectionModel().clear();
         dijagramView.setSelection(null);
@@ -46,6 +47,7 @@ public class AddInterclass implements State {
             }
         }
         if(interclass != null) {
+            AffineTransform at = dijagramView.getAt();
 
             ///odredjivanje dijaframa unutar stabla
             ClassyTreeItem item = null;
@@ -60,7 +62,7 @@ public class AddInterclass implements State {
             }
 
             if (interclass.equals("class")) {
-                Klasa klasa = new Klasa("Interclass", dijagramView.getClassyNode(), 2, "naziv", Vidljivost.PUBLIC, new Point(x, y));
+                Klasa klasa = new Klasa("Interclass", dijagramView.getClassyNode(), 2, "naziv", Vidljivost.PUBLIC, new Point(x,y));
                 klasa.addSubscriber(dijagramView);
                 KlasaPainter klasaPainter = new KlasaPainter(klasa);
                 dijagramView.getElementPainterList().add(klasaPainter);
@@ -88,12 +90,10 @@ public class AddInterclass implements State {
 
     @Override
     public void misOtpusten(int x, int y, DijagramView dijagramView) {
-
     }
 
     @Override
     public void misPrivucen(int x, int y, DijagramView dijagramView) {
-
     }
 
     public void setInterclass(String interclass) {

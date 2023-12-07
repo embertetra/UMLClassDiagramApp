@@ -10,6 +10,8 @@ import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.awt.geom.NoninvertibleTransformException;
+import java.awt.geom.Point2D;
 
 public class CreateTranslationListener implements MouseMotionListener {
     private DijagramView d;
@@ -21,9 +23,16 @@ public class CreateTranslationListener implements MouseMotionListener {
     @Override
     public void mouseDragged(MouseEvent e) {
 
+        Point2D point = e.getPoint();
+        try {
+            point = d.getAt().inverseTransform(e.getPoint(), null);
+        } catch (NoninvertibleTransformException ex) {
+            throw new RuntimeException(ex);
+        }
+
         if (d.getStartPoint() != null) {
-            int diffX = e.getX() - d.getStartPoint().x;
-            int diffY = e.getY() - d.getStartPoint().y;
+            int diffX = (int) (point.getX() - d.getStartPoint().x);
+            int diffY = (int) (point.getY() - d.getStartPoint().y);
 
             if (d.getFlag1() != null) {
                 for (ElementPainter ep : d.getElementPainterList()) {
@@ -58,10 +67,12 @@ public class CreateTranslationListener implements MouseMotionListener {
                         ConnectionPainter cp = (ConnectionPainter) ep;
                         Interclass from = ((Connection) cp.getElement()).getFrom();
                         Interclass to = ((Connection) cp.getElement()).getTo();
-                        from.setPosition(new Point(d.getStartPoint().x + diffX - cp.getDragOffset1().x,
-                                d.getStartPoint().y + diffY - cp.getDragOffset1().y));
-                        to.setPosition(new Point(d.getStartPoint().x + diffX - cp.getDragOffset2().x,
-                                d.getStartPoint().y + diffY - cp.getDragOffset2().y));
+                        if(d.getStartPoint()!= null) {
+                            from.setPosition(new Point(d.getStartPoint().x + diffX - cp.getDragOffset1().x,
+                                    d.getStartPoint().y + diffY - cp.getDragOffset1().y));
+                            to.setPosition(new Point(d.getStartPoint().x + diffX - cp.getDragOffset2().x,
+                                    d.getStartPoint().y + diffY - cp.getDragOffset2().y));
+                        }
                     }
                 }
             }
