@@ -155,7 +155,21 @@ public class KlasaProzor extends JFrame {
 
     public void setClassContentList(List<ClassContent> classContentList) {
         this.classContentList = classContentList;
-        lista.updateUI();
+
+        if(classContentList != null) {
+            System.out.println("ccList je " + classContentList);
+            for (ClassContent c : classContentList) {
+                if (c instanceof Atributi)
+                    defaultListModel.addElement(c);
+            }
+            for (ClassContent c : classContentList) {
+                if (c instanceof Metode)
+                    defaultListModel.addElement(c);
+            }
+        }
+
+
+        //lista.updateUI();
     }
 
     public JList<ClassContent> getLista() {

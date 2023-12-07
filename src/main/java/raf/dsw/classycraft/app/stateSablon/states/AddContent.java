@@ -27,8 +27,12 @@ public class AddContent implements State {
         if(interclassPainter != null) {
             if (interclassPainter.getElement() instanceof Klasa) {
                 Klasa k = (Klasa) interclassPainter.getElement();
+
+
                 MainFrame.getInstance().getKlasaProzor().setClassContentList(k.getClassContentList());
                 MainFrame.getInstance().getKlasaProzor().getLista().updateUI();
+
+
                 MainFrame.getInstance().getKlasaProzor().getJbIme().setAction(new PromenaNazivaKlaseAction(interclassPainter, dijagramView));
                 MainFrame.getInstance().getKlasaProzor().getJbDodaj().setAction(new DodajUKlasuAction(interclassPainter, dijagramView));
                 MainFrame.getInstance().getKlasaProzor().setVisible(true);
