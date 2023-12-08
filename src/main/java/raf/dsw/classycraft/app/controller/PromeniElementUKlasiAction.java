@@ -99,7 +99,7 @@ public class PromeniElementUKlasiAction extends AbstractClassyAction{
                     vidljivost = "-"; v = Vidljivost.PRIVATE;
                 }
                 else if(MainFrame.getInstance().getKlasaProzor().getJbPublic().isSelected()) {
-                    vidljivost = "+"; v = Vidljivost.PRIVATE;
+                    vidljivost = "+"; v = Vidljivost.PUBLIC;
                 }
                 else if(MainFrame.getInstance().getKlasaProzor().getJbProtected().isSelected()){
                     vidljivost = "#"; v = Vidljivost.PROTECTED;

@@ -19,6 +19,7 @@ public class CreateLineListener implements MouseMotionListener {
 
     @Override
     public void mouseDragged(MouseEvent e) {
+        ///iverzne koordinate
         Point2D point = e.getPoint();
         try {
             point = d.getAt().inverseTransform(e.getPoint(), null);

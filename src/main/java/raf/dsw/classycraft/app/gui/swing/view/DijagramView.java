@@ -30,10 +30,7 @@ public class DijagramView extends JPanel implements ISubscriber {
     private InterclassPainter flag1;
     private List<InterclassPainter> moveSelections;
 
-
-
-    /// zoom deo
-
+    /// zoom polja
     private Point startPoint;
     private double xOffset;
     private double yOffset;
@@ -83,7 +80,7 @@ public class DijagramView extends JPanel implements ISubscriber {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        AffineTransform save = ((Graphics2D) g).getTransform();
+        //AffineTransform save = ((Graphics2D) g).getTransform();
         if (zoomer) {
             double xRel = MouseInfo.getPointerInfo().getLocation().x - getLocationOnScreen().x;
             double yRel = MouseInfo.getPointerInfo().getLocation().y - getLocationOnScreen().y;
@@ -99,21 +96,26 @@ public class DijagramView extends JPanel implements ISubscriber {
         at.scale(zoomFactor, zoomFactor);
         g2.transform(at);
 
+        ///crtanje veze na dragged mouse
         if (line != null && line.getKey() != null && line.getValue() != null && line.getKey().x != -1 && line.getKey().y != -1)
             g2.drawLine(line.getKey().x, line.getKey().y, line.getValue().x, line.getValue().y);
 
         g2.setStroke(new BasicStroke(2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{9}, 0));
         g2.setPaint(Color.GRAY);
+        ///crtanje jedne selekcije
         if (selection != null)
             g2.draw(selection);
 
+        ///crtanje lasso pravugaonika
         if (shape != null)
             g2.draw(shape);
 
+        ///crtanje selekcije svakog selektovanog unutar lasso
         if(selectionModel != null)
             for (Shape s : selectionModel)
                 g2.draw(s);
 
+        ///iscrtavanje paintera
         for (ElementPainter x : elementPainterList) {
             x.draw(g2);
         }
@@ -205,29 +207,5 @@ public class DijagramView extends JPanel implements ISubscriber {
 
     public AffineTransform getAt() {
         return at;
-    }
-
-    public double getPrevZoomFactor() {
-        return prevZoomFactor;
-    }
-
-    public void setxOffset(double xOffset) {
-        this.xOffset = xOffset;
-    }
-
-    public void setyOffset(double yOffset) {
-        this.yOffset = yOffset;
-    }
-
-    public double getxOffset() {
-        return xOffset;
-    }
-
-    public double getyOffset() {
-        return yOffset;
-    }
-
-    public void setAt(AffineTransform at) {
-        this.at = at;
     }
 }

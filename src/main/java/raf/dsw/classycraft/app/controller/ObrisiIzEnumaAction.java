@@ -21,7 +21,7 @@ public class ObrisiIzEnumaAction extends AbstractClassyAction{
         dijagramView = d;
 
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(null));
-        putValue(NAME, "Obrisi");
+        putValue(NAME, "Obrisi element");
         putValue(SHORT_DESCRIPTION, "");
     }
 

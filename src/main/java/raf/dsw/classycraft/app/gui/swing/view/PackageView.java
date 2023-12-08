@@ -11,7 +11,6 @@ import raf.dsw.classycraft.app.stateSablon.StateManager;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.tools.Tool;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;

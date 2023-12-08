@@ -34,6 +34,7 @@ public class AddInterclass implements State {
         Dijagram d = (Dijagram)dijagramView.getClassyNode();
         d.addSubscriber(dijagramView);
 
+        ///preklapanje
         Rectangle rec = new Rectangle(x-38,y-23, 76, 46);
         for(ElementPainter ep : dijagramView.getElementPainterList()){
             if(ep instanceof InterclassPainter){
@@ -49,7 +50,7 @@ public class AddInterclass implements State {
         if(interclass != null) {
             AffineTransform at = dijagramView.getAt();
 
-            ///odredjivanje dijaframa unutar stabla
+            ///odredjivanje dijagrama unutar stabla
             ClassyTreeItem item = null;
             //ClassyTreeItem selected = MainFrame.getInstance().getClassyTree().getSelectedNode();
             ClassyNode tmp = MainFrame.getInstance().getPackageView().getClassyNode();
@@ -66,9 +67,9 @@ public class AddInterclass implements State {
                 klasa.addSubscriber(dijagramView);
                 KlasaPainter klasaPainter = new KlasaPainter(klasa);
                 dijagramView.getElementPainterList().add(klasaPainter);
-                d.addChild(klasa);
+                d.addChild(klasa);///dodoavanje u mode
 
-                MainFrame.getInstance().getClassyTree().addChild(item, klasa);
+                MainFrame.getInstance().getClassyTree().addChild(item, klasa);///dodavanje u stablo
             } else if (interclass.equals("interface")) {
                 Interfejs interfejs = new Interfejs("Interclass", dijagramView.getClassyNode(), 2, "naziv", Vidljivost.PUBLIC, new Point(x, y));
                 interfejs.addSubscriber(dijagramView);

@@ -30,11 +30,9 @@ public class MainFrame extends JFrame implements ISubscriber {
     private InterfejsProzor interfejsProzor;
     private EnumProzor enumProzor;
     private List<PackageView> listaPackageView;
-
-
-    JSplitPane split;
-    JPanel desktop;
-    JScrollPane scrollPane;
+    private JSplitPane split;
+    private JPanel desktop;
+    private JScrollPane scrollPane;
 
 
 

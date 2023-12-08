@@ -111,6 +111,7 @@ public class Move implements State {
     @Override
     public void misPrivucen(int x, int y, DijagramView dijagramView) {
         dijagramView.setSelection(null);
+        ///setovanje listenera
         dijagramView.setTranslation();
         dijagramView.setStartPoint(new Point(x, y));
         int flag = 0;
@@ -156,7 +157,6 @@ public class Move implements State {
                     InterclassPainter ip = (InterclassPainter) ep;
                     Interclass ic = (Interclass) ip.getElement();
                     if (ip.elementAt(new Point(x, y))) {
-                        System.out.println("ulazimmmm");
                         ip.setxDragOffset(x - ic.getPosition().x);
                         ip.setyDragOffset(y - ic.getPosition().y);
                         oldPoint = new Point(ic.getPosition().x, ic.getPosition().y);

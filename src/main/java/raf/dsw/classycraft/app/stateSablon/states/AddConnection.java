@@ -40,6 +40,7 @@ public class AddConnection implements State {
         Dijagram d = (Dijagram)dijagramView.getClassyNode();
         d.addSubscriber(dijagramView);
 
+        ///odredjivanje dijagrama u stablu
         ClassyTreeItem item = null;
         //ClassyTreeItem selected = MainFrame.getInstance().getClassyTree().getSelectedNode();
         ClassyTreeItem selected = MainFrame.getInstance().getPackageView().getClassyTreeItem();

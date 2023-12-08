@@ -72,6 +72,7 @@ public class RemoveChild extends AbstractClassyAction{
                         SwingUtilities.updateComponentTreeUI(classyTreeImplementation.getTreeView());
                     }
                 }
+                dijagramView.getSelectionModel().clear();
             }
             ///ako zeli da obrise paket ili dijagram
             else if(!(selected.getClassyNode() instanceof ProjectExplorer)){

@@ -21,7 +21,7 @@ public class DodajUEnumAction extends AbstractClassyAction{
         dijagramView = d;
 
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(null));
-        putValue(NAME, "Dodaj");
+        putValue(NAME, "Dodaj element");
         putValue(SHORT_DESCRIPTION, "");
     }
 
