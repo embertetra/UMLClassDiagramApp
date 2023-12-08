@@ -32,4 +32,16 @@ public class ClassContent {
     public String getNaziv() {
         return naziv;
     }
+
+    public void setVidljivost(Vidljivost vidljivost) {
+        this.vidljivost = vidljivost;
+    }
+
+    public void setTip(String tip) {
+        this.tip = tip;
+    }
+
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
+    }
 }

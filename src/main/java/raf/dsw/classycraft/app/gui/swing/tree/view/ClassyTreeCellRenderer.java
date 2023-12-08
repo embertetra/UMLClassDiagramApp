@@ -1,5 +1,6 @@
 package raf.dsw.classycraft.app.gui.swing.tree.view;
 
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Package;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
@@ -28,6 +29,8 @@ public class ClassyTreeCellRenderer extends DefaultTreeCellRenderer {
             image = getClass().getResource("/images/package.png");
 
         else if(((ClassyTreeItem)value).getClassyNode() instanceof Dijagram)
+            image = getClass().getResource("/images/dijagram.png");
+        else if(((ClassyTreeItem)value).getClassyNode() instanceof DijagramElement)
             image = getClass().getResource("/images/dijagram.png");
 
         Image img = new ImageIcon(image).getImage();

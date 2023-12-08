@@ -1,6 +1,8 @@
 package raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter;
 
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Connection;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Agregacija;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
@@ -34,8 +36,8 @@ public class AgregacijaPainter extends ConnectionPainter {
             }
         }
         double min = 1e9;
-        Point point1 = null;
-        Point point2 = null;
+        point1 = null;
+        point2 = null;
         int idx1 = 0;
         for(int i=0;i<=3;i++){
             for(int j=0;j<=3;j++){

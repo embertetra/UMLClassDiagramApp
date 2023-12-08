@@ -11,16 +11,13 @@ public class AddConnectionAction extends AbstractClassyAction {
     public AddConnectionAction() {
         //putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
         putValue(SMALL_ICON, loadIcon("/images/connection.png"));
-        putValue(NAME, "");
-        putValue(SHORT_DESCRIPTION, "");
-
-
-
+        putValue(NAME, "Dodaj vezu");
+        putValue(SHORT_DESCRIPTION, "Dodaj vezu");
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(MainFrame.getInstance().getPackageView().getParent() != null && MainFrame.getInstance().getPackageView().getjTabbedPane().getTabCount() > 0) {
+        if(MainFrame.getInstance().getPackageView().getClassyNode() != null && MainFrame.getInstance().getPackageView().getjTabbedPane().getTabCount() > 0) {
 
             Object[] options = {"Agregacija", "Generalizacija", "Kompozicija", "Zavisnost", "Asocijacija"};
             int n = JOptionPane.showOptionDialog(MainFrame.getInstance(), "Odaberite vezu:", "", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);

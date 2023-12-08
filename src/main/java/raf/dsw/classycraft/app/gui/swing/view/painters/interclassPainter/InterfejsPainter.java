@@ -1,11 +1,9 @@
 package raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.ClassContent;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Metode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Interfejs;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Vidljivost;
 import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
 
 import java.awt.*;
@@ -40,7 +38,7 @@ public class InterfejsPainter extends InterclassPainter {
 
         shape = new Rectangle(i.getPosition().x - width/2 - 5, i.getPosition().y - heightUkupno/2, width+10, heightUkupno+10);
         g.draw(shape);
-        g.drawString("I", i.getPosition().x - width/2, i.getPosition().y - heightUkupno/2 + heightRow);
+        g.drawString("I  " + i.getNaziv(), i.getPosition().x - width/2, i.getPosition().y - heightUkupno/2 + heightRow);
 
 
         //crtanje metoda
@@ -64,7 +62,7 @@ public class InterfejsPainter extends InterclassPainter {
             width = g.getFontMetrics().stringWidth(string);
             if(max < width) max = width;
         }
-        string = "I" + ((Interfejs)element).getNaziv();
+        string = "I  " + ((Interfejs)element).getNaziv();
         width = g.getFontMetrics().stringWidth(string);
         if (width > max) max = width;
 
@@ -72,6 +70,7 @@ public class InterfejsPainter extends InterclassPainter {
     }
 
     public void setConnectionPoints(){
+        connectionPoints.clear();
         Interclass i = (Interclass)element;
         int width2 = width + 10;
         int height2 = heightUkupno + 5;

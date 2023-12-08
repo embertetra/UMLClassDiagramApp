@@ -1,6 +1,9 @@
 package raf.dsw.classycraft.app.gui.swing.tree.model.childFactory;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Connection;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Package;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
@@ -16,7 +19,7 @@ public class FactoryUtils {
     public FactoryUtils() {
 
     }
-    public ClassyNode generateChild(ClassyNode parent){
+    public ClassyNode generateChild(ClassyNode parent, DijagramElement dijagramElement){
 
         ///pravljenje projekta
         if(parent instanceof ProjectExplorer){
@@ -29,7 +32,7 @@ public class FactoryUtils {
                 project = new Project("Project" + String.valueOf(cnt), parent);
             }
 
-            return childFactory.orderChild(project.getName(), parent);
+            return childFactory.orderChild(project.getName(), parent, null);
         }
         ///pravljenje paketa
         else if(parent instanceof Project){
@@ -42,7 +45,7 @@ public class FactoryUtils {
                 pck = new Package("Package" + String.valueOf(cnt), parent);
             }
 
-            return childFactory.orderChild(pck.getName(), parent);
+            return childFactory.orderChild(pck.getName(), parent, null);
         }
         ///pravljenje dijagrama ili podpaketa
         else if(parent instanceof Package){
@@ -65,7 +68,7 @@ public class FactoryUtils {
                     pck = new Package("SubPackage" + String.valueOf(cnt), parent);
                 }
 
-                return  childFactory.orderChild(pck.getName(), parent);
+                return  childFactory.orderChild(pck.getName(), parent, null);
             }
             else if(n == 0){
                 childFactory = getChildFactory(FactoryType.DIAGRAM);
@@ -77,11 +80,25 @@ public class FactoryUtils {
                     dijagram = new Dijagram("Dijagram" + String.valueOf(cnt), parent);
                 }
 
-                return  childFactory.orderChild(dijagram.getName(), parent);
+                return  childFactory.orderChild(dijagram.getName(), parent, null);
+            }
+        }
+        else if(parent instanceof Dijagram){
+            Dijagram d = (Dijagram)parent;
+            if(d.getChildren().size()-1 >=0);
+                ClassyNode c = d.getChildren().get(d.getChildren().size()-1);
+            if(c instanceof Interclass) {
+                childFactory = new InterclassFactory();
+                return childFactory.makeChild("interClass", parent, dijagramElement);
+            }
+            else if(c instanceof Connection){
+                childFactory = new InterclassFactory();
+                return childFactory.makeChild("connection", parent, dijagramElement);
             }
         }
         return null;
     }
+
 
     public ChildFactory getChildFactory(FactoryType factoryType) {
 

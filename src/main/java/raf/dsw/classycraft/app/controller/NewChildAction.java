@@ -1,5 +1,6 @@
 package raf.dsw.classycraft.app.controller;
 
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
@@ -21,8 +22,11 @@ public class NewChildAction extends AbstractClassyAction{
     @Override
     public void actionPerformed(ActionEvent e) {
         ClassyTreeItem selected = (ClassyTreeItem) MainFrame.getInstance().getClassyTree().getSelectedNode();
-        if(selected != null)
-            MainFrame.getInstance().getClassyTree().addChild(selected);
+        if(selected != null && !(selected.getClassyNode() instanceof Dijagram))
+            MainFrame.getInstance().getClassyTree().addChild(selected, null);
+        else if(selected != null && selected.getClassyNode() instanceof Dijagram){
+
+        }
         else
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije selektovan roditelj", MessageType.ERROR);
     }

@@ -10,8 +10,8 @@ public class DeleteAction extends AbstractClassyAction {
     public DeleteAction() {
         //putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
         putValue(SMALL_ICON, loadIcon("/images/delete.png"));
-        putValue(NAME, "");
-        putValue(SHORT_DESCRIPTION, "");
+        putValue(NAME, "Obrisi");
+        putValue(SHORT_DESCRIPTION, "Obrisi");
     }
 
     @Override

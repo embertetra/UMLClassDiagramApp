@@ -2,16 +2,19 @@ package raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Vidljivost;
+import raf.dsw.classycraft.app.observer.IPublisher;
 
 import java.awt.*;
-import java.util.List;
 
-public abstract class Interclass extends DijagramElement {
+public abstract class Interclass extends DijagramElement implements IPublisher {
+
     private String naziv;
-    private Vidljivost vidljivost;
-    private int size;
-    private Point position;
 
+    private Vidljivost vidljivost;
+
+    private int size;
+
+    private Point position;
 
     public Interclass(String name, ClassyNode parent) {
         super(name, parent);
@@ -35,10 +38,6 @@ public abstract class Interclass extends DijagramElement {
         return naziv;
     }
 
-    public void setNaziv(String naziv) {
-        this.naziv = naziv;
-    }
-
     public Vidljivost getVidljivost() {
         return vidljivost;
     }
@@ -47,19 +46,12 @@ public abstract class Interclass extends DijagramElement {
         this.vidljivost = vidljivost;
     }
 
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
-
     public Point getPosition() {
         return position;
     }
 
     public void setPosition(Point position) {
         this.position = position;
+        notifySubscribers("state");
     }
 }

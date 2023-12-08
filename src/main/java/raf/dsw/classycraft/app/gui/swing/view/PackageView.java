@@ -4,6 +4,7 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
+import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.jTabbedElements.NotificationJTabbed;
 import raf.dsw.classycraft.app.observer.ISubscriber;
 import raf.dsw.classycraft.app.stateSablon.StateManager;
@@ -19,15 +20,15 @@ public class PackageView implements ISubscriber {
     private JLabel nazivProjekta;
     private JLabel nazivAutora;
     private JPanel rightSide;
-    private ClassyNode parent;
+    private ClassyNode classyNode;
     private List<DijagramView> tabovi;
     private JPanel toolMenu;
     private JPanel downSide;
     private StateManager stateManager;
-    private JPanel x;
+    private ClassyTreeItem classyTreeItem;
 
     public PackageView() {
-        this.parent = null;
+        this.classyNode = null;
         stateManager = new StateManager();
 
         nazivProjekta = new JLabel("    ");
@@ -42,7 +43,8 @@ public class PackageView implements ISubscriber {
 
         toolMenu = new JPanel();
         toolMenu.setLayout(new BoxLayout(toolMenu, BoxLayout.Y_AXIS));
-        toolMenu.add(MainFrame.getInstance().getToolBarStates());
+        //toolMenu.add(MainFrame.getInstance().getToolBarStates());
+        toolMenu.add(new ToolBarStates());
         toolMenu.setAlignmentX(Component.CENTER_ALIGNMENT);
         toolMenu.setAlignmentY(Component.CENTER_ALIGNMENT);
 
@@ -58,10 +60,6 @@ public class PackageView implements ISubscriber {
         rightSide.add(nazivAutora);
         rightSide.add(downSide);
 
-    }
-
-    public JPanel getX() {
-        return x;
     }
 
     public void addInTabList(DijagramView dijagramView) {
@@ -81,7 +79,7 @@ public class PackageView implements ISubscriber {
         ///Update dodatih dijagrama u stablo, prikaz u JTabbu
         if (poruka.getOznaka() == 0) {
             brojac = 0;
-            if (this.parent != null && parent2.getName().equals(this.parent.getName())) {
+            if (this.classyNode != null && parent2.getName().equals(this.classyNode.getName())) {
                 for (ClassyNode c : parent2.getChildren()) {
                     totalTabs = jTabbedPane.getTabCount();
                     for (int i = 0; i < totalTabs; i++) {
@@ -99,7 +97,7 @@ public class PackageView implements ISubscriber {
         ///Update obrisanih dijagrama u stablo, prikaz u JTabbu
         else if (poruka.getOznaka() == 1) {
             brojac = 0;
-            if (this.parent != null && parent2.getName().equals(this.parent.getName())) {
+            if (this.classyNode != null && parent2.getName().equals(this.classyNode.getName())) {
                 totalTabs = jTabbedPane.getTabCount();
                 for (int i = 0; i < totalTabs; i++) {
                     for (ClassyNode c : parent2.getChildren()) {
@@ -115,12 +113,12 @@ public class PackageView implements ISubscriber {
         }
         ///update obrisanih podpaketa
         else if (poruka.getOznaka() == 2) {
-            ClassyNode tmp = parent;
-            if (parent != null) {
+            ClassyNode tmp = classyNode;
+            if (classyNode != null) {
                 while (!(tmp instanceof Project)) {
                     if (tmp.getName().equals(poruka.getParent().getName())) {
                         jTabbedPane.removeAll();
-                        parent = null;
+                        classyNode = null;
                         return;
                     }
                     tmp = tmp.getParent();
@@ -130,8 +128,8 @@ public class PackageView implements ISubscriber {
         ///update brisanje paketa
         else if (poruka.getOznaka() == 3) {
             ClassyNode pck = poruka.getParent();
-            if (parent != null) {
-                ClassyNode tmp = parent;
+            if (classyNode != null) {
+                ClassyNode tmp = classyNode;
                 while (true) {
                     ClassyNode tmp2 = tmp.getParent();
                     if (tmp2 instanceof Project)
@@ -141,7 +139,7 @@ public class PackageView implements ISubscriber {
 
                 if (tmp.getName().equals(pck.getName())) {
                     jTabbedPane.removeAll();
-                    parent = null;
+                    classyNode = null;
                 }
             }
         }
@@ -153,8 +151,8 @@ public class PackageView implements ISubscriber {
         }
         ///Update brisanje projekta
         else if (poruka.getOznaka() == 5) {
-            if (parent != null) {
-                ClassyNode p = this.parent;
+            if (classyNode != null) {
+                ClassyNode p = this.classyNode;
                 while (true) {
                     if (p instanceof Project)
                         break;
@@ -162,7 +160,7 @@ public class PackageView implements ISubscriber {
                 }
                 if (p.getName().equals(poruka.getParent().getName())) {
                     jTabbedPane.removeAll();
-                    parent = null;
+                    classyNode = null;
                     nazivProjekta.setText("    ");
                     nazivAutora.setText("    ");
                 }
@@ -174,8 +172,8 @@ public class PackageView implements ISubscriber {
         }
         ///Update promena autora
         else if (poruka.getOznaka() == 6) {
-            if (parent != null) {
-                ClassyNode p = this.parent;
+            if (classyNode != null) {
+                ClassyNode p = this.classyNode;
                 while (true) {
                     if (p instanceof Project)
                         break;
@@ -191,48 +189,65 @@ public class PackageView implements ISubscriber {
     //metode koje su unutar State intefrejsa
 
     public void misKliknut(int x, int y, DijagramView dijagramView){
-        stateManager.getCurrentState().misKliknut(x,y,dijagramView);
+        if(stateManager.getCurrentState() != null)
+            stateManager.getCurrentState().misKliknut(x,y,dijagramView);
     }
 
     public void misOtpusten(int x, int y, DijagramView dijagramView){
-        stateManager.getCurrentState().misOtpusten(x,y,dijagramView);
-
+        if(stateManager.getCurrentState() != null)
+            stateManager.getCurrentState().misOtpusten(x,y,dijagramView);
     }
 
     public void misPrivucen(int x, int y, DijagramView dijagramView){
-        stateManager.getCurrentState().misPrivucen(x,y,dijagramView);
+        if(stateManager.getCurrentState() != null)
+            stateManager.getCurrentState().misPrivucen(x, y, dijagramView);
+    }
+    public void startMouseState(){
+        if(stateManager.getCurrentState() != null) {
+            stateManager.setMouse();
+            if(jTabbedPane.getTabCount() > 0 &&((DijagramView) jTabbedPane.getSelectedComponent()).getSelectionModel() != null) {
+                ((DijagramView) jTabbedPane.getSelectedComponent()).getSelectionModel().clear();
+                ((DijagramView) jTabbedPane.getSelectedComponent()).setSelection(null);
+                ((DijagramView) jTabbedPane.getSelectedComponent()).repaint();
+            }
+        }
     }
 
     public void startAddInterclassState() {
         stateManager.setAddInterclass();
-        if(jTabbedPane.getSelectedComponent()!=null) {
-            ((DijagramView) jTabbedPane.getSelectedComponent()).removeMML();
-        }
     }
 
     public void startAddConnectionState() {
         stateManager.setAddConnection();
-        ((DijagramView)jTabbedPane.getSelectedComponent()).setMML();
     }
 
     public void startAddContentState() {
         stateManager.setAddContent();
     }
+    public void startMoveState(){
+        stateManager.setMove();
+    }
 
     public void startDeleteState() {
         stateManager.setDelete();
+        if(jTabbedPane.getSelectedComponent()!=null) {
+            ((DijagramView) jTabbedPane.getSelectedComponent()).setSelection(null);
+            ((DijagramView) jTabbedPane.getSelectedComponent()).repaint();
+        }
     }
 
     public void startSelectionState() {
         stateManager.setSelection();
     }
 
+    public void startDuplicateState(){stateManager.setDuplicate();}
+
     public StateManager getStateManager() {
         return stateManager;
     }
 
-    public void setParent(ClassyNode parent) {
-        this.parent = parent;
+    public void setClassyNode(ClassyNode classyNode) {
+        this.classyNode = classyNode;
     }
 
     public void promeniNazivProjekta(String string) {
@@ -255,7 +270,19 @@ public class PackageView implements ISubscriber {
         return nazivProjekta;
     }
 
-    public ClassyNode getParent() {
-        return parent;
+    public ClassyNode getClassyNode() {
+        return classyNode;
+    }
+
+    public JPanel getDownSide() {
+        return downSide;
+    }
+
+    public ClassyTreeItem getClassyTreeItem() {
+        return classyTreeItem;
+    }
+
+    public void setClassyTreeItem(ClassyTreeItem classyTreeItem) {
+        this.classyTreeItem = classyTreeItem;
     }
 }

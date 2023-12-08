@@ -10,6 +10,8 @@ import raf.dsw.classycraft.app.observer.ISubscriber;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainFrame extends JFrame implements ISubscriber {
     private static MainFrame instance;
@@ -24,6 +26,16 @@ public class MainFrame extends JFrame implements ISubscriber {
     private DijagramView dijagramView;
     private ToolBarStates toolBarStates;
 
+    private KlasaProzor klasaProzor;
+    private InterfejsProzor interfejsProzor;
+    private EnumProzor enumProzor;
+    private List<PackageView> listaPackageView;
+    private JSplitPane split;
+    private JPanel desktop;
+    private JScrollPane scrollPane;
+
+
+
     private MainFrame() {
     }
 
@@ -34,6 +46,10 @@ public class MainFrame extends JFrame implements ISubscriber {
         packageView = new PackageView();
         dijagramView = new DijagramView(null);
         toolBarStates = new ToolBarStates();
+        klasaProzor = new KlasaProzor();
+        interfejsProzor = new InterfejsProzor();
+        enumProzor = new EnumProzor();
+        listaPackageView = new ArrayList<>();
 
         ApplicationFramework.getInstance().getMessageGenerator().getSubscribers().add(this);
 
@@ -54,12 +70,11 @@ public class MainFrame extends JFrame implements ISubscriber {
         add(toolBar, BorderLayout.NORTH);
 
         JTree projectExplorer = classyTree.generateTree(ApplicationFramework.getInstance().getClassyRepository().getRoot());
-        JPanel desktop = new JPanel();
-        JScrollPane scrollPane = new JScrollPane(projectExplorer);
+        desktop = new JPanel();
+        scrollPane = new JScrollPane(projectExplorer);
         scrollPane.setMinimumSize(new Dimension(200, 150));
-        JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scrollPane, desktop);
+        split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scrollPane, desktop);
 
-        //split.add(packageView.getRightSide(), JSplitPane.RIGHT);
         split.add(packageView.getRightSide(), JSplitPane.RIGHT);
 
         getContentPane().add(split, BorderLayout.CENTER);
@@ -107,5 +122,27 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     public PackageView getPackageView() {
         return packageView;
+    }
+
+    public KlasaProzor getKlasaProzor() {
+        return klasaProzor;
+    }
+
+    public InterfejsProzor getInterfejsProzor() {
+        return interfejsProzor;
+    }
+
+    public EnumProzor getEnumProzor() {
+        return enumProzor;
+    }
+
+    public List<PackageView> getListaPackageView() {
+        return listaPackageView;
+    }
+
+    public void setPackageView(PackageView packageView) {
+        this.packageView = packageView;
+        //split.add(packageView.getRightSide(), JSplitPane.RIGHT);
+        split.setRightComponent(packageView.getRightSide());
     }
 }

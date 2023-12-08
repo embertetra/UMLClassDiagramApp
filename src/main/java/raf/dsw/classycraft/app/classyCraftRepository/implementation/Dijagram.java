@@ -28,8 +28,10 @@ public class Dijagram extends ClassyNodeComposite implements IPublisher {
 
     @Override
     public void removeChild(ClassyNode child) {
-        if(child != null && getChildren().contains(child))
+        if(child != null && getChildren().contains(child)) {
             getChildren().remove(child);
+            notifySubscribers("state");
+        }
     }
 
     public void setNameInJTabb(Object notification){
