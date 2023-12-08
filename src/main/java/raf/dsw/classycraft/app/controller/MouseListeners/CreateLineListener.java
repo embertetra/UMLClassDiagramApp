@@ -2,7 +2,6 @@ package raf.dsw.classycraft.app.controller.MouseListeners;
 
 import javafx.util.Pair;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
-import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
