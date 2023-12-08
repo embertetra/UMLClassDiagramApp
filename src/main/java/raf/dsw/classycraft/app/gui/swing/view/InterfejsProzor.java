@@ -130,6 +130,7 @@ public class InterfejsProzor extends JFrame {
         defaultListModel.clear();
         for(Metode m : metodeList)
             defaultListModel.addElement(m);
+        this.pack();
     }
 
     public ButtonGroup getBgVidljivost() {

@@ -86,6 +86,7 @@ public class EnumProzor extends JFrame {
         defaultListModel.clear();
         for(String s : enumMList)
             defaultListModel.addElement(s);
+        this.pack();
     }
 
     public List<String> getEnumMList() {

@@ -167,6 +167,7 @@ public class KlasaProzor extends JFrame {
             if (c instanceof Metode)
                 defaultListModel.addElement(c);
         }
+        this.pack();
 
     }
 
