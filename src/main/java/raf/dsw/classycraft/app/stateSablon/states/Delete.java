@@ -198,4 +198,14 @@ public class Delete implements State {
     public void misPrivucen(int x, int y, DijagramView dijagramView) {
 
     }
+
+    @Override
+    public void misDragged(int x, int y, DijagramView dijagramView) {
+
+    }
+
+    @Override
+    public void wheelMove(int x, int y, DijagramView dijagramView) {
+
+    }
 }

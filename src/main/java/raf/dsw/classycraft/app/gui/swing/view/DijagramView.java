@@ -46,12 +46,14 @@ public class DijagramView extends JPanel implements ISubscriber {
         }
 
         this.addMouseListener(new MouseController(this));
+        this.addMouseMotionListener(new MouseController(this));
+        this.addMouseWheelListener(new MouseController(this));
         elementPainterList = new ArrayList<>();
         selectionModel = new ArrayList<>();
         translation = new CreateTranslationListener(this);
         selectionListener = new CreateSelectionListener(this);
         mml = new CreateLineListener(this);
-        this.addMouseWheelListener(new CreateMouseWheelListener(this));
+        //this.addMouseWheelListener(new CreateMouseWheelListener(this));
     }
 
     @Override

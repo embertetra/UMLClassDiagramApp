@@ -97,6 +97,16 @@ public class AddInterclass implements State {
     public void misPrivucen(int x, int y, DijagramView dijagramView) {
     }
 
+    @Override
+    public void misDragged(int x, int y, DijagramView dijagramView) {
+
+    }
+
+    @Override
+    public void wheelMove(int x, int y, DijagramView dijagramView) {
+
+    }
+
     public void setInterclass(String interclass) {
         this.interclass = interclass;
     }

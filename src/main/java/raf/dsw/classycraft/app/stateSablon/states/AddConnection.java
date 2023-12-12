@@ -36,7 +36,7 @@ public class AddConnection implements State {
     @Override
     public void misOtpusten(int x, int y, DijagramView dijagramView) {
 
-        dijagramView.removeMML();
+        //dijagramView.removeMML();
         Dijagram d = (Dijagram)dijagramView.getClassyNode();
         d.addSubscriber(dijagramView);
 
@@ -135,7 +135,7 @@ public class AddConnection implements State {
     public void misPrivucen(int x, int y, DijagramView dijagramView) {
         dijagramView.getSelectionModel().clear();
         dijagramView.setSelection(null);
-        dijagramView.setMML();
+        //dijagramView.setMML();
         if(connection != null) {
             if (connection.equals("agregacija")) {
                 a = new Agregacija("Connection", dijagramView.getClassyNode(), 2, null, null);
@@ -193,6 +193,21 @@ public class AddConnection implements State {
 
             }
         }
+
+    }
+
+    @Override
+    public void misDragged(int x, int y, DijagramView d) {
+        System.out.println("usao");
+        if (d.getLine() != null && d.getLine().getKey() != null) {
+            System.out.println("usao?");
+            d.setLine(new Pair<>(d.getLine().getKey(), new Point(x, y)));
+            d.repaint();
+        }
+    }
+
+    @Override
+    public void wheelMove(int x, int y, DijagramView dijagramView) {
 
     }
 

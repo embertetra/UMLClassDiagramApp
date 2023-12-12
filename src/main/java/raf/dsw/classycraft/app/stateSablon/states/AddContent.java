@@ -67,4 +67,14 @@ public class AddContent implements State {
         dijagramView.setSelection(null);
         dijagramView.repaint();
     }
+
+    @Override
+    public void misDragged(int x, int y, DijagramView dijagramView) {
+
+    }
+
+    @Override
+    public void wheelMove(int x, int y, DijagramView dijagramView) {
+
+    }
 }

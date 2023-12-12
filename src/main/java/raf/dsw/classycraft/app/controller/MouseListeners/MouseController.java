@@ -4,19 +4,26 @@ import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseWheelListener;
+import java.awt.event.*;
 import java.awt.geom.NoninvertibleTransformException;
 import java.awt.geom.Point2D;
 
-public class MouseController implements MouseListener {
+public class MouseController implements MouseMotionListener,MouseListener, MouseWheelListener {
     private DijagramView dijagramView;
 
     public MouseController(DijagramView dijagramView) {
         this.dijagramView = dijagramView;
     }
-
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        Point2D point = e.getPoint();
+        try {
+            point = dijagramView.getAt().inverseTransform(e.getPoint(), null);
+        } catch (NoninvertibleTransformException ex) {
+            throw new RuntimeException(ex);
+        }
+        MainFrame.getInstance().getPackageView().misDragged((int) point.getX(), (int) point.getY(), dijagramView);
+    }
     @Override
     public void mouseClicked(MouseEvent e) {
 
@@ -64,5 +71,25 @@ public class MouseController implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+
+
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        dijagramView.setZoomer(true);
+        if(e.getWheelRotation() > 0) {
+            dijagramView.setZoomFactor(Math.max(dijagramView.getZoomFactor() / 1.1, 0.3));
+        }
+        else if(e.getWheelRotation() < 0) {
+            dijagramView.setZoomFactor(Math.min(dijagramView.getZoomFactor() * 1.1, 2.0));
+        }
+
+        dijagramView.repaint();
     }
 }

@@ -72,4 +72,14 @@ public class Selection implements State {
         dijagramView.getSelectionModel().clear();
         dijagramView.setSelection(new Rectangle(x,y,-1,-1));
     }
+
+    @Override
+    public void misDragged(int x, int y, DijagramView dijagramView) {
+
+    }
+
+    @Override
+    public void wheelMove(int x, int y, DijagramView dijagramView) {
+
+    }
 }

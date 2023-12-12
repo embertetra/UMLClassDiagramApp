@@ -8,5 +8,7 @@ public interface State{
     void misKliknut(int x, int y, DijagramView dijagramView);
     void misOtpusten(int x, int y, DijagramView dijagramView);
     void misPrivucen(int x, int y, DijagramView dijagramView);
+    void misDragged(int x, int y, DijagramView dijagramView);
+    void wheelMove(int x, int y, DijagramView dijagramView);
 
 }

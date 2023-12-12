@@ -201,4 +201,61 @@ public class Move implements State {
             dijagramView.repaint();
         }
     }
+
+    @Override
+    public void misDragged(int x, int y, DijagramView d) {
+        /*if (d.getStartPoint() != null) {
+            int diffX = (int) (x - d.getStartPoint().x);
+            int diffY = (int) (x - d.getStartPoint().y);
+
+            if (d.getFlag1() != null) {
+                for (ElementPainter ep : d.getElementPainterList()) {
+                    if (ep instanceof InterclassPainter) {
+                        InterclassPainter ip = (InterclassPainter) ep;
+                        Interclass ic = (Interclass) ip.getElement();
+                        if (ip == d.getFlag1()) {
+                            ic.setPosition(new Point(d.getStartPoint().x + diffX - d.getxDragOffset(), d.getStartPoint().y + diffY - d.getyDragOffset()));
+                            //d.repaint();//
+                            return;
+                        }
+                    }
+                }
+            } else if (d.getMoveSelections() != null && d.getMoveSelections().size() > 0) {
+                for (InterclassPainter ip : d.getMoveSelections()) {
+                    Interclass ic = (Interclass) ip.getElement();
+                    ic.setPosition(new Point(d.getStartPoint().x + diffX - ip.getxDragOffset(),
+                            d.getStartPoint().y + diffY - ip.getyDragOffset()));
+                }
+                //d.repaint();
+                return;
+            } else {
+                for (ElementPainter ep : d.getElementPainterList()) {
+                    if (ep instanceof InterclassPainter) {
+                        InterclassPainter ip = ((InterclassPainter) ep);
+                        ((Interclass) ip.getElement()).setPosition(new Point(d.getStartPoint().x + diffX - ip.getxDragOffset(),
+                                d.getStartPoint().y + diffY - ip.getyDragOffset()));
+                    }
+                }
+                for (ElementPainter ep : d.getElementPainterList()) {
+                    if (ep instanceof ConnectionPainter) {
+                        ConnectionPainter cp = (ConnectionPainter) ep;
+                        Interclass from = ((Connection) cp.getElement()).getFrom();
+                        Interclass to = ((Connection) cp.getElement()).getTo();
+                        if(d.getStartPoint()!= null) {
+                            from.setPosition(new Point(d.getStartPoint().x + diffX - cp.getDragOffset1().x,
+                                    d.getStartPoint().y + diffY - cp.getDragOffset1().y));
+                            to.setPosition(new Point(d.getStartPoint().x + diffX - cp.getDragOffset2().x,
+                                    d.getStartPoint().y + diffY - cp.getDragOffset2().y));
+                        }
+                    }
+                }
+            }
+            d.repaint();
+        }*/
+    }
+
+    @Override
+    public void wheelMove(int x, int y, DijagramView dijagramView) {
+
+    }
 }

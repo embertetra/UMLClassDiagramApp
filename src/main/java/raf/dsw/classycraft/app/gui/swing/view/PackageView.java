@@ -202,6 +202,14 @@ public class PackageView implements ISubscriber {
         if(stateManager.getCurrentState() != null)
             stateManager.getCurrentState().misPrivucen(x, y, dijagramView);
     }
+    public void misDragged(int x, int y, DijagramView dijagramView){
+        if(stateManager.getCurrentState() != null)
+            stateManager.getCurrentState().misDragged(x,y,dijagramView);
+    }
+    public void wheelMoved(int x, int y, DijagramView dijagramView){
+        if(stateManager.getCurrentState() != null)
+            stateManager.getCurrentState().wheelMove(x,y,dijagramView);
+    }
     public void startMouseState(){
         if(stateManager.getCurrentState() != null) {
             stateManager.setMouse();
