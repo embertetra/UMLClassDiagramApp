@@ -60,7 +60,6 @@ public class Selection implements State {
 
     @Override
     public void misOtpusten(int x, int y, DijagramView dijagramView) {
-        dijagramView.removeSelectionListener();
         dijagramView.setSelection(null);
         dijagramView.setShape(null);
         dijagramView.repaint();
@@ -68,14 +67,43 @@ public class Selection implements State {
 
     @Override
     public void misPrivucen(int x, int y, DijagramView dijagramView) {
-        dijagramView.setSelectionListener();
         dijagramView.getSelectionModel().clear();
         dijagramView.setSelection(new Rectangle(x,y,-1,-1));
     }
 
     @Override
-    public void misDragged(int x, int y, DijagramView dijagramView) {
-
+    public void misDragged(int x, int y, DijagramView d) {
+        if (d.getSelection() != null) {
+            d.setShape(new GeneralPath());
+            ((GeneralPath) d.getShape()).moveTo(d.getSelection().x, d.getSelection().y);
+            ((GeneralPath) d.getShape()).lineTo(x, d.getSelection().y);
+            ((GeneralPath) d.getShape()).lineTo(x, y);
+            ((GeneralPath) d.getShape()).lineTo(d.getSelection().x, y);
+            ((GeneralPath) d.getShape()).closePath();
+            d.repaint();
+        }
+        d.getSelectionModel().clear();
+        for (ElementPainter el : d.getElementPainterList()) {
+            if (el instanceof InterclassPainter) {
+                InterclassPainter ip = (InterclassPainter) el;
+                Interclass ic = (Interclass) ip.getElement();
+                Rectangle rec = new Rectangle(ic.getPosition().x - ip.getWidth() / 2 - 5, ic.getPosition().y - ip.getHeightUkupno() / 2,
+                        ip.getWidth() + 10, ip.getHeightUkupno() + 10);
+                if (d.getShape() != null && d.getShape().intersects(rec))
+                    d.getSelectionModel().add(new Rectangle(rec.x - 5, rec.y - 5, rec.width + 10, rec.height + 10));
+            } else if (el instanceof ConnectionPainter) {
+                ConnectionPainter cp = (ConnectionPainter) el;
+                if (d.getShape() != null && cp.getPoint1() != null && cp.getPoint2() != null && d.getShape().getBounds2D().intersectsLine(cp.getPoint1().x, cp.getPoint1().y, cp.getPoint2().x, cp.getPoint2().y)) {
+                    Shape shape2 = new GeneralPath();
+                    ((GeneralPath) shape2).moveTo(cp.getPoint1().x, cp.getPoint1().y);
+                    ((GeneralPath) shape2).lineTo(cp.getPoint1().x, cp.getPoint2().y);
+                    ((GeneralPath) shape2).lineTo(cp.getPoint2().x, cp.getPoint2().y);
+                    ((GeneralPath) shape2).lineTo(cp.getPoint2().x, cp.getPoint1().y);
+                    ((GeneralPath) shape2).lineTo(cp.getPoint1().x, cp.getPoint1().y);
+                    d.getSelectionModel().add(shape2);
+                }
+            }
+        }
     }
 
     @Override

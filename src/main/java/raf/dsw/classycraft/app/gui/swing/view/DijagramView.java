@@ -24,9 +24,6 @@ public class DijagramView extends JPanel implements ISubscriber {
     private Rectangle selection;
     private Shape shape;
     private List<Shape> selectionModel;
-    private MouseMotionListener mml;
-    private MouseMotionListener selectionListener;
-    private MouseMotionListener translation;
     private InterclassPainter flag1;
     private List<InterclassPainter> moveSelections;
 
@@ -39,21 +36,19 @@ public class DijagramView extends JPanel implements ISubscriber {
     private double zoomFactor = 1;
     private double prevZoomFactor = 1;
     private boolean zoomer;
+    private MouseController mouseController;
     AffineTransform at = new AffineTransform();
     public DijagramView(ClassyNode classyNode) {
         if (classyNode != null) {
             this.classyNode = classyNode;
         }
 
-        this.addMouseListener(new MouseController(this));
-        this.addMouseMotionListener(new MouseController(this));
-        this.addMouseWheelListener(new MouseController(this));
+        mouseController = new MouseController(this);
+        this.addMouseListener(mouseController);
+        this.addMouseMotionListener(mouseController);
+        this.addMouseWheelListener(mouseController);
         elementPainterList = new ArrayList<>();
         selectionModel = new ArrayList<>();
-        translation = new CreateTranslationListener(this);
-        selectionListener = new CreateSelectionListener(this);
-        mml = new CreateLineListener(this);
-        //this.addMouseWheelListener(new CreateMouseWheelListener(this));
     }
 
     @Override
@@ -123,25 +118,6 @@ public class DijagramView extends JPanel implements ISubscriber {
         }
         System.out.println("Izvrsen paintComponent");
         //((Graphics2D) g).setTransform(save);
-    }
-
-    public void setTranslation() {
-        addMouseMotionListener(translation);
-    }
-    public void removeTranslation() {
-        removeMouseMotionListener(translation);
-    }
-    public void setMML() {
-        this.addMouseMotionListener(mml);
-    }
-    public void removeMML() {
-        this.removeMouseMotionListener(mml);
-    }
-    public void setSelectionListener() {
-        this.addMouseMotionListener(selectionListener);
-    }
-    public void removeSelectionListener() {
-        this.removeMouseMotionListener(selectionListener);
     }
     public List<ElementPainter> getElementPainterList() {
         return elementPainterList;

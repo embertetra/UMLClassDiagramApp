@@ -33,9 +33,6 @@ public class Move implements State {
 
     @Override
     public void misOtpusten(int x, int y, DijagramView dijagramView) {
-
-
-        dijagramView.removeTranslation();
         dijagramView.getSelectionModel().clear();
         novaListaSelekcije.clear();
         ///presek multiselekcija
@@ -111,8 +108,6 @@ public class Move implements State {
     @Override
     public void misPrivucen(int x, int y, DijagramView dijagramView) {
         dijagramView.setSelection(null);
-        ///setovanje listenera
-        dijagramView.setTranslation();
         dijagramView.setStartPoint(new Point(x, y));
         int flag = 0;
 
@@ -204,9 +199,9 @@ public class Move implements State {
 
     @Override
     public void misDragged(int x, int y, DijagramView d) {
-        /*if (d.getStartPoint() != null) {
+        if (d.getStartPoint() != null) {
             int diffX = (int) (x - d.getStartPoint().x);
-            int diffY = (int) (x - d.getStartPoint().y);
+            int diffY = (int) (y - d.getStartPoint().y);
 
             if (d.getFlag1() != null) {
                 for (ElementPainter ep : d.getElementPainterList()) {
@@ -251,7 +246,7 @@ public class Move implements State {
                 }
             }
             d.repaint();
-        }*/
+        }
     }
 
     @Override

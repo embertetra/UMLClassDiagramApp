@@ -59,7 +59,7 @@ public class AddConnection implements State {
                     }
                 }
             }
-            if(a.getTo() != null){
+            if(a.getTo() != null && a.getFrom() != a.getTo()){
                 AgregacijaPainter ap = new AgregacijaPainter(a);
                 dijagramView.getElementPainterList().add(ap);
                 d.addChild(a);
@@ -74,7 +74,7 @@ public class AddConnection implements State {
                     }
                 }
             }
-            if(k.getTo() != null){
+            if(k.getTo() != null && k.getFrom() != k.getTo()){
                 KompozicijaPainter kp = new KompozicijaPainter(k);
                 dijagramView.getElementPainterList().add(kp);
                 d.addChild(k);
@@ -89,7 +89,7 @@ public class AddConnection implements State {
                     }
                 }
             }
-            if(g.getTo() != null){
+            if(g.getTo() != null && g.getFrom() != g.getTo()){
                 GeneralizacijaPainter gp = new GeneralizacijaPainter(g);
                 dijagramView.getElementPainterList().add(gp);
                 d.addChild(g);
@@ -102,7 +102,7 @@ public class AddConnection implements State {
                     if(e.elementAt(new Point(x, y)))
                         z.setTo((Interclass) e.getElement());
             }
-            if(z.getTo() != null){
+            if(z.getTo() != null && z.getFrom() != z.getTo()){
                 ZavisnostPainter zp = new ZavisnostPainter(z);
                 dijagramView.getElementPainterList().add(zp);
                 d.addChild(z);
@@ -118,7 +118,7 @@ public class AddConnection implements State {
                     }
                 }
             }
-            if(as.getTo() != null){
+            if(as.getTo() != null && as.getFrom() != as.getTo()){
                 AsocijacijaPainter asp = new AsocijacijaPainter(as);
                 dijagramView.getElementPainterList().add(asp);
                 d.addChild(as);
@@ -198,9 +198,7 @@ public class AddConnection implements State {
 
     @Override
     public void misDragged(int x, int y, DijagramView d) {
-        System.out.println("usao");
         if (d.getLine() != null && d.getLine().getKey() != null) {
-            System.out.println("usao?");
             d.setLine(new Pair<>(d.getLine().getKey(), new Point(x, y)));
             d.repaint();
         }
