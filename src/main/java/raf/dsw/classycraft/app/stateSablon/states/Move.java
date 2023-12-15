@@ -236,7 +236,7 @@ public class Move implements State {
                         ConnectionPainter cp = (ConnectionPainter) ep;
                         Interclass from = ((Connection) cp.getElement()).getFrom();
                         Interclass to = ((Connection) cp.getElement()).getTo();
-                        if(d.getStartPoint()!= null) {
+                        if(d.getStartPoint()!= null && from != null && to != null) {
                             from.setPosition(new Point(d.getStartPoint().x + diffX - cp.getDragOffset1().x,
                                     d.getStartPoint().y + diffY - cp.getDragOffset1().y));
                             to.setPosition(new Point(d.getStartPoint().x + diffX - cp.getDragOffset2().x,

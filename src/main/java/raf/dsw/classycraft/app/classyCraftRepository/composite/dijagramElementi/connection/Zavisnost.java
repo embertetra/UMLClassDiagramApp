@@ -7,6 +7,7 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.
 import java.awt.*;
 
 public class Zavisnost extends Connection {
+    private String callOrInstantiate;
 
     public Zavisnost(String name, ClassyNode parent) {
         super(name, parent);
@@ -14,5 +15,14 @@ public class Zavisnost extends Connection {
 
     public Zavisnost(String name, ClassyNode parent, int stroke, Interclass from, Interclass to) {
         super(name, parent, stroke, from, to);
+        callOrInstantiate = "-";
+    }
+
+    public String getCallOrInstantiate() {
+        return callOrInstantiate;
+    }
+
+    public void setCallOrInstantiate(String callOrInstantiate) {
+        this.callOrInstantiate = callOrInstantiate;
     }
 }

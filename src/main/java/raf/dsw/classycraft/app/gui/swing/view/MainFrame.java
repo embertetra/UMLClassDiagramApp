@@ -33,6 +33,8 @@ public class MainFrame extends JFrame implements ISubscriber {
     private JSplitPane split;
     private JPanel desktop;
     private JScrollPane scrollPane;
+    private KompAgregProzor kompAgregProzor;
+    private DependencyProzor dependencyProzor;
 
 
 
@@ -50,6 +52,10 @@ public class MainFrame extends JFrame implements ISubscriber {
         interfejsProzor = new InterfejsProzor();
         enumProzor = new EnumProzor();
         listaPackageView = new ArrayList<>();
+        kompAgregProzor = new KompAgregProzor();
+        dependencyProzor = new DependencyProzor();
+
+        //kompAgregProzor.setVisible(true);
 
         ApplicationFramework.getInstance().getMessageGenerator().getSubscribers().add(this);
 
@@ -144,5 +150,13 @@ public class MainFrame extends JFrame implements ISubscriber {
         this.packageView = packageView;
         //split.add(packageView.getRightSide(), JSplitPane.RIGHT);
         split.setRightComponent(packageView.getRightSide());
+    }
+
+    public KompAgregProzor getKompAgregProzor() {
+        return kompAgregProzor;
+    }
+
+    public DependencyProzor getDependencyProzor() {
+        return dependencyProzor;
     }
 }
