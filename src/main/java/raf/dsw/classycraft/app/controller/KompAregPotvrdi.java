@@ -24,11 +24,11 @@ public class KompAregPotvrdi extends AbstractClassyAction{
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if(prozor.getLblname().getText().isEmpty() || prozor.getLblname().getText().equals(" ")) {
+        if(prozor.getTfName().getText().isEmpty() || prozor.getTfName().getText().equals(" ")) {
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Niste uneli ime", MessageType.ERROR);
             return;
         }
-        else if(prozor.getLblTip().getText().isEmpty() || prozor.getLblTip().getText().equals(" ")) {
+        else if(prozor.getTfTip().getText().isEmpty() || prozor.getTfTip().getText().equals(" ")) {
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Niste uneli tip promenljive", MessageType.ERROR);
             return;
         }
