@@ -13,7 +13,7 @@ import java.util.List;
 @JsonTypeName("projectExplorer")
 public class ProjectExplorer extends ClassyNodeComposite implements IPublisher {
     // root klasa = postoji samo jedna instanca
-    private transient List<ISubscriber> subscribers = new ArrayList<>();
+    private transient List<ISubscriber> subscribers;
 
     public ProjectExplorer(String name) {
         super(name, null);

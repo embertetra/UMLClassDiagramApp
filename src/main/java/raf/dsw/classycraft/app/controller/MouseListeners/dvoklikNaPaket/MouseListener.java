@@ -2,6 +2,10 @@ package raf.dsw.classycraft.app.controller.MouseListeners.dvoklikNaPaket;
 
 import com.sun.tools.javac.Main;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.EnumM;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Interfejs;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Package;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
@@ -12,6 +16,10 @@ import raf.dsw.classycraft.app.gui.swing.tree.view.ClassyTreeView;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.gui.swing.view.PackageView;
+import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
+import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.EnumPainter;
+import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.InterfejsPainter;
+import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.KlasaPainter;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -50,6 +58,26 @@ public class MouseListener {
                                         DijagramView dijagramView = new DijagramView(c);
                                         ((Dijagram) c).addSubscriber(dijagramView);
                                         paket.getjTabbedPane().addTab(c.getName(),dijagramView);
+
+                                        ///prolazim kroz svu decu dijagrama i kreiram paintere za njih
+                                        for(ClassyNode cn : ((Dijagram)c).getChildren()){
+                                            InterclassPainter ip = null;
+                                            if(cn instanceof Klasa){
+                                                Klasa k = (Klasa) cn;
+                                                ip = new KlasaPainter(k);
+                                            }
+                                            else if(cn instanceof Interfejs){
+                                                Interfejs i = (Interfejs) cn;
+                                                ip = new InterfejsPainter(i);
+                                            }
+                                            else if(cn instanceof EnumM){
+                                                EnumM en = (EnumM) cn;
+                                                ip = new EnumPainter(en);
+                                            }
+                                            if(ip != null)
+                                                dijagramView.getElementPainterList().add(ip);
+                                        }
+
                                     }
                                 }
                                 MainFrame.getInstance().setPackageView(paket);
@@ -69,7 +97,7 @@ public class MouseListener {
                             }
                             ((Project) selectedNode).addSubscriber(MainFrame.getInstance().getPackageView());
                             MainFrame.getInstance().getPackageView().promeniNazivProjekta(selectedNode.getName());
-                            //((ProjectExplorer)selectedNode.getParent()).addSubscriber(MainFrame.getInstance().getPackageView());
+                            ((ProjectExplorer)selectedNode.getParent()).addSubscriber(MainFrame.getInstance().getPackageView());
                         }
                     }
                 }

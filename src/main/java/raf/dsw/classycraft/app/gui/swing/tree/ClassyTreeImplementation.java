@@ -3,6 +3,9 @@ package raf.dsw.classycraft.app.gui.swing.tree;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.EnumM;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Interfejs;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Package;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
@@ -15,6 +18,10 @@ import raf.dsw.classycraft.app.gui.swing.tree.model.childFactory.FactoryUtils;
 import raf.dsw.classycraft.app.gui.swing.tree.view.ClassyTreeView;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
+import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
+import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.EnumPainter;
+import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.InterfejsPainter;
+import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.KlasaPainter;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
@@ -79,17 +86,18 @@ public class ClassyTreeImplementation implements ClassyTree{
         }
 
     }
-
     @Override
     public void loadProject(Project project) {
 
         ClassyTreeItem loadedProject = new ClassyTreeItem(project);
         ((ClassyTreeItem)treeModel.getRoot()).add(loadedProject);
-        //project.setParent();
 
         ClassyNodeComposite classyNodeComposite = (ClassyNodeComposite) ((ClassyTreeItem) treeModel.getRoot()).getClassyNode();
         classyNodeComposite.addChild(project);
+
         insertAllChildren(project, loadedProject);
+
+
         project.setParent(ApplicationFramework.getInstance().getClassyRepository().getRoot());
 
         TreePath tp = new TreePath(loadedProject.getPath());
