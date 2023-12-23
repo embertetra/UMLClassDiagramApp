@@ -14,5 +14,6 @@ public class MyToolBar extends JToolBar {
         add(MainFrame.getInstance().getActionManager().getNewChildAction());
         add(MainFrame.getInstance().getActionManager().getRemoveChild());
         add(MainFrame.getInstance().getActionManager().getAutorAction());
+        add(MainFrame.getInstance().getActionManager().getSaveAsAction());
     }
 }

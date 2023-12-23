@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Dijagram extends ClassyNodeComposite implements IPublisher {
 
-    private List<ISubscriber> subscribers;
+    private transient List<ISubscriber> subscribers;
 
     public Dijagram(String name, ClassyNode parent) {
         super(name, parent);

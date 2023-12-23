@@ -11,7 +11,8 @@ import java.util.List;
 
 public class Project extends ClassyNodeComposite implements IPublisher {
 
-    private List<ISubscriber> subscribers;
+    protected String filePath;
+    private transient List<ISubscriber> subscribers;
     private String autor;
 
     public Project(String name, ClassyNode parent) {
@@ -83,5 +84,13 @@ public class Project extends ClassyNodeComposite implements IPublisher {
 
     public void setAutor(String autor) {
         this.autor = autor;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 }

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Package extends ClassyNodeComposite implements IPublisher {
-    private List<ISubscriber> subscribers;
+    private transient List<ISubscriber> subscribers;
 
     public Package(String name, ClassyNode parent) {
         super(name, parent);

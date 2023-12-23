@@ -20,6 +20,7 @@ public class ActionManager {
     private DuplicateAction duplicateAction;
     private MouseStateAction mouseStateAction;
     private MoveStateAction moveStateAction;
+    private SaveAsAction saveAsAction;
 
 
     public ActionManager() {
@@ -36,8 +37,12 @@ public class ActionManager {
         duplicateAction = new DuplicateAction();
         mouseStateAction = new MouseStateAction();
         moveStateAction = new MoveStateAction();
+        saveAsAction = new SaveAsAction();
     }
 
+    public SaveAsAction getSaveAsAction() {
+        return saveAsAction;
+    }
     public DuplicateAction getDuplicateAction() {
         return duplicateAction;
     }

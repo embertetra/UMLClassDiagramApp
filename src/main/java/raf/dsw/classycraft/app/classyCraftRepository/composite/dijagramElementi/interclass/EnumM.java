@@ -12,7 +12,7 @@ public class EnumM extends Interclass{
 
     private String naziv;
     private List<String> listEnuma;
-    private List<ISubscriber>subscribers;
+    private transient List<ISubscriber>subscribers;
 
     public EnumM(String name, ClassyNode parent) {
         super(name, parent);

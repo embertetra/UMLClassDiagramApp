@@ -15,7 +15,7 @@ public class Interfejs extends Interclass{
     private String naziv;
 
     private List<Metode> metodeList;
-    private List<ISubscriber> subscribers;
+    private transient List<ISubscriber> subscribers;
 
     public Interfejs(String name, ClassyNode parent) {
         super(name, parent);

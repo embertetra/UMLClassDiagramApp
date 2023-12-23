@@ -14,7 +14,7 @@ public class Klasa extends Interclass{
     private String naziv;
 
     private List<ClassContent> classContentList;
-    private List<ISubscriber> subscribers;
+    private transient List<ISubscriber> subscribers;
 
     public Klasa(String name, ClassyNode parent) {
         super(name, parent);

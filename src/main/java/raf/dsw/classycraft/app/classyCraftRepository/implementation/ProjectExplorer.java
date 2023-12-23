@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ProjectExplorer extends ClassyNodeComposite implements IPublisher {
     // root klasa = postoji samo jedna instanca
-    private List<ISubscriber> subscribers;
+    private transient List<ISubscriber> subscribers;
 
     public ProjectExplorer(String name) {
         super(name, null);
