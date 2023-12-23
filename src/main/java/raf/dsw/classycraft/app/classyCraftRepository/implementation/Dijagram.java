@@ -1,5 +1,6 @@
 package raf.dsw.classycraft.app.classyCraftRepository.implementation;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
@@ -8,13 +9,17 @@ import raf.dsw.classycraft.app.observer.ISubscriber;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@JsonTypeName("dijagram")
 public class Dijagram extends ClassyNodeComposite implements IPublisher {
 
     private transient List<ISubscriber> subscribers;
 
     public Dijagram(String name, ClassyNode parent) {
         super(name, parent);
+        subscribers = new ArrayList<>();
+    }
+    public Dijagram(){
+        super("", null);
         subscribers = new ArrayList<>();
     }
 
@@ -62,4 +67,5 @@ public class Dijagram extends ClassyNodeComposite implements IPublisher {
             }
         }
     }
+
 }

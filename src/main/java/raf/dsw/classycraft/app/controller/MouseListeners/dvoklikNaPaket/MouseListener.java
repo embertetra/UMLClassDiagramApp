@@ -43,14 +43,12 @@ public class MouseListener {
                                 paket = new PackageView();
                                 paket.setClassyTreeItem(selected);
                                 MainFrame.getInstance().getListaPackageView().add(paket);
-                                //MainFrame.getInstance().setPackageView(paket);
                                 ((Package) selectedNode).addSubscriber(paket);
                                 paket.setClassyNode(selectedNode);
                                 for (ClassyNode c : ((Package) selectedNode).getChildren()) {
                                     if (c instanceof Dijagram) {
                                         DijagramView dijagramView = new DijagramView(c);
                                         ((Dijagram) c).addSubscriber(dijagramView);
-                                        //MainFrame.getInstance().getPackageView().getjTabbedPane().addTab(c.getName(), dijagramView);
                                         paket.getjTabbedPane().addTab(c.getName(),dijagramView);
                                     }
                                 }
@@ -58,21 +56,6 @@ public class MouseListener {
                             } else {
                                 MainFrame.getInstance().setPackageView(paket);
                             }
-                            /*
-                            ///OVO TREBA MENJATIIIIIII, Ako obrisem sve jtabove gubim sve dijagramViewove !>!>!>!>!>!?!
-                            ((Package) selected.getClassyNode()).addSubscriber(MainFrame.getInstance().getPackageView());
-                            MainFrame.getInstance().getPackageView().getjTabbedPane().removeAll();
-                            for (ClassyNode c : ((Package) selected.getClassyNode()).getChildren()) {
-                                if (c instanceof Dijagram) {
-                                    DijagramView dijagramView = new DijagramView(c);
-                                    ((Dijagram) c).addSubscriber(dijagramView);
-                                    //MainFrame.getInstance().getPackageView().addInTabList(dijagramView);
-                                    MainFrame.getInstance().getPackageView().getjTabbedPane().addTab(c.getName(), dijagramView);
-                                }
-                            }
-                            //setovanje parenta packageView-u
-                            MainFrame.getInstance().getPackageView().setClassyNode(selected.getClassyNode());
-                            */
 
                             ///ispisivanje projekta i autora na packageView trebalo bi da ostaje kao i pre
                             while(true){
@@ -86,7 +69,7 @@ public class MouseListener {
                             }
                             ((Project) selectedNode).addSubscriber(MainFrame.getInstance().getPackageView());
                             MainFrame.getInstance().getPackageView().promeniNazivProjekta(selectedNode.getName());
-                            ((ProjectExplorer)selectedNode.getParent()).addSubscriber(MainFrame.getInstance().getPackageView());
+                            //((ProjectExplorer)selectedNode.getParent()).addSubscriber(MainFrame.getInstance().getPackageView());
                         }
                     }
                 }

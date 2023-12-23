@@ -4,6 +4,8 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.Package;
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.ProjectExplorer;
 import raf.dsw.classycraft.app.controller.MouseListeners.dvoklikNaPaket.MouseListener;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
@@ -59,6 +61,42 @@ public class ClassyTreeImplementation implements ClassyTree{
     @Override
     public ClassyTreeItem getSelectedNode() {
         return (ClassyTreeItem) treeView.getLastSelectedPathComponent();
+    }
+
+    public void insertAllChildren(ClassyNodeComposite parent, ClassyTreeItem parentTree){
+
+        for(ClassyNode c : parent.getChildren()){
+            if(c instanceof Package){
+                ClassyTreeItem treeItem = new ClassyTreeItem(c);
+                parentTree.add(treeItem);
+                insertAllChildren((Package)c, treeItem);
+            }
+            else{
+                parentTree.add(new ClassyTreeItem(c));
+                TreePath tp = new TreePath(parentTree.getPath());
+                treeView.expandPath(tp);
+            }
+        }
+
+    }
+
+    @Override
+    public void loadProject(Project project) {
+
+        ClassyTreeItem loadedProject = new ClassyTreeItem(project);
+        ((ClassyTreeItem)treeModel.getRoot()).add(loadedProject);
+        //project.setParent();
+
+        ClassyNodeComposite classyNodeComposite = (ClassyNodeComposite) ((ClassyTreeItem) treeModel.getRoot()).getClassyNode();
+        classyNodeComposite.addChild(project);
+        insertAllChildren(project, loadedProject);
+        project.setParent(ApplicationFramework.getInstance().getClassyRepository().getRoot());
+
+        TreePath tp = new TreePath(loadedProject.getPath());
+        treeView.expandPath(tp);
+        treeView.expandPath(treeView.getSelectionPath());
+        SwingUtilities.updateComponentTreeUI(treeView);
+
     }
 
 

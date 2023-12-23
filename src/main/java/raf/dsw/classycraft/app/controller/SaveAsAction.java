@@ -12,9 +12,9 @@ import java.io.File;
 public class SaveAsAction extends AbstractClassyAction{
     public SaveAsAction() {
 
-        putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, ActionEvent.CTRL_MASK));
+        //putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, ActionEvent.CTRL_MASK));
         putValue(SMALL_ICON, loadIcon("/images/saveAs.png"));
-        putValue(NAME, "");
+        putValue(NAME, "Save As");
         putValue(SHORT_DESCRIPTION, "SaveAs project");
 
     }
@@ -30,7 +30,7 @@ public class SaveAsAction extends AbstractClassyAction{
         Project project = (Project) MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode();
         File projectFile = null;
 
-        if(project.getFilePath() == null || project.getFilePath().isEmpty()){
+        if(project.getFilePath() == null || project.getFilePath().isEmpty() || project.getFilePath() != null){
             if(jfc.showSaveDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION){
                 projectFile = jfc.getSelectedFile();
                 project.setFilePath(projectFile.getPath());

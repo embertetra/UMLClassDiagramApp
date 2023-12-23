@@ -1,5 +1,6 @@
 package raf.dsw.classycraft.app.classyCraftRepository.implementation;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
@@ -9,15 +10,13 @@ import raf.dsw.classycraft.app.observer.ISubscriber;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@JsonTypeName("projectExplorer")
 public class ProjectExplorer extends ClassyNodeComposite implements IPublisher {
     // root klasa = postoji samo jedna instanca
     private transient List<ISubscriber> subscribers;
 
     public ProjectExplorer(String name) {
         super(name, null);
-
-
     }
 
     @Override

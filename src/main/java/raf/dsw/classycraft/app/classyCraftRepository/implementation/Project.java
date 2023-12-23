@@ -1,5 +1,7 @@
 package raf.dsw.classycraft.app.classyCraftRepository.implementation;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.jTabbedElements.NotificationJTabbed;
@@ -8,16 +10,21 @@ import raf.dsw.classycraft.app.observer.ISubscriber;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@JsonTypeName("projekat")
+@JsonPropertyOrder({ "type","filePath", "name", "autor","children","type"})
 public class Project extends ClassyNodeComposite implements IPublisher {
-
     protected String filePath;
     private transient List<ISubscriber> subscribers;
     private String autor;
 
+
     public Project(String name, ClassyNode parent) {
         super(name, parent);
         autor = "unkown";
+    }
+    public Project(){
+        super("", null);
+        subscribers = new ArrayList<>();
     }
 
     public void setNewAutor(Object notification){

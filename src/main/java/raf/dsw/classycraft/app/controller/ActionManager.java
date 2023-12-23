@@ -21,9 +21,11 @@ public class ActionManager {
     private MouseStateAction mouseStateAction;
     private MoveStateAction moveStateAction;
     private SaveAsAction saveAsAction;
+    private ImportAction importAction;
 
 
     public ActionManager() {
+        importAction = new ImportAction();
         exitAction = new ExitAction();
         aboutUsAction = new AboutUsAction();
         newChildAction = new NewChildAction();
@@ -39,7 +41,9 @@ public class ActionManager {
         moveStateAction = new MoveStateAction();
         saveAsAction = new SaveAsAction();
     }
-
+    public ImportAction getImportAction() {
+        return importAction;
+    }
     public SaveAsAction getSaveAsAction() {
         return saveAsAction;
     }

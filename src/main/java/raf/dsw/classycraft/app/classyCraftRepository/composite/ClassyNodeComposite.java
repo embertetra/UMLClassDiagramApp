@@ -1,8 +1,9 @@
 package raf.dsw.classycraft.app.classyCraftRepository.composite;
 
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 import java.util.ArrayList;
 import java.util.List;
-
 public abstract class ClassyNodeComposite extends ClassyNode{
 
     List<ClassyNode> children;
@@ -31,5 +32,10 @@ public abstract class ClassyNodeComposite extends ClassyNode{
 
     public List<ClassyNode> getChildren() {
         return children;
+    }
+
+    @JsonSetter
+    public void setChildren(List<ClassyNode> children) {
+        this.children = children;
     }
 }

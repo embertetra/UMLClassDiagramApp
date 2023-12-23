@@ -1,11 +1,25 @@
 package raf.dsw.classycraft.app.classyCraftRepository.composite;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
+
+@JsonIgnoreProperties({ "parent"})
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Dijagram.class, name = "dijagram"),
+        @JsonSubTypes.Type(value = Package.class, name = "paket"),
+        @JsonSubTypes.Type(value = Project.class, name = "projekat")
+})
 public abstract class ClassyNode {
 
     private String name;
-
-    private transient ClassyNode parent;
-
+    private ClassyNode parent;
     public ClassyNode(String name, ClassyNode parent) {
         this.name = name;
         this.parent = parent;
@@ -35,4 +49,5 @@ public abstract class ClassyNode {
     public void setParent(ClassyNode parent) {
         this.parent = parent;
     }
+
 }
