@@ -3,6 +3,10 @@ package raf.dsw.classycraft.app.serializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.EnumM;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Interfejs;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Package;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
@@ -19,34 +23,21 @@ public class JacksonSerializer implements Serializer {
     }
     void setParents(ClassyNodeComposite parent){
         for(ClassyNode c : parent.getChildren()){
-            if(c instanceof Package) {
+            if(c instanceof Package || c instanceof Dijagram) {
                 c.setParent(parent);
-                setParents((Package) c);
+                setParents((ClassyNodeComposite) c);
             }
             else {
                 c.setParent(parent);
             }
         }
-    }
-    void test(ClassyNodeComposite classyNodeComposite){
-
-        for(ClassyNode c : classyNodeComposite.getChildren()){
-            if(c instanceof Package) {
-                System.out.println("paket: "+c.getName() + "deca:");
-                test((Package)c);
-            }
-            else {
-                System.out.println(c.getName() + " i moj parent je: " + c.getParent().getName());
-            }
-        }
-
     }
     @Override
     public Project loadProject(File file) {
 
         try {
             FileReader fr = new FileReader(file);
-            objectMapper.registerSubtypes(Dijagram.class, Package.class);
+            objectMapper.registerSubtypes(Dijagram.class, Package.class, Klasa.class, Interfejs.class, EnumM.class);
             Project project = objectMapper.readValue(file, Project.class);
             setParents(project);
             return project;

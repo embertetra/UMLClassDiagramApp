@@ -66,10 +66,10 @@ public class ClassyTreeImplementation implements ClassyTree{
     public void insertAllChildren(ClassyNodeComposite parent, ClassyTreeItem parentTree){
 
         for(ClassyNode c : parent.getChildren()){
-            if(c instanceof Package){
+            if(c instanceof Package || c instanceof Dijagram){
                 ClassyTreeItem treeItem = new ClassyTreeItem(c);
                 parentTree.add(treeItem);
-                insertAllChildren((Package)c, treeItem);
+                insertAllChildren((ClassyNodeComposite) c, treeItem);
             }
             else{
                 parentTree.add(new ClassyTreeItem(c));

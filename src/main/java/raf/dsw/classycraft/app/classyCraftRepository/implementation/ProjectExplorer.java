@@ -13,7 +13,7 @@ import java.util.List;
 @JsonTypeName("projectExplorer")
 public class ProjectExplorer extends ClassyNodeComposite implements IPublisher {
     // root klasa = postoji samo jedna instanca
-    private transient List<ISubscriber> subscribers;
+    private transient List<ISubscriber> subscribers = new ArrayList<>();
 
     public ProjectExplorer(String name) {
         super(name, null);
@@ -31,6 +31,7 @@ public class ProjectExplorer extends ClassyNodeComposite implements IPublisher {
 
     @Override
     public void removeChild(ClassyNode child) {
+
         if (child != null && child instanceof Project) {
             if (getChildren().contains(child)) {
                 getChildren().remove(child);

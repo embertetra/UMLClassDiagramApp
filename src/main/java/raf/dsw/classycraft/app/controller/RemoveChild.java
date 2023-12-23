@@ -54,7 +54,6 @@ public class RemoveChild extends AbstractClassyAction{
                     ClassyNodeComposite cns = (ClassyNodeComposite) selected.getClassyNode().getParent();
                     if(cns.getChildren().contains(selected.getClassyNode()))
                         cns.removeChild(selected.getClassyNode());
-
                     ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
                     SwingUtilities.updateComponentTreeUI(classyTreeImplementation.getTreeView());
                 }
