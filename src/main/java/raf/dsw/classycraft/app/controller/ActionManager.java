@@ -22,9 +22,11 @@ public class ActionManager {
     private MoveStateAction moveStateAction;
     private SaveAsAction saveAsAction;
     private ImportAction importAction;
+    private SaveAction saveAction;
 
 
     public ActionManager() {
+        saveAction = new SaveAction();
         importAction = new ImportAction();
         exitAction = new ExitAction();
         aboutUsAction = new AboutUsAction();
@@ -41,6 +43,11 @@ public class ActionManager {
         moveStateAction = new MoveStateAction();
         saveAsAction = new SaveAsAction();
     }
+
+    public SaveAction getSaveAction() {
+        return saveAction;
+    }
+
     public ImportAction getImportAction() {
         return importAction;
     }

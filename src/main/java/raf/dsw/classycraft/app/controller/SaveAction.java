@@ -10,20 +10,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
 
-public class SaveAsAction extends AbstractClassyAction{
-    public SaveAsAction() {
+public class SaveAction extends AbstractClassyAction{
 
-        //putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.SHIFT_MASK));
-        putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl shift S"));
-        putValue(SMALL_ICON, loadIcon("/images/saveAs.png"));
-        putValue(NAME, "Save As");
-        putValue(SHORT_DESCRIPTION, "SaveAs project");
-
+    public SaveAction() {
+        putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.SHIFT_MASK));
+        putValue(SMALL_ICON, loadIcon("/images/save.png"));
+        putValue(NAME, "Save");
+        putValue(SHORT_DESCRIPTION, "Save project");
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
         JFileChooser jfc = new JFileChooser();
 
         if(MainFrame.getInstance().getClassyTree().getSelectedNode() == null || !((MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode()) instanceof Project)){
@@ -31,10 +28,11 @@ public class SaveAsAction extends AbstractClassyAction{
             return;
         }
 
+
         Project project = (Project) MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode();
         File projectFile = null;
 
-        if(project.getFilePath() == null || project.getFilePath().isEmpty() || project.getFilePath() != null){
+        if(project.getFilePath() == null || project.getFilePath().isEmpty()){
             if(jfc.showSaveDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION){
                 projectFile = jfc.getSelectedFile();
                 project.setFilePath(projectFile.getPath());
