@@ -176,14 +176,25 @@ public class PromeniElementUKlasiAction extends AbstractClassyAction{
         for(ClassContent c : MainFrame.getInstance().getKlasaProzor().getClassContentList()){
             if (c instanceof Atributi && metode == null && atributi != null){
                 if(c.getVidljivost().equals(atributi.getVidljivost()) && c.getTip().equals(atributi.getTip()) && c.getNaziv().equals(atributi.getNaziv())){
-                    c.setVidljivost(v);
+                    if(v==Vidljivost.PUBLIC)
+                        c.setVidljivost("+");
+                    else if(v==Vidljivost.PRIVATE)
+                        c.setVidljivost("-");
+                    else c.setVidljivost("#");
+
+                    //c.setVidljivost(v);
                     c.setTip(tip);
                     c.setNaziv(naziv);
                 }
             }
             else if (c instanceof Metode && atributi == null && metode != null){
                 if(c.getVidljivost().equals(metode.getVidljivost()) && c.getTip().equals(metode.getTip()) && c.getNaziv().equals(metode.getNaziv())){
-                    c.setVidljivost(v);
+                    //c.setVidljivost(v);
+                    if(v==Vidljivost.PUBLIC)
+                        c.setVidljivost("+");
+                    else if(v==Vidljivost.PRIVATE)
+                        c.setVidljivost("-");
+                    else c.setVidljivost("#");
                     c.setTip(tip);
                     c.setNaziv(naziv);
                 }

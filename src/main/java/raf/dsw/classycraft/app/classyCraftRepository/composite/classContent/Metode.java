@@ -1,8 +1,13 @@
 package raf.dsw.classycraft.app.classyCraftRepository.composite.classContent;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Vidljivost;
 
+@JsonTypeName("metoda")
 public class Metode extends ClassContent {
+    public Metode(){
+        super(null, "", "");
+    }
     public Metode(Vidljivost vidljivost, String tip, String naziv) {
         super(vidljivost, tip, naziv);
     }

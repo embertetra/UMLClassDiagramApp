@@ -3,6 +3,9 @@ package raf.dsw.classycraft.app.serializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Atributi;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.EnumElement;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Metode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Agregacija;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Asocijacija;
@@ -41,7 +44,8 @@ public class JacksonSerializer implements Serializer {
 
         try {
             FileReader fr = new FileReader(file);
-            objectMapper.registerSubtypes(Dijagram.class, Package.class, Klasa.class, Interfejs.class, EnumM.class, Asocijacija.class, Generalizacija.class, Zavisnost.class, Agregacija.class);
+            objectMapper.registerSubtypes(Dijagram.class, Package.class, Klasa.class, Interfejs.class, EnumM.class, Asocijacija.class,
+                    Generalizacija.class, Zavisnost.class, Agregacija.class, Atributi.class, EnumElement.class, Metode.class);
             Project project = objectMapper.readValue(file, Project.class);
             setParents(project);
             return project;
