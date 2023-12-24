@@ -1,6 +1,7 @@
 package raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Kompozicija;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
@@ -29,8 +30,8 @@ public class KompozicijaPainter extends ConnectionPainter {
         for (ElementPainter e : d.getElementPainterList()){
             if(e instanceof InterclassPainter){
                 InterclassPainter ip = (InterclassPainter) e;
-                if(ip.getElement() == k.getFrom()) kpFrom = ip;
-                else if(ip.getElement() == k.getTo()) kpTo = ip;
+                if(((Interclass)ip.getElement()).getPosition().x == k.getFrom().getPosition().x && ((Interclass)ip.getElement()).getPosition().y == k.getFrom().getPosition().y)kpFrom = ip;
+                else if(((Interclass)ip.getElement()).getPosition().x == k.getTo().getPosition().x && ((Interclass)ip.getElement()).getPosition().y == k.getTo().getPosition().y)kpTo = ip;
             }
         }
         double min = 1e9;

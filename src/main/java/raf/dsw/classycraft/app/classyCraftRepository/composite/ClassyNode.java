@@ -3,6 +3,10 @@ package raf.dsw.classycraft.app.classyCraftRepository.composite;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Agregacija;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Generalizacija;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Kompozicija;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Zavisnost;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.EnumM;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Interfejs;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
@@ -21,6 +25,10 @@ import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
         @JsonSubTypes.Type(value = Klasa.class, name = "klasa"),
         @JsonSubTypes.Type(value = Interfejs.class, name = "interfejs"),
         @JsonSubTypes.Type(value = EnumM.class, name = "enum"),
+        @JsonSubTypes.Type(value = Agregacija.class, name = "agregacija"),
+        @JsonSubTypes.Type(value = Kompozicija.class, name = "kompozicija"),
+        @JsonSubTypes.Type(value = Zavisnost.class, name = "zavisnost"),
+        @JsonSubTypes.Type(value = Generalizacija.class, name = "generalizacija")
 })
 public abstract class ClassyNode {
 

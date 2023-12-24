@@ -1,12 +1,13 @@
 package raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import javafx.util.Pair;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Connection;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
 
 import java.awt.*;
-
+@JsonTypeName("agregacija")
 public class Agregacija extends Connection {
 
     private String name2;
@@ -15,6 +16,9 @@ public class Agregacija extends Connection {
     private String vidljivost;
     public Agregacija(String name, ClassyNode parent) {
         super(name, parent);
+    }
+    public Agregacija(){
+        super("", null);
     }
 
     public Agregacija(String name, ClassyNode parent, int stroke, Interclass from, Interclass to) {
