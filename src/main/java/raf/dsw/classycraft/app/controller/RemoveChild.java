@@ -60,6 +60,7 @@ public class RemoveChild extends AbstractClassyAction {
                 }
 
             }
+            ///potrebno prepraviti
             ///brisanje dijagramElemenata
             else if (selected.getClassyNode() instanceof DijagramElement) {
                 DijagramView dijagramView = (DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent();

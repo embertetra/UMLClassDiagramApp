@@ -59,7 +59,6 @@ public class JacksonSerializer implements Serializer {
 
     @Override
     public void saveProject(Project project) {
-
         try {
             FileWriter fw = new FileWriter(project.getFilePath());
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(fw, project);
@@ -67,6 +66,5 @@ public class JacksonSerializer implements Serializer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }

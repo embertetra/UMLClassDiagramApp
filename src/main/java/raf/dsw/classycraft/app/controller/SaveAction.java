@@ -27,10 +27,11 @@ public class SaveAction extends AbstractClassyAction{
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Morate selektovati projekat", MessageType.ERROR);
             return;
         }
-
-
         Project project = (Project) MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode();
         File projectFile = null;
+
+        if(!project.isChanged())
+            return;
 
         if(project.getFilePath() == null || project.getFilePath().isEmpty()){
             if(jfc.showSaveDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION){
@@ -42,7 +43,8 @@ public class SaveAction extends AbstractClassyAction{
             }
         }
 
+        System.out.println("Odradio");
         ApplicationFramework.getInstance().getSerializer().saveProject(project);
-
+        project.setChanged(false);
     }
 }

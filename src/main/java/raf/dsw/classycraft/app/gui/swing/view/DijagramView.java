@@ -9,10 +9,14 @@ import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
 import raf.dsw.classycraft.app.jTabbedElements.NotificationDijagramView;
 import raf.dsw.classycraft.app.observer.ISubscriber;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -119,6 +123,28 @@ public class DijagramView extends JPanel implements ISubscriber {
         System.out.println("Izvrsen paintComponent");
         //((Graphics2D) g).setTransform(save);
     }
+
+    public void exportImage(){
+        BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = image.createGraphics();
+        printAll(g);
+        g.dispose();
+
+        JFileChooser jfc = new JFileChooser();
+        File file = null;
+
+        if(jfc.showSaveDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION){
+            file = jfc.getSelectedFile();
+        }
+
+        try{
+            if(file != null && !file.getPath().isEmpty())
+                ImageIO.write(image, "png", file);
+        } catch (IOException exp){
+            exp.printStackTrace();
+        }
+    }
+
     public List<ElementPainter> getElementPainterList() {
         return elementPainterList;
     }
