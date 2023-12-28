@@ -134,7 +134,9 @@ public class DijagramView extends JPanel implements ISubscriber {
         File file = null;
 
         if(jfc.showSaveDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION){
-            file = jfc.getSelectedFile();
+            //file = jfc.getSelectedFile();
+            file = new File(jfc.getSelectedFile() + ".png");
+
         }
 
         try{

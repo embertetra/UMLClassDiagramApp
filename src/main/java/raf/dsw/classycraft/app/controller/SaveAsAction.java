@@ -34,14 +34,9 @@ public class SaveAsAction extends AbstractClassyAction{
         Project project = (Project) MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode();
         File projectFile = null;
 
-        if(project.getFilePath() == null || project.getFilePath().isEmpty() || project.getFilePath() != null){
-            if(jfc.showSaveDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION){
-                projectFile = jfc.getSelectedFile();
-                project.setFilePath(projectFile.getPath());
-            }
-            else {
-                return;
-            }
+        if(jfc.showSaveDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION){
+            projectFile = jfc.getSelectedFile();
+            project.setFilePath(projectFile.getPath());
         }
 
         ApplicationFramework.getInstance().getSerializer().saveProject(project);

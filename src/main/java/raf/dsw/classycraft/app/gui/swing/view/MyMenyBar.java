@@ -21,6 +21,7 @@ public class MyMenyBar extends JMenuBar {
         editMenu.add(MainFrame.getInstance().getActionManager().getRemoveChild());
         editMenu.add(MainFrame.getInstance().getActionManager().getAutorAction());
         editMenu.add(MainFrame.getInstance().getActionManager().getExportDiagram());
+        editMenu.add(MainFrame.getInstance().getActionManager().getSaveTemplate());
 
         JMenu infoMenu = new JMenu("Info");
         infoMenu.add(MainFrame.getInstance().getActionManager().getAboutUsAction());

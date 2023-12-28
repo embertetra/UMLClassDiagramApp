@@ -24,9 +24,11 @@ public class ActionManager {
     private ImportAction importAction;
     private SaveAction saveAction;
     private ExportDiagram exportDiagram;
+    private SaveTemplate saveTemplate;
 
 
     public ActionManager() {
+        saveTemplate = new SaveTemplate();
         exportDiagram = new ExportDiagram();
         saveAction = new SaveAction();
         importAction = new ImportAction();
@@ -45,6 +47,11 @@ public class ActionManager {
         moveStateAction = new MoveStateAction();
         saveAsAction = new SaveAsAction();
     }
+
+    public SaveTemplate getSaveTemplate() {
+        return saveTemplate;
+    }
+
     public ExportDiagram getExportDiagram() {
         return exportDiagram;
     }

@@ -49,7 +49,6 @@ public class JacksonSerializer implements Serializer {
             Project project = objectMapper.readValue(file, Project.class);
             setParents(project);
             return project;
-
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -62,6 +61,18 @@ public class JacksonSerializer implements Serializer {
         try {
             FileWriter fw = new FileWriter(project.getFilePath());
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(fw, project);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void saveTemplate(Dijagram dijagram, String name) {
+        File file = new File("src/main/resources/templates/" + name);
+        try {
+            FileWriter fw = new FileWriter(file);
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(fw, dijagram);
 
         } catch (IOException e) {
             e.printStackTrace();

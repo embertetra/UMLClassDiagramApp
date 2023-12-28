@@ -28,7 +28,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
-public class ClassyTreeImplementation implements ClassyTree{
+public class ClassyTreeImplementation implements ClassyTree {
 
     private ClassyTreeView treeView;
 
@@ -47,15 +47,15 @@ public class ClassyTreeImplementation implements ClassyTree{
     @Override
     public void addChild(ClassyTreeItem parent, DijagramElement dijagramElement) {
 
-        if(parent != null && !(parent.getClassyNode() instanceof ClassyNodeComposite)) {
+        if (parent != null && !(parent.getClassyNode() instanceof ClassyNodeComposite)) {
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("DijagramElement ne moze imati podklasu!", MessageType.ERROR);
             return;
         }
         ClassyNode child = createChild(parent.getClassyNode(), dijagramElement);
-        child.setParent(parent.getClassyNode());
-        if(child != null) {
+        if (child != null) {
+            child.setParent(parent.getClassyNode());
             parent.add(new ClassyTreeItem(child)); //prikazuje se u JTree-u
-            if(!(child instanceof DijagramElement)) {
+            if (!(child instanceof DijagramElement)) {
                 ((ClassyNodeComposite) parent.getClassyNode()).addChild(child); // dodaje se u modelu addChild()
             }
             treeView.expandPath(treeView.getSelectionPath());
@@ -70,15 +70,14 @@ public class ClassyTreeImplementation implements ClassyTree{
         return (ClassyTreeItem) treeView.getLastSelectedPathComponent();
     }
 
-    public void insertAllChildren(ClassyNodeComposite parent, ClassyTreeItem parentTree){
+    public void insertAllChildren(ClassyNodeComposite parent, ClassyTreeItem parentTree) {
 
-        for(ClassyNode c : parent.getChildren()){
-            if(c instanceof Package || c instanceof Dijagram){
+        for (ClassyNode c : parent.getChildren()) {
+            if (c instanceof Package || c instanceof Dijagram) {
                 ClassyTreeItem treeItem = new ClassyTreeItem(c);
                 parentTree.add(treeItem);
                 insertAllChildren((ClassyNodeComposite) c, treeItem);
-            }
-            else{
+            } else {
                 parentTree.add(new ClassyTreeItem(c));
                 TreePath tp = new TreePath(parentTree.getPath());
                 treeView.expandPath(tp);
@@ -86,11 +85,12 @@ public class ClassyTreeImplementation implements ClassyTree{
         }
 
     }
+
     @Override
     public void loadProject(Project project) {
 
         ClassyTreeItem loadedProject = new ClassyTreeItem(project);
-        ((ClassyTreeItem)treeModel.getRoot()).add(loadedProject);
+        ((ClassyTreeItem) treeModel.getRoot()).add(loadedProject);
 
         ClassyNodeComposite classyNodeComposite = (ClassyNodeComposite) ((ClassyTreeItem) treeModel.getRoot()).getClassyNode();
         classyNodeComposite.addChild(project);
@@ -107,11 +107,11 @@ public class ClassyTreeImplementation implements ClassyTree{
     }
 
 
-    private ClassyNode createChild(ClassyNode parent, DijagramElement dijagramElement){
+    private ClassyNode createChild(ClassyNode parent, DijagramElement dijagramElement) {
 
         FactoryUtils factoryUtils = ApplicationFramework.getInstance().getFactoryUtils();
 
-        if(parent != null){
+        if (parent != null) {
             return factoryUtils.generateChild(parent, dijagramElement);
         }
         return null;

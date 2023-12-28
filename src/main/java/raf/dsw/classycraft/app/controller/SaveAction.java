@@ -30,8 +30,8 @@ public class SaveAction extends AbstractClassyAction{
         Project project = (Project) MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode();
         File projectFile = null;
 
-        if(!project.isChanged())
-            return;
+        //if(!project.isChanged())
+            //return;
 
         if(project.getFilePath() == null || project.getFilePath().isEmpty()){
             if(jfc.showSaveDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION){
@@ -39,12 +39,10 @@ public class SaveAction extends AbstractClassyAction{
                 project.setFilePath(projectFile.getPath());
             }
             else {
-                return;
+                //return;
             }
         }
-
-        System.out.println("Odradio");
         ApplicationFramework.getInstance().getSerializer().saveProject(project);
-        project.setChanged(false);
+        //project.setChanged(false);
     }
 }
