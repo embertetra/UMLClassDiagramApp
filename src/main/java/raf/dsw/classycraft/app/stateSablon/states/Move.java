@@ -73,7 +73,7 @@ public class Move implements State {
             dijagramView.setSelectionModel(novaListaSelekcije);
         }
 
-        ///odredjivanje preseka u vracanje na stare koordinate ako se sece - 1 interklasa
+        ///odredjivanje preseka i vracanje na stare koordinate ako se sece - 1 interklasa
         if(tmp != 1) {
             int brojac = 0;
             InterclassPainter mojPainter = null;

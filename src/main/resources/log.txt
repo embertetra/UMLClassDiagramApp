@@ -70,3 +70,4 @@
 [ERROR] [28.12.2023. 13:01] [Morate selektovati dijagram]
 [ERROR] [28.12.2023. 13:01] [Nije selektovan roditelj]
 [ERROR] [28.12.2023. 13:14] [Nije selektovan roditelj]
+[ERROR] [28.12.2023. 13:47] [Morate selektovati dijagram]
