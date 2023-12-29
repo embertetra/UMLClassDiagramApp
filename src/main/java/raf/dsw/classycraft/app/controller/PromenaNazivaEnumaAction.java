@@ -2,6 +2,8 @@ package raf.dsw.classycraft.app.controller;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.EnumM;
+import raf.dsw.classycraft.app.commands.AbstractCommand;
+import raf.dsw.classycraft.app.commands.implementation.AddNameCommand;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
@@ -53,10 +55,14 @@ public class PromenaNazivaEnumaAction extends AbstractClassyAction{
                 }
             }
         }
-
+        /*
         //menjanje imena
         ((EnumM) enumPainter.getElement()).setNaziv(MainFrame.getInstance().getEnumProzor().getTfIme().getText());
         dijagramView.repaint();
+        */
+        AbstractCommand command = new AddNameCommand(MainFrame.getInstance().getEnumProzor().getTfIme().getText(), (EnumM) enumPainter.getElement(), dijagramView);
+        ((DijagramView)MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
+
         MainFrame.getInstance().getEnumProzor().getTfIme().setText("");
     }
 }
