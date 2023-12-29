@@ -2,7 +2,10 @@ package raf.dsw.classycraft.app.stateSablon.states;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Connection;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
+import raf.dsw.classycraft.app.commands.AbstractCommand;
+import raf.dsw.classycraft.app.commands.implementation.MoveCommand;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
+import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ConnectionPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
@@ -35,7 +38,12 @@ public class Move implements State {
     public void misOtpusten(int x, int y, DijagramView dijagramView) {
         dijagramView.getSelectionModel().clear();
         novaListaSelekcije.clear();
-        ///presek multiselekcija
+
+        AbstractCommand command = new MoveCommand(tmp, novaListaSelekcije, oldPoints, oldPoint, shapes, dijagramView, x, y);
+        ((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
+
+        /*
+        //presek multiselekcija
         if(tmp == 1) {
             for(InterclassPainter ip : shapes) {
                 Interclass ic = (Interclass) ip.getElement();
@@ -62,7 +70,7 @@ public class Move implements State {
                     break;
                 }
             }
-            ///settovanje novih selekcija
+            ///setovanje novih selekcija
             for (InterclassPainter ip : shapes) {
                 Interclass ic = (Interclass) ip.getElement();
                 Shape s = new Rectangle(ic.getPosition().x - ip.getWidth() / 2 - 10, ic.getPosition().y - ip.getHeightUkupno() / 2 - 5,
@@ -74,6 +82,7 @@ public class Move implements State {
         }
 
         ///odredjivanje preseka i vracanje na stare koordinate ako se sece - 1 interklasa
+
         if(tmp != 1) {
             int brojac = 0;
             InterclassPainter mojPainter = null;
@@ -100,6 +109,8 @@ public class Move implements State {
                 ((Interclass) dijagramView.getFlag1().getElement()).setPosition(oldPoint);
             }
         }
+        */
+
         dijagramView.setFlag1(null);
         tmp = 0;
         dijagramView.repaint();
@@ -155,7 +166,7 @@ public class Move implements State {
                         ip.setxDragOffset(x - ic.getPosition().x);
                         ip.setyDragOffset(y - ic.getPosition().y);
                         oldPoint = new Point(ic.getPosition().x, ic.getPosition().y);
-                        dijagramView.repaint();//
+                        dijagramView.repaint();
                         return;
                     }
                 }
@@ -210,18 +221,16 @@ public class Move implements State {
                         Interclass ic = (Interclass) ip.getElement();
                         if (ip == d.getFlag1()) {
                             ic.setPosition(new Point(d.getStartPoint().x + diffX - d.getxDragOffset(), d.getStartPoint().y + diffY - d.getyDragOffset()));
-                            //d.repaint();//
                             return;
                         }
                     }
                 }
-            } else if (d.getMoveSelections() != null && d.getMoveSelections().size() > 0) {
+            } else if (d.getMoveSelections() != null && !d.getMoveSelections().isEmpty()) {
                 for (InterclassPainter ip : d.getMoveSelections()) {
                     Interclass ic = (Interclass) ip.getElement();
                     ic.setPosition(new Point(d.getStartPoint().x + diffX - ip.getxDragOffset(),
                             d.getStartPoint().y + diffY - ip.getyDragOffset()));
                 }
-                //d.repaint();
                 return;
             } else {
                 for (ElementPainter ep : d.getElementPainterList()) {

@@ -68,8 +68,6 @@ public class Delete implements State {
         for (Shape s : dijagramView.getSelectionModel()) {
             if (s.contains(new Point(x, y))) flag = 1;
         }
-
-
         ///brisanje multiselekcije
         if(dijagramView.getSelectionModel().size() > 0 && flag == 1){
             for(Iterator<ElementPainter> iterator = dijagramView.getElementPainterList().iterator(); iterator.hasNext();){
@@ -137,7 +135,6 @@ public class Delete implements State {
             dijagramView.getSelectionModel().clear();
         }
         else {
-
             Interclass selektovanaKlasa = null;//klasa na koju smo kliknuli. Cuvam je kako bi posle mogao da obrisem sve veze koje su spojene sa njom
             ///brisanje pojedinacog elementa
             for (Iterator<ElementPainter> iterator = dijagramView.getElementPainterList().iterator(); iterator.hasNext(); ) {
@@ -210,7 +207,6 @@ public class Delete implements State {
                 }
             }
         }
-
         ///sredjivanje modela i paintera
         List<ElementPainter> novaPainterLista = new ArrayList<>();
         List<ClassyNode> novaLista = new ArrayList<>();

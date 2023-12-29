@@ -25,6 +25,8 @@ public class ActionManager {
     private SaveAction saveAction;
     private ExportDiagram exportDiagram;
     private SaveTemplate saveTemplate;
+    private RedoAction redoAction;
+    private UndoAction undoAction;
 
 
     public ActionManager() {
@@ -46,6 +48,8 @@ public class ActionManager {
         mouseStateAction = new MouseStateAction();
         moveStateAction = new MoveStateAction();
         saveAsAction = new SaveAsAction();
+        redoAction = new RedoAction();
+        undoAction = new UndoAction();
     }
 
     public SaveTemplate getSaveTemplate() {
@@ -114,5 +118,12 @@ public class ActionManager {
 
     public MoveStateAction getMoveStateAction() {
         return moveStateAction;
+    }
+    public RedoAction getRedoAction() {
+        return redoAction;
+    }
+
+    public UndoAction getUndoAction() {
+        return undoAction;
     }
 }
