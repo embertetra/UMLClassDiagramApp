@@ -6,7 +6,7 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Meto
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Vidljivost;
 import raf.dsw.classycraft.app.commands.AbstractCommand;
-import raf.dsw.classycraft.app.commands.implementation.DodajContentCommand;
+import raf.dsw.classycraft.app.commands.implementation.AddContentCommand;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
@@ -102,11 +102,11 @@ public class DodajUKlasuAction extends AbstractClassyAction{
         AbstractCommand command = null;
         if(MainFrame.getInstance().getKlasaProzor().getAtribut().isSelected()) {
             Atributi a = new Atributi(vidljivost, tip, naziv);
-            command = new DodajContentCommand(a, null, null, (Klasa) klasaPainter.getElement(), dijagramView);
+            command = new AddContentCommand(a, null, null, (Klasa) klasaPainter.getElement(), dijagramView);
         }
         else if(MainFrame.getInstance().getKlasaProzor().getMetoda().isSelected()) {
             Metode m = new Metode(vidljivost, tip, naziv);
-            command = new DodajContentCommand(null, m, null, (Klasa) klasaPainter.getElement(), dijagramView);
+            command = new AddContentCommand(null, m, null, (Klasa) klasaPainter.getElement(), dijagramView);
         }
         ((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
 

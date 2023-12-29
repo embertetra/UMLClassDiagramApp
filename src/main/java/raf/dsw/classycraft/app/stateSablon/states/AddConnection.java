@@ -142,8 +142,8 @@ public class AddConnection implements State {
             ((DijagramView)MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
         }
 
-        dijagramView.setLine(new Pair<>(new Point(-1,-1), new Point(0,0)));
-        dijagramView.repaint();
+        //dijagramView.setLine(new Pair<>(new Point(-1,-1), new Point(0,0)));
+        //dijagramView.repaint();
     }
 
     @Override

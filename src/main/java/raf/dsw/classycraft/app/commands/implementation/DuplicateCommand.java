@@ -33,10 +33,6 @@ import java.util.List;
 public class DuplicateCommand extends AbstractCommand {
 
     private InterclassPainter interclassPainter;
-    private Klasa k = null;
-    private Klasa duplikatK;
-    private Interfejs i = null;
-    private Interfejs duplikatI;
     private DijagramView dijagramView;
     private ClassyTreeItem item = null;
 
@@ -49,8 +45,8 @@ public class DuplicateCommand extends AbstractCommand {
     @Override
     public void doCommand() {
         if(interclassPainter instanceof KlasaPainter) {
-            k = (Klasa) interclassPainter.getElement();
-            duplikatK = new Klasa("Interclass", dijagramView.getClassyNode(), 2, k.getNaziv(), k.getVidljivost(), new Point(k.getPosition().x + interclassPainter.getWidth() / 2 + 5, k.getPosition().y + interclassPainter.getHeightUkupno() / 2 + 10));
+            Klasa k = (Klasa) interclassPainter.getElement();
+            Klasa duplikatK = new Klasa("Interclass", dijagramView.getClassyNode(), 2, k.getNaziv(), k.getVidljivost(), new Point(k.getPosition().x + interclassPainter.getWidth() / 2 + 5, k.getPosition().y + interclassPainter.getHeightUkupno() / 2 + 10));
             duplikatK.setNaziv(k.getNaziv());
             duplikatK.setClassContentList(k.getClassContentList());
             duplikatK.addSubscriber(dijagramView);
@@ -61,8 +57,8 @@ public class DuplicateCommand extends AbstractCommand {
             d.addChild(duplikatK);
         }
         else if(interclassPainter instanceof InterfejsPainter) {
-            i = (Interfejs) interclassPainter.getElement();
-            duplikatI = new Interfejs("Interclass", dijagramView.getClassyNode(), 2, i.getNaziv(), i.getVidljivost(), new Point(i.getPosition().x + interclassPainter.getWidth()/2 + 5, i.getPosition().y + 10 + interclassPainter.getHeightUkupno()/2));
+            Interfejs i = (Interfejs) interclassPainter.getElement();
+            Interfejs duplikatI = new Interfejs("Interclass", dijagramView.getClassyNode(), 2, i.getNaziv(), i.getVidljivost(), new Point(i.getPosition().x + interclassPainter.getWidth()/2 + 5, i.getPosition().y + 10 + interclassPainter.getHeightUkupno()/2));
             duplikatI.setNaziv(i.getNaziv()); duplikatI.setMetodeList(i.getMetodeList());
             duplikatI.addSubscriber(dijagramView);
             dijagramView.getElementPainterList().add(new InterfejsPainter(duplikatI));
@@ -74,16 +70,6 @@ public class DuplicateCommand extends AbstractCommand {
 
     @Override
     public void undoCommand() {
-        ///odredjivanje dijagrama unutar stabla
-        ClassyTreeItem item = null;
-        ClassyTreeItem selected = MainFrame.getInstance().getPackageView().getClassyTreeItem();
-        for (int i = 0; i < selected.getChildCount(); i++) {
-            ClassyTreeItem c = (ClassyTreeItem) selected.getChildAt(i);
-            ClassyNode cn = c.getClassyNode();
-            if (cn.getName().equals(dijagramView.getClassyNode().getName()))
-                item = c;
-        }
-
         for(int j=dijagramView.getElementPainterList().size()-1; j>=0; j--){
             ElementPainter elementPainter = dijagramView.getElementPainterList().get(j);
             ///brisanje pojedinacne interklase

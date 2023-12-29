@@ -6,7 +6,6 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
 import raf.dsw.classycraft.app.commands.AbstractCommand;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
-import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 public class AddNameCommand extends AbstractCommand {
 

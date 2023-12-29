@@ -10,7 +10,7 @@ import raf.dsw.classycraft.app.commands.AbstractCommand;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
-public class ObrisiContentCommand extends AbstractCommand {
+public class DeleteContentCommand extends AbstractCommand {
 
     public Interclass interclass;
     public DijagramView dijagramView;
@@ -18,7 +18,7 @@ public class ObrisiContentCommand extends AbstractCommand {
     public Metode metoda;
     public String naziv;
 
-    public ObrisiContentCommand(Interclass interclass, DijagramView dijagramView){
+    public DeleteContentCommand(Interclass interclass, DijagramView dijagramView){
         atribut = null;
         metoda = null;
         naziv = null;

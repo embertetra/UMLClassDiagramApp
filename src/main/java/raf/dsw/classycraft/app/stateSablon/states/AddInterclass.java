@@ -43,46 +43,7 @@ public class AddInterclass implements State {
                 }
             }
         }
-        /*
-        if(interclass != null) {
-            AffineTransform at = dijagramView.getAt();
 
-            ///odredjivanje dijagrama unutar stabla
-            ClassyTreeItem item = null;
-            //ClassyTreeItem selected = MainFrame.getInstance().getClassyTree().getSelectedNode();
-            ClassyNode tmp = MainFrame.getInstance().getPackageView().getClassyNode();
-            ClassyTreeItem selected = MainFrame.getInstance().getPackageView().getClassyTreeItem();
-            for(int i=0; i<selected.getChildCount(); i++){
-                ClassyTreeItem c = (ClassyTreeItem)selected.getChildAt(i);
-                ClassyNode cn = c.getClassyNode();
-                if(cn.getName().equals(dijagramView.getClassyNode().getName()))
-                    item = c;
-            }
-
-            if (interclass.equals("class")) {
-                Klasa klasa = new Klasa("Interclass", dijagramView.getClassyNode(), 2, "naziv", Vidljivost.PUBLIC, new Point(x,y));
-                klasa.addSubscriber(dijagramView);
-                KlasaPainter klasaPainter = new KlasaPainter(klasa);
-                dijagramView.getElementPainterList().add(klasaPainter);
-                d.addChild(klasa);///dodoavanje u model
-                MainFrame.getInstance().getClassyTree().addChild(item, klasa);///dodavanje u stablo
-            } else if (interclass.equals("interface")) {
-                Interfejs interfejs = new Interfejs("Interclass", dijagramView.getClassyNode(), 2, "naziv", Vidljivost.PUBLIC, new Point(x, y));
-                interfejs.addSubscriber(dijagramView);
-                InterfejsPainter interfejsPainter = new InterfejsPainter(interfejs);
-                dijagramView.getElementPainterList().add(interfejsPainter);
-                d.addChild(interfejs);
-                MainFrame.getInstance().getClassyTree().addChild(item, interfejs);
-            } else if (interclass.equals("enum")) {
-                EnumM enumM = new EnumM("Interclass", dijagramView.getClassyNode(), 2, "naziv", Vidljivost.PUBLIC, new Point(x, y));
-                enumM.addSubscriber(dijagramView);
-                EnumPainter enumPainter = new EnumPainter(enumM);
-                dijagramView.getElementPainterList().add(enumPainter);
-                d.addChild(enumM);
-                MainFrame.getInstance().getClassyTree().addChild(item, enumM);
-            }
-        }
-        */
         if(interclass != null) {
             AbstractCommand command = null;
             if (interclass.equals("class")) {

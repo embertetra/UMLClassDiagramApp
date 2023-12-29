@@ -2,7 +2,7 @@ package raf.dsw.classycraft.app.controller;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Interfejs;
 import raf.dsw.classycraft.app.commands.AbstractCommand;
-import raf.dsw.classycraft.app.commands.implementation.ObrisiContentCommand;
+import raf.dsw.classycraft.app.commands.implementation.DeleteContentCommand;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
@@ -41,7 +41,7 @@ public class ObrisiIzInterfejsaAction extends AbstractClassyAction{
         MainFrame.getInstance().getInterfejsProzor().setMetodeList(((Interfejs) interfejsPainter.getElement()).getMetodeList());
         dijagramView.repaint();
         */
-        AbstractCommand command = new ObrisiContentCommand((Interfejs) interfejsPainter.getElement(), dijagramView);
+        AbstractCommand command = new DeleteContentCommand((Interfejs) interfejsPainter.getElement(), dijagramView);
         ((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
 
         MainFrame.getInstance().getInterfejsProzor().getBgVidljivost().clearSelection();
