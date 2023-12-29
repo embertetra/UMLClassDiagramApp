@@ -60,7 +60,7 @@ public class SingleTemplateAction extends AbstractClassyAction {
                 file = f;
         }
 
-        if(file == null){
+        if(file == null || file.getName().equals("null")){
 
             ClassyTreeItem paket = MainFrame.getInstance().getClassyTree().getSelectedNode();
             ClassyTreeItem dijagramTree = new ClassyTreeItem(prosledjen);
