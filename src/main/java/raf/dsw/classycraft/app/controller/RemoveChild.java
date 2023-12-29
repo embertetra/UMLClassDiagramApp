@@ -62,7 +62,7 @@ public class RemoveChild extends AbstractClassyAction {
             }
             ///potrebno prepraviti
             ///brisanje dijagramElemenata
-            else if (selected.getClassyNode() instanceof DijagramElement) {
+            /*else if (selected.getClassyNode() instanceof DijagramElement) {
                 DijagramView dijagramView = (DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent();
                 if (dijagramView != null) {
                     for (Iterator<ElementPainter> iterator = dijagramView.getElementPainterList().iterator(); iterator.hasNext(); ) {
@@ -82,8 +82,11 @@ public class RemoveChild extends AbstractClassyAction {
                 }
                 ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
                 SwingUtilities.updateComponentTreeUI(classyTreeImplementation.getTreeView());
-            }
+            }*/
             ///ako zeli da obrise paket ili dijagram
+            else if(selected.getClassyNode() instanceof DijagramElement){
+                ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Dijagram elemente mozete brisati na samom dijagramu", MessageType.INFO);
+            }
             else if (!(selected.getClassyNode() instanceof ProjectExplorer)) {
                 if (selected.getClassyNode() instanceof Package) {
                     for (Iterator<PackageView> iterator = MainFrame.getInstance().getListaPackageView().iterator(); iterator.hasNext(); ) {

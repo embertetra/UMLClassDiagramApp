@@ -34,6 +34,12 @@ public abstract class Interclass extends DijagramElement implements IPublisher {
         this.position = position;
     }
 
+    public boolean poredjenje(Interclass i){
+        if(position.x == i.getPosition().x && position.y == i.getPosition().y)
+            return true;
+        else return false;
+    }
+
     public String getNaziv() {
         return naziv;
     }

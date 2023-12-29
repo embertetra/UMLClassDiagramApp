@@ -32,6 +32,8 @@ import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.KlasaPa
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MouseListener {
 

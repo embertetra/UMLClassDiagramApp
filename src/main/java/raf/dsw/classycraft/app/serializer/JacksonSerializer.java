@@ -27,6 +27,8 @@ public class JacksonSerializer implements Serializer {
 
     public JacksonSerializer() {
         objectMapper = new ObjectMapper();
+        objectMapper.registerSubtypes(Dijagram.class, Package.class, Klasa.class, Interfejs.class, EnumM.class, Asocijacija.class,
+                Generalizacija.class, Zavisnost.class, Agregacija.class, Atributi.class, EnumElement.class, Metode.class);
     }
     void setParents(ClassyNodeComposite parent){
         for(ClassyNode c : parent.getChildren()){
@@ -44,8 +46,7 @@ public class JacksonSerializer implements Serializer {
 
         try {
             FileReader fr = new FileReader(file);
-            objectMapper.registerSubtypes(Dijagram.class, Package.class, Klasa.class, Interfejs.class, EnumM.class, Asocijacija.class,
-                    Generalizacija.class, Zavisnost.class, Agregacija.class, Atributi.class, EnumElement.class, Metode.class);
+
             Project project = objectMapper.readValue(file, Project.class);
             setParents(project);
             return project;

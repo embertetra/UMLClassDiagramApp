@@ -67,33 +67,35 @@ public class GalleryTemplates extends JFrame {
         listFiles = folder.listFiles();
 
         ///dodavanje fajlova
-        for (File f : listFiles) {
+        if(listFiles != null) {
+            for (File f : listFiles) {
 
-            JPanel panel = new JPanel();
-            JButton dugme = new JButton(f.getName());
-            BufferedImage rawPicture = null;
-            Image scaledPicture = null;
-            try {
-                rawPicture = ImageIO.read(new File("src/main/resources/images/existingDiagram.png"));
-                scaledPicture = rawPicture.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
-            } catch (IOException e) {
-                e.printStackTrace();
+                JPanel panel = new JPanel();
+                JButton dugme = new JButton(f.getName());
+                BufferedImage rawPicture = null;
+                Image scaledPicture = null;
+                try {
+                    rawPicture = ImageIO.read(new File("src/main/resources/images/existingDiagram.png"));
+                    scaledPicture = rawPicture.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                JLabel picLabel = new JLabel(new ImageIcon(scaledPicture));
+                picLabel.setBorder(new EmptyBorder(new Insets(0, 0, 6, 0)));
+                panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+                picLabel.setAlignmentX(CENTER_ALIGNMENT);
+                dugme.setAlignmentX(CENTER_ALIGNMENT);
+
+                panel.add(picLabel);
+                panel.add(dugme);
+                dugme.setAction(new SingleTemplateAction(f.getName()));
+
+                templates.add(panel);
             }
-            JLabel picLabel = new JLabel(new ImageIcon(scaledPicture));
-            picLabel.setBorder(new EmptyBorder(new Insets(0,0,6,0)));
-            panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-
-            picLabel.setAlignmentX(CENTER_ALIGNMENT);
-            dugme.setAlignmentX(CENTER_ALIGNMENT);
-
-            panel.add(picLabel);
-            panel.add(dugme);
-            dugme.setAction(new SingleTemplateAction(f.getName()));
-
-            templates.add(panel);
+            mainPanel.add(templates);
+            add(mainPanel);
+            pack();
         }
-        mainPanel.add(templates);
-        add(mainPanel);
-        pack();
     }
 }

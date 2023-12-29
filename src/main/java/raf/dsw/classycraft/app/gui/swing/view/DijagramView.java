@@ -4,6 +4,7 @@ import javafx.util.Pair;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.controller.MouseListeners.*;
+import raf.dsw.classycraft.app.gui.swing.view.painters.ConnectionPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
 import raf.dsw.classycraft.app.jTabbedElements.NotificationDijagramView;
@@ -18,6 +19,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class DijagramView extends JPanel implements ISubscriber {
@@ -120,6 +122,7 @@ public class DijagramView extends JPanel implements ISubscriber {
         for (ElementPainter x : elementPainterList) {
             x.draw(g2);
         }
+
         System.out.println("Izvrsen paintComponent");
         //((Graphics2D) g).setTransform(save);
     }
@@ -213,5 +216,9 @@ public class DijagramView extends JPanel implements ISubscriber {
 
     public AffineTransform getAt() {
         return at;
+    }
+
+    public void setElementPainterList(List<ElementPainter> elementPainterList) {
+        this.elementPainterList = elementPainterList;
     }
 }
