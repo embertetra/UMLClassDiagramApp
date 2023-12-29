@@ -15,11 +15,14 @@ import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.Interfe
 import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.KlasaPainter;
 
 import java.awt.geom.AffineTransform;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddInterClassCommand extends AbstractCommand {
 
     private Interclass interclass;
     private DijagramView dijagramView;
+    //private List<Interclass> listaInterclass = new ArrayList<>();
 
     public AddInterClassCommand(Interclass interclass, DijagramView dijagramView) {
         this.interclass = interclass;
@@ -32,7 +35,6 @@ public class AddInterClassCommand extends AbstractCommand {
 
         ///odredjivanje dijagrama unutar stabla
         ClassyTreeItem item = null;
-        //ClassyNode tmp = MainFrame.getInstance().getPackageView().getClassyNode();
         ClassyTreeItem selected = MainFrame.getInstance().getPackageView().getClassyTreeItem();
         for (int i = 0; i < selected.getChildCount(); i++) {
             ClassyTreeItem c = (ClassyTreeItem) selected.getChildAt(i);
@@ -49,6 +51,7 @@ public class AddInterClassCommand extends AbstractCommand {
             dijagramView.getElementPainterList().add(klasaPainter);
             d.addChild(klasa);///dodoavanje u model
             MainFrame.getInstance().getClassyTree().addChild(item, klasa);///dodavanje u stablo
+            //listaInterclass.add(klasa);
         } else if (interclass instanceof Interfejs) {
             Interfejs interfejs = (Interfejs)interclass;
             interfejs.addSubscriber(dijagramView);
@@ -56,6 +59,7 @@ public class AddInterClassCommand extends AbstractCommand {
             dijagramView.getElementPainterList().add(interfejsPainter);
             d.addChild(interfejs);
             MainFrame.getInstance().getClassyTree().addChild(item, interfejs);
+            //listaInterclass.add(interfejs);
         } else if (interclass instanceof EnumM) {
             EnumM enumM = (EnumM)interclass;
             enumM.addSubscriber(dijagramView);
@@ -63,6 +67,7 @@ public class AddInterClassCommand extends AbstractCommand {
             dijagramView.getElementPainterList().add(enumPainter);
             d.addChild(enumM);
             MainFrame.getInstance().getClassyTree().addChild(item, enumM);
+            //listaInterclass.add(enumM);
         }
     }
 

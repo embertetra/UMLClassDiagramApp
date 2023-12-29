@@ -52,15 +52,12 @@ public class DodajUEnumAction extends AbstractClassyAction{
             return;
         }
 
-        ((EnumM) enumPainter.getElement()).getListEnuma().add(naziv);
-
-        dijagramView.repaint();
+        //((EnumM) enumPainter.getElement()).getListEnuma().add(naziv);
+        //dijagramView.repaint();
+        AbstractCommand command = new AddContentCommand(null, null, naziv, (EnumM) enumPainter.getElement(), dijagramView);
+        ((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
 
         MainFrame.getInstance().getEnumProzor().getTfNaziv().setText("");
         MainFrame.getInstance().getEnumProzor().setEnumMList(((EnumM) enumPainter.getElement()).getListEnuma());
-
-        ////
-        AbstractCommand command = new AddContentCommand((EnumM) enumPainter.getElement(), dijagramView);
-        ((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
     }
 }
