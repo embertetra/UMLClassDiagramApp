@@ -6,14 +6,19 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.*;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.commands.AbstractCommand;
+import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
+import raf.dsw.classycraft.app.gui.swing.view.painters.ConnectionPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.*;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.GeneralPath;
+import java.awt.geom.Line2D;
 
 public class AddConnectionCommand extends AbstractCommand {
 
@@ -37,7 +42,6 @@ public class AddConnectionCommand extends AbstractCommand {
 
         ///odredjivanje dijagrama u stablu
         ClassyTreeItem item = null;
-        //ClassyTreeItem selected = MainFrame.getInstance().getClassyTree().getSelectedNode();
         ClassyTreeItem selected = MainFrame.getInstance().getPackageView().getClassyTreeItem();
         for(int i=0; i<selected.getChildCount(); i++){
             ClassyTreeItem c = (ClassyTreeItem)selected.getChildAt(i);
@@ -122,6 +126,7 @@ public class AddConnectionCommand extends AbstractCommand {
 
         }
     }
+
     @Override
     public void undoCommand() {
 
