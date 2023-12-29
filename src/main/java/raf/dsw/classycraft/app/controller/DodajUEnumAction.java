@@ -1,6 +1,8 @@
 package raf.dsw.classycraft.app.controller;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.EnumM;
+import raf.dsw.classycraft.app.commands.AbstractCommand;
+import raf.dsw.classycraft.app.commands.implementation.AddContentCommand;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
@@ -28,6 +30,8 @@ public class DodajUEnumAction extends AbstractClassyAction{
     @Override
     public void actionPerformed(ActionEvent e) {
 
+
+
         //greske pri unosu podataka:
         if(MainFrame.getInstance().getEnumProzor().getTfNaziv().getText().isEmpty() || MainFrame.getInstance().getEnumProzor().getTfNaziv().getText().equals(" ")){
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije upisan naziv enuma!", MessageType.ERROR);
@@ -54,5 +58,9 @@ public class DodajUEnumAction extends AbstractClassyAction{
 
         MainFrame.getInstance().getEnumProzor().getTfNaziv().setText("");
         MainFrame.getInstance().getEnumProzor().setEnumMList(((EnumM) enumPainter.getElement()).getListEnuma());
+
+        ////
+        AbstractCommand command = new AddContentCommand((EnumM) enumPainter.getElement(), dijagramView);
+        ((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
     }
 }

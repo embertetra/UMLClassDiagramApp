@@ -159,4 +159,8 @@ public class MainFrame extends JFrame implements ISubscriber {
     public DependencyProzor getDependencyProzor() {
         return dependencyProzor;
     }
+
+    public DijagramView getDijagramView() {
+        return dijagramView;
+    }
 }

@@ -1,20 +1,14 @@
 package raf.dsw.classycraft.app.stateSablon.states;
 
 import javafx.util.Pair;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.*;
-import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
-import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
+import raf.dsw.classycraft.app.commands.AbstractCommand;
+import raf.dsw.classycraft.app.commands.implementation.AddConnectionCommand;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.AgregacijaPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.AsocijacijaPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.GeneralizacijaPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.KompozicijaPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.ZavisnostPainter;
 import raf.dsw.classycraft.app.stateSablon.State;
 
 import java.awt.*;
@@ -35,8 +29,7 @@ public class AddConnection implements State {
 
     @Override
     public void misOtpusten(int x, int y, DijagramView dijagramView) {
-
-        //dijagramView.removeMML();
+/*
         Dijagram d = (Dijagram)dijagramView.getClassyNode();
         d.addSubscriber(dijagramView);
 
@@ -127,6 +120,26 @@ public class AddConnection implements State {
                 }
 
             }
+        }
+*/
+        if(connection != null){
+            AbstractCommand command = null;
+            if(connection.equals("agregacija")){
+            command = new AddConnectionCommand(a, dijagramView, x, y);
+            }
+            else if(connection.equals("kompozicija")){
+            command = new AddConnectionCommand(k, dijagramView, x, y);
+            }
+            else if(connection.equals("generalizacija")){
+            command = new AddConnectionCommand(g, dijagramView, x, y);
+            }
+            else if(connection.equals("zavisnost")){
+            command = new AddConnectionCommand(z, dijagramView, x, y);
+            }
+            else if(connection.equals("asocijacija")){
+            command = new AddConnectionCommand(as, dijagramView, x, y);
+            }
+            ((DijagramView)MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
         }
 
         dijagramView.setLine(new Pair<>(new Point(-1,-1), new Point(0,0)));

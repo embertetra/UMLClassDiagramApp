@@ -20,6 +20,8 @@ public class ActionManager {
     private DuplicateAction duplicateAction;
     private MouseStateAction mouseStateAction;
     private MoveStateAction moveStateAction;
+    private RedoAction redoAction;
+    private UndoAction undoAction;
 
 
     public ActionManager() {
@@ -36,6 +38,8 @@ public class ActionManager {
         duplicateAction = new DuplicateAction();
         mouseStateAction = new MouseStateAction();
         moveStateAction = new MoveStateAction();
+        redoAction = new RedoAction();
+        undoAction = new UndoAction();
     }
 
     public DuplicateAction getDuplicateAction() {
@@ -87,5 +91,12 @@ public class ActionManager {
 
     public MoveStateAction getMoveStateAction() {
         return moveStateAction;
+    }
+    public RedoAction getRedoAction() {
+        return redoAction;
+    }
+
+    public UndoAction getUndoAction() {
+        return undoAction;
     }
 }

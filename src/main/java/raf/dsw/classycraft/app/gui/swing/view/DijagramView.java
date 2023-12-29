@@ -3,6 +3,7 @@ package raf.dsw.classycraft.app.gui.swing.view;
 import javafx.util.Pair;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
+import raf.dsw.classycraft.app.commands.CommandManager;
 import raf.dsw.classycraft.app.controller.MouseListeners.*;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
@@ -26,6 +27,7 @@ public class DijagramView extends JPanel implements ISubscriber {
     private List<Shape> selectionModel;
     private InterclassPainter flag1;
     private List<InterclassPainter> moveSelections;
+    private CommandManager commandManager;
 
     /// zoom polja
     private Point startPoint;
@@ -49,6 +51,7 @@ public class DijagramView extends JPanel implements ISubscriber {
         this.addMouseWheelListener(mouseController);
         elementPainterList = new ArrayList<>();
         selectionModel = new ArrayList<>();
+        commandManager = new CommandManager();
     }
 
     @Override
@@ -182,7 +185,9 @@ public class DijagramView extends JPanel implements ISubscriber {
     public void setZoomer(boolean zoomer) {
         this.zoomer = zoomer;
     }
-
+    public CommandManager getCommandManager() {
+        return commandManager;
+    }
     public AffineTransform getAt() {
         return at;
     }

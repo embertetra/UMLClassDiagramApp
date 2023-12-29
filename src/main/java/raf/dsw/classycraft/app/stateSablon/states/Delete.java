@@ -39,6 +39,10 @@ public class Delete implements State {
             if(s.contains(new Point(x,y)))flag=1;
         }
 
+
+
+
+
         ///brisanje multi selekcije
         if (dijagramView.getSelectionModel().size() > 0 && flag == 1) {
             for (Iterator<ElementPainter> iterator = dijagramView.getElementPainterList().iterator(); iterator.hasNext(); ) {
@@ -105,6 +109,10 @@ public class Delete implements State {
             return;
         }
 
+
+
+
+
         for (Iterator<ElementPainter> iterator = dijagramView.getElementPainterList().iterator(); iterator.hasNext(); ) {
             ElementPainter el = iterator.next();
             ///brisanje veze
@@ -141,6 +149,9 @@ public class Delete implements State {
                     return;
                 }
             }
+
+
+
             //brisanje interclasse
             if (el.elementAt(new Point(x, y))) {
                 Dijagram d = (Dijagram) el.getElement().getParent();
@@ -186,6 +197,9 @@ public class Delete implements State {
                 }
             }
         }
+
+
+
 
     }
 

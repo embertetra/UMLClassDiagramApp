@@ -1,9 +1,8 @@
 package raf.dsw.classycraft.app.stateSablon.states;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Interfejs;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
-import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
+import raf.dsw.classycraft.app.commands.AbstractCommand;
+import raf.dsw.classycraft.app.commands.implementation.DuplicateCommand;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
@@ -34,9 +33,13 @@ public class Duplicate implements State {
                 item = c;
         }
 
-        InterclassPainter ip = null;
+        /*
         Klasa duplikatK = null;
         Interfejs duplikatI = null;
+         */
+
+        InterclassPainter ip = null;
+        AbstractCommand command = null;
         for(ElementPainter e : dijagramView.getElementPainterList()){
             if(e instanceof InterclassPainter){
                 if(e.elementAt(new Point(x, y))) {
@@ -44,7 +47,8 @@ public class Duplicate implements State {
                     if (ip instanceof EnumPainter)
                         ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije moguce napraviti kopiju enuma!", MessageType.ERROR);
                     else if (ip instanceof KlasaPainter) {
-                        Klasa k = (Klasa) ip.getElement();
+                        /*
+                        //Klasa k = (Klasa) ip.getElement();
                         duplikatK = new Klasa("Interclass", dijagramView.getClassyNode(), 2, k.getNaziv(), k.getVidljivost(), new Point(k.getPosition().x + ip.getWidth()/2 + 5, k.getPosition().y + ip.getHeightUkupno()/2 + 10));
                         duplikatK.setNaziv(k.getNaziv()); duplikatK.setClassContentList(k.getClassContentList());
                         duplikatK.addSubscriber(dijagramView);
@@ -53,8 +57,13 @@ public class Duplicate implements State {
                         if(item != null)
                             MainFrame.getInstance().getClassyTree().addChild(item, duplikatK);
                         d.addChild(duplikatK);
+                        */
+                        command = new DuplicateCommand(ip, dijagramView, item);
+                        ((DijagramView)MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
+
                         break;
                     } else if (ip instanceof InterfejsPainter) {
+                        /*
                         Interfejs i = (Interfejs) ip.getElement();
                         duplikatI = new Interfejs("Interclass", dijagramView.getClassyNode(), 2, i.getNaziv(), i.getVidljivost(), new Point(i.getPosition().x + ip.getWidth()/2 + 5, i.getPosition().y + 10 + ip.getHeightUkupno()/2));
                         duplikatI.setNaziv(i.getNaziv()); duplikatI.setMetodeList(i.getMetodeList());
@@ -63,6 +72,10 @@ public class Duplicate implements State {
                         Dijagram d = (Dijagram) dijagramView.getClassyNode();
                         MainFrame.getInstance().getClassyTree().addChild(item, duplikatI);
                         d.addChild(duplikatI);
+                        */
+                        command = new DuplicateCommand(ip, dijagramView, item);
+                        ((DijagramView)MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
+
                         break;
                     }
                 }

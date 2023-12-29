@@ -1,25 +1,21 @@
 package raf.dsw.classycraft.app.stateSablon.states;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.EnumM;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Interfejs;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Vidljivost;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
+import raf.dsw.classycraft.app.commands.AbstractCommand;
+import raf.dsw.classycraft.app.commands.implementation.AddInterClassCommand;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
-import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.EnumPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.InterfejsPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.KlasaPainter;
 import raf.dsw.classycraft.app.stateSablon.State;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 
 public class AddInterclass implements State {
 
@@ -47,6 +43,7 @@ public class AddInterclass implements State {
                 }
             }
         }
+        /*
         if(interclass != null) {
             AffineTransform at = dijagramView.getAt();
 
@@ -86,7 +83,21 @@ public class AddInterclass implements State {
                 MainFrame.getInstance().getClassyTree().addChild(item, enumM);
             }
         }
-
+        */
+        if(interclass != null) {
+            AbstractCommand command = null;
+            if (interclass.equals("class")) {
+                Klasa klasa = new Klasa("Interclass", dijagramView.getClassyNode(), 2, "naziv", Vidljivost.PUBLIC, new Point(x,y));
+                command = new AddInterClassCommand(klasa, dijagramView);
+            } else if (interclass.equals("interface")) {
+                Interfejs interfejs = new Interfejs("Interclass", dijagramView.getClassyNode(), 2, "naziv", Vidljivost.PUBLIC, new Point(x, y));
+                command = new AddInterClassCommand(interfejs, dijagramView);
+            } else if (interclass.equals("enum")) {
+                EnumM enumM = new EnumM("Interclass", dijagramView.getClassyNode(), 2, "naziv", Vidljivost.PUBLIC, new Point(x, y));
+                command = new AddInterClassCommand(enumM, dijagramView);
+            }
+            ((DijagramView)MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
+        }
     }
 
     @Override
