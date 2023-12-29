@@ -65,7 +65,9 @@ public class GalleryTemplates extends JFrame {
         ///dodavanje fajlova
         if(listFiles != null) {
             for (File f : listFiles) {
-
+                if(f.getName().equals("null")){
+                    continue;
+                }
                 JPanel panel = new JPanel();
                 panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
                 JButton dugme = new JButton(f.getName());
@@ -76,6 +78,7 @@ public class GalleryTemplates extends JFrame {
                 index++;
 
             }
+            templates.add(new JLabel(), index, 0);
             templates.add(btnBlank, index,0);
             templates.setAlignmentX(Component.CENTER_ALIGNMENT);
             mainPanel.add(templates);
@@ -92,7 +95,9 @@ public class GalleryTemplates extends JFrame {
         ///dodavanje fajlova
         if(listFiles != null) {
             for (File f : listFiles) {
-
+                if(f.getName().equals("null")){
+                    continue;
+                }
                 JPanel panel = new JPanel();
                 panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
                 JButton dugme = new JButton(f.getName());
