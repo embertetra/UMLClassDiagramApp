@@ -4,7 +4,6 @@ import javafx.util.Pair;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.controller.MouseListeners.*;
-import raf.dsw.classycraft.app.gui.swing.view.painters.ConnectionPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
 import raf.dsw.classycraft.app.jTabbedElements.NotificationDijagramView;
@@ -13,13 +12,11 @@ import raf.dsw.classycraft.app.observer.ISubscriber;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseMotionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class DijagramView extends JPanel implements ISubscriber {

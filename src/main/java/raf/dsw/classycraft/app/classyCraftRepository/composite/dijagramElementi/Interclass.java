@@ -1,9 +1,14 @@
 package raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi;
 
+import javafx.geometry.Pos;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Vidljivost;
+import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
+import raf.dsw.classycraft.app.gui.swing.view.painters.ConnectionPainter;
+import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.observer.IPublisher;
 
+import javax.swing.text.Position;
 import java.awt.*;
 
 public abstract class Interclass extends DijagramElement implements IPublisher {
@@ -56,7 +61,20 @@ public abstract class Interclass extends DijagramElement implements IPublisher {
         return position;
     }
 
-    public void setPosition(Point position) {
+    public void setPosition(Point position, DijagramView d) {
+
+        if(d != null){
+            for(ElementPainter elementPainter : d.getElementPainterList()){
+                if(elementPainter instanceof ConnectionPainter){
+                    ConnectionPainter painter = (ConnectionPainter) elementPainter;
+                    Connection cn = (Connection) painter.getElement();
+                    if(cn.getTo().poredjenje(this))
+                        cn.getTo().setPosition(position, null);
+                    else if(cn.getFrom().poredjenje(this))
+                        cn.getFrom().setPosition(position, null);
+                }
+            }
+        }
         this.position = position;
         notifySubscribers("state");
     }

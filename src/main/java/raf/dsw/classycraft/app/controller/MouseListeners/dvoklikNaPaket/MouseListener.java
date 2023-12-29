@@ -14,6 +14,7 @@ import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Package;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.ProjectExplorer;
+import raf.dsw.classycraft.app.controller.MouseListeners.MouseController;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.tree.view.ClassyTreeView;
@@ -76,14 +77,17 @@ public class MouseListener {
                                             InterclassPainter ip = null;
                                             if(cn instanceof Klasa){
                                                 Klasa k = (Klasa) cn;
+                                                k.addSubscriber(dijagramView);
                                                 ip = new KlasaPainter(k);
                                             }
                                             else if(cn instanceof Interfejs){
                                                 Interfejs i = (Interfejs) cn;
+                                                i.addSubscriber(dijagramView);
                                                 ip = new InterfejsPainter(i);
                                             }
                                             else if(cn instanceof EnumM){
                                                 EnumM en = (EnumM) cn;
+                                                en.addSubscriber(dijagramView);
                                                 ip = new EnumPainter(en);
                                             }
                                             if(ip != null)

@@ -53,7 +53,6 @@ public class Delete implements State {
     public void misKliknut(int x, int y, DijagramView dijagramView) {
         ///prebaci i makeShape metodu!!!!
 
-
         ///pronalazenje dijagrama u stablu
         ClassyTreeItem item = null;
         ClassyTreeItem selected = MainFrame.getInstance().getPackageView().getClassyTreeItem();
@@ -68,7 +67,6 @@ public class Delete implements State {
         for (Shape s : dijagramView.getSelectionModel()) {
             if (s.contains(new Point(x, y))) flag = 1;
         }
-
 
         ///brisanje multiselekcije
         if(dijagramView.getSelectionModel().size() > 0 && flag == 1){

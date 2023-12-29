@@ -56,7 +56,7 @@ public class Move implements State {
 
                     for(InterclassPainter ip2 : shapes){
                         Interclass i = (Interclass) ip2.getElement();
-                        i.setPosition(oldPoints.get(index));
+                        i.setPosition(oldPoints.get(index), dijagramView);
                         index++;
                     }
                     break;
@@ -97,7 +97,7 @@ public class Move implements State {
                 }
             }
             if (brojac > 1) {
-                ((Interclass) dijagramView.getFlag1().getElement()).setPosition(oldPoint);
+                ((Interclass) dijagramView.getFlag1().getElement()).setPosition(oldPoint, dijagramView);
             }
         }
         dijagramView.setFlag1(null);
@@ -203,14 +203,14 @@ public class Move implements State {
             int diffX = (int) (x - d.getStartPoint().x);
             int diffY = (int) (y - d.getStartPoint().y);
 
+            ///
             if (d.getFlag1() != null) {
                 for (ElementPainter ep : d.getElementPainterList()) {
                     if (ep instanceof InterclassPainter) {
                         InterclassPainter ip = (InterclassPainter) ep;
                         Interclass ic = (Interclass) ip.getElement();
                         if (ip == d.getFlag1()) {
-                            ic.setPosition(new Point(d.getStartPoint().x + diffX - d.getxDragOffset(), d.getStartPoint().y + diffY - d.getyDragOffset()));
-                            //d.repaint();//
+                            ic.setPosition(new Point(d.getStartPoint().x + diffX - d.getxDragOffset(), d.getStartPoint().y + diffY - d.getyDragOffset()), d);
                             return;
                         }
                     }
@@ -219,16 +219,15 @@ public class Move implements State {
                 for (InterclassPainter ip : d.getMoveSelections()) {
                     Interclass ic = (Interclass) ip.getElement();
                     ic.setPosition(new Point(d.getStartPoint().x + diffX - ip.getxDragOffset(),
-                            d.getStartPoint().y + diffY - ip.getyDragOffset()));
+                            d.getStartPoint().y + diffY - ip.getyDragOffset()), d);
                 }
-                //d.repaint();
                 return;
             } else {
                 for (ElementPainter ep : d.getElementPainterList()) {
                     if (ep instanceof InterclassPainter) {
                         InterclassPainter ip = ((InterclassPainter) ep);
                         ((Interclass) ip.getElement()).setPosition(new Point(d.getStartPoint().x + diffX - ip.getxDragOffset(),
-                                d.getStartPoint().y + diffY - ip.getyDragOffset()));
+                                d.getStartPoint().y + diffY - ip.getyDragOffset()), d);
                     }
                 }
                 for (ElementPainter ep : d.getElementPainterList()) {
@@ -238,9 +237,9 @@ public class Move implements State {
                         Interclass to = ((Connection) cp.getElement()).getTo();
                         if(d.getStartPoint()!= null && from != null && to != null) {
                             from.setPosition(new Point(d.getStartPoint().x + diffX - cp.getDragOffset1().x,
-                                    d.getStartPoint().y + diffY - cp.getDragOffset1().y));
+                                    d.getStartPoint().y + diffY - cp.getDragOffset1().y), d);
                             to.setPosition(new Point(d.getStartPoint().x + diffX - cp.getDragOffset2().x,
-                                    d.getStartPoint().y + diffY - cp.getDragOffset2().y));
+                                    d.getStartPoint().y + diffY - cp.getDragOffset2().y), d);
                         }
                     }
                 }

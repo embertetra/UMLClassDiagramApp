@@ -105,3 +105,6 @@
 [ERROR] [29.12.2023. 13:31] [Morate selektovati projekat]
 [ERROR] [29.12.2023. 13:38] [Morate selektovati projekat]
 [ERROR] [29.12.2023. 13:38] [Morate selektovati projekat]
+[ERROR] [29.12.2023. 13:45] [Nije moguce postaviti interklasu na zeljeno mesto!]
+[ERROR] [29.12.2023. 14:19] [Morate selektovati projekat]
+[ERROR] [29.12.2023. 14:57] [Morate selektovati projekat]
