@@ -43,10 +43,8 @@ public class JacksonSerializer implements Serializer {
     }
     @Override
     public Project loadProject(File file) {
-
         try {
             FileReader fr = new FileReader(file);
-
             Project project = objectMapper.readValue(file, Project.class);
             setParents(project);
             return project;
@@ -54,9 +52,24 @@ public class JacksonSerializer implements Serializer {
             e.printStackTrace();
             return null;
         }
+    }
+    @Override
+    public Dijagram loadTemplate(File file) {
+
+
+        try {
+            FileReader fr = new FileReader(file);
+            Dijagram dijagram = objectMapper.readValue(file, Dijagram.class);
+            for(ClassyNode c : dijagram.getChildren()){
+                c.setParent(dijagram);
+            }
+            return dijagram;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
 
     }
-
     @Override
     public void saveProject(Project project) {
         try {
@@ -79,4 +92,6 @@ public class JacksonSerializer implements Serializer {
             e.printStackTrace();
         }
     }
+
+
 }

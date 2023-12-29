@@ -136,7 +136,7 @@ public class Delete implements State {
         }
         else {
 
-            Interclass selektovanaKlasa = null;//klasa na koju smo kliknuli. Cuvam je kako bi posle mogao da obrisem sve veze koje su spojene sa njom
+            Interclass selektovanaKlasa = null;//klasa na koju smo kliknuli. Cuvam je kako bi posle mogao da obrisem sve veze koje su spojene  njom
             ///brisanje pojedinacog elementa
             for (Iterator<ElementPainter> iterator = dijagramView.getElementPainterList().iterator(); iterator.hasNext(); ) {
                 ElementPainter elementPainter = iterator.next();
@@ -191,7 +191,7 @@ public class Delete implements State {
                     }
                 }
             }
-            ///brisanje svih connectionsa koji su bili vezani sa klasom koja je obrisana
+            ///brisanje svih connectionsa koji su bili vezani s klasom koja je obrisana
             if (selektovanaKlasa != null) {
                 for (int i = 0; i < item.getChildCount(); i++) {
                     ClassyTreeItem cti = (ClassyTreeItem) item.getChildAt(i);

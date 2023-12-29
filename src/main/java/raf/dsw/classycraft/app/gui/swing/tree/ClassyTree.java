@@ -1,6 +1,7 @@
 package raf.dsw.classycraft.app.gui.swing.tree;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.ProjectExplorer;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
@@ -16,5 +17,4 @@ public interface ClassyTree {
 
     ClassyTreeItem getSelectedNode();
     void loadProject(Project project);
-
 }
