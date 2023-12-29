@@ -112,3 +112,4 @@
 [ERROR] [29.12.2023. 20:48] [Morate selektovati dijagram]
 [ERROR] [29.12.2023. 21:12] [Morate selektovati projekat]
 [ERROR] [29.12.2023. 21:24] [Morate selektovati projekat]
+[ERROR] [30.12.2023. 00:18] [Samo celokupan projekat moze da se exportuje kao kod]

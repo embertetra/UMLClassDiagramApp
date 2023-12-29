@@ -25,9 +25,11 @@ public class ActionManager {
     private SaveAction saveAction;
     private ExportDiagram exportDiagram;
     private SaveTemplate saveTemplate;
+    private ExportProjectToCode exportProjectToCode;
 
 
     public ActionManager() {
+        exportProjectToCode = new ExportProjectToCode();
         saveTemplate = new SaveTemplate();
         exportDiagram = new ExportDiagram();
         saveAction = new SaveAction();
@@ -46,6 +48,10 @@ public class ActionManager {
         mouseStateAction = new MouseStateAction();
         moveStateAction = new MoveStateAction();
         saveAsAction = new SaveAsAction();
+    }
+
+    public ExportProjectToCode getExportProjectToCode() {
+        return exportProjectToCode;
     }
 
     public SaveTemplate getSaveTemplate() {

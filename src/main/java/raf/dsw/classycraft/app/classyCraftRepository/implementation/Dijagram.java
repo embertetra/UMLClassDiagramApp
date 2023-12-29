@@ -67,5 +67,4 @@ public class Dijagram extends ClassyNodeComposite implements IPublisher {
             }
         }
     }
-
 }

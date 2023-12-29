@@ -17,7 +17,7 @@ public class Project extends ClassyNodeComposite implements IPublisher {
     protected String filePath;
     private transient List<ISubscriber> subscribers;
     private String autor;
-    private boolean changed;
+    protected boolean changed;
 
 
     public Project(String name, ClassyNode parent) {
