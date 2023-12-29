@@ -2,16 +2,11 @@ package raf.dsw.classycraft.app.stateSablon.states;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Connection;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Agregacija;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Generalizacija;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Kompozicija;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Zavisnost;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.EnumM;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Interfejs;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
+import raf.dsw.classycraft.app.commands.AbstractCommand;
+import raf.dsw.classycraft.app.commands.implementation.MultipleDeleteCommand;
+import raf.dsw.classycraft.app.commands.implementation.SingleDeleteCommand;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
@@ -19,22 +14,12 @@ import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ConnectionPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.AgregacijaPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.GeneralizacijaPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.KompozicijaPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.ZavisnostPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.EnumPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.InterfejsPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.KlasaPainter;
 import raf.dsw.classycraft.app.stateSablon.State;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.GeneralPath;
-import java.awt.geom.Line2D;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 public class Delete implements State {
 
@@ -51,9 +36,7 @@ public class Delete implements State {
 
     @Override
     public void misKliknut(int x, int y, DijagramView dijagramView) {
-        ///prebaci i makeShape metodu!!!!
-
-
+        AbstractCommand command;
         ///pronalazenje dijagrama u stablu
         ClassyTreeItem item = null;
         ClassyTreeItem selected = MainFrame.getInstance().getPackageView().getClassyTreeItem();
@@ -70,6 +53,8 @@ public class Delete implements State {
         }
         ///brisanje multiselekcije
         if(dijagramView.getSelectionModel().size() > 0 && flag == 1){
+            command = new MultipleDeleteCommand(x, y, dijagramView);
+            /*
             for(Iterator<ElementPainter> iterator = dijagramView.getElementPainterList().iterator(); iterator.hasNext();){
                 ElementPainter elementPainter = iterator.next();
                 for(Shape s : dijagramView.getSelectionModel()){
@@ -133,7 +118,13 @@ public class Delete implements State {
                 }
             }
             dijagramView.getSelectionModel().clear();
+            */
         }
+        else{
+            command = new SingleDeleteCommand(x, y, dijagramView);
+        }
+        ((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
+        /*
         else {
             Interclass selektovanaKlasa = null;//klasa na koju smo kliknuli. Cuvam je kako bi posle mogao da obrisem sve veze koje su spojene sa njom
             ///brisanje pojedinacog elementa
@@ -233,6 +224,7 @@ public class Delete implements State {
         dijagramView.getElementPainterList().clear();
         dijagramView.setElementPainterList(novaPainterLista);
         dijagramView.repaint();
+         */
     }
 
     @Override

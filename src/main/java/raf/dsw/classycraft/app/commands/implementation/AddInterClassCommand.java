@@ -26,7 +26,6 @@ import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.Interfe
 import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.KlasaPainter;
 
 import javax.swing.*;
-import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +41,7 @@ public class AddInterClassCommand extends AbstractCommand {
 
     @Override
     public void doCommand() {
-        AffineTransform at = dijagramView.getAt();
+        //AffineTransform at = dijagramView.getAt();
 
         ///odredjivanje dijagrama unutar stabla
         ClassyTreeItem item = null;

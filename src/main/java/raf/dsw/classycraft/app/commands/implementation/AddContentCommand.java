@@ -10,9 +10,7 @@ import raf.dsw.classycraft.app.commands.AbstractCommand;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
-import java.util.List;
-
-public class DodajContentCommand extends AbstractCommand {
+public class AddContentCommand extends AbstractCommand {
 
     public Interclass interclass;
     public DijagramView dijagramView;
@@ -20,7 +18,7 @@ public class DodajContentCommand extends AbstractCommand {
     public Metode metoda;
     public String naziv;
 
-    public DodajContentCommand(Atributi atribut, Metode metoda, String naziv, Interclass interclass, DijagramView dijagramView){
+    public AddContentCommand(Atributi atribut, Metode metoda, String naziv, Interclass interclass, DijagramView dijagramView){
         this.atribut = atribut;
         this.metoda = metoda;
         this.naziv = naziv;
