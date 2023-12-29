@@ -35,6 +35,7 @@ public class MouseController implements MouseMotionListener,MouseListener, Mouse
         }
 
         MainFrame.getInstance().getPackageView().misKliknut((int) point.getX(), (int)point.getY(), dijagramView);
+        System.out.println(point.getX() + " " + point.getY());
         //MainFrame.getInstance().getPackageView().misKliknut(e.getX(), e.getY(), dijagramView);
     }
 

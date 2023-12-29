@@ -18,6 +18,9 @@ public abstract class Connection extends DijagramElement {
         this.from = from;
         this.to = to;
     }
+    public boolean poredjenje(Connection c){
+        return (from.poredjenje(c.getFrom()) && to.poredjenje(c.getTo())) || (from.poredjenje(c.getTo()) && to.poredjenje(c.getFrom()));
+    }
 
     public Interclass getFrom() {
         return from;

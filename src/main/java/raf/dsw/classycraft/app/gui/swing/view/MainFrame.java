@@ -35,13 +35,15 @@ public class MainFrame extends JFrame implements ISubscriber {
     private JScrollPane scrollPane;
     private KompAgregProzor kompAgregProzor;
     private DependencyProzor dependencyProzor;
-
+    private GalleryTemplates galleryTemplates;
 
 
     private MainFrame() {
     }
 
     private void initialize() {
+        galleryTemplates = new GalleryTemplates();
+        galleryTemplates.setVisible(true);
         actionManager = new ActionManager();
         aboutUsFrame = new AboutUsFrame();
         classyTree = new ClassyTreeImplementation();

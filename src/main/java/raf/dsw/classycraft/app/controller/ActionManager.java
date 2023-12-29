@@ -20,11 +20,20 @@ public class ActionManager {
     private DuplicateAction duplicateAction;
     private MouseStateAction mouseStateAction;
     private MoveStateAction moveStateAction;
+    private SaveAsAction saveAsAction;
+    private ImportAction importAction;
+    private SaveAction saveAction;
+    private ExportDiagram exportDiagram;
+    private SaveTemplate saveTemplate;
     private RedoAction redoAction;
     private UndoAction undoAction;
 
 
     public ActionManager() {
+        saveTemplate = new SaveTemplate();
+        exportDiagram = new ExportDiagram();
+        saveAction = new SaveAction();
+        importAction = new ImportAction();
         exitAction = new ExitAction();
         aboutUsAction = new AboutUsAction();
         newChildAction = new NewChildAction();
@@ -38,10 +47,28 @@ public class ActionManager {
         duplicateAction = new DuplicateAction();
         mouseStateAction = new MouseStateAction();
         moveStateAction = new MoveStateAction();
+        saveAsAction = new SaveAsAction();
         redoAction = new RedoAction();
         undoAction = new UndoAction();
     }
 
+    public SaveTemplate getSaveTemplate() {
+        return saveTemplate;
+    }
+
+    public ExportDiagram getExportDiagram() {
+        return exportDiagram;
+    }
+    public SaveAction getSaveAction() {
+        return saveAction;
+    }
+
+    public ImportAction getImportAction() {
+        return importAction;
+    }
+    public SaveAsAction getSaveAsAction() {
+        return saveAsAction;
+    }
     public DuplicateAction getDuplicateAction() {
         return duplicateAction;
     }

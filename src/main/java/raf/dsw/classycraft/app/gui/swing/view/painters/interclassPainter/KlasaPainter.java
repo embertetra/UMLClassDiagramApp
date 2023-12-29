@@ -99,6 +99,9 @@ public class KlasaPainter extends InterclassPainter {
 
     @Override
     public boolean elementAt(Point point) {
+        if(getShape() == null)
+            return false;
+
         return this.getShape().contains(point);
     }
 

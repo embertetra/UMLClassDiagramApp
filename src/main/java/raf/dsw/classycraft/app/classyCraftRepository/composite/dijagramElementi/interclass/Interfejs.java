@@ -1,5 +1,6 @@
 package raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Metode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
@@ -9,14 +10,16 @@ import raf.dsw.classycraft.app.observer.ISubscriber;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-
+@JsonTypeName("interfejs")
 public class Interfejs extends Interclass{
 
     private String naziv;
 
     private List<Metode> metodeList;
-    private List<ISubscriber> subscribers;
-
+    private transient List<ISubscriber> subscribers;
+    public Interfejs() {
+        super("", null);
+    }
     public Interfejs(String name, ClassyNode parent) {
         super(name, parent);
     }

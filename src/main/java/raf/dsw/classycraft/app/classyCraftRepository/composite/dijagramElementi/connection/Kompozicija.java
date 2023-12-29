@@ -1,17 +1,21 @@
 package raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Connection;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
 
 import java.awt.*;
-
+@JsonTypeName("kompozicija")
 public class Kompozicija extends Connection {
     private String name2;
     private String tip;
     private String kardinalnost;
     private String vidljivost;
 
+    public Kompozicija(){
+        super("", null);
+    }
     public Kompozicija(String name, ClassyNode parent) {
         super(name, parent);
     }

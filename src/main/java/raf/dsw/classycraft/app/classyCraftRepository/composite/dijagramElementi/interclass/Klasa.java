@@ -1,5 +1,6 @@
 package raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.ClassContent;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
@@ -8,13 +9,16 @@ import raf.dsw.classycraft.app.observer.ISubscriber;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-
+@JsonTypeName("klasa")
 public class Klasa extends Interclass{
 
     private String naziv;
 
     private List<ClassContent> classContentList;
-    private List<ISubscriber> subscribers;
+    private transient List<ISubscriber> subscribers;
+    public Klasa(){
+        super("", null);
+    }
 
     public Klasa(String name, ClassyNode parent) {
         super(name, parent);

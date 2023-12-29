@@ -2,6 +2,14 @@ package raf.dsw.classycraft.app.controller.MouseListeners.dvoklikNaPaket;
 
 import com.sun.tools.javac.Main;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Agregacija;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Generalizacija;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Kompozicija;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Zavisnost;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.EnumM;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Interfejs;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Package;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
@@ -12,9 +20,20 @@ import raf.dsw.classycraft.app.gui.swing.tree.view.ClassyTreeView;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.gui.swing.view.PackageView;
+import raf.dsw.classycraft.app.gui.swing.view.painters.ConnectionPainter;
+import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
+import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.AgregacijaPainter;
+import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.GeneralizacijaPainter;
+import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.KompozicijaPainter;
+import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.ZavisnostPainter;
+import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.EnumPainter;
+import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.InterfejsPainter;
+import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.KlasaPainter;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MouseListener {
 
@@ -43,36 +62,61 @@ public class MouseListener {
                                 paket = new PackageView();
                                 paket.setClassyTreeItem(selected);
                                 MainFrame.getInstance().getListaPackageView().add(paket);
-                                //MainFrame.getInstance().setPackageView(paket);
                                 ((Package) selectedNode).addSubscriber(paket);
                                 paket.setClassyNode(selectedNode);
                                 for (ClassyNode c : ((Package) selectedNode).getChildren()) {
                                     if (c instanceof Dijagram) {
                                         DijagramView dijagramView = new DijagramView(c);
                                         ((Dijagram) c).addSubscriber(dijagramView);
-                                        //MainFrame.getInstance().getPackageView().getjTabbedPane().addTab(c.getName(), dijagramView);
                                         paket.getjTabbedPane().addTab(c.getName(),dijagramView);
+
+                                        ///prolazim kroz svu decu dijagrama i kreiram paintere za njih
+                                        ///prvo za interclasse
+                                        for(ClassyNode cn : ((Dijagram)c).getChildren()){
+                                            InterclassPainter ip = null;
+                                            if(cn instanceof Klasa){
+                                                Klasa k = (Klasa) cn;
+                                                ip = new KlasaPainter(k);
+                                            }
+                                            else if(cn instanceof Interfejs){
+                                                Interfejs i = (Interfejs) cn;
+                                                ip = new InterfejsPainter(i);
+                                            }
+                                            else if(cn instanceof EnumM){
+                                                EnumM en = (EnumM) cn;
+                                                ip = new EnumPainter(en);
+                                            }
+                                            if(ip != null)
+                                                dijagramView.getElementPainterList().add(ip);
+                                        }
+                                        ///sada za konekcije
+                                        for(ClassyNode cn : ((Dijagram)c).getChildren()){
+                                            ConnectionPainter cp = null;
+                                            if(cn instanceof Agregacija){
+                                                Agregacija a = (Agregacija) cn;
+                                                cp = new AgregacijaPainter(a);
+                                            }
+                                            else if(cn instanceof Generalizacija){
+                                                Generalizacija g = (Generalizacija) cn;
+                                                cp = new GeneralizacijaPainter(g);
+                                            }
+                                            else if(cn instanceof Kompozicija){
+                                                Kompozicija k = (Kompozicija) cn;
+                                                cp = new KompozicijaPainter(k);
+                                            }
+                                            else if(cn instanceof Zavisnost){
+                                                Zavisnost z = (Zavisnost) cn;
+                                                cp = new ZavisnostPainter(z);
+                                            }
+                                            if(cp != null)
+                                                dijagramView.getElementPainterList().add(cp);
+                                        }
                                     }
                                 }
                                 MainFrame.getInstance().setPackageView(paket);
                             } else {
                                 MainFrame.getInstance().setPackageView(paket);
                             }
-                            /*
-                            ///OVO TREBA MENJATIIIIIII, Ako obrisem sve jtabove gubim sve dijagramViewove !>!>!>!>!>!?!
-                            ((Package) selected.getClassyNode()).addSubscriber(MainFrame.getInstance().getPackageView());
-                            MainFrame.getInstance().getPackageView().getjTabbedPane().removeAll();
-                            for (ClassyNode c : ((Package) selected.getClassyNode()).getChildren()) {
-                                if (c instanceof Dijagram) {
-                                    DijagramView dijagramView = new DijagramView(c);
-                                    ((Dijagram) c).addSubscriber(dijagramView);
-                                    //MainFrame.getInstance().getPackageView().addInTabList(dijagramView);
-                                    MainFrame.getInstance().getPackageView().getjTabbedPane().addTab(c.getName(), dijagramView);
-                                }
-                            }
-                            //setovanje parenta packageView-u
-                            MainFrame.getInstance().getPackageView().setClassyNode(selected.getClassyNode());
-                            */
 
                             ///ispisivanje projekta i autora na packageView trebalo bi da ostaje kao i pre
                             while(true){

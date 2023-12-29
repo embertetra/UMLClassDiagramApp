@@ -1,7 +1,17 @@
 package raf.dsw.classycraft.app.classyCraftRepository.composite.classContent;
-
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Vidljivost;
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Atributi.class, name = "atribut"),
+        @JsonSubTypes.Type(value = EnumElement.class, name = "enumElement"),
+        @JsonSubTypes.Type(value = Metode.class, name = "metoda"),
 
+})
 public class ClassContent {
 
     protected Vidljivost vidljivost;
@@ -33,8 +43,12 @@ public class ClassContent {
         return naziv;
     }
 
-    public void setVidljivost(Vidljivost vidljivost) {
-        this.vidljivost = vidljivost;
+    public void setVidljivost(String s) {
+        if(s.equals("+"))
+            vidljivost = Vidljivost.PUBLIC;
+        else if(s.equals("-"))
+            vidljivost = Vidljivost.PRIVATE;
+        else vidljivost = Vidljivost.PROTECTED;
     }
 
     public void setTip(String tip) {

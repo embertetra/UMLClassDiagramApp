@@ -1,5 +1,8 @@
 package raf.dsw.classycraft.app.classyCraftRepository.implementation;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.jTabbedElements.NotificationJTabbed;
@@ -9,12 +12,17 @@ import raf.dsw.classycraft.app.observer.ISubscriber;
 import java.util.ArrayList;
 import java.util.List;
 
+@JsonTypeName("paket")
 public class Package extends ClassyNodeComposite implements IPublisher {
-    private List<ISubscriber> subscribers;
-
+    private transient List<ISubscriber> subscribers;
+    public Package(){
+        super("", null);
+        subscribers = new ArrayList<>();
+    }
     public Package(String name, ClassyNode parent) {
         super(name, parent);
     }
+
 
     @Override
     public void addChild(ClassyNode child) {

@@ -112,7 +112,13 @@ public class PromeniElementUInterfejsuAction extends AbstractClassyAction{
         //promena elementa
         for(Metode m : MainFrame.getInstance().getInterfejsProzor().getMetodeList()){
             if (m.getTip().equals(promeni.getTip()) && m.getNaziv().equals(promeni.getNaziv()) && m.getVidljivost().equals(promeni.getVidljivost())) {
-                m.setVidljivost(v);
+                if(v==Vidljivost.PRIVATE)
+                    m.setVidljivost("-");
+                else if(v==Vidljivost.PUBLIC)
+                    m.setVidljivost("+");
+                else m.setVidljivost("#");
+
+                //m.setVidljivost(v);
                 m.setTip(tip);
                 m.setNaziv(naziv);
             }

@@ -64,8 +64,7 @@ public class AddInterclass implements State {
                 klasa.addSubscriber(dijagramView);
                 KlasaPainter klasaPainter = new KlasaPainter(klasa);
                 dijagramView.getElementPainterList().add(klasaPainter);
-                d.addChild(klasa);///dodoavanje u mode
-
+                d.addChild(klasa);///dodoavanje u model
                 MainFrame.getInstance().getClassyTree().addChild(item, klasa);///dodavanje u stablo
             } else if (interclass.equals("interface")) {
                 Interfejs interfejs = new Interfejs("Interclass", dijagramView.getClassyNode(), 2, "naziv", Vidljivost.PUBLIC, new Point(x, y));
