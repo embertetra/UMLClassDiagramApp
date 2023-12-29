@@ -6,7 +6,7 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Meto
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Vidljivost;
 import raf.dsw.classycraft.app.commands.AbstractCommand;
-import raf.dsw.classycraft.app.commands.implementation.AddContentCommand;
+import raf.dsw.classycraft.app.commands.implementation.DodajContentCommand;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
@@ -90,8 +90,6 @@ public class DodajUKlasuAction extends AbstractClassyAction{
                 MainFrame.getInstance().getKlasaProzor().getTfNaziv().setText("");
                 return;
             }
-        Atributi a = new Atributi(vidljivost, tip, naziv);
-        Metode m = new Metode(vidljivost, tip, naziv);
         /*
         if(MainFrame.getInstance().getKlasaProzor().getAtribut().isSelected()) {
             ((Klasa) klasaPainter.getElement()).getClassContentList().add(new Atributi(vidljivost, tip, naziv));
@@ -100,8 +98,19 @@ public class DodajUKlasuAction extends AbstractClassyAction{
             ((Klasa) klasaPainter.getElement()).getClassContentList().add(new Metode(vidljivost, tip, naziv));
         } dijagramView.repaint();
         */
-        AbstractCommand command = new AddContentCommand(a, m, null, (Klasa) klasaPainter.getElement(), dijagramView);
+
+        AbstractCommand command = null;
+        if(MainFrame.getInstance().getKlasaProzor().getAtribut().isSelected()) {
+            Atributi a = new Atributi(vidljivost, tip, naziv);
+            command = new DodajContentCommand(a, null, null, (Klasa) klasaPainter.getElement(), dijagramView);
+        }
+        else if(MainFrame.getInstance().getKlasaProzor().getMetoda().isSelected()) {
+            Metode m = new Metode(vidljivost, tip, naziv);
+            command = new DodajContentCommand(null, m, null, (Klasa) klasaPainter.getElement(), dijagramView);
+        }
         ((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
+
+
 
         MainFrame.getInstance().getKlasaProzor().getTfNaziv().setText("");
         MainFrame.getInstance().getKlasaProzor().setClassContentList(((Klasa) klasaPainter.getElement()).getClassContentList());

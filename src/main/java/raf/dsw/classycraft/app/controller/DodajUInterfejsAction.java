@@ -4,7 +4,7 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Meto
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Interfejs;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Vidljivost;
 import raf.dsw.classycraft.app.commands.AbstractCommand;
-import raf.dsw.classycraft.app.commands.implementation.AddContentCommand;
+import raf.dsw.classycraft.app.commands.implementation.DodajContentCommand;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
@@ -83,7 +83,7 @@ public class DodajUInterfejsAction extends AbstractClassyAction{
 
         //((Interfejs) interfejsPainter.getElement()).getMetodeList().add(new Metode(vidljivost, tip, naziv));
         //dijagramView.repaint();
-        AbstractCommand command = new AddContentCommand(null, m, null, (Interfejs) interfejsPainter.getElement(), dijagramView);
+        AbstractCommand command = new DodajContentCommand(null, m, null, (Interfejs) interfejsPainter.getElement(), dijagramView);
         ((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
 
         MainFrame.getInstance().getInterfejsProzor().getTfNaziv().setText("");
