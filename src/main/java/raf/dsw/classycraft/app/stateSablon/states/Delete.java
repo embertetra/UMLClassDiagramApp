@@ -36,7 +36,7 @@ public class Delete implements State {
 
     @Override
     public void misKliknut(int x, int y, DijagramView dijagramView) {
-        AbstractCommand command;
+
         ///pronalazenje dijagrama u stablu
         ClassyTreeItem item = null;
         ClassyTreeItem selected = MainFrame.getInstance().getPackageView().getClassyTreeItem();
@@ -51,6 +51,8 @@ public class Delete implements State {
         for (Shape s : dijagramView.getSelectionModel()) {
             if (s.contains(new Point(x, y))) flag = 1;
         }
+
+        AbstractCommand command;
         ///brisanje multiselekcije
         if(dijagramView.getSelectionModel().size() > 0 && flag == 1){
             command = new MultipleDeleteCommand(x, y, dijagramView);

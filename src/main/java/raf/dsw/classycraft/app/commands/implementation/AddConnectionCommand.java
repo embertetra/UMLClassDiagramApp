@@ -24,10 +24,7 @@ import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.KlasaPa
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.GeneralPath;
-import java.awt.geom.Line2D;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class AddConnectionCommand extends AbstractCommand {
@@ -153,7 +150,6 @@ public class AddConnectionCommand extends AbstractCommand {
             ElementPainter elementPainter = dijagramView.getElementPainterList().get(j);
             ///brisanje pojedinacne veze
             if (elementPainter instanceof ConnectionPainter) {
-                ConnectionPainter painter = (ConnectionPainter) elementPainter;
                 Connection vezaBrisanje = (Connection) elementPainter.getElement();
                 if (item != null) {
                     for (int i = 0; i < item.getChildCount(); i++) {
@@ -199,16 +195,5 @@ public class AddConnectionCommand extends AbstractCommand {
         dijagramView.getElementPainterList().clear();
         dijagramView.setElementPainterList(novaPainterLista);
         dijagramView.repaint();
-    }
-
-    public Shape makeShape(int x, int y){
-        Shape shape = new GeneralPath();
-        ((GeneralPath) shape).moveTo(x - 10, y - 10);
-        ((GeneralPath) shape).lineTo(x + 10, y - 10);
-        ((GeneralPath) shape).lineTo(x + 10, y + 10);
-        ((GeneralPath) shape).lineTo(x - 10, y + 10);
-        ((GeneralPath) shape).lineTo(x - 10, y - 10);
-        ((GeneralPath) shape).closePath();
-        return shape;
     }
 }

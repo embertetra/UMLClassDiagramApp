@@ -1,13 +1,11 @@
 package raf.dsw.classycraft.app.commands.implementation;
 
+import javafx.util.Pair;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Connection;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Agregacija;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Generalizacija;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Kompozicija;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Zavisnost;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.*;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.EnumM;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Interfejs;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
@@ -20,10 +18,7 @@ import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ConnectionPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.AgregacijaPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.GeneralizacijaPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.KompozicijaPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.ZavisnostPainter;
+import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.*;
 import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.EnumPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.InterfejsPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.KlasaPainter;
@@ -61,8 +56,8 @@ public class MultipleDeleteCommand extends AbstractCommand {
                 item = c;
         }
 
-        for(Iterator<ElementPainter> iterator = dijagramView.getElementPainterList().iterator(); iterator.hasNext();){
-            ElementPainter elementPainter = iterator.next();
+        for (int j=dijagramView.getElementPainterList().size()-1; j>=0; j--) {
+            ElementPainter elementPainter = dijagramView.getElementPainterList().get(j);
             for(Shape s : dijagramView.getSelectionModel()){
                 ///brisanje svih klasa
                 if(elementPainter instanceof InterclassPainter){
@@ -90,37 +85,27 @@ public class MultipleDeleteCommand extends AbstractCommand {
                         }
                         list.add(painter.getElement());
                         d.removeChild(painter.getElement());
-                        iterator.remove();
                         break;
                     }
 
                 }
-                ///brisanje svih veza
-                else if(elementPainter instanceof ConnectionPainter){
-                    ConnectionPainter painter = (ConnectionPainter) elementPainter;
-                    if (painter.getPoint1() != null && painter.getPoint2() != null && s.getBounds2D().intersectsLine(painter.getPoint1().x, painter.getPoint1().y, painter.getPoint2().x, painter.getPoint2().y)) {
-                        Dijagram d = (Dijagram) painter.getElement().getParent();
-                        if (item != null) {
-                            for (int i = 0; i < item.getChildCount(); i++) {
-                                if (item.getChildAt(i) != null) {
-                                    ClassyTreeItem tn = (ClassyTreeItem) item.getChildAt(i);
-                                    ClassyNode cn = tn.getClassyNode();
-                                    if (cn instanceof Connection) {
-                                        Connection cnn = (Connection)cn;
-                                        if(cnn.poredjenje((Connection) painter.getElement())) {
-
-                                            item.remove(i);
-                                            ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
-                                            SwingUtilities.updateComponentTreeUI(classyTreeImplementation.getTreeView());
-                                            break;
-                                        }
-                                    }
+                ///brisanje pojedinacne veze
+                else if (elementPainter instanceof ConnectionPainter) {
+                    Connection vezaBrisanje = (Connection) elementPainter.getElement();
+                    if (item != null) {
+                        for (int i = 0; i < item.getChildCount(); i++) {
+                            if (((ClassyTreeItem) item.getChildAt(i)).getClassyNode() instanceof Connection) {
+                                Connection cn = (Connection) ((ClassyTreeItem) item.getChildAt(i)).getClassyNode();
+                                if (cn.poredjenje(vezaBrisanje)) {
+                                    item.remove(i);
+                                    list.add(vezaBrisanje);
+                                    ((Dijagram) item.getClassyNode()).removeChild(vezaBrisanje);
+                                    ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
+                                    SwingUtilities.updateComponentTreeUI(classyTreeImplementation.getTreeView());
+                                    break;
                                 }
                             }
                         }
-                        list.add(painter.getElement());
-                        d.removeChild(painter.getElement());
-                        iterator.remove();
                         break;
                     }
                 }
@@ -196,14 +181,81 @@ public class MultipleDeleteCommand extends AbstractCommand {
                 }
             } else if(list.get(idx) instanceof Connection) {
                 Connection connection = (Connection) list.get(idx);
-                ///
-                ///\
-                ///
-                ///
-                //
-                //
-                //
-
+                if(connection instanceof Agregacija){
+                    for(ElementPainter e : dijagramView.getElementPainterList()){
+                        if(e instanceof InterclassPainter) {
+                            if (e.elementAt(new Point(x, y))){
+                                connection.setTo((Interclass) e.getElement());
+                            }
+                        }
+                    }
+                    if(connection.getFrom()!= null && connection.getTo() != null && connection.getFrom() != connection.getTo()){
+                        AgregacijaPainter ap = new AgregacijaPainter(connection);
+                        dijagramView.getElementPainterList().add(ap);
+                        d.addChild(connection);
+                        MainFrame.getInstance().getClassyTree().addChild(item, connection);
+                    }
+                }
+                else if(connection instanceof Kompozicija){
+                    for(ElementPainter e : dijagramView.getElementPainterList()){
+                        if(e instanceof InterclassPainter) {
+                            if (e.elementAt(new Point(x, y))){
+                                connection.setTo((Interclass) e.getElement());
+                            }
+                        }
+                    }
+                    if(connection.getFrom()!= null && connection.getTo() != null && connection.getFrom() != connection.getTo()){
+                        KompozicijaPainter kp = new KompozicijaPainter(connection);
+                        dijagramView.getElementPainterList().add(kp);
+                        d.addChild(connection);
+                        MainFrame.getInstance().getClassyTree().addChild(item, connection);
+                    }
+                }
+                else if(connection instanceof Generalizacija){
+                    for(ElementPainter e : dijagramView.getElementPainterList()){
+                        if(e instanceof InterclassPainter) {
+                            if (e.elementAt(new Point(x, y))){
+                                connection.setTo((Interclass) e.getElement());
+                            }
+                        }
+                    }
+                    if(connection.getFrom()!= null && connection.getTo() != null && connection.getFrom() != connection.getTo()){
+                        GeneralizacijaPainter gp = new GeneralizacijaPainter(connection);
+                        dijagramView.getElementPainterList().add(gp);
+                        d.addChild(connection);
+                        MainFrame.getInstance().getClassyTree().addChild(item, connection);
+                    }
+                }
+                else if(connection instanceof Zavisnost){
+                    for(ElementPainter e : dijagramView.getElementPainterList()){
+                        if(e instanceof InterclassPainter)
+                            if(e.elementAt(new Point(x, y)))
+                                connection.setTo((Interclass) e.getElement());
+                    }
+                    if(connection.getFrom()!= null && connection.getTo() != null && connection.getFrom() != connection.getTo()){
+                        ZavisnostPainter zp = new ZavisnostPainter(connection);
+                        dijagramView.getElementPainterList().add(zp);
+                        d.addChild(connection);
+                        MainFrame.getInstance().getClassyTree().addChild(item, connection);
+                    }
+                }
+                else if(connection instanceof Asocijacija){
+                    for(ElementPainter e : dijagramView.getElementPainterList()){
+                        if(e instanceof InterclassPainter) {
+                            if (e.elementAt(new Point(x, y))){
+                                connection.setTo((Interclass) e.getElement());
+                            }
+                        }
+                    }
+                    if(connection.getFrom()!= null && connection.getTo() != null && connection.getFrom() != connection.getTo()){
+                        AsocijacijaPainter asp = new AsocijacijaPainter(connection);
+                        dijagramView.getElementPainterList().add(asp);
+                        d.addChild(connection);
+                        MainFrame.getInstance().getClassyTree().addChild(item, connection);
+                    }
+                }
+                dijagramView.setLine(new Pair<>(new Point(-1,-1), new Point(0,0)));
+                dijagramView.repaint();
             }
         }
         list.clear();
