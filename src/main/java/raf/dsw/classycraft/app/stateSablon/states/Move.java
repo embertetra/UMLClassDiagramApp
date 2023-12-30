@@ -3,7 +3,8 @@ package raf.dsw.classycraft.app.stateSablon.states;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Connection;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
 import raf.dsw.classycraft.app.commands.AbstractCommand;
-import raf.dsw.classycraft.app.commands.implementation.MoveCommand;
+import raf.dsw.classycraft.app.commands.implementation.MultipleMoveCommand;
+import raf.dsw.classycraft.app.commands.implementation.SingleMoveCommand;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ConnectionPainter;
@@ -23,7 +24,6 @@ public class Move implements State {
     private int tmp;
     public Move() {
         shapes = new ArrayList<>();
-        novaListaSelekcije = new ArrayList<>();
         oldPoints = new ArrayList<>();
         tmp = 0;
     }
@@ -36,15 +36,14 @@ public class Move implements State {
 
     @Override
     public void misOtpusten(int x, int y, DijagramView dijagramView) {
+        AbstractCommand command = null;
+
         dijagramView.getSelectionModel().clear();
-        novaListaSelekcije.clear();
 
-        AbstractCommand command = new MoveCommand(tmp, novaListaSelekcije, oldPoints, oldPoint, shapes, dijagramView, x, y);
-        ((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
-
-        /*
         //presek multiselekcija
         if(tmp == 1) {
+            command = new MultipleMoveCommand(dijagramView, shapes, oldPoints, x, y);
+            /*
             for(InterclassPainter ip : shapes) {
                 Interclass ic = (Interclass) ip.getElement();
                 Rectangle myRect = new Rectangle(ic.getPosition().x - ip.getWidth() / 2 - 10, ic.getPosition().y - ip.getHeightUkupno() / 2 - 5,
@@ -61,7 +60,6 @@ public class Move implements State {
                     }
                 }
                 if (brojac > 1) {
-
                     for(InterclassPainter ip2 : shapes){
                         Interclass i = (Interclass) ip2.getElement();
                         i.setPosition(oldPoints.get(index));
@@ -79,11 +77,13 @@ public class Move implements State {
 
             }
             dijagramView.setSelectionModel(novaListaSelekcije);
+             */
         }
 
         ///odredjivanje preseka i vracanje na stare koordinate ako se sece - 1 interklasa
-
         if(tmp != 1) {
+            command = new SingleMoveCommand(dijagramView, x, y, oldPoint);
+            /*
             int brojac = 0;
             InterclassPainter mojPainter = null;
             for (ElementPainter ep : dijagramView.getElementPainterList()) {
@@ -108,8 +108,10 @@ public class Move implements State {
             if (brojac > 1) {
                 ((Interclass) dijagramView.getFlag1().getElement()).setPosition(oldPoint);
             }
+
+             */
         }
-        */
+        ((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
 
         dijagramView.setFlag1(null);
         tmp = 0;
@@ -125,7 +127,7 @@ public class Move implements State {
         ///move multiselekcije
         shapes.clear();
         oldPoints.clear();
-        if(dijagramView.getSelectionModel() != null && dijagramView.getSelectionModel().size() > 0){
+        if(dijagramView.getSelectionModel() != null && !dijagramView.getSelectionModel().isEmpty()){
             for(ElementPainter ep : dijagramView.getElementPainterList()){
                 if(ep instanceof InterclassPainter){
                     InterclassPainter ip = (InterclassPainter) ep;
@@ -138,7 +140,7 @@ public class Move implements State {
                     }
                 }
             }
-            if(shapes.size() > 0){
+            if(!shapes.isEmpty()){
                 dijagramView.setMoveSelections(shapes);
                 flag = 2;
                 dijagramView.setSelectionModel(new ArrayList<>());
@@ -211,8 +213,8 @@ public class Move implements State {
     @Override
     public void misDragged(int x, int y, DijagramView d) {
         if (d.getStartPoint() != null) {
-            int diffX = (int) (x - d.getStartPoint().x);
-            int diffY = (int) (y - d.getStartPoint().y);
+            int diffX = x - d.getStartPoint().x;
+            int diffY = y - d.getStartPoint().y;
 
             if (d.getFlag1() != null) {
                 for (ElementPainter ep : d.getElementPainterList()) {
