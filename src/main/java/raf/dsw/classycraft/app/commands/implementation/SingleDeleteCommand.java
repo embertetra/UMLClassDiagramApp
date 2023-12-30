@@ -37,25 +37,17 @@ public class SingleDeleteCommand extends AbstractCommand {
     private DijagramView dijagramView;
     private int x;
     private int y;
+    private ClassyTreeItem item;
 
-    public SingleDeleteCommand(int x, int y, DijagramView dijagramView){
+    public SingleDeleteCommand(int x, int y, DijagramView dijagramView, ClassyTreeItem item){
         this.dijagramView = dijagramView;
         this.x = x;
         this.y = y;
+        this.item = item;
     }
 
     @Override
     public void doCommand() {
-        ///pronalazenje dijagrama u stablu
-        ClassyTreeItem item = null;
-        ClassyTreeItem selected = MainFrame.getInstance().getPackageView().getClassyTreeItem();
-        for (int i = 0; i < selected.getChildCount(); i++) {
-            ClassyTreeItem c = (ClassyTreeItem) selected.getChildAt(i);
-            ClassyNode cn = c.getClassyNode();
-            if (cn.getName().equals(dijagramView.getClassyNode().getName()))
-                item = c;
-        }
-
         Interclass selektovanaKlasa = null;//klasa na koju smo kliknuli
         ///brisanje pojedinacog elementa
         for (int j=dijagramView.getElementPainterList().size()-1; j>=0; j--) {
@@ -159,15 +151,6 @@ public class SingleDeleteCommand extends AbstractCommand {
 
     @Override
     public void undoCommand() {
-        ///odredjivanje dijagrama unutar stabla
-        ClassyTreeItem item = null;
-        ClassyTreeItem selected = MainFrame.getInstance().getPackageView().getClassyTreeItem();
-        for (int i = 0; i < selected.getChildCount(); i++) {
-            ClassyTreeItem c = (ClassyTreeItem) selected.getChildAt(i);
-            ClassyNode cn = c.getClassyNode();
-            if (cn.getName().equals(dijagramView.getClassyNode().getName()))
-                item = c;
-        }
         Dijagram d = (Dijagram) dijagramView.getClassyNode();
 
         for (DijagramElement dijagramElement : list) {

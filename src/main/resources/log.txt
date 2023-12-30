@@ -116,3 +116,4 @@
 [ERROR] [30.12.2023. 13:52] [Morate selektovati dijagram]
 [ERROR] [30.12.2023. 15:30] [ProjectExplorer nije moguce obrisati!]
 [ERROR] [30.12.2023. 16:13] [Morate selektovati dijagram]
+[ERROR] [30.12.2023. 18:21] [ProjectExplorer nije moguce obrisati!]
