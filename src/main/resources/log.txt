@@ -117,3 +117,8 @@
 [ERROR] [30.12.2023. 15:30] [ProjectExplorer nije moguce obrisati!]
 [ERROR] [30.12.2023. 16:13] [Morate selektovati dijagram]
 [ERROR] [30.12.2023. 18:21] [ProjectExplorer nije moguce obrisati!]
+[ERROR] [30.12.2023. 19:28] [Metoda vec postoji!]
+[ERROR] [30.12.2023. 19:33] [Zeljen naziv je zauzet!]
+[ERROR] [30.12.2023. 19:33] [Nije upisan naziv enuma!]
+[ERROR] [30.12.2023. 20:23] [Nije odabran element iz liste!]
+[ERROR] [30.12.2023. 20:30] [Nije odabrana vidljivost metode!]

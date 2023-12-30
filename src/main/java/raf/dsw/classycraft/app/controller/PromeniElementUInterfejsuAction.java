@@ -3,6 +3,8 @@ package raf.dsw.classycraft.app.controller;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Metode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Interfejs;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Vidljivost;
+import raf.dsw.classycraft.app.commands.AbstractCommand;
+import raf.dsw.classycraft.app.commands.implementation.ChangeContentCommand;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
@@ -109,23 +111,25 @@ public class PromeniElementUInterfejsuAction extends AbstractClassyAction{
             }
         }
 
-        //promena elementa
-        for(Metode m : MainFrame.getInstance().getInterfejsProzor().getMetodeList()){
-            if (m.getTip().equals(promeni.getTip()) && m.getNaziv().equals(promeni.getNaziv()) && m.getVidljivost().equals(promeni.getVidljivost())) {
-                if(v==Vidljivost.PRIVATE)
-                    m.setVidljivost("-");
-                else if(v==Vidljivost.PUBLIC)
-                    m.setVidljivost("+");
-                else m.setVidljivost("#");
-
-                //m.setVidljivost(v);
-                m.setTip(tip);
-                m.setNaziv(naziv);
-            }
+        int index = 0;
+        for(int i=0; i<MainFrame.getInstance().getInterfejsProzor().getMetodeList().size(); i++){
+            if(MainFrame.getInstance().getInterfejsProzor().getMetodeList().get(i).getNaziv().equals(MainFrame.getInstance().getInterfejsProzor().getLista().getSelectedValue().getNaziv())
+            && MainFrame.getInstance().getInterfejsProzor().getMetodeList().get(i).getTip().equals(MainFrame.getInstance().getInterfejsProzor().getLista().getSelectedValue().getTip())
+            && MainFrame.getInstance().getInterfejsProzor().getMetodeList().get(i).getVidljivost().equals(MainFrame.getInstance().getInterfejsProzor().getLista().getSelectedValue().getVidljivost()))
+                index = i;
         }
 
-        dijagramView.repaint();
-        MainFrame.getInstance().getInterfejsProzor().setMetodeList(((Interfejs) interfejsPainter.getElement()).getMetodeList());
+        Metode metoda;
+        if(v==Vidljivost.PRIVATE)
+            metoda = new Metode(Vidljivost.PRIVATE, tip, naziv);
+        else if(v==Vidljivost.PUBLIC)
+            metoda = new Metode(Vidljivost.PUBLIC, tip, naziv);
+        else
+            metoda = new Metode(Vidljivost.PROTECTED, tip, naziv);
+
+        AbstractCommand command = new ChangeContentCommand(index, null, metoda, null, dijagramView, (Interfejs) interfejsPainter.getElement());
+        ((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
+
         MainFrame.getInstance().getInterfejsProzor().getTfNaziv().setText("");
         MainFrame.getInstance().getInterfejsProzor().getBgVidljivost().clearSelection();
         MainFrame.getInstance().getInterfejsProzor().getBgTip().clearSelection();

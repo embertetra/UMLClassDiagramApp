@@ -1,6 +1,8 @@
 package raf.dsw.classycraft.app.controller;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.EnumM;
+import raf.dsw.classycraft.app.commands.AbstractCommand;
+import raf.dsw.classycraft.app.commands.implementation.ChangeContentCommand;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
@@ -59,11 +61,10 @@ public class PromeniElementUEnumuAction extends AbstractClassyAction{
             }
         }
 
-        MainFrame.getInstance().getEnumProzor().getEnumMList().set(index, naziv);
+        AbstractCommand command = new ChangeContentCommand(index, null, null, naziv, dijagramView, (EnumM) enumPainter.getElement());
+        ((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
 
-        dijagramView.repaint();
         MainFrame.getInstance().getEnumProzor().getTfIme().setText("");
         MainFrame.getInstance().getEnumProzor().getTfNaziv().setText("");
-        MainFrame.getInstance().getEnumProzor().setEnumMList(((EnumM) enumPainter.getElement()).getListEnuma());
     }
 }

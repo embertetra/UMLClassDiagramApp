@@ -21,11 +21,9 @@ import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.*;
 import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.EnumPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.InterfejsPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.KlasaPainter;
-import raf.dsw.classycraft.app.stateSablon.states.Selection;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.GeneralPath;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -185,17 +183,6 @@ public class MultipleDeleteCommand extends AbstractCommand {
 
         klase.clear();
         veze.clear();
-    }
-
-    public Shape makeShape(int x, int y){
-        Shape shape = new GeneralPath();
-        ((GeneralPath) shape).moveTo(x - 10, y - 10);
-        ((GeneralPath) shape).lineTo(x + 10, y - 10);
-        ((GeneralPath) shape).lineTo(x + 10, y + 10);
-        ((GeneralPath) shape).lineTo(x - 10, y + 10);
-        ((GeneralPath) shape).lineTo(x - 10, y - 10);
-        ((GeneralPath) shape).closePath();
-        return shape;
     }
 
     public void makeConnection(Connection connection, Dijagram d, ClassyTreeItem item){
