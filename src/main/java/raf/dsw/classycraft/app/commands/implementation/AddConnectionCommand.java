@@ -155,26 +155,20 @@ public class AddConnectionCommand extends AbstractCommand {
             if (elementPainter instanceof ConnectionPainter) {
                 ConnectionPainter painter = (ConnectionPainter) elementPainter;
                 Connection vezaBrisanje = (Connection) elementPainter.getElement();
-                Shape shape = makeShape(x, y);
-                Line2D line = null;
-                if (painter.getPoint1() != null && painter.getPoint2() != null)
-                    line = new Line2D.Double(painter.getPoint1().x, painter.getPoint1().y, painter.getPoint2().x, painter.getPoint2().y);
-                if (line != null && shape.getBounds2D().intersectsLine(line)) {
-                    if (item != null) {
-                        for (int i = 0; i < item.getChildCount(); i++) {
-                            if (((ClassyTreeItem) item.getChildAt(i)).getClassyNode() instanceof Connection) {
-                                Connection cn = (Connection) ((ClassyTreeItem) item.getChildAt(i)).getClassyNode();
-                                if (cn.poredjenje(vezaBrisanje)) {
-                                    item.remove(i);
-                                    ((Dijagram) item.getClassyNode()).removeChild(vezaBrisanje);
-                                    ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
-                                    SwingUtilities.updateComponentTreeUI(classyTreeImplementation.getTreeView());
-                                    break;
-                                }
+                if (item != null) {
+                    for (int i = 0; i < item.getChildCount(); i++) {
+                        if (((ClassyTreeItem) item.getChildAt(i)).getClassyNode() instanceof Connection) {
+                            Connection cn = (Connection) ((ClassyTreeItem) item.getChildAt(i)).getClassyNode();
+                            if (cn.poredjenje(vezaBrisanje)) {
+                                item.remove(i);
+                                ((Dijagram) item.getClassyNode()).removeChild(vezaBrisanje);
+                                ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
+                                SwingUtilities.updateComponentTreeUI(classyTreeImplementation.getTreeView());
+                                break;
                             }
                         }
-                        break;
                     }
+                    break;
                 }
             }
         }
