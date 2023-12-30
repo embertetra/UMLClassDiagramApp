@@ -1,6 +1,7 @@
 package raf.dsw.classycraft.app.stateSablon.states;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Metode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Interfejs;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
@@ -17,6 +18,10 @@ import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.KlasaPa
 import raf.dsw.classycraft.app.stateSablon.State;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Duplicate implements State {
     @Override
@@ -46,7 +51,7 @@ public class Duplicate implements State {
                     else if (ip instanceof KlasaPainter) {
                         Klasa k = (Klasa) ip.getElement();
                         duplikatK = new Klasa("Interclass", dijagramView.getClassyNode(), 2, k.getNaziv(), k.getVidljivost(), new Point(k.getPosition().x + ip.getWidth()/2 + 5, k.getPosition().y + ip.getHeightUkupno()/2 + 10));
-                        duplikatK.setNaziv(k.getNaziv()); duplikatK.setClassContentList(k.getClassContentList());
+                        duplikatK.setNaziv(k.getNaziv()); duplikatK.setClassContentList(new ArrayList<>(k.getClassContentList()));
                         duplikatK.addSubscriber(dijagramView);
                         dijagramView.getElementPainterList().add(new KlasaPainter(duplikatK));
                         Dijagram d = (Dijagram) dijagramView.getClassyNode();
@@ -57,7 +62,7 @@ public class Duplicate implements State {
                     } else if (ip instanceof InterfejsPainter) {
                         Interfejs i = (Interfejs) ip.getElement();
                         duplikatI = new Interfejs("Interclass", dijagramView.getClassyNode(), 2, i.getNaziv(), i.getVidljivost(), new Point(i.getPosition().x + ip.getWidth()/2 + 5, i.getPosition().y + 10 + ip.getHeightUkupno()/2));
-                        duplikatI.setNaziv(i.getNaziv()); duplikatI.setMetodeList(i.getMetodeList());
+                        duplikatI.setNaziv(i.getNaziv()); duplikatI.setMetodeList(new ArrayList<>(i.getMetodeList()));
                         duplikatI.addSubscriber(dijagramView);
                         dijagramView.getElementPainterList().add(new InterfejsPainter(duplikatI));
                         Dijagram d = (Dijagram) dijagramView.getClassyNode();
@@ -68,7 +73,7 @@ public class Duplicate implements State {
                 }
             }
         }
-
+        dijagramView.repaint();
 
     }
 

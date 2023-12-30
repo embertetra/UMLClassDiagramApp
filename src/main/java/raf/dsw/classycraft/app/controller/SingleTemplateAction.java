@@ -143,6 +143,7 @@ public class SingleTemplateAction extends AbstractClassyAction {
             paket.setClassyTreeItem(classyTreeItem);
             paket.getjTabbedPane().addTab(dijagramView.getClassyNode().getName(), dijagramView);
             MainFrame.getInstance().getListaPackageView().add(paket);
+            dijagramView.repaint();
         }
     }
 
