@@ -120,7 +120,7 @@ public class DijagramView extends JPanel implements ISubscriber {
             x.draw(g2);
         }
 
-        System.out.println("Izvrsen paintComponent");
+        //System.out.println("Izvrsen paintComponent");
         //((Graphics2D) g).setTransform(save);
     }
 
@@ -136,12 +136,13 @@ public class DijagramView extends JPanel implements ISubscriber {
         if(jfc.showSaveDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION){
             //file = jfc.getSelectedFile();
             file = new File(jfc.getSelectedFile() + ".png");
-
         }
 
         try{
-            if(file != null && !file.getPath().isEmpty())
+            if(file != null && !file.getPath().isEmpty()) {
                 ImageIO.write(image, "png", file);
+                System.out.println("Dijagram eksportovan u sliku");
+            }
         } catch (IOException exp){
             exp.printStackTrace();
         }

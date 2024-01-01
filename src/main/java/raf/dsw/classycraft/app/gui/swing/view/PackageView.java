@@ -282,10 +282,6 @@ public class PackageView implements ISubscriber {
         return classyNode;
     }
 
-    public JPanel getDownSide() {
-        return downSide;
-    }
-
     public ClassyTreeItem getClassyTreeItem() {
         return classyTreeItem;
     }

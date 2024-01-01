@@ -106,7 +106,7 @@ public class Move implements State {
         dijagramView.repaint();
 
         ((Dijagram)dijagramView.getClassyNode()).projectChanged();
-
+        System.out.println("Zavrsen move");
     }
 
     @Override
@@ -114,7 +114,7 @@ public class Move implements State {
         dijagramView.setSelection(null);
         dijagramView.setStartPoint(new Point(x, y));
         int flag = 0;
-
+        System.out.println("zapocet move");
         ///move multiselekcije
         shapes.clear();
         oldPoints.clear();
@@ -199,6 +199,7 @@ public class Move implements State {
             }
             dijagramView.repaint();
         }
+
     }
 
     @Override

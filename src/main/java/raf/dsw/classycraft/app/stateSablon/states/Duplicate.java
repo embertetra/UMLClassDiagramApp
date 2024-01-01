@@ -74,7 +74,7 @@ public class Duplicate implements State {
             }
         }
         dijagramView.repaint();
-
+        System.out.println("Napravljena kopija");
     }
 
     @Override

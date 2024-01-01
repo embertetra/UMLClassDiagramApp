@@ -235,6 +235,7 @@ public class Delete implements State {
         dijagramView.getElementPainterList().clear();
         dijagramView.setElementPainterList(novaPainterLista);
         dijagramView.repaint();
+        System.out.println("zavrsen delete");
     }
 
     @Override

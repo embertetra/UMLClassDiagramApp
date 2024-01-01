@@ -131,6 +131,7 @@ public class AddConnection implements State {
 
         dijagramView.setLine(new Pair<>(new Point(-1,-1), new Point(0,0)));
         dijagramView.repaint();
+        System.out.println("Zavrsena konekcija");
     }
 
     @Override
@@ -195,7 +196,7 @@ public class AddConnection implements State {
 
             }
         }
-
+        System.out.println("zapoceta konekcija");
     }
 
     @Override

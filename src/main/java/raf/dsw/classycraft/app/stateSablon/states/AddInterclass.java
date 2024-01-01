@@ -85,7 +85,7 @@ public class AddInterclass implements State {
                 MainFrame.getInstance().getClassyTree().addChild(item, enumM);
             }
         }
-
+        System.out.println("Dodata interclassa");
     }
 
     @Override

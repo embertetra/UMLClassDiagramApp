@@ -36,6 +36,7 @@ public class ExportProjectToCode extends AbstractClassyAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("export to code");
 
         ClassyTreeItem selectedTree = MainFrame.getInstance().getClassyTree().getSelectedNode();
         if (selectedTree == null || !(selectedTree.getClassyNode() instanceof Project)) {

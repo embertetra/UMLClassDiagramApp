@@ -42,7 +42,7 @@ public class SaveAction extends AbstractClassyAction{
                 project.setFilePath(projectFile.getPath());
             }
         }
-        if(projectFile == null || project.getFilePath()==null || project.getFilePath().isEmpty())
+        if(projectFile == null && project.getFilePath()==null && project.getFilePath().isEmpty())
             return;
         ApplicationFramework.getInstance().getSerializer().saveProject(project);
         System.out.println("Project saved");
