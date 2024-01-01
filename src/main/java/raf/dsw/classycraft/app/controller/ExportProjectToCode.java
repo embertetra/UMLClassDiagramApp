@@ -1,6 +1,5 @@
 package raf.dsw.classycraft.app.controller;
 
-import org.w3c.dom.views.AbstractView;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Atributi;
@@ -8,7 +7,9 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Clas
 import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Metode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Connection;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Agregacija;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Generalizacija;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Kompozicija;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.EnumM;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Interfejs;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
@@ -70,22 +71,23 @@ public class ExportProjectToCode extends AbstractClassyAction {
     public void kreirajDir(File file, ClassyNodeComposite node) {
 
         for (ClassyNode c : node.getChildren()) {
+            ///ako je package kreiraj novi folder, a ako je dijagram generisi kod za taj dijagram..
             if (c instanceof Package) {
                 File f = new File(file.getPath() + "/" + c.getName());
                 f.mkdir();
                 kreirajDir(f, (ClassyNodeComposite) c);
             } else if (c instanceof Dijagram) {
                 System.out.println(file.getPath());
-                File f = new File(file.getPath() + "/" + c.getName() + ".java");
-                System.out.println(f.getPath());
-                generateCode(f, (Dijagram) c);
+                generateCode(file, (Dijagram) c);
             }
         }
 
     }
 
-    public void generateCode(File file, Dijagram d) {
+    public void generateCode(File f, Dijagram d) {
+        File file = new File(f.getPath() + "/" + d.getName() + ".java");
 
+        ///model..
         for (ClassyNode c : d.getChildren()) {
             if (c instanceof Connection) {
                 Connection cn = (Connection) c;
@@ -101,10 +103,10 @@ public class ExportProjectToCode extends AbstractClassyAction {
             }
         }
 
-
         try {
+            ///ispis foldera u kojem se nalazi dijagram
             FileWriter fw = new FileWriter(file);
-            fw.append("package " + file.getPath() + "\n\n");
+            fw.append("package " + f.getPath() + "\n\n");
 
             String string = "";
 
@@ -114,11 +116,10 @@ public class ExportProjectToCode extends AbstractClassyAction {
                     ///dodavanje extends
                     for (ClassyNode cn : d.getChildren()) {
                         if (cn instanceof Connection) {
+                            Connection cnc = (Connection) cn;
+                            ///dodavanje extends
                             if (cn instanceof Generalizacija) {
-                                Connection cnc = (Connection) cn;
                                 if (cnc.getTo().poredjenje(k)) {
-                                    System.out.println(cnc.getFrom().getNaziv());
-                                    System.out.println(k.getNaziv());
                                     if (cnc.getFrom() instanceof Klasa) {
                                         if (string.contains("extends"))
                                             string = string + " " + ((Connection) cn).getFrom().getNaziv();
@@ -163,6 +164,41 @@ public class ExportProjectToCode extends AbstractClassyAction {
                                 ubaciVezuA(fw, parent);
                             }
                         }
+                        else if(v instanceof Agregacija){
+                            ///From treba da ima polje To
+                            Agregacija a = (Agregacija) v;
+                            if(a.getFrom().poredjenje(k)){
+                                String naziv = a.getName2();
+                                String kardinalnost = a.getKardinalnost();
+                                String tip = a.getTip();
+                                String vidljivost = a.getVidljivost();
+                                if(naziv.isEmpty() || kardinalnost.equals("-") || tip.isEmpty() || vidljivost.equals("-")) {
+                                    ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Niste ispravno popunili vezu agregacije", MessageType.ERROR);
+                                    return;
+                                }
+                                if(kardinalnost.contains("*"))
+                                    fw.append("\t" + vidljivost + " List<" + tip + "> " + naziv + ";\n");
+                                else
+                                    fw.append("\t" + vidljivost + " " + tip + " " + naziv + ";\n");
+                            }
+                        }
+                        else if(v instanceof Kompozicija){
+                            Kompozicija a = (Kompozicija) v;
+                            if(a.getFrom().poredjenje(k)){
+                                String naziv = a.getName2();
+                                String kardinalnost = a.getKardinalnost();
+                                String tip = a.getTip();
+                                String vidljivost = a.getVidljivost();
+                                if(naziv.isEmpty() || kardinalnost.equals("-") || tip.isEmpty() || vidljivost.equals("-")) {
+                                    ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Niste ispravno popunili vezu kompozicije", MessageType.ERROR);
+                                    return;
+                                }
+                                if(kardinalnost.contains("*"))
+                                    fw.append("\t" + vidljivost + " List<" + tip + "> " + naziv + ";\n");
+                                else
+                                    fw.append("\t" + vidljivost + " " + tip + " " + naziv + ";\n");
+                            }
+                        }
                     }
 
                     ///ubacivanje svih metoda
@@ -183,7 +219,7 @@ public class ExportProjectToCode extends AbstractClassyAction {
                             }
                         }
                     }
-                    fw.append("}");
+                    fw.append("}\n\n");
                 } else if (c instanceof Interfejs) {
                     Interfejs i = (Interfejs) c;
 
@@ -207,10 +243,20 @@ public class ExportProjectToCode extends AbstractClassyAction {
                     for (Metode cc : i.getMetodeList()) {
                         fw.append("\t" + vidljivostToString(cc.getVidljivost()) + " " + cc.getTip() + " " + cc.getNaziv() + "() {\n\n\t}\n");
                     }
-                    ///ovde treba da dodam dodate metode iz extendova!!!!!!!!!!!!!!!!!!!!!
+                    ///sredjivanje veza metode
+                    for (ClassyNode v : d.getChildren()) {
+                        ///From - parent, To - child  -> child extends parent
+                        if (v instanceof Generalizacija) {
+                            Generalizacija g = (Generalizacija) v;
+                            Interclass parent = g.getFrom();
+                            Interclass child = g.getTo();
+                            if (child.poredjenje(i)) {
+                                ubaciVezuM(fw, parent);
+                            }
+                        }
+                    }
 
-
-                    fw.append("}");
+                    fw.append("}\n\n");
                 } else if (c instanceof EnumM) {
                     EnumM e = (EnumM) c;
                     fw.append(e.getVidljivost().toString().toLowerCase() + " enum " + e.getNaziv() + " {" + "\n\n");
@@ -224,15 +270,13 @@ public class ExportProjectToCode extends AbstractClassyAction {
                             brojac++;
                         }
                     }
-                    fw.append("}");
+                    fw.append("}\n\n");
                 }
-                fw.append("\n\n");
             }
             fw.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     ///child extends parent
@@ -268,7 +312,6 @@ public class ExportProjectToCode extends AbstractClassyAction {
         } else if (parent instanceof Interfejs) {
             Interfejs interfejs = (Interfejs) parent;
             for (Metode m : interfejs.getMetodeList()) {
-                System.out.println(m.getNaziv());
                 try {
                     fw.append("\t" + vidljivostToString(m.getVidljivost()) + " " + m.getTip() + " " + m.getNaziv() + "() {\n\n\t}\n");
                 } catch (IOException e) {
@@ -277,7 +320,6 @@ public class ExportProjectToCode extends AbstractClassyAction {
             }
         }
     }
-
     public String vidljivostToString(String veza) {
         switch (veza) {
             case "-":
