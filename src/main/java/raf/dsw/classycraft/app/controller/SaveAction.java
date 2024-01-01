@@ -38,9 +38,12 @@ public class SaveAction extends AbstractClassyAction{
         if(project.getFilePath() == null || project.getFilePath().isEmpty()){
             if(jfc.showSaveDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION){
                 projectFile = jfc.getSelectedFile();
+
                 project.setFilePath(projectFile.getPath());
             }
         }
+        if(projectFile == null || project.getFilePath()==null || project.getFilePath().isEmpty())
+            return;
         ApplicationFramework.getInstance().getSerializer().saveProject(project);
         System.out.println("Project saved");
         project.setChanged(false);
