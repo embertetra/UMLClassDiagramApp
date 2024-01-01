@@ -49,6 +49,7 @@ public class DodajUEnumAction extends AbstractClassyAction{
         }
 
         ((EnumM) enumPainter.getElement()).getListEnuma().add(naziv);
+        ((EnumM)enumPainter.getElement()).projectChanged();
 
         dijagramView.repaint();
 

@@ -203,6 +203,7 @@ public class PromeniElementUKlasiAction extends AbstractClassyAction{
 
         dijagramView.repaint();
         MainFrame.getInstance().getKlasaProzor().setClassContentList(((Klasa) klasaPainter.getElement()).getClassContentList());
+        ((Klasa)klasaPainter.getElement()).projectChanged();
         MainFrame.getInstance().getKlasaProzor().getTfNaziv().setText("");
         MainFrame.getInstance().getKlasaProzor().getBg().clearSelection();
         MainFrame.getInstance().getKlasaProzor().getBgVidljivost().clearSelection();

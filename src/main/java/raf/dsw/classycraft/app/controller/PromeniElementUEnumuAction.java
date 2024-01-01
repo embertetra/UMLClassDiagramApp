@@ -55,11 +55,13 @@ public class PromeniElementUEnumuAction extends AbstractClassyAction{
         int index = 0;
         for(int i=0; i<((EnumM) enumPainter.getElement()).getListEnuma().size(); i++){
             if( ((EnumM) enumPainter.getElement()).getListEnuma().get(i).equals(MainFrame.getInstance().getEnumProzor().getLista().getSelectedValue())){
+                ((EnumM) enumPainter.getElement()).projectChanged();
                 index = i;
             }
         }
 
         MainFrame.getInstance().getEnumProzor().getEnumMList().set(index, naziv);
+
 
         dijagramView.repaint();
         MainFrame.getInstance().getEnumProzor().getTfIme().setText("");

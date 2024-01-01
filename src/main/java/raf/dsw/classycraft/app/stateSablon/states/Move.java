@@ -2,6 +2,7 @@ package raf.dsw.classycraft.app.stateSablon.states;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Connection;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ConnectionPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
@@ -103,6 +104,9 @@ public class Move implements State {
         dijagramView.setFlag1(null);
         tmp = 0;
         dijagramView.repaint();
+
+        ((Dijagram)dijagramView.getClassyNode()).projectChanged();
+
     }
 
     @Override

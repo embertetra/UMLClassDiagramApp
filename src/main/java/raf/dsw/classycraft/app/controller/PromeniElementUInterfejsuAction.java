@@ -127,6 +127,7 @@ public class PromeniElementUInterfejsuAction extends AbstractClassyAction{
 
         dijagramView.repaint();
         MainFrame.getInstance().getInterfejsProzor().setMetodeList(new ArrayList<>(((Interfejs) interfejsPainter.getElement()).getMetodeList()));
+        ((Interfejs) interfejsPainter.getElement()).projectChanged();
         MainFrame.getInstance().getInterfejsProzor().getTfNaziv().setText("");
         MainFrame.getInstance().getInterfejsProzor().getBgVidljivost().clearSelection();
         MainFrame.getInstance().getInterfejsProzor().getBgTip().clearSelection();

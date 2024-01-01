@@ -35,6 +35,7 @@ public class ObrisiIzEnumaAction extends AbstractClassyAction{
         }
 
         ((EnumM) enumPainter.getElement()).getListEnuma().remove(MainFrame.getInstance().getEnumProzor().getLista().getSelectedValue());
+        ((EnumM) enumPainter.getElement()).projectChanged();
         MainFrame.getInstance().getEnumProzor().setEnumMList(((EnumM) enumPainter.getElement()).getListEnuma());
         dijagramView.repaint();
     }

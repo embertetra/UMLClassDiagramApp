@@ -56,6 +56,7 @@ public class PromenaNazivaEnumaAction extends AbstractClassyAction{
 
         //menjanje imena
         ((EnumM) enumPainter.getElement()).setNaziv(MainFrame.getInstance().getEnumProzor().getTfIme().getText());
+        ((EnumM) enumPainter.getElement()).projectChanged();
         dijagramView.repaint();
         MainFrame.getInstance().getEnumProzor().getTfIme().setText("");
     }

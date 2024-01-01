@@ -78,6 +78,7 @@ public class DodajUInterfejsAction extends AbstractClassyAction{
             }
 
         ((Interfejs) interfejsPainter.getElement()).getMetodeList().add(new Metode(vidljivost, tip, naziv));
+        ((Interfejs) interfejsPainter.getElement()).projectChanged();
 
         dijagramView.repaint();
         MainFrame.getInstance().getInterfejsProzor().getTfNaziv().setText("");

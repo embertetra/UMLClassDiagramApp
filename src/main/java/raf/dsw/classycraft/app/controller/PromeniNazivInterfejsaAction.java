@@ -55,6 +55,7 @@ public class PromeniNazivInterfejsaAction extends AbstractClassyAction{
 
         //menjanje imena
         ((Interfejs) interfejsPainter.getElement()).setNaziv(MainFrame.getInstance().getInterfejsProzor().getTfIme().getText());
+        ((Interfejs) interfejsPainter.getElement()).projectChanged();
         dijagramView.repaint();
         MainFrame.getInstance().getInterfejsProzor().getTfIme().setText("");
 

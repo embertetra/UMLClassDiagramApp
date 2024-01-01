@@ -37,6 +37,7 @@ public abstract class ClassyNode {
     public ClassyNode(String name, ClassyNode parent) {
         this.name = name;
         this.parent = parent;
+        projectChanged();
     }
 
     @Override
@@ -48,6 +49,15 @@ public abstract class ClassyNode {
         return false;
     }
 
+    private void projectChanged(){
+        ClassyNode c = this;
+        while(c!=null && !(c instanceof Project)){
+            c = c.getParent();
+        }
+        if(c != null)
+            ((Project) c).setChanged(true);
+    }
+
     public String getName() {
         return name;
     }
@@ -57,10 +67,12 @@ public abstract class ClassyNode {
     }
 
     public void setName(String name) {
+        projectChanged();
         this.name = name;
     }
 
     public void setParent(ClassyNode parent) {
+        projectChanged();
         this.parent = parent;
     }
 

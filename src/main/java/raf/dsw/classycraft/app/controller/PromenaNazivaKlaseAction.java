@@ -55,6 +55,7 @@ public class PromenaNazivaKlaseAction extends AbstractClassyAction{
 
         //menjanje imena
         ((Klasa) klasaPainter.getElement()).setNaziv(MainFrame.getInstance().getKlasaProzor().getTfIme().getText());
+        ((Klasa) klasaPainter.getElement()).projectChanged();
         dijagramView.repaint();
         MainFrame.getInstance().getKlasaProzor().getTfIme().setText("");
         MainFrame.getInstance().getKlasaProzor().getBg().clearSelection();

@@ -91,9 +91,11 @@ public class DodajUKlasuAction extends AbstractClassyAction{
 
         if(MainFrame.getInstance().getKlasaProzor().getAtribut().isSelected()) {
             ((Klasa) klasaPainter.getElement()).getClassContentList().add(new Atributi(vidljivost, tip, naziv));
+            ((Klasa)klasaPainter.getElement()).projectChanged();
         }
         else if(MainFrame.getInstance().getKlasaProzor().getMetoda().isSelected()) {
             ((Klasa) klasaPainter.getElement()).getClassContentList().add(new Metode(vidljivost, tip, naziv));
+            ((Klasa)klasaPainter.getElement()).projectChanged();
         }
 
         dijagramView.repaint();
