@@ -4,6 +4,7 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Package;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.ProjectExplorer;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
@@ -27,6 +28,25 @@ public class ImportAction extends AbstractClassyAction{
             try {
                 File file = jfc.getSelectedFile();
                 Project p = ApplicationFramework.getInstance().getSerializer().loadProject(file);
+
+                int index = 1;
+                int flag = 1;
+                ProjectExplorer root = ApplicationFramework.getInstance().getClassyRepository().getRoot();
+
+                String base = p.getName();
+                while(flag == 1) {
+                    flag = 0;
+                    for (ClassyNode c : root.getChildren()) {
+                        if (c.getName().equals(p.getName())) {
+                            String s = "(" + index + ")";
+                            p.setName(base + s);
+                            index++;
+                            flag = 1;
+                            break;
+                        }
+                    }
+                }
+
                 MainFrame.getInstance().getClassyTree().loadProject(p);
 
             } catch (Exception e) {

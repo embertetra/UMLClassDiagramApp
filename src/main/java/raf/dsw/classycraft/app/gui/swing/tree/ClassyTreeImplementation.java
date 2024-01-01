@@ -110,6 +110,7 @@ public class ClassyTreeImplementation implements ClassyTree {
         insertAllChildren(project, loadedProject);
 
         project.setParent(ApplicationFramework.getInstance().getClassyRepository().getRoot());
+        project.setChanged(false);
 
         TreePath tp = new TreePath(loadedProject.getPath());
         treeView.expandPath(tp);

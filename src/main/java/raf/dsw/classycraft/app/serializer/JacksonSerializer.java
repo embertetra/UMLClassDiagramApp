@@ -47,6 +47,7 @@ public class JacksonSerializer implements Serializer {
             FileReader fr = new FileReader(file);
             Project project = objectMapper.readValue(file, Project.class);
             setParents(project);
+            project.setChanged(false);
             return project;
         } catch (IOException e) {
             e.printStackTrace();

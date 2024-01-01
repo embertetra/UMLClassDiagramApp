@@ -30,19 +30,19 @@ public class SaveAction extends AbstractClassyAction{
         Project project = (Project) MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode();
         File projectFile = null;
 
-        //if(!project.isChanged())
-            //return;
+        if(!project.isChanged()){
+            System.out.println("project.isChanged = false");
+            return;
+        }
 
         if(project.getFilePath() == null || project.getFilePath().isEmpty()){
             if(jfc.showSaveDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION){
                 projectFile = jfc.getSelectedFile();
                 project.setFilePath(projectFile.getPath());
             }
-            else {
-                //return;
-            }
         }
         ApplicationFramework.getInstance().getSerializer().saveProject(project);
-        //project.setChanged(false);
+        System.out.println("Project saved");
+        project.setChanged(false);
     }
 }

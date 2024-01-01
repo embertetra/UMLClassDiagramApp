@@ -55,7 +55,7 @@ public class MouseListener {
                     if ((selected instanceof ClassyTreeItem &&  selectedNode instanceof Package)) {
                         if (e.getClickCount() == 2) {
                             for (PackageView p : MainFrame.getInstance().getListaPackageView()) {
-                                if (p.getClassyNode().getName().equals(selectedNode.getName())) {
+                                if (p.getClassyNode().getName().equals(selectedNode.getName()) && p.getClassyNode().getParent().getName().equals(selectedNode.getParent().getName())) {
                                     paket = p;
                                 }
                             }
