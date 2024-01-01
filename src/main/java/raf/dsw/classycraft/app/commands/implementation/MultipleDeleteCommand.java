@@ -36,21 +36,24 @@ public class MultipleDeleteCommand extends AbstractCommand {
     private int y;
     private ClassyTreeItem item;
     private List<Shape> selection;
+    private List<Shape> mojaSelekcija;
 
     public MultipleDeleteCommand(int x, int y,DijagramView dijagramView, ClassyTreeItem item){
         this.x = x;
         this.y = y;
         this.dijagramView = dijagramView;
         this.item = item;
-
+        mojaSelekcija = new ArrayList<>(dijagramView.getSelectionModel());
     }
 
     @Override
     public void doCommand() {
-        selection = dijagramView.getSelectionModel();
+        dijagramView.getSelectionModel().clear();
+        selection = new ArrayList<>(mojaSelekcija);
+
         for (int j=dijagramView.getElementPainterList().size()-1; j>=0; j--) {
             ElementPainter elementPainter = dijagramView.getElementPainterList().get(j);
-            for(Shape s : dijagramView.getSelectionModel()){
+            for(Shape s : mojaSelekcija){
                 ///brisanje svih klasa
                 if(elementPainter instanceof InterclassPainter){
                     InterclassPainter painter = (InterclassPainter) elementPainter;
@@ -109,8 +112,6 @@ public class MultipleDeleteCommand extends AbstractCommand {
                 }
             }
         }
-
-
         ///sredjivanje modela i paintera
         List<ElementPainter> novaPainterLista = new ArrayList<>();
         List<ClassyNode> novaLista = new ArrayList<>();
@@ -136,12 +137,13 @@ public class MultipleDeleteCommand extends AbstractCommand {
         d.setChildren(novaLista);
         dijagramView.getElementPainterList().clear();
         dijagramView.setElementPainterList(novaPainterLista);
+        mojaSelekcija.clear();
         dijagramView.repaint();
-        dijagramView.getSelectionModel().clear();
     }
 
     @Override
     public void undoCommand() {
+        mojaSelekcija = selection;
         ///odredjivanje dijagrama unutar stabla
         ClassyTreeItem item = null;
         ClassyTreeItem selected = MainFrame.getInstance().getPackageView().getClassyTreeItem();
@@ -152,7 +154,6 @@ public class MultipleDeleteCommand extends AbstractCommand {
                 item = c;
         }
         Dijagram d = (Dijagram) dijagramView.getClassyNode();
-
         for (Interclass interclass : klase) {
             if (interclass instanceof Klasa) {
                 Klasa klasa = (Klasa) interclass;
@@ -177,10 +178,9 @@ public class MultipleDeleteCommand extends AbstractCommand {
                 MainFrame.getInstance().getClassyTree().addChild(item, enumM);
             }
         }
-        for (Connection connection : veze)
+        for (Connection connection : veze){
             makeConnection(connection, d, item);
-        dijagramView.setSelectionModel(selection);
-
+        }
         klase.clear();
         veze.clear();
     }

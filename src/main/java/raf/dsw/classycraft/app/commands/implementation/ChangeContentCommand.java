@@ -56,7 +56,6 @@ public class ChangeContentCommand extends AbstractCommand {
 
     @Override
     public void undoCommand() {
-
         if (interclass instanceof Klasa) {
             if(atribut != null)
                 MainFrame.getInstance().getKlasaProzor().getClassContentList().set(index, atributStari);

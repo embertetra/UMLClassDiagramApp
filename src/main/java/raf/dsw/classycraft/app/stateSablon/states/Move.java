@@ -19,7 +19,6 @@ import java.util.List;
 public class Move implements State {
     private Point oldPoint;
     private List<InterclassPainter> shapes;
-    private List<Shape> novaListaSelekcije;
     private List<Point> oldPoints;
     private int tmp;
     public Move() {
@@ -36,86 +35,23 @@ public class Move implements State {
 
     @Override
     public void misOtpusten(int x, int y, DijagramView dijagramView) {
+
         AbstractCommand command = null;
 
         dijagramView.getSelectionModel().clear();
 
-        //presek multiselekcija
+        //multiple selection
         if(tmp == 1) {
-            command = new MultipleMoveCommand(dijagramView, shapes, oldPoints, x, y);
-            /*
-            for(InterclassPainter ip : shapes) {
-                Interclass ic = (Interclass) ip.getElement();
-                Rectangle myRect = new Rectangle(ic.getPosition().x - ip.getWidth() / 2 - 10, ic.getPosition().y - ip.getHeightUkupno() / 2 - 5,
-                        ip.getWidth() + 12, ip.getHeightUkupno() + 12);
-                int brojac = 0;
-                int index = 0;
-                for (ElementPainter ep : dijagramView.getElementPainterList()) {
-                    if(ep instanceof InterclassPainter) {
-                        InterclassPainter classP = (InterclassPainter) ep;
-                        Interclass klasa = (Interclass) classP.getElement();
-                        Rectangle rect = new Rectangle(klasa.getPosition().x - classP.getWidth() / 2 - 10, klasa.getPosition().y - classP.getHeightUkupno() / 2 - 5,
-                                classP.getWidth() + 12, classP.getHeightUkupno() + 12);
-                        if (rect.intersects(myRect)) brojac++;
-                    }
-                }
-                if (brojac > 1) {
-                    for(InterclassPainter ip2 : shapes){
-                        Interclass i = (Interclass) ip2.getElement();
-                        i.setPosition(oldPoints.get(index));
-                        index++;
-                    }
-                    break;
-                }
-            }
-            ///setovanje novih selekcija
-            for (InterclassPainter ip : shapes) {
-                Interclass ic = (Interclass) ip.getElement();
-                Shape s = new Rectangle(ic.getPosition().x - ip.getWidth() / 2 - 10, ic.getPosition().y - ip.getHeightUkupno() / 2 - 5,
-                        ip.getWidth() + 20, ip.getHeightUkupno() + 20);
-                novaListaSelekcije.add(s);
-
-            }
-            dijagramView.setSelectionModel(novaListaSelekcije);
-             */
+            command = new MultipleMoveCommand(dijagramView, oldPoints, x, y);
         }
-
-        ///odredjivanje preseka i vracanje na stare koordinate ako se sece - 1 interklasa
+        ///single selection
         if(tmp != 1) {
             command = new SingleMoveCommand(dijagramView, x, y, oldPoint);
-            /*
-            int brojac = 0;
-            InterclassPainter mojPainter = null;
-            for (ElementPainter ep : dijagramView.getElementPainterList()) {
-                if (ep instanceof InterclassPainter) {
-                    InterclassPainter ip = (InterclassPainter) ep;
-                    if (ip.elementAt(new Point(x, y)))
-                        mojPainter = ip;
-                }
-            }
-            if (mojPainter != null) {
-                Interclass mojaKlasa = (Interclass) mojPainter.getElement();
-                Rectangle mojRect = new Rectangle(mojaKlasa.getPosition().x - mojPainter.getWidth() / 2 - 10, mojaKlasa.getPosition().y - mojPainter.getHeightUkupno() / 2 - 5, mojPainter.getWidth() + 12, mojPainter.getHeightUkupno() + 12);
-                for (ElementPainter ep : dijagramView.getElementPainterList()) {
-                    if (ep instanceof InterclassPainter) {
-                        InterclassPainter ip = (InterclassPainter) ep;
-                        Interclass ic = (Interclass) ip.getElement();
-                        Rectangle rect = new Rectangle(ic.getPosition().x - ip.getWidth() / 2 - 10, ic.getPosition().y - 5 - ip.getHeightUkupno() / 2, ip.getWidth() + 12, ip.getHeightUkupno() + 12);
-                        if (rect.intersects(mojRect)) brojac++;
-                    }
-                }
-            }
-            if (brojac > 1) {
-                ((Interclass) dijagramView.getFlag1().getElement()).setPosition(oldPoint);
-            }
-
-             */
         }
         ((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
 
         dijagramView.setFlag1(null);
         tmp = 0;
-        dijagramView.repaint();
     }
 
     @Override
