@@ -11,42 +11,35 @@ import java.awt.*;
 public class SingleMoveCommand extends AbstractCommand {
 
     private DijagramView dijagramView;
-    private int x;
-    private int y;
     private Point oldPoint;
     private Point newPoint;
     private Interclass mojInterclass;
+    private Rectangle mojRect;
 
     public SingleMoveCommand(DijagramView dijagramView, int x, int y, Point oldPoint){
         this.dijagramView = dijagramView;
-        this.x = x;
-        this.y = y;
         this.oldPoint = oldPoint;
         this.newPoint = new Point(x, y);
     }
 
     @Override
     public void doCommand() {
-
-
         int brojac = 0;
         InterclassPainter mojPainter = null;
         for (ElementPainter ep : dijagramView.getElementPainterList()) {
             if (ep instanceof InterclassPainter) {
                 InterclassPainter ip = (InterclassPainter) ep;
-                if (ip.elementAt(newPoint))
+                if (ip.elementAt(oldPoint)) {
                     mojPainter = ip;
+                    //nove koordinate
+                    mojInterclass = (Interclass) mojPainter.getElement();
+                    mojInterclass.setPosition(newPoint);
+                }
             }
         }
         if (mojPainter != null) {
-
-            //nove koordinate
-            mojInterclass = (Interclass) mojPainter.getElement();
-            mojInterclass.setPosition(newPoint);
-
-            //provera da li se nove kordinate preklapaju sa drugim elementima na dijagramu
-            Interclass mojaKlasa = (Interclass) mojPainter.getElement();
-            Rectangle mojRect = new Rectangle(mojaKlasa.getPosition().x - mojPainter.getWidth() / 2 - 10, mojaKlasa.getPosition().y - mojPainter.getHeightUkupno() / 2 - 5, mojPainter.getWidth() + 12, mojPainter.getHeightUkupno() + 12);
+            //provera da li se nove koordinate preklapaju sa drugim elementima na dijagramu
+            mojRect = new Rectangle(mojInterclass.getPosition().x - mojPainter.getWidth() / 2 - 10, mojInterclass.getPosition().y - mojPainter.getHeightUkupno() / 2 - 5, mojPainter.getWidth() + 12, mojPainter.getHeightUkupno() + 12);
             for (ElementPainter ep : dijagramView.getElementPainterList()) {
                 if (ep instanceof InterclassPainter) {
                     InterclassPainter ip = (InterclassPainter) ep;
@@ -55,18 +48,17 @@ public class SingleMoveCommand extends AbstractCommand {
                     if (rect.intersects(mojRect)) brojac++;
                 }
             }
+            if (brojac > 1) {//vracanje starih koordinata
+                mojInterclass.setPosition(oldPoint);
+                newPoint  = oldPoint;
+            }
         }
-        if (brojac > 1) {//vracanje starih koordinata
-            ((Interclass) dijagramView.getFlag1().getElement()).setPosition(oldPoint);
-            newPoint  = oldPoint;
-        }
-
         dijagramView.repaint();
     }
 
     @Override
     public void undoCommand() {
-        InterclassPainter mojPainter = null;
+        InterclassPainter mojPainter;
         for (ElementPainter ep : dijagramView.getElementPainterList()) {
             if (ep instanceof InterclassPainter) {
                 InterclassPainter ip = (InterclassPainter) ep;

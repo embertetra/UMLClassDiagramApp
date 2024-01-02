@@ -208,8 +208,6 @@ public class PromeniElementUKlasiAction extends AbstractClassyAction{
         }
 
         AbstractCommand command = new ChangeContentCommand(index, atribut, metoda, null, dijagramView, (Klasa) klasaPainter.getElement());
-        //((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
-
         ((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
 
         MainFrame.getInstance().getKlasaProzor().getTfNaziv().setText("");
