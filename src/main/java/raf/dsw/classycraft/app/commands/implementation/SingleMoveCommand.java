@@ -14,7 +14,6 @@ public class SingleMoveCommand extends AbstractCommand {
     private Point oldPoint;
     private Point newPoint;
     private Interclass mojInterclass;
-    private Rectangle mojRect;
 
     public SingleMoveCommand(DijagramView dijagramView, int x, int y, Point oldPoint){
         this.dijagramView = dijagramView;
@@ -39,18 +38,20 @@ public class SingleMoveCommand extends AbstractCommand {
         }
         if (mojPainter != null) {
             //provera da li se nove koordinate preklapaju sa drugim elementima na dijagramu
-            mojRect = new Rectangle(mojInterclass.getPosition().x - mojPainter.getWidth() / 2 - 10, mojInterclass.getPosition().y - mojPainter.getHeightUkupno() / 2 - 5, mojPainter.getWidth() + 12, mojPainter.getHeightUkupno() + 12);
+            Rectangle mojRect = new Rectangle(mojInterclass.getPosition().x - mojPainter.getWidth() / 2 - 10, mojInterclass.getPosition().y - mojPainter.getHeightUkupno() / 2 - 5, mojPainter.getWidth() + 12, mojPainter.getHeightUkupno() + 12);
             for (ElementPainter ep : dijagramView.getElementPainterList()) {
                 if (ep instanceof InterclassPainter) {
                     InterclassPainter ip = (InterclassPainter) ep;
                     Interclass ic = (Interclass) ip.getElement();
                     Rectangle rect = new Rectangle(ic.getPosition().x - ip.getWidth() / 2 - 10, ic.getPosition().y - 5 - ip.getHeightUkupno() / 2, ip.getWidth() + 12, ip.getHeightUkupno() + 12);
                     if (rect.intersects(mojRect)) brojac++;
+
                 }
             }
             if (brojac > 1) {//vracanje starih koordinata
+                System.out.println(brojac);
                 mojInterclass.setPosition(oldPoint);
-                newPoint  = oldPoint;
+                //newPoint  = oldPoint;
             }
         }
         dijagramView.repaint();

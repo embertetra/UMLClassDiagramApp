@@ -1,7 +1,6 @@
 package raf.dsw.classycraft.app.commands.implementation;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Atributi;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.ClassContent;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Metode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.EnumM;
