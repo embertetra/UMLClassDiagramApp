@@ -17,7 +17,7 @@ public class Project extends ClassyNodeComposite implements IPublisher {
     protected String filePath;
     private transient List<ISubscriber> subscribers;
     private String autor;
-    private boolean changed;
+    protected boolean changed;
 
 
     public Project(String name, ClassyNode parent) {
@@ -29,6 +29,7 @@ public class Project extends ClassyNodeComposite implements IPublisher {
     public Project() {
         super("", null);
         subscribers = new ArrayList<>();
+        changed = true;
     }
 
     public void setNewAutor(Object notification) {
@@ -112,6 +113,7 @@ public class Project extends ClassyNodeComposite implements IPublisher {
     }
 
     public void setAutor(String autor) {
+        changed = true;
         this.autor = autor;
     }
 
@@ -120,6 +122,7 @@ public class Project extends ClassyNodeComposite implements IPublisher {
     }
 
     public void setFilePath(String filePath) {
+        changed = true;
         this.filePath = filePath;
     }
 }

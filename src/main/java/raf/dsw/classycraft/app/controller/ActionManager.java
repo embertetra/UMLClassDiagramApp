@@ -27,9 +27,11 @@ public class ActionManager {
     private SaveTemplate saveTemplate;
     private RedoAction redoAction;
     private UndoAction undoAction;
+    private ExportProjectToCode exportProjectToCode;
 
 
     public ActionManager() {
+        exportProjectToCode = new ExportProjectToCode();
         saveTemplate = new SaveTemplate();
         exportDiagram = new ExportDiagram();
         saveAction = new SaveAction();
@@ -50,6 +52,10 @@ public class ActionManager {
         saveAsAction = new SaveAsAction();
         redoAction = new RedoAction();
         undoAction = new UndoAction();
+    }
+
+    public ExportProjectToCode getExportProjectToCode() {
+        return exportProjectToCode;
     }
 
     public SaveTemplate getSaveTemplate() {

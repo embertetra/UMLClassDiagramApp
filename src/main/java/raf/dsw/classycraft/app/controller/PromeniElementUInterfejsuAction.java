@@ -14,6 +14,7 @@ import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.Interfe
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 public class PromeniElementUInterfejsuAction extends AbstractClassyAction{
 
@@ -130,6 +131,8 @@ public class PromeniElementUInterfejsuAction extends AbstractClassyAction{
         AbstractCommand command = new ChangeContentCommand(index, null, metoda, null, dijagramView, (Interfejs) interfejsPainter.getElement());
         ((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
 
+        dijagramView.repaint();
+        ((Interfejs) interfejsPainter.getElement()).projectChanged();
         MainFrame.getInstance().getInterfejsProzor().getTfNaziv().setText("");
         MainFrame.getInstance().getInterfejsProzor().getBgVidljivost().clearSelection();
         MainFrame.getInstance().getInterfejsProzor().getBgTip().clearSelection();

@@ -57,6 +57,7 @@ public class PromenaNazivaInterfejsaAction extends AbstractClassyAction{
         /*
         //menjanje imena
         ((Interfejs) interfejsPainter.getElement()).setNaziv(MainFrame.getInstance().getInterfejsProzor().getTfIme().getText());
+        ((Interfejs) interfejsPainter.getElement()).projectChanged();
         dijagramView.repaint();
         */
         AbstractCommand command = new AddNameCommand(MainFrame.getInstance().getInterfejsProzor().getTfIme().getText(), (Interfejs) interfejsPainter.getElement(), dijagramView);

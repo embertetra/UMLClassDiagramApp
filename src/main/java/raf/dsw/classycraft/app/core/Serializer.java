@@ -10,5 +10,6 @@ public interface Serializer {
     Project loadProject(File file);
     void saveProject(Project node);
     void saveTemplate(Dijagram dijagram, String name);
+    Dijagram loadTemplate(File file);
 
 }

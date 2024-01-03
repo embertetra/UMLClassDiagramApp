@@ -43,7 +43,7 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     private void initialize() {
         galleryTemplates = new GalleryTemplates();
-        galleryTemplates.setVisible(true);
+        //galleryTemplates.setVisible(true);
         actionManager = new ActionManager();
         aboutUsFrame = new AboutUsFrame();
         classyTree = new ClassyTreeImplementation();
@@ -114,6 +114,10 @@ public class MainFrame extends JFrame implements ISubscriber {
         if(toolBarStates != null)
             return toolBarStates;
         else return new ToolBarStates();
+    }
+
+    public GalleryTemplates getGalleryTemplates() {
+        return galleryTemplates;
     }
 
     public ActionManager getActionManager() {

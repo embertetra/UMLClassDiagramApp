@@ -39,6 +39,7 @@ public class ObrisiIzKlaseAction extends AbstractClassyAction{
 
         /*
         ((Klasa) klasaPainter.getElement()).getClassContentList().remove(MainFrame.getInstance().getKlasaProzor().getLista().getSelectedValue());
+        ((Klasa) klasaPainter.getElement()).projectChanged();
         MainFrame.getInstance().getKlasaProzor().setClassContentList(((Klasa) klasaPainter.getElement()).getClassContentList());
         dijagramView.repaint();
         */

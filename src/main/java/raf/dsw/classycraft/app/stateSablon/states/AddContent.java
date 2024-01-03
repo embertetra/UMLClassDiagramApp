@@ -108,6 +108,7 @@ public class AddContent implements State {
         dijagramView.getSelectionModel().clear();
         dijagramView.setSelection(null);
         dijagramView.repaint();
+        System.out.println("Dodat kontent");
     }
 
     @Override

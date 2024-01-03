@@ -1,6 +1,10 @@
 package raf.dsw.classycraft.app.stateSablon.states;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Metode;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Interfejs;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.commands.AbstractCommand;
 import raf.dsw.classycraft.app.commands.implementation.DuplicateCommand;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
@@ -16,6 +20,10 @@ import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.KlasaPa
 import raf.dsw.classycraft.app.stateSablon.State;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Duplicate implements State {
     @Override
@@ -81,8 +89,8 @@ public class Duplicate implements State {
                 }
             }
         }
-
-
+        dijagramView.repaint();
+        System.out.println("Napravljena kopija");
     }
 
     @Override

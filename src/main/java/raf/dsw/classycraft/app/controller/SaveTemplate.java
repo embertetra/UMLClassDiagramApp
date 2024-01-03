@@ -21,7 +21,6 @@ public class SaveTemplate extends AbstractClassyAction{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
         if(MainFrame.getInstance().getClassyTree().getSelectedNode() == null || !((MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode()) instanceof Dijagram)){
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Morate selektovati dijagram", MessageType.ERROR);
             return;
@@ -31,11 +30,13 @@ public class SaveTemplate extends AbstractClassyAction{
 
         if(d != null && d.getChildren() != null && !d.getChildren().isEmpty()) {
             String input = JOptionPane.showInputDialog("Uneti ime sablona:", "");
+            if(input == null || input.isEmpty())
+                return;
             ApplicationFramework.getInstance().getSerializer().saveTemplate(d, input);
+            MainFrame.getInstance().getGalleryTemplates().refreshFoldredTemplate();
         }
         else if(d != null && d.getChildren() != null && d.getChildren().isEmpty()) {
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Ne mozete sacuvati prazan dijagram", MessageType.ERROR);
-            return;
         }
     }
 }

@@ -1,12 +1,11 @@
 package raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import javafx.util.Pair;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Connection;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
 
-import java.awt.*;
 @JsonTypeName("agregacija")
 public class Agregacija extends Connection {
 
@@ -16,6 +15,7 @@ public class Agregacija extends Connection {
     private String vidljivost;
     public Agregacija(String name, ClassyNode parent) {
         super(name, parent);
+        projectChanged();
     }
     public Agregacija(){
         super("", null);
@@ -27,6 +27,15 @@ public class Agregacija extends Connection {
         tip = "";
         kardinalnost = "-";
         vidljivost = "-";
+        projectChanged();
+    }
+    private void projectChanged(){
+        ClassyNode c = this;
+        while(c!=null && !(c instanceof Project)){
+            c = c.getParent();
+        }
+        if(c != null)
+            ((Project) c).setChanged(true);
     }
 
     public String getName2() {
@@ -35,6 +44,7 @@ public class Agregacija extends Connection {
 
     public void setName2(String name2) {
         this.name2 = name2;
+        projectChanged();
     }
 
     public String getTip() {
@@ -43,6 +53,7 @@ public class Agregacija extends Connection {
 
     public void setTip(String tip) {
         this.tip = tip;
+        projectChanged();
     }
 
     public String getKardinalnost() {
@@ -51,6 +62,7 @@ public class Agregacija extends Connection {
 
     public void setKardinalnost(String kardinalnost) {
         this.kardinalnost = kardinalnost;
+        projectChanged();
     }
 
     public String getVidljivost() {
@@ -59,5 +71,6 @@ public class Agregacija extends Connection {
 
     public void setVidljivost(String vidljivost) {
         this.vidljivost = vidljivost;
+        projectChanged();
     }
 }

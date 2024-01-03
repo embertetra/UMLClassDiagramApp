@@ -57,6 +57,7 @@ public class PromeniElementUEnumuAction extends AbstractClassyAction{
         int index = 0;
         for(int i=0; i<((EnumM) enumPainter.getElement()).getListEnuma().size(); i++){
             if( ((EnumM) enumPainter.getElement()).getListEnuma().get(i).equals(MainFrame.getInstance().getEnumProzor().getLista().getSelectedValue())){
+                ((EnumM) enumPainter.getElement()).projectChanged();
                 index = i;
             }
         }
@@ -64,6 +65,8 @@ public class PromeniElementUEnumuAction extends AbstractClassyAction{
         AbstractCommand command = new ChangeContentCommand(index, null, null, naziv, dijagramView, (EnumM) enumPainter.getElement());
         ((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
 
+
+        dijagramView.repaint();
         MainFrame.getInstance().getEnumProzor().getTfIme().setText("");
         MainFrame.getInstance().getEnumProzor().getTfNaziv().setText("");
     }

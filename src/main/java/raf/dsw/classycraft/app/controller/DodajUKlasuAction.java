@@ -103,10 +103,12 @@ public class DodajUKlasuAction extends AbstractClassyAction{
         if(MainFrame.getInstance().getKlasaProzor().getAtribut().isSelected()) {
             Atributi a = new Atributi(vidljivost, tip, naziv);
             command = new AddContentCommand(a, null, null, (Klasa) klasaPainter.getElement(), dijagramView);
+            ((Klasa)klasaPainter.getElement()).projectChanged();
         }
         else if(MainFrame.getInstance().getKlasaProzor().getMetoda().isSelected()) {
             Metode m = new Metode(vidljivost, tip, naziv);
             command = new AddContentCommand(null, m, null, (Klasa) klasaPainter.getElement(), dijagramView);
+            ((Klasa)klasaPainter.getElement()).projectChanged();
         }
         ((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
 

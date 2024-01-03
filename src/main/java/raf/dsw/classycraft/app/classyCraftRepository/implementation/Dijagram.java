@@ -17,6 +17,7 @@ public class Dijagram extends ClassyNodeComposite implements IPublisher {
     public Dijagram(String name, ClassyNode parent) {
         super(name, parent);
         subscribers = new ArrayList<>();
+        projectChanged();
     }
     public Dijagram(){
         super("", null);
@@ -28,6 +29,7 @@ public class Dijagram extends ClassyNodeComposite implements IPublisher {
         if (child != null && child instanceof DijagramElement) {
             getChildren().add(child);
             notifySubscribers("state");
+            projectChanged();
         }
     }
 
@@ -36,16 +38,19 @@ public class Dijagram extends ClassyNodeComposite implements IPublisher {
         if(child != null && getChildren().contains(child)) {
             getChildren().remove(child);
             notifySubscribers("state");
+            projectChanged();
         }
     }
 
     public void setNameInJTabb(Object notification){
+        projectChanged();
         notifySubscribers(notification);
     }
 
     @Override
     public void addSubscriber(ISubscriber subscriber) {
         if (subscriber != null) {
+            projectChanged();
             if (subscribers == null)
                 this.subscribers = new ArrayList<>();
             if (!subscribers.contains(subscriber))
@@ -55,8 +60,10 @@ public class Dijagram extends ClassyNodeComposite implements IPublisher {
 
     @Override
     public void removeSubscriber(ISubscriber subscriber) {
-        if (subscriber != null && subscribers != null && subscribers.contains(subscriber))
+        if (subscriber != null && subscribers != null && subscribers.contains(subscriber)) {
             subscribers.remove(subscriber);
+            projectChanged();
+        }
     }
 
     @Override
@@ -65,7 +72,17 @@ public class Dijagram extends ClassyNodeComposite implements IPublisher {
             for (ISubscriber i : subscribers) {
                 i.update(notification);
             }
+            projectChanged();
         }
+    }
+
+    public void projectChanged(){
+        ClassyNode c = this;
+        while(c!=null && !(c instanceof Project)){
+            c = c.getParent();
+        }
+        if(c != null)
+            ((Project) c).setChanged(true);
     }
 
 }

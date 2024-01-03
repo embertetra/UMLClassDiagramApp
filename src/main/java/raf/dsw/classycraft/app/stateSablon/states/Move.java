@@ -5,6 +5,7 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.
 import raf.dsw.classycraft.app.commands.AbstractCommand;
 import raf.dsw.classycraft.app.commands.implementation.MultipleMoveCommand;
 import raf.dsw.classycraft.app.commands.implementation.SingleMoveCommand;
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ConnectionPainter;
@@ -55,6 +56,10 @@ public class Move implements State {
 
         dijagramView.setFlag1(null);
         tmp = 0;
+        dijagramView.repaint();
+
+        ((Dijagram)dijagramView.getClassyNode()).projectChanged();
+        System.out.println("Zavrsen move");
     }
 
     @Override
@@ -63,7 +68,7 @@ public class Move implements State {
         dijagramView.setSelection(null);
         dijagramView.setStartPoint(new Point(x, y));
         int flag = 0;
-
+        System.out.println("zapocet move");
         ///move multiselekcije
         shapes.clear();
         oldPoints.clear();
@@ -170,6 +175,7 @@ public class Move implements State {
                         Interclass ic = (Interclass) ip.getElement();
                         if (ip == d.getFlag1()) {
                             ic.setPosition(new Point(d.getStartPoint().x + diffX - d.getxDragOffset(), d.getStartPoint().y + diffY - d.getyDragOffset()));
+                            ic.setPosition(new Point(d.getStartPoint().x + diffX - d.getxDragOffset(), d.getStartPoint().y + diffY - d.getyDragOffset()), d);
                             return;
                         }
                     }
@@ -178,7 +184,7 @@ public class Move implements State {
                 for (InterclassPainter ip : d.getMoveSelections()) {
                     Interclass ic = (Interclass) ip.getElement();
                     ic.setPosition(new Point(d.getStartPoint().x + diffX - ip.getxDragOffset(),
-                            d.getStartPoint().y + diffY - ip.getyDragOffset()));
+                            d.getStartPoint().y + diffY - ip.getyDragOffset()), d);
                 }
                 return;
             } else {
@@ -186,7 +192,7 @@ public class Move implements State {
                     if (ep instanceof InterclassPainter) {
                         InterclassPainter ip = ((InterclassPainter) ep);
                         ((Interclass) ip.getElement()).setPosition(new Point(d.getStartPoint().x + diffX - ip.getxDragOffset(),
-                                d.getStartPoint().y + diffY - ip.getyDragOffset()));
+                                d.getStartPoint().y + diffY - ip.getyDragOffset()), d);
                     }
                 }
                 for (ElementPainter ep : d.getElementPainterList()) {
@@ -196,9 +202,9 @@ public class Move implements State {
                         Interclass to = ((Connection) cp.getElement()).getTo();
                         if(d.getStartPoint()!= null && from != null && to != null) {
                             from.setPosition(new Point(d.getStartPoint().x + diffX - cp.getDragOffset1().x,
-                                    d.getStartPoint().y + diffY - cp.getDragOffset1().y));
+                                    d.getStartPoint().y + diffY - cp.getDragOffset1().y), d);
                             to.setPosition(new Point(d.getStartPoint().x + diffX - cp.getDragOffset2().x,
-                                    d.getStartPoint().y + diffY - cp.getDragOffset2().y));
+                                    d.getStartPoint().y + diffY - cp.getDragOffset2().y), d);
                         }
                     }
                 }
