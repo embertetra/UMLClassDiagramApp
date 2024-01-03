@@ -35,12 +35,16 @@ public class ChangeContentCommand extends AbstractCommand {
         atributUndo = new ArrayList<>();
         metodaUndo = new ArrayList<>();
 
-        if(!MainFrame.getInstance().getInterfejsProzor().getTfNaziv().getText().isEmpty() || !MainFrame.getInstance().getInterfejsProzor().getTfNaziv().getText().equals(" ") && atribut == null)
-            metodaUndo.add(MainFrame.getInstance().getInterfejsProzor().getMetodeList().get(index));
-        else if(!MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().isEmpty() || !MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().equals(" ")) {
-            if (MainFrame.getInstance().getKlasaProzor().getClassContentList().get(index) instanceof Atributi)
-                atributUndo.add((Atributi) MainFrame.getInstance().getKlasaProzor().getClassContentList().get(index));
-            else metodaUndo.add((Metode) MainFrame.getInstance().getKlasaProzor().getClassContentList().get(index));
+        if(naziv == null) {
+            if (!MainFrame.getInstance().getInterfejsProzor().getTfNaziv().getText().isEmpty() || !MainFrame.getInstance().getInterfejsProzor().getTfNaziv().getText().equals(" ") && atribut == null)
+                if (MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().isEmpty() || MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().equals(" "))
+                    metodaUndo.add(MainFrame.getInstance().getInterfejsProzor().getMetodeList().get(index));
+            if (!MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().isEmpty() || !MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().equals(" ")) {
+                if (MainFrame.getInstance().getKlasaProzor().getClassContentList().get(index) instanceof Atributi)
+                    atributUndo.add((Atributi) MainFrame.getInstance().getKlasaProzor().getClassContentList().get(index));
+                else
+                    metodaUndo.add((Metode) MainFrame.getInstance().getKlasaProzor().getClassContentList().get(index));
+            }
         }
     }
 
@@ -70,18 +74,18 @@ public class ChangeContentCommand extends AbstractCommand {
     @Override
     public void undoCommand() {
         if (interclass instanceof Klasa) {
-            if(atributRedo != null && atributUndo != null) {
-                atributUndo.remove(atributUndo.size()-1);
-                MainFrame.getInstance().getKlasaProzor().getClassContentList().set(index, atributUndo.get(atributUndo.size()-1));
-            }else if(metodaRedo != null && metodaUndo != null) {
+            if(atributRedo != null && !atributUndo.isEmpty()) {
+                atributUndo.remove(atributUndo.size() - 1);
+                MainFrame.getInstance().getKlasaProzor().getClassContentList().set(index, atributUndo.get(atributUndo.size() - 1));
+            }else if(metodaRedo != null && !metodaUndo.isEmpty()) {
                 metodaUndo.remove(metodaUndo.size() - 1);
                 MainFrame.getInstance().getKlasaProzor().getClassContentList().set(index, metodaUndo.get(metodaUndo.size() - 1));
             }MainFrame.getInstance().getKlasaProzor().setClassContentList(((Klasa) interclass).getClassContentList());
-        } else if (interclass instanceof Interfejs && metodaRedo != null && metodaUndo != null){
+        } else if (interclass instanceof Interfejs && metodaRedo != null && !metodaUndo.isEmpty()){
             metodaUndo.remove(metodaUndo.size() - 1);
             MainFrame.getInstance().getInterfejsProzor().getMetodeList().set(index, metodaUndo.get(metodaUndo.size()-1));
             MainFrame.getInstance().getInterfejsProzor().setMetodeList(((Interfejs) interclass).getMetodeList());
-        }else if(interclass instanceof EnumM) {
+        }else if(interclass instanceof EnumM && nazivUndo != null) {
             MainFrame.getInstance().getEnumProzor().getEnumMList().set(index, nazivUndo);
             MainFrame.getInstance().getEnumProzor().setEnumMList(((EnumM)interclass).getListEnuma());
         }
