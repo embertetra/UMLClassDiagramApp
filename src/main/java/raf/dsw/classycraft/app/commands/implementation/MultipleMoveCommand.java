@@ -44,7 +44,7 @@ public class MultipleMoveCommand extends AbstractCommand {
         //nove koordinate
         for (InterclassPainter ip : moveSeletionRedo) {
             Interclass ic = (Interclass) ip.getElement();
-            ic.setPosition(new Point(dijagramView.getStartPoint().x + diffX - ip.getxDragOffset(), dijagramView.getStartPoint().y + diffY - ip.getyDragOffset()));
+            ic.setPosition(new Point(dijagramView.getStartPoint().x + diffX - ip.getxDragOffset(), dijagramView.getStartPoint().y + diffY - ip.getyDragOffset()), dijagramView);
         }
         //provera da li se nove kordinate preklapaju sa drugim elementima na dijagramu
         for(InterclassPainter ip : moveSeletionRedo) {
@@ -65,7 +65,7 @@ public class MultipleMoveCommand extends AbstractCommand {
                 int ind = 0;
                 for(InterclassPainter ip2 : moveSeletionRedo){
                     Interclass i = (Interclass) ip2.getElement();
-                    i.setPosition(oldPointsRedo.get(ind++));
+                    i.setPosition(oldPointsRedo.get(ind++), dijagramView);
                 }
             }
         }
@@ -82,7 +82,7 @@ public class MultipleMoveCommand extends AbstractCommand {
         int index = 0;
         for (InterclassPainter ip : moveSeletionRedo) {
             Interclass i = (Interclass) ip.getElement();
-            i.setPosition(oldPointsRedo.get(index++));
+            i.setPosition(oldPointsRedo.get(index++), dijagramView);
         }
         dijagramView.repaint();
     }

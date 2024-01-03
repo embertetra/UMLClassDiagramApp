@@ -36,7 +36,7 @@ public class SingleMoveCommand extends AbstractCommand {
                     mojPainter = ip;
                     //nove koordinate
                     mojInterclass = (Interclass) mojPainter.getElement();
-                    mojInterclass.setPosition(newPoint);
+                    mojInterclass.setPosition(newPoint, dijagramView);
                 }
             }
         }
@@ -60,7 +60,7 @@ public class SingleMoveCommand extends AbstractCommand {
                         if (ip.elementAt(newPoint)) {
                             mojPainter = ip;
                             mojInterclass = (Interclass) mojPainter.getElement();
-                            mojInterclass.setPosition(oldPoint);
+                            mojInterclass.setPosition(oldPoint, dijagramView);
                             break;
                         }
                     }
@@ -80,7 +80,7 @@ public class SingleMoveCommand extends AbstractCommand {
                 if (ip.elementAt(newPoint)) {
                     mojPainter = ip;
                     mojInterclass = (Interclass) mojPainter.getElement();
-                    mojInterclass.setPosition(oldPoint);
+                    mojInterclass.setPosition(oldPoint, dijagramView);
                     break;
                 }
             }

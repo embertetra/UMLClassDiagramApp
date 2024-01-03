@@ -174,7 +174,7 @@ public class Move implements State {
                         InterclassPainter ip = (InterclassPainter) ep;
                         Interclass ic = (Interclass) ip.getElement();
                         if (ip == d.getFlag1()) {
-                            ic.setPosition(new Point(d.getStartPoint().x + diffX - d.getxDragOffset(), d.getStartPoint().y + diffY - d.getyDragOffset()));
+                            ic.setPosition(new Point(d.getStartPoint().x + diffX - d.getxDragOffset(), d.getStartPoint().y + diffY - d.getyDragOffset()), d);
                             ic.setPosition(new Point(d.getStartPoint().x + diffX - d.getxDragOffset(), d.getStartPoint().y + diffY - d.getyDragOffset()), d);
                             return;
                         }
