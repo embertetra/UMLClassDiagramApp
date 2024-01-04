@@ -196,7 +196,6 @@ public class PromeniElementUKlasiAction extends AbstractClassyAction{
                         metoda = new Metode(Vidljivost.PRIVATE, tip, naziv);
                     else
                         metoda = new Metode(Vidljivost.PROTECTED, tip, naziv);
-
                 }
             }
         }

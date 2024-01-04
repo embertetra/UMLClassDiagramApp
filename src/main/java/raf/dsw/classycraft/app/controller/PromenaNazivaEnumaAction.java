@@ -64,6 +64,8 @@ public class PromenaNazivaEnumaAction extends AbstractClassyAction{
         AbstractCommand command = new AddNameCommand(MainFrame.getInstance().getEnumProzor().getTfIme().getText(), ((EnumM) enumPainter.getElement()).getNaziv(), (EnumM) enumPainter.getElement(), dijagramView);
         ((DijagramView)MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
 
+        ((EnumM) enumPainter.getElement()).projectChanged();
+
         MainFrame.getInstance().getEnumProzor().getTfIme().setText("");
     }
 }

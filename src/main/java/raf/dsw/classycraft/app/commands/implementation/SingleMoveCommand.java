@@ -38,6 +38,12 @@ public class SingleMoveCommand extends AbstractCommand {
                     mojInterclass = (Interclass) mojPainter.getElement();
                     mojInterclass.setPosition(newPoint, dijagramView);
                 }
+                else if(ic.getPosition().x == oldPoint.x && ic.getPosition().y == oldPoint.y){
+                    mojPainter = ip;
+                    //nove koordinate
+                    mojInterclass = (Interclass) mojPainter.getElement();
+                    mojInterclass.setPosition(newPoint, dijagramView);
+                }
             }
         }
 

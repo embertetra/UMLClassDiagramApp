@@ -46,6 +46,8 @@ public class ObrisiIzKlaseAction extends AbstractClassyAction{
         AbstractCommand command = new DeleteContentCommand((Klasa) klasaPainter.getElement(), dijagramView);
         ((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
 
+        ((Klasa) klasaPainter.getElement()).projectChanged();
+
         MainFrame.getInstance().getKlasaProzor().getBg().clearSelection();
         MainFrame.getInstance().getKlasaProzor().getBgVidljivost().clearSelection();
         MainFrame.getInstance().getKlasaProzor().getBgTip().clearSelection();

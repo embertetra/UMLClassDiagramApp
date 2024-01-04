@@ -78,7 +78,7 @@ public class GalleryTemplates extends JFrame {
                 index++;
 
             }
-            templates.add(new JLabel(), index, 0);
+            //templates.add(new JLabel(), index, 0);
             templates.add(btnBlank, index,0);
             templates.setAlignmentX(Component.CENTER_ALIGNMENT);
             mainPanel.add(templates);
@@ -108,6 +108,7 @@ public class GalleryTemplates extends JFrame {
                 index++;
 
             }
+            //templates.add(new JLabel(), index, 0);
             templates.add(btnBlank, index,0);
             templates.setAlignmentX(Component.CENTER_ALIGNMENT);
             mainPanel.add(templates);

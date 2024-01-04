@@ -136,6 +136,7 @@ public class AddConnectionCommand extends AbstractCommand {
 
     @Override
     public void undoCommand() {
+        dijagramView.getSelectionModel().clear();
         ///odredjivanje dijagrama unutar stabla
         ClassyTreeItem item = null;
         ClassyTreeItem selected = MainFrame.getInstance().getPackageView().getClassyTreeItem();
@@ -168,7 +169,10 @@ public class AddConnectionCommand extends AbstractCommand {
                 }
             }
         }
+        fixModel(item);
+    }
 
+    private void fixModel(ClassyTreeItem item){
         ///sredjivanje modela i paintera
         List<ElementPainter> novaPainterLista = new ArrayList<>();
         List<ClassyNode> novaLista = new ArrayList<>();
@@ -196,4 +200,5 @@ public class AddConnectionCommand extends AbstractCommand {
         dijagramView.setElementPainterList(novaPainterLista);
         dijagramView.repaint();
     }
+
 }

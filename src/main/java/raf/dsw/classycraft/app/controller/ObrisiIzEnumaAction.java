@@ -42,6 +42,7 @@ public class ObrisiIzEnumaAction extends AbstractClassyAction{
         dijagramView.repaint();
 
      */
+        ((EnumM) enumPainter.getElement()).projectChanged();
         AbstractCommand command = new DeleteContentCommand((EnumM) enumPainter.getElement(), dijagramView);
         ((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
     }

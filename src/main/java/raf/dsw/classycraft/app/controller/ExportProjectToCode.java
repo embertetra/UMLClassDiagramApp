@@ -242,7 +242,7 @@ public class ExportProjectToCode extends AbstractClassyAction {
                     string="";
                     ///ubacivanje svih metoda
                     for (Metode cc : i.getMetodeList()) {
-                        fw.append("\t" + vidljivostToString(cc.getVidljivost()) + " " + cc.getTip() + " " + cc.getNaziv() + "() {\n\n\t}\n");
+                        fw.append("\t" + vidljivostToString(cc.getVidljivost()) + " " + cc.getTip() + " " + cc.getNaziv() + "();\n");
                     }
                     ///sredjivanje veza metode
                     for (ClassyNode v : d.getChildren()) {

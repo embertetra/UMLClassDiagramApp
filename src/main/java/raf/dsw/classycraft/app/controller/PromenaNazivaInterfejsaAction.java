@@ -63,6 +63,8 @@ public class PromenaNazivaInterfejsaAction extends AbstractClassyAction{
         AbstractCommand command = new AddNameCommand(MainFrame.getInstance().getInterfejsProzor().getTfIme().getText(), ((Interfejs) interfejsPainter.getElement()).getNaziv() , (Interfejs) interfejsPainter.getElement(), dijagramView);
         ((DijagramView)MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
 
+        ((Interfejs) interfejsPainter.getElement()).projectChanged();
+
         MainFrame.getInstance().getInterfejsProzor().getTfIme().setText("");
         MainFrame.getInstance().getInterfejsProzor().getBgVidljivost().clearSelection();
         MainFrame.getInstance().getInterfejsProzor().getBgTip().clearSelection();
