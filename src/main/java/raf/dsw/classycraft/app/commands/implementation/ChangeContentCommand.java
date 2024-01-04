@@ -37,7 +37,7 @@ public class ChangeContentCommand extends AbstractCommand {
 
         if(naziv == null) {
             if (!MainFrame.getInstance().getInterfejsProzor().getTfNaziv().getText().isEmpty() || !MainFrame.getInstance().getInterfejsProzor().getTfNaziv().getText().equals(" ") && atribut == null)
-                if (MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().isEmpty() || MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().equals(" "))
+                if (interclass instanceof Interfejs)
                     metodaUndo.add(MainFrame.getInstance().getInterfejsProzor().getMetodeList().get(index));
             if (!MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().isEmpty() || !MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().equals(" ")) {
                 if (MainFrame.getInstance().getKlasaProzor().getClassContentList().get(index) instanceof Atributi)

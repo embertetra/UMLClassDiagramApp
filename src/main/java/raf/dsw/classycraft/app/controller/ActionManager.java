@@ -52,6 +52,8 @@ public class ActionManager {
         saveAsAction = new SaveAsAction();
         redoAction = new RedoAction();
         undoAction = new UndoAction();
+        redoAction.setEnabled(false);
+        undoAction.setEnabled(false);
     }
 
     public ExportProjectToCode getExportProjectToCode() {
