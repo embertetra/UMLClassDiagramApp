@@ -48,6 +48,7 @@ public class MultipleDeleteCommand extends AbstractCommand {
 
     @Override
     public void doCommand() {
+        //mojaSelekcija = new ArrayList<>(dijagramView.getSelectionModel());
         dijagramView.getSelectionModel().clear();
         selection = new ArrayList<>(mojaSelekcija);
 
@@ -112,38 +113,14 @@ public class MultipleDeleteCommand extends AbstractCommand {
                 }
             }
         }
-        ///sredjivanje modela i paintera
-        List<ElementPainter> novaPainterLista = new ArrayList<>();
-        List<ClassyNode> novaLista = new ArrayList<>();
-        for(int i=0;i< item.getChildCount();i++){
-            ClassyTreeItem cti = (ClassyTreeItem) item.getChildAt(i);
-            novaLista.add(cti.getClassyNode());
-            if(cti.getClassyNode() instanceof Klasa)
-                novaPainterLista.add(new KlasaPainter((Klasa) cti.getClassyNode()));
-            else if(cti.getClassyNode() instanceof Interfejs)
-                novaPainterLista.add(new InterfejsPainter((Interfejs) cti.getClassyNode()));
-            else if(cti.getClassyNode() instanceof EnumM)
-                novaPainterLista.add(new EnumPainter((EnumM) cti.getClassyNode()));
-            else if(cti.getClassyNode() instanceof Agregacija)
-                novaPainterLista.add(new AgregacijaPainter((Agregacija) cti.getClassyNode()));
-            else if(cti.getClassyNode() instanceof Kompozicija)
-                novaPainterLista.add(new KompozicijaPainter((Kompozicija) cti.getClassyNode()));
-            else if(cti.getClassyNode() instanceof Generalizacija)
-                novaPainterLista.add(new GeneralizacijaPainter((Generalizacija) cti.getClassyNode()));
-            else if(cti.getClassyNode() instanceof Zavisnost)
-                novaPainterLista.add(new ZavisnostPainter((Zavisnost) cti.getClassyNode()));
-        }
-        Dijagram d = (Dijagram) item.getClassyNode();
-        d.setChildren(novaLista);
-        dijagramView.getElementPainterList().clear();
-        dijagramView.setElementPainterList(novaPainterLista);
-        mojaSelekcija.clear();
-        dijagramView.repaint();
+        fixModel();
     }
 
     @Override
     public void undoCommand() {
-        mojaSelekcija = selection;
+        //fixModel();
+        dijagramView.setSelectionModel(selection);
+        dijagramView.repaint();
         ///odredjivanje dijagrama unutar stabla
         ClassyTreeItem item = null;
         ClassyTreeItem selected = MainFrame.getInstance().getPackageView().getClassyTreeItem();
@@ -183,6 +160,38 @@ public class MultipleDeleteCommand extends AbstractCommand {
         }
         klase.clear();
         veze.clear();
+        fixModel();
+        //dijagramView.setSelectionModel(mojaSelekcija);
+    }
+
+    private void fixModel(){
+        ///sredjivanje modela i paintera
+        List<ElementPainter> novaPainterLista = new ArrayList<>();
+        List<ClassyNode> novaLista = new ArrayList<>();
+        for(int i=0;i< item.getChildCount();i++){
+            ClassyTreeItem cti = (ClassyTreeItem) item.getChildAt(i);
+            novaLista.add(cti.getClassyNode());
+            if(cti.getClassyNode() instanceof Klasa)
+                novaPainterLista.add(new KlasaPainter((Klasa) cti.getClassyNode()));
+            else if(cti.getClassyNode() instanceof Interfejs)
+                novaPainterLista.add(new InterfejsPainter((Interfejs) cti.getClassyNode()));
+            else if(cti.getClassyNode() instanceof EnumM)
+                novaPainterLista.add(new EnumPainter((EnumM) cti.getClassyNode()));
+            else if(cti.getClassyNode() instanceof Agregacija)
+                novaPainterLista.add(new AgregacijaPainter((Agregacija) cti.getClassyNode()));
+            else if(cti.getClassyNode() instanceof Kompozicija)
+                novaPainterLista.add(new KompozicijaPainter((Kompozicija) cti.getClassyNode()));
+            else if(cti.getClassyNode() instanceof Generalizacija)
+                novaPainterLista.add(new GeneralizacijaPainter((Generalizacija) cti.getClassyNode()));
+            else if(cti.getClassyNode() instanceof Zavisnost)
+                novaPainterLista.add(new ZavisnostPainter((Zavisnost) cti.getClassyNode()));
+        }
+        Dijagram d = (Dijagram) item.getClassyNode();
+        d.setChildren(novaLista);
+        dijagramView.getElementPainterList().clear();
+        dijagramView.setElementPainterList(novaPainterLista);
+        //mojaSelekcija.clear();
+        dijagramView.repaint();
     }
 
     public void makeConnection(Connection connection, Dijagram d, ClassyTreeItem item){

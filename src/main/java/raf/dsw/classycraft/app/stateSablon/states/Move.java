@@ -49,33 +49,71 @@ public class Move implements State {
         AbstractCommand command = null;
 
 
-        //provera da li se nove kordinate preklapaju sa drugim elementima na dijagramu
-        for(ElementPainter ep : dijagramView.getElementPainterList()) {
-            if(ep instanceof InterclassPainter) {
-                InterclassPainter ip = (InterclassPainter)ep;
-                Interclass ic = (Interclass) ip.getElement();
-                Rectangle myRect = new Rectangle(ic.getPosition().x - ip.getWidth() / 2 - 10, ic.getPosition().y - ip.getHeightUkupno() / 2 - 5,
-                        ip.getWidth() + 12, ip.getHeightUkupno() + 12);
-                int brojac = 0;
-                for (ElementPainter epp : dijagramView.getElementPainterList()) {
-                    if (epp instanceof InterclassPainter) {
-                        InterclassPainter classP = (InterclassPainter) epp;
-                        Interclass klasa = (Interclass) classP.getElement();
-                        Rectangle rect = new Rectangle(klasa.getPosition().x - classP.getWidth() / 2 - 10, klasa.getPosition().y - classP.getHeightUkupno() / 2 - 5,
-                                classP.getWidth() + 12, classP.getHeightUkupno() + 12);
-                        if (rect.intersects(myRect)) brojac++;
+        //preklapanje multi move
+        if(tmp == 1) {
+            for (ElementPainter ep : dijagramView.getElementPainterList()) {
+                if (ep instanceof InterclassPainter) {
+                    InterclassPainter ip = (InterclassPainter) ep;
+                    Interclass ic = (Interclass) ip.getElement();
+                    Rectangle myRect = new Rectangle(ic.getPosition().x - ip.getWidth() / 2 - 10, ic.getPosition().y - ip.getHeightUkupno() / 2 - 5,
+                            ip.getWidth() + 12, ip.getHeightUkupno() + 12);
+                    int brojac = 0;
+                    for (ElementPainter epp : dijagramView.getElementPainterList()) {
+                        if (epp instanceof InterclassPainter) {
+                            InterclassPainter classP = (InterclassPainter) epp;
+                            Interclass klasa = (Interclass) classP.getElement();
+                            Rectangle rect = new Rectangle(klasa.getPosition().x - classP.getWidth() / 2 - 10, klasa.getPosition().y - classP.getHeightUkupno() / 2 - 5,
+                                    classP.getWidth() + 12, classP.getHeightUkupno() + 12);
+                            if (rect.intersects(myRect)) brojac++;
+                        }
+                    }
+                    if (brojac > 1) {//vracanje starih koordinata
+                        int ind = 0;
+                        for (InterclassPainter ip2 : dijagramView.getMoveSelections()) {
+                            Interclass i = (Interclass) ip2.getElement();
+                            i.setPosition(oldPoints.get(ind++), dijagramView);
+                        }
+                        dijagramView.setFlag1(null);
+                        tmp = 0;
+                        dijagramView.repaint();
+                        return;
                     }
                 }
-                if (brojac > 1) {//vracanje starih koordinata
-                    int ind = 0;
-                    for (InterclassPainter ip2 : dijagramView.getMoveSelections()) {
-                        Interclass i = (Interclass) ip2.getElement();
-                        i.setPosition(oldPoints.get(ind++), dijagramView);
+            }
+        }
+        ///preklapanje single move
+        else if(tmp != 1){
+            int br=0;
+            for(ElementPainter ep : dijagramView.getElementPainterList()){
+                if(ep instanceof InterclassPainter) {
+                    InterclassPainter mojPainter = (InterclassPainter) ep;
+                    if (mojPainter != null) {
+                        Interclass mojInterclass = (Interclass) mojPainter.getElement();
+                        //provera da li se nove koordinate preklapaju sa drugim elementima na dijagramu
+                        Rectangle mojRect = new Rectangle(mojInterclass.getPosition().x - mojPainter.getWidth() / 2 - 10, mojInterclass.getPosition().y - mojPainter.getHeightUkupno() / 2 - 5, mojPainter.getWidth() + 12, mojPainter.getHeightUkupno() + 12);
+                        for (ElementPainter epp : dijagramView.getElementPainterList()) {
+                            if (epp instanceof InterclassPainter) {
+                                InterclassPainter ip = (InterclassPainter) epp;
+                                Interclass ic = (Interclass) ip.getElement();
+                                Rectangle rect = new Rectangle(ic.getPosition().x - ip.getWidth() / 2 - 10, ic.getPosition().y - 5 - ip.getHeightUkupno() / 2, ip.getWidth() + 12, ip.getHeightUkupno() + 12);
+                                if (rect.intersects(mojRect)) br++;
+
+                            }
+                        }
+                        if (br > 1) {//vracanje starih koordinata
+                            for (ElementPainter epp : dijagramView.getElementPainterList()) {
+                                if (epp instanceof InterclassPainter) {
+                                    InterclassPainter ip = (InterclassPainter) epp;
+                                    if (ip.elementAt(new Point(x,y))) {
+                                        mojPainter = ip;
+                                        mojInterclass = (Interclass) mojPainter.getElement();
+                                        mojInterclass.setPosition(oldPoint, dijagramView);
+                                        return;
+                                    }
+                                }
+                            }
+                        }
                     }
-                    dijagramView.setFlag1(null);
-                    tmp = 0;
-                    dijagramView.repaint();
-                    return;
                 }
             }
         }

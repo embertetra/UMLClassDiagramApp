@@ -15,7 +15,6 @@ public class Delete implements State {
 
     @Override
     public void misKliknut(int x, int y, DijagramView dijagramView) {
-
         ///pronalazenje dijagrama u stablu
         ClassyTreeItem item = null;
         ClassyTreeItem selected = MainFrame.getInstance().getPackageView().getClassyTreeItem();

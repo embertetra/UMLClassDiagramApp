@@ -76,10 +76,13 @@ public class AddInterClassCommand extends AbstractCommand {
             d.addChild(enumM);
             MainFrame.getInstance().getClassyTree().addChild(item, enumM);
         }
+        //fixModel(item);
     }
 
     @Override
     public void undoCommand() {
+
+        dijagramView.getSelectionModel().clear();
         ///odredjivanje dijagrama unutar stabla
         ClassyTreeItem item = null;
         ClassyTreeItem selected = MainFrame.getInstance().getPackageView().getClassyTreeItem();
@@ -89,7 +92,7 @@ public class AddInterClassCommand extends AbstractCommand {
             if (cn.getName().equals(dijagramView.getClassyNode().getName()))
                 item = c;
         }
-
+        //fixModel(item);
         for(int j=dijagramView.getElementPainterList().size()-1; j>=0; j--){
             ElementPainter elementPainter = dijagramView.getElementPainterList().get(j);
             ///brisanje pojedinacne interklase
@@ -100,21 +103,23 @@ public class AddInterClassCommand extends AbstractCommand {
                         if (((ClassyTreeItem) item.getChildAt(i)).getClassyNode() instanceof Interclass) {
                             Interclass inter = (Interclass) ((ClassyTreeItem) item.getChildAt(i)).getClassyNode();
                             if (inter.poredjenje(klasaBrisanje)) {
-                                Dijagram dijagram = (Dijagram) item.getClassyNode();
-                                Interclass interclass = (Interclass) ((ClassyTreeItem) item.getChildAt(i)).getClassyNode();
-                                dijagram.removeChild(interclass);
                                 item.remove(i);
                                 break;
                             }
                         }
                     }
                 }
+
                 ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
                 SwingUtilities.updateComponentTreeUI(classyTreeImplementation.getTreeView());
                 break;
             }
         }
 
+        fixModel(item);
+    }
+
+    private void fixModel(ClassyTreeItem item){
         ///sredjivanje modela i paintera
         List<ElementPainter> novaPainterLista = new ArrayList<>();
         List<ClassyNode> novaLista = new ArrayList<>();
@@ -142,4 +147,5 @@ public class AddInterClassCommand extends AbstractCommand {
         dijagramView.setElementPainterList(novaPainterLista);
         dijagramView.repaint();
     }
+
 }
