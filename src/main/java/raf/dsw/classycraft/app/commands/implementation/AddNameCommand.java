@@ -9,12 +9,14 @@ import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 
 public class AddNameCommand extends AbstractCommand {
 
-    private String naziv;
+    private String nazivRedo;
+    private String nazivUndo;
     private Interclass interclass;
     private DijagramView dijagramView;
 
-    public AddNameCommand(String naziv, Interclass interclass, DijagramView dijagramView){
-        this.naziv = naziv;
+    public AddNameCommand(String noviNaziv,  String stariNaziv, Interclass interclass, DijagramView dijagramView){
+        this.nazivRedo = noviNaziv;
+        this.nazivUndo = stariNaziv;
         this.interclass = interclass;
         this.dijagramView = dijagramView;
     }
@@ -22,15 +24,15 @@ public class AddNameCommand extends AbstractCommand {
     public void doCommand() {
         if(interclass instanceof Klasa){
             Klasa k = (Klasa) interclass;
-            k.setNaziv(naziv);
+            k.setNaziv(nazivRedo);
         }
         else if(interclass instanceof Interfejs){
             Interfejs i = (Interfejs) interclass;
-            i.setNaziv(naziv);
+            i.setNaziv(nazivRedo);
         }
         else if(interclass instanceof EnumM){
             EnumM e = (EnumM) interclass;
-            e.setNaziv(naziv);
+            e.setNaziv(nazivRedo);
         }
         dijagramView.repaint();
     }
@@ -39,15 +41,15 @@ public class AddNameCommand extends AbstractCommand {
     public void undoCommand() {
         if(interclass instanceof Klasa){
             Klasa k = (Klasa) interclass;
-            k.setNaziv("");
+            k.setNaziv(nazivUndo);
         }
         else if(interclass instanceof Interfejs){
             Interfejs i = (Interfejs) interclass;
-            i.setNaziv("");
+            i.setNaziv(nazivUndo);
         }
         else if(interclass instanceof EnumM){
             EnumM e = (EnumM) interclass;
-            e.setNaziv("");
+            e.setNaziv(nazivUndo);
         }
         dijagramView.repaint();
     }
