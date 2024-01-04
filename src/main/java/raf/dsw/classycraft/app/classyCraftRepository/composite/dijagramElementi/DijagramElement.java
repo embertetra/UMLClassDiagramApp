@@ -1,6 +1,7 @@
 package raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
+import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
 
 import java.awt.*;
 
@@ -12,13 +13,16 @@ public abstract class DijagramElement extends ClassyNode {
         super(name, parent);
         this.color = color;
         this.stroke = stroke;
+        projectChanged();
     }
     public DijagramElement(String name, ClassyNode parent, int stroke) {
         super(name, parent);
         this.stroke = stroke;
+        projectChanged();
     }
     public DijagramElement(String name, ClassyNode parent) {
         super(name, parent);
+        projectChanged();
     }
 
     public Color getColor() {
@@ -26,6 +30,7 @@ public abstract class DijagramElement extends ClassyNode {
     }
 
     public void setColor(Color color) {
+        projectChanged();
         this.color = color;
     }
 
@@ -35,5 +40,15 @@ public abstract class DijagramElement extends ClassyNode {
 
     public void setStroke(int stroke) {
         this.stroke = stroke;
+        projectChanged();
     }
+    private void projectChanged(){
+        ClassyNode c = this;
+        while(c!=null && !(c instanceof Project)){
+            c = c.getParent();
+        }
+        if(c != null)
+            ((Project) c).setChanged(true);
+    }
+
 }

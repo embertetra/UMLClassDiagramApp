@@ -2,6 +2,8 @@ package raf.dsw.classycraft.app.controller;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
+import raf.dsw.classycraft.app.commands.AbstractCommand;
+import raf.dsw.classycraft.app.commands.implementation.AddNameCommand;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
@@ -52,10 +54,17 @@ public class PromenaNazivaKlaseAction extends AbstractClassyAction{
                 }
             }
         }
-
+/*
         //menjanje imena
         ((Klasa) klasaPainter.getElement()).setNaziv(MainFrame.getInstance().getKlasaProzor().getTfIme().getText());
+        ((Klasa) klasaPainter.getElement()).projectChanged();
         dijagramView.repaint();
+*/
+        AbstractCommand command = new AddNameCommand(MainFrame.getInstance().getKlasaProzor().getTfIme().getText(), ((Klasa) klasaPainter.getElement()).getNaziv(), (Klasa) klasaPainter.getElement(), dijagramView);
+        ((DijagramView)MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
+
+        ((Klasa) klasaPainter.getElement()).projectChanged();
+
         MainFrame.getInstance().getKlasaProzor().getTfIme().setText("");
         MainFrame.getInstance().getKlasaProzor().getBg().clearSelection();
         MainFrame.getInstance().getKlasaProzor().getBgVidljivost().clearSelection();

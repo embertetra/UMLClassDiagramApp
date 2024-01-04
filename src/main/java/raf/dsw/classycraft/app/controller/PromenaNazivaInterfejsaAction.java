@@ -2,6 +2,8 @@ package raf.dsw.classycraft.app.controller;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Interfejs;
+import raf.dsw.classycraft.app.commands.AbstractCommand;
+import raf.dsw.classycraft.app.commands.implementation.AddNameCommand;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
@@ -13,13 +15,13 @@ import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.Interfe
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-public class PromeniNazivInterfejsaAction extends AbstractClassyAction{
+public class PromenaNazivaInterfejsaAction extends AbstractClassyAction{
 
     private InterfejsPainter interfejsPainter;
 
     private DijagramView dijagramView;
 
-    public PromeniNazivInterfejsaAction(InterclassPainter interclassPainter, DijagramView d){
+    public PromenaNazivaInterfejsaAction(InterclassPainter interclassPainter, DijagramView d){
 
         interfejsPainter = (InterfejsPainter) interclassPainter;
         dijagramView = d;
@@ -52,12 +54,18 @@ public class PromeniNazivInterfejsaAction extends AbstractClassyAction{
                 }
             }
         }
-
+        /*
         //menjanje imena
         ((Interfejs) interfejsPainter.getElement()).setNaziv(MainFrame.getInstance().getInterfejsProzor().getTfIme().getText());
+        ((Interfejs) interfejsPainter.getElement()).projectChanged();
         dijagramView.repaint();
-        MainFrame.getInstance().getInterfejsProzor().getTfIme().setText("");
+        */
+        AbstractCommand command = new AddNameCommand(MainFrame.getInstance().getInterfejsProzor().getTfIme().getText(), ((Interfejs) interfejsPainter.getElement()).getNaziv() , (Interfejs) interfejsPainter.getElement(), dijagramView);
+        ((DijagramView)MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
 
+        ((Interfejs) interfejsPainter.getElement()).projectChanged();
+
+        MainFrame.getInstance().getInterfejsProzor().getTfIme().setText("");
         MainFrame.getInstance().getInterfejsProzor().getBgVidljivost().clearSelection();
         MainFrame.getInstance().getInterfejsProzor().getBgTip().clearSelection();
     }

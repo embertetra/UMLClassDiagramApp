@@ -1,6 +1,7 @@
 package raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
+import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Zavisnost;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
@@ -28,8 +29,8 @@ public class ZavisnostPainter extends ConnectionPainter {
         for(ElementPainter e : d.getElementPainterList()){
             if(e instanceof InterclassPainter){
                 InterclassPainter ip = (InterclassPainter) e;
-                if(ip.getElement() == z.getFrom()) zpFrom = ip;
-                else if(ip.getElement() == z.getTo()) zpTo = ip;
+                if(((Interclass)ip.getElement()).getPosition().x == z.getFrom().getPosition().x && ((Interclass)ip.getElement()).getPosition().y == z.getFrom().getPosition().y)zpFrom = ip;
+                else if(((Interclass)ip.getElement()).getPosition().x == z.getTo().getPosition().x && ((Interclass)ip.getElement()).getPosition().y == z.getTo().getPosition().y)zpTo = ip;
             }
         }
         double min = 1e9;

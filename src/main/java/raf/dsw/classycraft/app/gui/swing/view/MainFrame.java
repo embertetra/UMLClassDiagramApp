@@ -35,13 +35,15 @@ public class MainFrame extends JFrame implements ISubscriber {
     private JScrollPane scrollPane;
     private KompAgregProzor kompAgregProzor;
     private DependencyProzor dependencyProzor;
-
+    private GalleryTemplates galleryTemplates;
 
 
     private MainFrame() {
     }
 
     private void initialize() {
+        galleryTemplates = new GalleryTemplates();
+        //galleryTemplates.setVisible(true);
         actionManager = new ActionManager();
         aboutUsFrame = new AboutUsFrame();
         classyTree = new ClassyTreeImplementation();
@@ -114,6 +116,10 @@ public class MainFrame extends JFrame implements ISubscriber {
         else return new ToolBarStates();
     }
 
+    public GalleryTemplates getGalleryTemplates() {
+        return galleryTemplates;
+    }
+
     public ActionManager getActionManager() {
         return actionManager;
     }
@@ -158,5 +164,9 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     public DependencyProzor getDependencyProzor() {
         return dependencyProzor;
+    }
+
+    public DijagramView getDijagramView() {
+        return dijagramView;
     }
 }

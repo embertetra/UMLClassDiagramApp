@@ -17,7 +17,6 @@ public class FactoryUtils {
     ChildFactory childFactory;
 
     public FactoryUtils() {
-
     }
     public ClassyNode generateChild(ClassyNode parent, DijagramElement dijagramElement){
 
@@ -79,8 +78,11 @@ public class FactoryUtils {
                     cnt++;
                     dijagram = new Dijagram("Dijagram" + String.valueOf(cnt), parent);
                 }
-
-                return  childFactory.orderChild(dijagram.getName(), parent, null);
+                Dijagram d = (Dijagram) childFactory.orderChild(dijagram.getName(), parent, null);
+                MainFrame.getInstance().getGalleryTemplates().setProsledjen(d);
+                MainFrame.getInstance().getGalleryTemplates().setVisible(true);
+                return null;
+                //return  childFactory.orderChild(dijagram.getName(), parent, null);
             }
         }
         else if(parent instanceof Dijagram){

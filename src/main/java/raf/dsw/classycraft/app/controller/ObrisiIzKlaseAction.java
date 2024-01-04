@@ -1,6 +1,8 @@
 package raf.dsw.classycraft.app.controller;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
+import raf.dsw.classycraft.app.commands.AbstractCommand;
+import raf.dsw.classycraft.app.commands.implementation.DeleteContentCommand;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
@@ -35,9 +37,17 @@ public class ObrisiIzKlaseAction extends AbstractClassyAction{
             return;
         }
 
+        /*
         ((Klasa) klasaPainter.getElement()).getClassContentList().remove(MainFrame.getInstance().getKlasaProzor().getLista().getSelectedValue());
+        ((Klasa) klasaPainter.getElement()).projectChanged();
         MainFrame.getInstance().getKlasaProzor().setClassContentList(((Klasa) klasaPainter.getElement()).getClassContentList());
         dijagramView.repaint();
+        */
+        AbstractCommand command = new DeleteContentCommand((Klasa) klasaPainter.getElement(), dijagramView);
+        ((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
+
+        ((Klasa) klasaPainter.getElement()).projectChanged();
+
         MainFrame.getInstance().getKlasaProzor().getBg().clearSelection();
         MainFrame.getInstance().getKlasaProzor().getBgVidljivost().clearSelection();
         MainFrame.getInstance().getKlasaProzor().getBgTip().clearSelection();

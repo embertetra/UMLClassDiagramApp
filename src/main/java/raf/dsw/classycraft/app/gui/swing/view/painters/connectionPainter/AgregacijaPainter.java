@@ -12,6 +12,7 @@ import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
 
 import java.awt.*;
 import java.awt.geom.GeneralPath;
+import java.util.Iterator;
 
 public class AgregacijaPainter extends ConnectionPainter {
     public AgregacijaPainter(DijagramElement element) {
@@ -30,9 +31,10 @@ public class AgregacijaPainter extends ConnectionPainter {
         DijagramView d = (DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent();
         for (ElementPainter e : d.getElementPainterList()){
             if(e instanceof InterclassPainter){
+
                 InterclassPainter ip = (InterclassPainter) e;
-                if(ip.getElement() == a.getFrom())kpFrom = ip;
-                else if(ip.getElement() == a.getTo())kpTo = ip;
+                if(((Interclass)ip.getElement()).getPosition().x == a.getFrom().getPosition().x && ((Interclass)ip.getElement()).getPosition().y == a.getFrom().getPosition().y)kpFrom = ip;
+                else if(((Interclass)ip.getElement()).getPosition().x == a.getTo().getPosition().x && ((Interclass)ip.getElement()).getPosition().y == a.getTo().getPosition().y)kpTo = ip;
             }
         }
         double min = 1e9;

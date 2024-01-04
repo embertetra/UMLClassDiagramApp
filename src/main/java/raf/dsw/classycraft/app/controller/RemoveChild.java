@@ -1,5 +1,6 @@
 package raf.dsw.classycraft.app.controller;
 
+import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Package;
@@ -19,7 +20,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.Iterator;
 
-public class RemoveChild extends AbstractClassyAction{
+public class RemoveChild extends AbstractClassyAction {
 
     public RemoveChild() {
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, ActionEvent.CTRL_MASK));
@@ -31,13 +32,13 @@ public class RemoveChild extends AbstractClassyAction{
     @Override
     public void actionPerformed(ActionEvent e) {
         ClassyTreeItem selected = (ClassyTreeItem) MainFrame.getInstance().getClassyTree().getSelectedNode();
-        if(selected != null) {
+        if (selected != null) {
 
             ///ako korisnik zeli da obrise ProjectExplorer
-            if(selected.getClassyNode() instanceof ProjectExplorer)
+            if (selected.getClassyNode() instanceof ProjectExplorer)
                 ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("ProjectExplorer nije moguce obrisati!", MessageType.ERROR);
             ///ako zeli da obrise projekat
-            if(selected.getClassyNode() instanceof Project){
+            if (selected.getClassyNode() instanceof Project) {
 
                 Object[] options = {"Da", "Ne"};
                 int n = JOptionPane.showOptionDialog(MainFrame.getInstance(),
@@ -49,37 +50,48 @@ public class RemoveChild extends AbstractClassyAction{
                         options,
                         options[1]);
 
-                if(n == 0){
+                if (n == 0) {
                     MainFrame.getInstance().getClassyTree().getSelectedNode().removeFromParent();
                     ClassyNodeComposite cns = (ClassyNodeComposite) selected.getClassyNode().getParent();
-                    if(cns.getChildren().contains(selected.getClassyNode()))
+                    if (cns.getChildren().contains(selected.getClassyNode()))
                         cns.removeChild(selected.getClassyNode());
                     ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
                     SwingUtilities.updateComponentTreeUI(classyTreeImplementation.getTreeView());
                 }
 
             }
+            ///potrebno prepraviti
             ///brisanje dijagramElemenata
-            else if(selected.getClassyNode() instanceof DijagramElement){
+            /*else if (selected.getClassyNode() instanceof DijagramElement) {
                 DijagramView dijagramView = (DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent();
-                for (Iterator<ElementPainter> iterator = dijagramView.getElementPainterList().iterator(); iterator.hasNext(); ) {
-                    ElementPainter el = iterator.next();
-                    if(el.getElement() == selected.getClassyNode()) {
-                        iterator.remove();
-                        dijagramView.repaint();
-                        MainFrame.getInstance().getClassyTree().getSelectedNode().removeFromParent();
-                        ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
-                        SwingUtilities.updateComponentTreeUI(classyTreeImplementation.getTreeView());
+                if (dijagramView != null) {
+                    for (Iterator<ElementPainter> iterator = dijagramView.getElementPainterList().iterator(); iterator.hasNext(); ) {
+                        ElementPainter el = iterator.next();
+                        if (el.getElement() == selected.getClassyNode()) {
+                            iterator.remove();
+                            dijagramView.repaint();
+                            MainFrame.getInstance().getClassyTree().getSelectedNode().removeFromParent();
+                        }
                     }
+                    dijagramView.getSelectionModel().clear();
                 }
-                dijagramView.getSelectionModel().clear();
-            }
+                else {
+                    ClassyNode c = MainFrame.getInstance().getClassyTree().getSelectedNode().getClassyNode();
+                    ((ClassyNodeComposite)c.getParent()).removeChild(c);
+                    MainFrame.getInstance().getClassyTree().getSelectedNode().removeFromParent();
+                }
+                ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
+                SwingUtilities.updateComponentTreeUI(classyTreeImplementation.getTreeView());
+            }*/
             ///ako zeli da obrise paket ili dijagram
-            else if(!(selected.getClassyNode() instanceof ProjectExplorer)){
-                if(selected.getClassyNode() instanceof Package){
-                    for(Iterator<PackageView> iterator = MainFrame.getInstance().getListaPackageView().iterator(); iterator.hasNext();){
+            else if(selected.getClassyNode() instanceof DijagramElement){
+                ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Dijagram elemente mozete brisati na samom dijagramu", MessageType.INFO);
+            }
+            else if (!(selected.getClassyNode() instanceof ProjectExplorer)) {
+                if (selected.getClassyNode() instanceof Package) {
+                    for (Iterator<PackageView> iterator = MainFrame.getInstance().getListaPackageView().iterator(); iterator.hasNext(); ) {
                         PackageView pv = iterator.next();
-                        if(pv.getClassyNode() == selected.getClassyNode()){
+                        if (pv.getClassyNode() == selected.getClassyNode()) {
                             iterator.remove();
                             System.out.println(pv.getClassyNode().getName());
                         }
@@ -87,14 +99,14 @@ public class RemoveChild extends AbstractClassyAction{
                 }
                 MainFrame.getInstance().getClassyTree().getSelectedNode().removeFromParent();
                 ClassyNodeComposite cns = (ClassyNodeComposite) selected.getClassyNode().getParent();
-                if(cns.getChildren().contains(selected.getClassyNode()))
+                if (cns.getChildren().contains(selected.getClassyNode()))
                     cns.removeChild(selected.getClassyNode());
                 ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
                 SwingUtilities.updateComponentTreeUI(classyTreeImplementation.getTreeView());
             }
-                ///brise selekciju nakon brisanja
-                ClassyTreeImplementation cti = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
-                cti.getTreeView().clearSelection();
+            ///brise selekciju nakon brisanja
+            ClassyTreeImplementation cti = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();
+            cti.getTreeView().clearSelection();
         }
         ///ako nista nije selektovano
         else

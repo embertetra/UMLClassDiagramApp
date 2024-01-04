@@ -92,7 +92,7 @@ public class AddContent implements State {
                 MainFrame.getInstance().getInterfejsProzor().setMetodeList(i.getMetodeList());
                 MainFrame.getInstance().getInterfejsProzor().getJbPromeni().setAction(new PromeniElementUInterfejsuAction(interclassPainter, dijagramView));
                 MainFrame.getInstance().getInterfejsProzor().getJbObrisi().setAction(new ObrisiIzInterfejsaAction(interclassPainter, dijagramView));
-                MainFrame.getInstance().getInterfejsProzor().getJbIme().setAction(new PromeniNazivInterfejsaAction(interclassPainter, dijagramView));
+                MainFrame.getInstance().getInterfejsProzor().getJbIme().setAction(new PromenaNazivaInterfejsaAction(interclassPainter, dijagramView));
                 MainFrame.getInstance().getInterfejsProzor().getJbDodaj().setAction(new DodajUInterfejsAction(interclassPainter, dijagramView));
                 MainFrame.getInstance().getInterfejsProzor().setVisible(true);
             } else if (interclassPainter.getElement() instanceof EnumM) {
@@ -108,6 +108,7 @@ public class AddContent implements State {
         dijagramView.getSelectionModel().clear();
         dijagramView.setSelection(null);
         dijagramView.repaint();
+        System.out.println("Dodat kontent");
     }
 
     @Override

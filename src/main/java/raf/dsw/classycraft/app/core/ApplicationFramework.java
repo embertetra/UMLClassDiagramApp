@@ -3,6 +3,7 @@ package raf.dsw.classycraft.app.core;
 import raf.dsw.classycraft.app.errorHandler.*;
 import raf.dsw.classycraft.app.gui.swing.tree.model.childFactory.FactoryUtils;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
+import raf.dsw.classycraft.app.serializer.JacksonSerializer;
 
 public class ApplicationFramework {
 
@@ -15,12 +16,15 @@ public class ApplicationFramework {
     private Logger consoleLogger;
     private FactoryUtils factoryUtils;
     protected ClassyRepository classyRepository;
+    private Serializer serializer;
 
     private ApplicationFramework() {
 
     }
 
     public void initialize(ClassyRepository classyRepository) {
+
+        serializer = new JacksonSerializer();
 
         factoryUtils = new FactoryUtils();
 
@@ -55,4 +59,7 @@ public class ApplicationFramework {
         return factoryUtils;
     }
 
+    public Serializer getSerializer() {
+        return serializer;
+    }
 }

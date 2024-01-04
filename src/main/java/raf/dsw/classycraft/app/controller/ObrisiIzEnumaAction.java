@@ -1,6 +1,8 @@
 package raf.dsw.classycraft.app.controller;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.EnumM;
+import raf.dsw.classycraft.app.commands.AbstractCommand;
+import raf.dsw.classycraft.app.commands.implementation.DeleteContentCommand;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
@@ -33,9 +35,15 @@ public class ObrisiIzEnumaAction extends AbstractClassyAction{
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije odabran element koji se brise!", MessageType.ERROR);
             return;
         }
-
+    /*
         ((EnumM) enumPainter.getElement()).getListEnuma().remove(MainFrame.getInstance().getEnumProzor().getLista().getSelectedValue());
+        ((EnumM) enumPainter.getElement()).projectChanged();
         MainFrame.getInstance().getEnumProzor().setEnumMList(((EnumM) enumPainter.getElement()).getListEnuma());
         dijagramView.repaint();
+
+     */
+        ((EnumM) enumPainter.getElement()).projectChanged();
+        AbstractCommand command = new DeleteContentCommand((EnumM) enumPainter.getElement(), dijagramView);
+        ((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
     }
 }

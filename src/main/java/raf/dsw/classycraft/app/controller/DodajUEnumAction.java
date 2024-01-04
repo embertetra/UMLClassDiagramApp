@@ -1,6 +1,8 @@
 package raf.dsw.classycraft.app.controller;
-
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.EnumM;
+
+import raf.dsw.classycraft.app.commands.AbstractCommand;
+import raf.dsw.classycraft.app.commands.implementation.AddContentCommand;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
@@ -48,9 +50,12 @@ public class DodajUEnumAction extends AbstractClassyAction{
             return;
         }
 
-        ((EnumM) enumPainter.getElement()).getListEnuma().add(naziv);
+        //((EnumM) enumPainter.getElement()).getListEnuma().add(naziv);
+        //dijagramView.repaint();
+        AbstractCommand command = new AddContentCommand(null, null, naziv, (EnumM) enumPainter.getElement(), dijagramView);
+        ((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
 
-        dijagramView.repaint();
+        ((EnumM)enumPainter.getElement()).projectChanged();
 
         MainFrame.getInstance().getEnumProzor().getTfNaziv().setText("");
         MainFrame.getInstance().getEnumProzor().setEnumMList(((EnumM) enumPainter.getElement()).getListEnuma());

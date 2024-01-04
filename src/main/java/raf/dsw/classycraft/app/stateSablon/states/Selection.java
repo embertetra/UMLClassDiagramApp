@@ -55,7 +55,7 @@ public class Selection implements State {
             dijagramView.setSelection(new Rectangle((int) s.getBounds().getMinX(), (int) s.getBounds().getMinY(), s.getBounds().width, s.getBounds().height));
             dijagramView.repaint();
         }
-
+        System.out.println("selektovan element");
     }
 
     @Override
@@ -63,12 +63,14 @@ public class Selection implements State {
         dijagramView.setSelection(null);
         dijagramView.setShape(null);
         dijagramView.repaint();
+        System.out.println("Zavrsena multiselekcija");
     }
 
     @Override
     public void misPrivucen(int x, int y, DijagramView dijagramView) {
         dijagramView.getSelectionModel().clear();
         dijagramView.setSelection(new Rectangle(x,y,-1,-1));
+        System.out.println("Poceta multiselekcija");
     }
 
     @Override

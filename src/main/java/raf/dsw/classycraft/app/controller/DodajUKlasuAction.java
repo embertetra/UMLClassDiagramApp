@@ -5,6 +5,8 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Clas
 import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Metode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Vidljivost;
+import raf.dsw.classycraft.app.commands.AbstractCommand;
+import raf.dsw.classycraft.app.commands.implementation.AddContentCommand;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
@@ -88,15 +90,30 @@ public class DodajUKlasuAction extends AbstractClassyAction{
                 MainFrame.getInstance().getKlasaProzor().getTfNaziv().setText("");
                 return;
             }
-
+        /*
         if(MainFrame.getInstance().getKlasaProzor().getAtribut().isSelected()) {
             ((Klasa) klasaPainter.getElement()).getClassContentList().add(new Atributi(vidljivost, tip, naziv));
         }
         else if(MainFrame.getInstance().getKlasaProzor().getMetoda().isSelected()) {
             ((Klasa) klasaPainter.getElement()).getClassContentList().add(new Metode(vidljivost, tip, naziv));
-        }
+        } dijagramView.repaint();
+        */
 
-        dijagramView.repaint();
+        AbstractCommand command = null;
+        if(MainFrame.getInstance().getKlasaProzor().getAtribut().isSelected()) {
+            Atributi a = new Atributi(vidljivost, tip, naziv);
+            command = new AddContentCommand(a, null, null, (Klasa) klasaPainter.getElement(), dijagramView);
+            ((Klasa)klasaPainter.getElement()).projectChanged();
+        }
+        else if(MainFrame.getInstance().getKlasaProzor().getMetoda().isSelected()) {
+            Metode m = new Metode(vidljivost, tip, naziv);
+            command = new AddContentCommand(null, m, null, (Klasa) klasaPainter.getElement(), dijagramView);
+            ((Klasa)klasaPainter.getElement()).projectChanged();
+        }
+        ((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
+
+
+
         MainFrame.getInstance().getKlasaProzor().getTfNaziv().setText("");
         MainFrame.getInstance().getKlasaProzor().setClassContentList(((Klasa) klasaPainter.getElement()).getClassContentList());
         MainFrame.getInstance().getKlasaProzor().getBg().clearSelection();
