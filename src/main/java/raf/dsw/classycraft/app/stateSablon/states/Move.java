@@ -23,6 +23,7 @@ public class Move implements State {
     private List<InterclassPainter> shapes;
     private List<Point> oldPoints;
     private int tmp;
+    private int radnaPovrsinaFlag=0;
 
     public Move() {
         shapes = new ArrayList<>();
@@ -40,9 +41,45 @@ public class Move implements State {
     @Override
     public void misOtpusten(int x, int y, DijagramView dijagramView) {
 
+        if(radnaPovrsinaFlag == 1){
+            radnaPovrsinaFlag = 0;
+            return;
+        }
+
         AbstractCommand command = null;
 
-        dijagramView.getSelectionModel().clear();
+
+        //provera da li se nove kordinate preklapaju sa drugim elementima na dijagramu
+        for(ElementPainter ep : dijagramView.getElementPainterList()) {
+            if(ep instanceof InterclassPainter) {
+                InterclassPainter ip = (InterclassPainter)ep;
+                Interclass ic = (Interclass) ip.getElement();
+                Rectangle myRect = new Rectangle(ic.getPosition().x - ip.getWidth() / 2 - 10, ic.getPosition().y - ip.getHeightUkupno() / 2 - 5,
+                        ip.getWidth() + 12, ip.getHeightUkupno() + 12);
+                int brojac = 0;
+                for (ElementPainter epp : dijagramView.getElementPainterList()) {
+                    if (epp instanceof InterclassPainter) {
+                        InterclassPainter classP = (InterclassPainter) epp;
+                        Interclass klasa = (Interclass) classP.getElement();
+                        Rectangle rect = new Rectangle(klasa.getPosition().x - classP.getWidth() / 2 - 10, klasa.getPosition().y - classP.getHeightUkupno() / 2 - 5,
+                                classP.getWidth() + 12, classP.getHeightUkupno() + 12);
+                        if (rect.intersects(myRect)) brojac++;
+                    }
+                }
+                if (brojac > 1) {//vracanje starih koordinata
+                    int ind = 0;
+                    for (InterclassPainter ip2 : dijagramView.getMoveSelections()) {
+                        Interclass i = (Interclass) ip2.getElement();
+                        i.setPosition(oldPoints.get(ind++), dijagramView);
+                    }
+                    dijagramView.setFlag1(null);
+                    tmp = 0;
+                    dijagramView.repaint();
+                    return;
+                }
+            }
+        }
+
 
         //multiple selection
         if(tmp == 1)
@@ -135,6 +172,7 @@ public class Move implements State {
 
         ///pomeranje radne povrsine
         else {
+            radnaPovrsinaFlag = 1;
             for (ElementPainter ep : dijagramView.getElementPainterList()) {
                 if (ep instanceof InterclassPainter) {
                     InterclassPainter ip = (InterclassPainter) ep;

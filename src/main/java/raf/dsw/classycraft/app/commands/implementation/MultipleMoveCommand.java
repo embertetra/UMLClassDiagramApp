@@ -46,29 +46,42 @@ public class MultipleMoveCommand extends AbstractCommand {
             Interclass ic = (Interclass) ip.getElement();
             ic.setPosition(new Point(dijagramView.getStartPoint().x + diffX - ip.getxDragOffset(), dijagramView.getStartPoint().y + diffY - ip.getyDragOffset()), dijagramView);
         }
-        //provera da li se nove kordinate preklapaju sa drugim elementima na dijagramu
-        for(InterclassPainter ip : moveSeletionRedo) {
+//        //provera da li se nove kordinate preklapaju sa drugim elementima na dijagramu
+//        for(InterclassPainter ip : moveSeletionRedo) {
+//            Interclass ic = (Interclass) ip.getElement();
+//            Rectangle myRect = new Rectangle(ic.getPosition().x - ip.getWidth() / 2 - 10, ic.getPosition().y - ip.getHeightUkupno() / 2 - 5,
+//                    ip.getWidth() + 12, ip.getHeightUkupno() + 12);
+//            int brojac = 0;
+//            for (ElementPainter ep : dijagramView.getElementPainterList()) {
+//                if(ep instanceof InterclassPainter) {
+//                    InterclassPainter classP = (InterclassPainter) ep;
+//                    Interclass klasa = (Interclass) classP.getElement();
+//                    Rectangle rect = new Rectangle(klasa.getPosition().x - classP.getWidth() / 2 - 10, klasa.getPosition().y - classP.getHeightUkupno() / 2 - 5,
+//                            classP.getWidth() + 12, classP.getHeightUkupno() + 12);
+//                    if (rect.intersects(myRect)) brojac++;
+//                }
+//            }
+//            if (brojac > 1) {//vracanje starih koordinata
+//                int ind = 0;
+//                for(InterclassPainter ip2 : moveSeletionRedo){
+//                    Interclass i = (Interclass) ip2.getElement();
+//                    i.setPosition(oldPointsRedo.get(ind++), dijagramView);
+//                }
+//            }
+//        }
+
+        List<Shape> novaListaSelekcija = new ArrayList<>();
+
+        for (InterclassPainter ip : moveSeletionRedo) {
             Interclass ic = (Interclass) ip.getElement();
-            Rectangle myRect = new Rectangle(ic.getPosition().x - ip.getWidth() / 2 - 10, ic.getPosition().y - ip.getHeightUkupno() / 2 - 5,
-                    ip.getWidth() + 12, ip.getHeightUkupno() + 12);
-            int brojac = 0;
-            for (ElementPainter ep : dijagramView.getElementPainterList()) {
-                if(ep instanceof InterclassPainter) {
-                    InterclassPainter classP = (InterclassPainter) ep;
-                    Interclass klasa = (Interclass) classP.getElement();
-                    Rectangle rect = new Rectangle(klasa.getPosition().x - classP.getWidth() / 2 - 10, klasa.getPosition().y - classP.getHeightUkupno() / 2 - 5,
-                            classP.getWidth() + 12, classP.getHeightUkupno() + 12);
-                    if (rect.intersects(myRect)) brojac++;
-                }
-            }
-            if (brojac > 1) {//vracanje starih koordinata
-                int ind = 0;
-                for(InterclassPainter ip2 : moveSeletionRedo){
-                    Interclass i = (Interclass) ip2.getElement();
-                    i.setPosition(oldPointsRedo.get(ind++), dijagramView);
-                }
-            }
+            Shape s = new Rectangle(ic.getPosition().x - ip.getWidth() / 2 - 10, ic.getPosition().y - ip.getHeightUkupno() / 2 - 5,
+                    ip.getWidth() + 20, ip.getHeightUkupno() + 20);
+            novaListaSelekcija.add(s);
+
         }
+
+        dijagramView.setSelectionModel(novaListaSelekcija);
+
         selectionRedo.clear();
         moveSeletionRedo.clear();
         dijagramView.repaint();
@@ -76,6 +89,7 @@ public class MultipleMoveCommand extends AbstractCommand {
 
     @Override
     public void undoCommand() {
+        dijagramView.getSelectionModel().clear();
         selectionRedo = selectionUndo;
         moveSeletionRedo = moveSelectionUndo;
         oldPointsRedo = oldPointsUndo;
@@ -84,6 +98,17 @@ public class MultipleMoveCommand extends AbstractCommand {
             Interclass i = (Interclass) ip.getElement();
             i.setPosition(oldPointsRedo.get(index++), dijagramView);
         }
+        List<Shape> novaListaSelekcija = new ArrayList<>();
+        for (InterclassPainter ip : moveSeletionRedo) {
+            Interclass ic = (Interclass) ip.getElement();
+            Shape s = new Rectangle(ic.getPosition().x - ip.getWidth() / 2 - 10, ic.getPosition().y - ip.getHeightUkupno() / 2 - 5,
+                    ip.getWidth() + 20, ip.getHeightUkupno() + 20);
+            novaListaSelekcija.add(s);
+
+        }
+        dijagramView.setSelectionModel(novaListaSelekcija);
+
         dijagramView.repaint();
+
     }
 }
