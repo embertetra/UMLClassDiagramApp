@@ -156,7 +156,7 @@ public class AddConnectionCommand extends AbstractCommand {
                     for (int i = 0; i < item.getChildCount(); i++) {
                         if (((ClassyTreeItem) item.getChildAt(i)).getClassyNode() instanceof Connection) {
                             Connection cn = (Connection) ((ClassyTreeItem) item.getChildAt(i)).getClassyNode();
-                            if (cn.poredjenje(vezaBrisanje)) {
+                            if (cn.poredjenje(connection)) {
                                 item.remove(i);
                                 ((Dijagram) item.getClassyNode()).removeChild(vezaBrisanje);
                                 ClassyTreeImplementation classyTreeImplementation = (ClassyTreeImplementation) MainFrame.getInstance().getClassyTree();

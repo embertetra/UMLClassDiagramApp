@@ -43,7 +43,6 @@ public class AddInterClassCommand extends AbstractCommand {
     public void doCommand() {
         //AffineTransform at = dijagramView.getAt();
 
-        System.out.println("koordinate pre do commande " + interclass.getPosition());
         ///odredjivanje dijagrama unutar stabla
         ClassyTreeItem item = null;
         ClassyTreeItem selected = MainFrame.getInstance().getPackageView().getClassyTreeItem();
@@ -82,7 +81,6 @@ public class AddInterClassCommand extends AbstractCommand {
 
     @Override
     public void undoCommand() {
-        System.out.println("koordinate pre undo commande " + interclass.getPosition());
         dijagramView.getSelectionModel().clear();
         ///odredjivanje dijagrama unutar stabla
         ClassyTreeItem item = null;
