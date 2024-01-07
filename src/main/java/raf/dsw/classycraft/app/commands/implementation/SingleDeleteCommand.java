@@ -50,6 +50,8 @@ public class SingleDeleteCommand extends AbstractCommand {
     @Override
     public void doCommand() {
 
+
+
         Interclass selektovanaKlasa = null;//klasa na koju smo kliknuli
         for (int j = dijagramView.getElementPainterList().size() - 1; j >= 0; j--) {
             ElementPainter elementPainter = dijagramView.getElementPainterList().get(j);
@@ -128,6 +130,7 @@ public class SingleDeleteCommand extends AbstractCommand {
     @Override
     public void undoCommand() {
         Dijagram d = (Dijagram) dijagramView.getClassyNode();
+
 
         for (DijagramElement dijagramElement : list) {
             if (dijagramElement instanceof Interclass) {

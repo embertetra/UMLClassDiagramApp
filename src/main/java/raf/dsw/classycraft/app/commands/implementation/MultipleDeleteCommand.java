@@ -114,6 +114,7 @@ public class MultipleDeleteCommand extends AbstractCommand {
             }
         }
         fixModel();
+        dijagramView.repaint();
     }
 
     @Override
@@ -137,21 +138,21 @@ public class MultipleDeleteCommand extends AbstractCommand {
                 klasa.addSubscriber(dijagramView);
                 KlasaPainter klasaPainter = new KlasaPainter(klasa);
                 dijagramView.getElementPainterList().add(klasaPainter);
-                //d.addChild(klasa);///dodoavanje u model
+                d.addChild(klasa);///dodoavanje u model
                 MainFrame.getInstance().getClassyTree().addChild(item, klasa);///dodavanje u stablo
             } else if (interclass instanceof Interfejs) {
                 Interfejs interfejs = (Interfejs) interclass;
                 interfejs.addSubscriber(dijagramView);
                 InterfejsPainter interfejsPainter = new InterfejsPainter(interfejs);
                 dijagramView.getElementPainterList().add(interfejsPainter);
-                //d.addChild(interfejs);
+                d.addChild(interfejs);
                 MainFrame.getInstance().getClassyTree().addChild(item, interfejs);
             } else if (interclass instanceof EnumM) {
                 EnumM enumM = (EnumM) interclass;
                 enumM.addSubscriber(dijagramView);
                 EnumPainter enumPainter = new EnumPainter(enumM);
                 dijagramView.getElementPainterList().add(enumPainter);
-                //d.addChild(enumM);
+                d.addChild(enumM);
                 MainFrame.getInstance().getClassyTree().addChild(item, enumM);
             }
         }
@@ -201,7 +202,6 @@ public class MultipleDeleteCommand extends AbstractCommand {
         dijagramView.getElementPainterList().clear();
         dijagramView.setElementPainterList(novaPainterLista);
         //mojaSelekcija.clear();
-        dijagramView.repaint();
     }
 
     public void makeConnection(Connection connection, Dijagram d, ClassyTreeItem item){

@@ -43,6 +43,7 @@ public class AddInterClassCommand extends AbstractCommand {
     public void doCommand() {
         //AffineTransform at = dijagramView.getAt();
 
+        System.out.println("koordinate pre do commande " + interclass.getPosition());
         ///odredjivanje dijagrama unutar stabla
         ClassyTreeItem item = null;
         ClassyTreeItem selected = MainFrame.getInstance().getPackageView().getClassyTreeItem();
@@ -76,12 +77,12 @@ public class AddInterClassCommand extends AbstractCommand {
             d.addChild(enumM);
             MainFrame.getInstance().getClassyTree().addChild(item, enumM);
         }
-        //fixModel(item);
+        fixModel(item);
     }
 
     @Override
     public void undoCommand() {
-
+        System.out.println("koordinate pre undo commande " + interclass.getPosition());
         dijagramView.getSelectionModel().clear();
         ///odredjivanje dijagrama unutar stabla
         ClassyTreeItem item = null;
@@ -102,7 +103,8 @@ public class AddInterClassCommand extends AbstractCommand {
                     for (int i = 0; i < item.getChildCount(); i++) {
                         if (((ClassyTreeItem) item.getChildAt(i)).getClassyNode() instanceof Interclass) {
                             Interclass inter = (Interclass) ((ClassyTreeItem) item.getChildAt(i)).getClassyNode();
-                            if (inter.poredjenje(klasaBrisanje)) {
+                            if (inter.poredjenje(interclass)) {
+                                System.out.println("orbisano" + interclass.getPosition());
                                 item.remove(i);
                                 break;
                             }
@@ -123,23 +125,33 @@ public class AddInterClassCommand extends AbstractCommand {
         ///sredjivanje modela i paintera
         List<ElementPainter> novaPainterLista = new ArrayList<>();
         List<ClassyNode> novaLista = new ArrayList<>();
-        for(int i=0;i< item.getChildCount();i++){
+        for (int i = 0; i < item.getChildCount(); i++) {
             ClassyTreeItem cti = (ClassyTreeItem) item.getChildAt(i);
             novaLista.add(cti.getClassyNode());
-            if(cti.getClassyNode() instanceof Klasa)
+            if (cti.getClassyNode() instanceof Klasa) {
+                ((Klasa)cti.getClassyNode()).addSubscriber(dijagramView);
                 novaPainterLista.add(new KlasaPainter((Klasa) cti.getClassyNode()));
-            else if(cti.getClassyNode() instanceof Interfejs)
+            }
+            else if (cti.getClassyNode() instanceof Interfejs) {
+                ((Interfejs)cti.getClassyNode()).addSubscriber(dijagramView);
                 novaPainterLista.add(new InterfejsPainter((Interfejs) cti.getClassyNode()));
-            else if(cti.getClassyNode() instanceof EnumM)
+            }
+            else if (cti.getClassyNode() instanceof EnumM) {
+                ((EnumM)cti.getClassyNode()).addSubscriber(dijagramView);
                 novaPainterLista.add(new EnumPainter((EnumM) cti.getClassyNode()));
-            else if(cti.getClassyNode() instanceof Agregacija)
+            }
+            else if (cti.getClassyNode() instanceof Agregacija) {
                 novaPainterLista.add(new AgregacijaPainter((Agregacija) cti.getClassyNode()));
-            else if(cti.getClassyNode() instanceof Kompozicija)
+            }
+            else if (cti.getClassyNode() instanceof Kompozicija) {
                 novaPainterLista.add(new KompozicijaPainter((Kompozicija) cti.getClassyNode()));
-            else if(cti.getClassyNode() instanceof Generalizacija)
+            }
+            else if (cti.getClassyNode() instanceof Generalizacija) {
                 novaPainterLista.add(new GeneralizacijaPainter((Generalizacija) cti.getClassyNode()));
-            else if(cti.getClassyNode() instanceof Zavisnost)
+            }
+            else if (cti.getClassyNode() instanceof Zavisnost) {
                 novaPainterLista.add(new ZavisnostPainter((Zavisnost) cti.getClassyNode()));
+            }
         }
         Dijagram d = (Dijagram) item.getClassyNode();
         d.setChildren(novaLista);

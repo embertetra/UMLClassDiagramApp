@@ -232,3 +232,4 @@
 [ERROR] [07.01.2024. 11:18] [Nije odabran element iz liste!]
 [ERROR] [07.01.2024. 11:18] [Metoda vec postoji!]
 [ERROR] [07.01.2024. 11:21] [Nije selektovan roditelj]
+[ERROR] [07.01.2024. 11:46] [Nije selektovan roditelj]

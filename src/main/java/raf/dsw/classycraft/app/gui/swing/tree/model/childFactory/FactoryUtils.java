@@ -87,7 +87,7 @@ public class FactoryUtils {
         }
         else if(parent instanceof Dijagram){
             Dijagram d = (Dijagram)parent;
-            if(d.getChildren().size()-1 >=0);
+            if(d.getChildren().size()-1 >= 0);
                 ClassyNode c = d.getChildren().get(d.getChildren().size()-1);
             if(c instanceof Interclass) {
                 childFactory = new InterclassFactory();
