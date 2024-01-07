@@ -36,15 +36,13 @@ public class ChangeContentCommand extends AbstractCommand {
         metodaUndo = new ArrayList<>();
 
         if(naziv == null) {
-            if (!MainFrame.getInstance().getInterfejsProzor().getTfNaziv().getText().isEmpty() || !MainFrame.getInstance().getInterfejsProzor().getTfNaziv().getText().equals(" ") && atribut == null) {
-                if (interclass instanceof Interfejs){
-                    metodaUndo.add(MainFrame.getInstance().getInterfejsProzor().getMetodeList().get(index));
-                }
+            if (interclass instanceof Interfejs && (!MainFrame.getInstance().getInterfejsProzor().getTfNaziv().getText().isEmpty() || !MainFrame.getInstance().getInterfejsProzor().getTfNaziv().getText().equals(" ") && atribut == null)) {
+                metodaUndo.add(MainFrame.getInstance().getInterfejsProzor().getMetodeList().get(index));
             }
-            else if (!MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().isEmpty() || !MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().equals(" ")) {
+            else if (interclass instanceof Klasa && (!MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().isEmpty() || !MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().equals(" "))) {
                 if (atribut != null && MainFrame.getInstance().getKlasaProzor().getClassContentList().get(index) instanceof Atributi)
                     atributUndo.add((Atributi) MainFrame.getInstance().getKlasaProzor().getClassContentList().get(index));
-                else if(metoda != null)
+                else if(metoda != null && MainFrame.getInstance().getKlasaProzor().getClassContentList().get(index) instanceof Metode)
                     metodaUndo.add((Metode) MainFrame.getInstance().getKlasaProzor().getClassContentList().get(index));
             }
         }
