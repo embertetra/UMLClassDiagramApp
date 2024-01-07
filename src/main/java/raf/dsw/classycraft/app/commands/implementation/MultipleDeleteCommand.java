@@ -137,21 +137,21 @@ public class MultipleDeleteCommand extends AbstractCommand {
                 klasa.addSubscriber(dijagramView);
                 KlasaPainter klasaPainter = new KlasaPainter(klasa);
                 dijagramView.getElementPainterList().add(klasaPainter);
-                d.addChild(klasa);///dodoavanje u model
+                //d.addChild(klasa);///dodoavanje u model
                 MainFrame.getInstance().getClassyTree().addChild(item, klasa);///dodavanje u stablo
             } else if (interclass instanceof Interfejs) {
                 Interfejs interfejs = (Interfejs) interclass;
                 interfejs.addSubscriber(dijagramView);
                 InterfejsPainter interfejsPainter = new InterfejsPainter(interfejs);
                 dijagramView.getElementPainterList().add(interfejsPainter);
-                d.addChild(interfejs);
+                //d.addChild(interfejs);
                 MainFrame.getInstance().getClassyTree().addChild(item, interfejs);
             } else if (interclass instanceof EnumM) {
                 EnumM enumM = (EnumM) interclass;
                 enumM.addSubscriber(dijagramView);
                 EnumPainter enumPainter = new EnumPainter(enumM);
                 dijagramView.getElementPainterList().add(enumPainter);
-                d.addChild(enumM);
+                //d.addChild(enumM);
                 MainFrame.getInstance().getClassyTree().addChild(item, enumM);
             }
         }
@@ -168,23 +168,33 @@ public class MultipleDeleteCommand extends AbstractCommand {
         ///sredjivanje modela i paintera
         List<ElementPainter> novaPainterLista = new ArrayList<>();
         List<ClassyNode> novaLista = new ArrayList<>();
-        for(int i=0;i< item.getChildCount();i++){
+        for (int i = 0; i < item.getChildCount(); i++) {
             ClassyTreeItem cti = (ClassyTreeItem) item.getChildAt(i);
             novaLista.add(cti.getClassyNode());
-            if(cti.getClassyNode() instanceof Klasa)
+            if (cti.getClassyNode() instanceof Klasa) {
+                ((Klasa)cti.getClassyNode()).addSubscriber(dijagramView);
                 novaPainterLista.add(new KlasaPainter((Klasa) cti.getClassyNode()));
-            else if(cti.getClassyNode() instanceof Interfejs)
+            }
+            else if (cti.getClassyNode() instanceof Interfejs) {
+                ((Interfejs)cti.getClassyNode()).addSubscriber(dijagramView);
                 novaPainterLista.add(new InterfejsPainter((Interfejs) cti.getClassyNode()));
-            else if(cti.getClassyNode() instanceof EnumM)
+            }
+            else if (cti.getClassyNode() instanceof EnumM) {
+                ((EnumM)cti.getClassyNode()).addSubscriber(dijagramView);
                 novaPainterLista.add(new EnumPainter((EnumM) cti.getClassyNode()));
-            else if(cti.getClassyNode() instanceof Agregacija)
+            }
+            else if (cti.getClassyNode() instanceof Agregacija) {
                 novaPainterLista.add(new AgregacijaPainter((Agregacija) cti.getClassyNode()));
-            else if(cti.getClassyNode() instanceof Kompozicija)
+            }
+            else if (cti.getClassyNode() instanceof Kompozicija) {
                 novaPainterLista.add(new KompozicijaPainter((Kompozicija) cti.getClassyNode()));
-            else if(cti.getClassyNode() instanceof Generalizacija)
+            }
+            else if (cti.getClassyNode() instanceof Generalizacija) {
                 novaPainterLista.add(new GeneralizacijaPainter((Generalizacija) cti.getClassyNode()));
-            else if(cti.getClassyNode() instanceof Zavisnost)
+            }
+            else if (cti.getClassyNode() instanceof Zavisnost) {
                 novaPainterLista.add(new ZavisnostPainter((Zavisnost) cti.getClassyNode()));
+            }
         }
         Dijagram d = (Dijagram) item.getClassyNode();
         d.setChildren(novaLista);
@@ -249,21 +259,6 @@ public class MultipleDeleteCommand extends AbstractCommand {
             if(connection.getFrom()!= null && connection.getTo() != null && connection.getFrom() != connection.getTo()){
                 ZavisnostPainter zp = new ZavisnostPainter(connection);
                 dijagramView.getElementPainterList().add(zp);
-                d.addChild(connection);
-                MainFrame.getInstance().getClassyTree().addChild(item, connection);
-            }
-        }
-        else if(connection instanceof Asocijacija){
-            for(ElementPainter e : dijagramView.getElementPainterList()){
-                if(e instanceof InterclassPainter) {
-                    if (e.elementAt(new Point(x, y))){
-                        connection.setTo((Interclass) e.getElement());
-                    }
-                }
-            }
-            if(connection.getFrom()!= null && connection.getTo() != null && connection.getFrom() != connection.getTo()){
-                AsocijacijaPainter asp = new AsocijacijaPainter(connection);
-                dijagramView.getElementPainterList().add(asp);
                 d.addChild(connection);
                 MainFrame.getInstance().getClassyTree().addChild(item, connection);
             }

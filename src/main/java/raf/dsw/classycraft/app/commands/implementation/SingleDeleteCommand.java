@@ -123,15 +123,11 @@ public class SingleDeleteCommand extends AbstractCommand {
         }
         //selektovanaKlasa = null;
         fixModel();
-        System.out.println("Stanje broj veza posle Do: " + veze.size());
     }
 
     @Override
     public void undoCommand() {
         Dijagram d = (Dijagram) dijagramView.getClassyNode();
-        fixModel();
-
-        System.out.println("Stanje broj veza pre undo: " + veze.size());
 
         for (DijagramElement dijagramElement : list) {
             if (dijagramElement instanceof Interclass) {
@@ -178,20 +174,30 @@ public class SingleDeleteCommand extends AbstractCommand {
         for (int i = 0; i < item.getChildCount(); i++) {
             ClassyTreeItem cti = (ClassyTreeItem) item.getChildAt(i);
             novaLista.add(cti.getClassyNode());
-            if (cti.getClassyNode() instanceof Klasa)
+            if (cti.getClassyNode() instanceof Klasa) {
+                ((Klasa)cti.getClassyNode()).addSubscriber(dijagramView);
                 novaPainterLista.add(new KlasaPainter((Klasa) cti.getClassyNode()));
-            else if (cti.getClassyNode() instanceof Interfejs)
+            }
+            else if (cti.getClassyNode() instanceof Interfejs) {
+                ((Interfejs)cti.getClassyNode()).addSubscriber(dijagramView);
                 novaPainterLista.add(new InterfejsPainter((Interfejs) cti.getClassyNode()));
-            else if (cti.getClassyNode() instanceof EnumM)
+            }
+            else if (cti.getClassyNode() instanceof EnumM) {
+                ((EnumM)cti.getClassyNode()).addSubscriber(dijagramView);
                 novaPainterLista.add(new EnumPainter((EnumM) cti.getClassyNode()));
-            else if (cti.getClassyNode() instanceof Agregacija)
+            }
+            else if (cti.getClassyNode() instanceof Agregacija) {
                 novaPainterLista.add(new AgregacijaPainter((Agregacija) cti.getClassyNode()));
-            else if (cti.getClassyNode() instanceof Kompozicija)
+            }
+            else if (cti.getClassyNode() instanceof Kompozicija) {
                 novaPainterLista.add(new KompozicijaPainter((Kompozicija) cti.getClassyNode()));
-            else if (cti.getClassyNode() instanceof Generalizacija)
+            }
+            else if (cti.getClassyNode() instanceof Generalizacija) {
                 novaPainterLista.add(new GeneralizacijaPainter((Generalizacija) cti.getClassyNode()));
-            else if (cti.getClassyNode() instanceof Zavisnost)
+            }
+            else if (cti.getClassyNode() instanceof Zavisnost) {
                 novaPainterLista.add(new ZavisnostPainter((Zavisnost) cti.getClassyNode()));
+            }
         }
         Dijagram d = (Dijagram) item.getClassyNode();
         d.setChildren(novaLista);

@@ -61,6 +61,8 @@ public class ClassyTreeImplementation implements ClassyTree {
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("DijagramElement ne moze imati podklasu!", MessageType.ERROR);
             return;
         }
+        if(parent == null)
+            return;
         ClassyNode child = createChild(parent.getClassyNode(), dijagramElement);
         if (child != null) {
             child.setParent(parent.getClassyNode());

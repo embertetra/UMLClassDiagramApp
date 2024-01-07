@@ -32,6 +32,7 @@ public class Delete implements State {
 
         AbstractCommand command;
         if(!dijagramView.getSelectionModel().isEmpty() && flag == 1){
+            System.out.println("usao");
             command = new MultipleDeleteCommand(x, y, dijagramView, item);
         }
         else{

@@ -83,13 +83,15 @@ public class Move implements State {
         }
         ///preklapanje single move
         else if(tmp != 1){
-            int br=0;
+
+
             for(ElementPainter ep : dijagramView.getElementPainterList()){
                 if(ep instanceof InterclassPainter) {
                     InterclassPainter mojPainter = (InterclassPainter) ep;
                     if (mojPainter != null) {
                         Interclass mojInterclass = (Interclass) mojPainter.getElement();
                         //provera da li se nove koordinate preklapaju sa drugim elementima na dijagramu
+                        int br=0;
                         Rectangle mojRect = new Rectangle(mojInterclass.getPosition().x - mojPainter.getWidth() / 2 - 10, mojInterclass.getPosition().y - mojPainter.getHeightUkupno() / 2 - 5, mojPainter.getWidth() + 12, mojPainter.getHeightUkupno() + 12);
                         for (ElementPainter epp : dijagramView.getElementPainterList()) {
                             if (epp instanceof InterclassPainter) {
@@ -108,6 +110,7 @@ public class Move implements State {
                                         mojPainter = ip;
                                         mojInterclass = (Interclass) mojPainter.getElement();
                                         mojInterclass.setPosition(oldPoint, dijagramView);
+                                        System.out.println(br);
                                         return;
                                     }
                                 }
