@@ -36,10 +36,12 @@ public class ChangeContentCommand extends AbstractCommand {
         metodaUndo = new ArrayList<>();
 
         if(naziv == null) {
-            if (!MainFrame.getInstance().getInterfejsProzor().getTfNaziv().getText().isEmpty() || !MainFrame.getInstance().getInterfejsProzor().getTfNaziv().getText().equals(" ") && atribut == null)
-                if (interclass instanceof Interfejs)
+            if (!MainFrame.getInstance().getInterfejsProzor().getTfNaziv().getText().isEmpty() || !MainFrame.getInstance().getInterfejsProzor().getTfNaziv().getText().equals(" ") && atribut == null) {
+                if (interclass instanceof Interfejs){
                     metodaUndo.add(MainFrame.getInstance().getInterfejsProzor().getMetodeList().get(index));
-            if (!MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().isEmpty() || !MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().equals(" ")) {
+                }
+            }
+            else if (!MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().isEmpty() || !MainFrame.getInstance().getKlasaProzor().getTfNaziv().getText().equals(" ")) {
                 if (atribut != null && MainFrame.getInstance().getKlasaProzor().getClassContentList().get(index) instanceof Atributi)
                     atributUndo.add((Atributi) MainFrame.getInstance().getKlasaProzor().getClassContentList().get(index));
                 else if(metoda != null)
@@ -59,11 +61,13 @@ public class ChangeContentCommand extends AbstractCommand {
                 MainFrame.getInstance().getKlasaProzor().getClassContentList().set(index, metodaRedo);
             }
             MainFrame.getInstance().getKlasaProzor().setClassContentList(((Klasa) interclass).getClassContentList());
-        } else if (interclass instanceof Interfejs){
+        }
+        else if (interclass instanceof Interfejs){
             metodaUndo.add(metodaRedo);
             MainFrame.getInstance().getInterfejsProzor().getMetodeList().set(index, metodaRedo);
             MainFrame.getInstance().getInterfejsProzor().setMetodeList(((Interfejs) interclass).getMetodeList());
-        }else if(interclass instanceof EnumM) {
+        }
+        else if(interclass instanceof EnumM) {
             nazivUndo = MainFrame.getInstance().getEnumProzor().getEnumMList().get(index);
             MainFrame.getInstance().getEnumProzor().getEnumMList().set(index, nazivRedo);
             MainFrame.getInstance().getEnumProzor().setEnumMList(((EnumM)interclass).getListEnuma());
@@ -77,15 +81,19 @@ public class ChangeContentCommand extends AbstractCommand {
             if(atributRedo != null && !atributUndo.isEmpty()) {
                 atributUndo.remove(atributUndo.size() - 1);
                 MainFrame.getInstance().getKlasaProzor().getClassContentList().set(index, atributUndo.get(atributUndo.size() - 1));
-            }else if(metodaRedo != null && !metodaUndo.isEmpty()) {
+            }
+            else if(metodaRedo != null && !metodaUndo.isEmpty()) {
                 metodaUndo.remove(metodaUndo.size() - 1);
                 MainFrame.getInstance().getKlasaProzor().getClassContentList().set(index, metodaUndo.get(metodaUndo.size() - 1));
-            }MainFrame.getInstance().getKlasaProzor().setClassContentList(((Klasa) interclass).getClassContentList());
-        } else if (interclass instanceof Interfejs && metodaRedo != null && !metodaUndo.isEmpty()){
+            }
+            MainFrame.getInstance().getKlasaProzor().setClassContentList(((Klasa) interclass).getClassContentList());
+        }
+        else if (interclass instanceof Interfejs && metodaRedo != null && !metodaUndo.isEmpty()){
             metodaUndo.remove(metodaUndo.size() - 1);
             MainFrame.getInstance().getInterfejsProzor().getMetodeList().set(index, metodaUndo.get(metodaUndo.size()-1));
             MainFrame.getInstance().getInterfejsProzor().setMetodeList(((Interfejs) interclass).getMetodeList());
-        }else if(interclass instanceof EnumM && nazivUndo != null) {
+        }
+        else if(interclass instanceof EnumM && nazivUndo != null) {
             MainFrame.getInstance().getEnumProzor().getEnumMList().set(index, nazivUndo);
             MainFrame.getInstance().getEnumProzor().setEnumMList(((EnumM)interclass).getListEnuma());
         }
