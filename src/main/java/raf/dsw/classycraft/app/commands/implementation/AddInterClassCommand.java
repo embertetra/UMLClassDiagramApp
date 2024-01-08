@@ -102,7 +102,6 @@ public class AddInterClassCommand extends AbstractCommand {
                         if (((ClassyTreeItem) item.getChildAt(i)).getClassyNode() instanceof Interclass) {
                             Interclass inter = (Interclass) ((ClassyTreeItem) item.getChildAt(i)).getClassyNode();
                             if (inter.poredjenje(interclass)) {
-                                System.out.println("orbisano" + interclass.getPosition());
                                 item.remove(i);
                                 break;
                             }

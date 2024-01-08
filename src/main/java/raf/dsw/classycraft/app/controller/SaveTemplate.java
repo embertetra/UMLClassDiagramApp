@@ -1,20 +1,17 @@
 package raf.dsw.classycraft.app.controller;
 
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
-import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
-import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.io.File;
 
 public class SaveTemplate extends AbstractClassyAction{
     public SaveTemplate() {
         //putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl shift S"));
-        putValue(SMALL_ICON, loadIcon("/images/template.png"));
+        putValue(SMALL_ICON, loadIcon("/images/save_template.png"));
         putValue(NAME, "Save template");
         putValue(SHORT_DESCRIPTION, "Save template");
     }

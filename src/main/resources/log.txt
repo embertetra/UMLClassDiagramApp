@@ -254,3 +254,6 @@
 [ERROR] [07.01.2024. 14:01] [Nije odabran element iz liste!]
 [ERROR] [07.01.2024. 14:01] [Nije odabran element iz liste!]
 [ERROR] [07.01.2024. 14:03] [Nije upisan naziv!]
+[ERROR] [08.01.2024. 20:05] [Nije selektovan roditelj]
+[ERROR] [08.01.2024. 20:17] [Potrebno je selektovati projekat pri dodeli autora!]
+[ERROR] [08.01.2024. 20:19] [Morate selektovati projekat]

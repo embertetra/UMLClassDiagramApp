@@ -29,7 +29,7 @@ import java.io.IOException;
 
 public class ExportProjectToCode extends AbstractClassyAction {
     public ExportProjectToCode() {
-        putValue(SMALL_ICON, loadIcon("/images/exportProjectToCode.png"));
+        putValue(SMALL_ICON, loadIcon("/images/export_code.png"));
         putValue(NAME, "Export as code");
         putValue(SHORT_DESCRIPTION, "Export as code");
     }
