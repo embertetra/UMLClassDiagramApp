@@ -7,7 +7,6 @@ import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.io.File;
 
 public class SaveAsAction extends AbstractClassyAction{

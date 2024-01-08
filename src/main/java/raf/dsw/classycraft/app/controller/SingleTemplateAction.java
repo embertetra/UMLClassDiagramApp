@@ -175,8 +175,4 @@ public class SingleTemplateAction extends AbstractClassyAction {
         }
 
     }
-
-    public void setProsledjen(Dijagram prosledjen) {
-        this.prosledjen = prosledjen;
-    }
 }

@@ -44,42 +44,9 @@ public class DependencyProzor extends JFrame {
         pack();
     }
 
-    public JLabel getJblName() {
-        return jblName;
-    }
-
-    public void setJblName(JLabel jblName) {
-        this.jblName = jblName;
-    }
-
     public JComboBox<String> getComboBox() {
         return comboBox;
     }
-
-    public void setComboBox(JComboBox<String> comboBox) {
-        this.comboBox = comboBox;
-    }
-
-    public JButton getJbOk() {
-        return jbOk;
-    }
-
-    public void setJbOk(JButton jbOk) {
-        this.jbOk = jbOk;
-    }
-
-    public JPanel getjPanel() {
-        return jPanel;
-    }
-
-    public void setjPanel(JPanel jPanel) {
-        this.jPanel = jPanel;
-    }
-
-    public ZavisnostPainter getPainter() {
-        return painter;
-    }
-
     public void setPainter(ZavisnostPainter painter) {
         this.painter = painter;
         jbOk.setAction(new DependencyPotvrdi(this, painter));

@@ -9,8 +9,6 @@ import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.GeneralPath;
-import java.awt.geom.PathIterator;
 
 public class KlasaPainter extends InterclassPainter {
     protected Shape shape;

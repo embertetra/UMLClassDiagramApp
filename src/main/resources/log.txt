@@ -257,3 +257,5 @@
 [ERROR] [08.01.2024. 20:05] [Nije selektovan roditelj]
 [ERROR] [08.01.2024. 20:17] [Potrebno je selektovati projekat pri dodeli autora!]
 [ERROR] [08.01.2024. 20:19] [Morate selektovati projekat]
+[ERROR] [08.01.2024. 20:42] [Folder pod nazivom vaseg projekta vec postoji na zeljenoj lokaciji]
+[ERROR] [08.01.2024. 20:42] [Novo ime nije pravilno uneto!]

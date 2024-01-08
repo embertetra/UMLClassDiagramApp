@@ -2,7 +2,6 @@ package raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Agregacija;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Generalizacija;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;

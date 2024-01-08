@@ -36,12 +36,6 @@ public class ObrisiIzInterfejsaAction extends AbstractClassyAction{
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije odabran element koji se brise!", MessageType.ERROR);
             return;
         }
-        /*
-        ((Interfejs) interfejsPainter.getElement()).getMetodeList().remove(MainFrame.getInstance().getInterfejsProzor().getLista().getSelectedValue());
-        ((Interfejs) interfejsPainter.getElement()).projectChanged();
-        MainFrame.getInstance().getInterfejsProzor().setMetodeList(((Interfejs) interfejsPainter.getElement()).getMetodeList());
-        dijagramView.repaint();
-        */
         AbstractCommand command = new DeleteContentCommand((Interfejs) interfejsPainter.getElement(), dijagramView);
         ((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
         ((Interfejs) interfejsPainter.getElement()).projectChanged();

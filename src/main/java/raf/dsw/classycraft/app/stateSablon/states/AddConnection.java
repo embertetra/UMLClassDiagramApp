@@ -29,99 +29,7 @@ public class AddConnection implements State {
 
     @Override
     public void misOtpusten(int x, int y, DijagramView dijagramView) {
-/*
-        Dijagram d = (Dijagram)dijagramView.getClassyNode();
-        d.addSubscriber(dijagramView);
 
-        ///odredjivanje dijagrama u stablu
-        ClassyTreeItem item = null;
-        //ClassyTreeItem selected = MainFrame.getInstance().getClassyTree().getSelectedNode();
-        ClassyTreeItem selected = MainFrame.getInstance().getPackageView().getClassyTreeItem();
-        for(int i=0; i<selected.getChildCount(); i++){
-            ClassyTreeItem c = (ClassyTreeItem)selected.getChildAt(i);
-            ClassyNode cn = c.getClassyNode();
-            if(cn.getName().equals(dijagramView.getClassyNode().getName()))
-                item = c;
-        }
-
-        if(connection != null){
-            if(connection.equals("agregacija")){
-                for(ElementPainter e : dijagramView.getElementPainterList()){
-                    if(e instanceof InterclassPainter) {
-                        if (e.elementAt(new Point(x, y))){
-                            a.setTo((Interclass) e.getElement());
-                        }
-                    }
-                }
-                if(a.getFrom()!= null && a.getTo() != null && a.getFrom() != a.getTo()){
-                    AgregacijaPainter ap = new AgregacijaPainter(a);
-                    dijagramView.getElementPainterList().add(ap);
-                    d.addChild(a);
-                    MainFrame.getInstance().getClassyTree().addChild(item, a);
-                }
-            }
-            else if(connection.equals("kompozicija")){
-                for(ElementPainter e : dijagramView.getElementPainterList()){
-                    if(e instanceof InterclassPainter) {
-                        if (e.elementAt(new Point(x, y))){
-                            k.setTo((Interclass) e.getElement());
-                        }
-                    }
-                }
-                if(k.getFrom()!= null && k.getTo() != null && k.getFrom() != k.getTo()){
-                    KompozicijaPainter kp = new KompozicijaPainter(k);
-                    dijagramView.getElementPainterList().add(kp);
-                    d.addChild(k);
-                    MainFrame.getInstance().getClassyTree().addChild(item, k);
-                }
-            }
-            else if(connection.equals("generalizacija")){
-                for(ElementPainter e : dijagramView.getElementPainterList()){
-                    if(e instanceof InterclassPainter) {
-                        if (e.elementAt(new Point(x, y))){
-                            g.setTo((Interclass) e.getElement());
-                        }
-                    }
-                }
-                if(g.getFrom()!= null && g.getTo() != null && g.getFrom() != g.getTo()){
-                    GeneralizacijaPainter gp = new GeneralizacijaPainter(g);
-                    dijagramView.getElementPainterList().add(gp);
-                    d.addChild(g);
-                    MainFrame.getInstance().getClassyTree().addChild(item, g);
-                }
-            }
-            else if(connection.equals("zavisnost")){
-                for(ElementPainter e : dijagramView.getElementPainterList()){
-                    if(e instanceof InterclassPainter)
-                        if(e.elementAt(new Point(x, y)))
-                            z.setTo((Interclass) e.getElement());
-                }
-                if(z.getFrom()!= null && z.getTo() != null && z.getFrom() != z.getTo()){
-                    ZavisnostPainter zp = new ZavisnostPainter(z);
-                    dijagramView.getElementPainterList().add(zp);
-                    d.addChild(z);
-                    MainFrame.getInstance().getClassyTree().addChild(item, z);
-                }
-            }
-            else if(connection.equals("asocijacija")){
-
-                for(ElementPainter e : dijagramView.getElementPainterList()){
-                    if(e instanceof InterclassPainter) {
-                        if (e.elementAt(new Point(x, y))){
-                            as.setTo((Interclass) e.getElement());
-                        }
-                    }
-                }
-                if(as.getFrom()!= null && as.getTo() != null && as.getFrom() != as.getTo()){
-                    AsocijacijaPainter asp = new AsocijacijaPainter(as);
-                    dijagramView.getElementPainterList().add(asp);
-                    d.addChild(as);
-                    MainFrame.getInstance().getClassyTree().addChild(item, as);
-                }
-
-            }
-        }
-*/
         if(connection != null){
             AbstractCommand command = null;
             if(connection.equals("agregacija")){
@@ -141,9 +49,6 @@ public class AddConnection implements State {
             }
             ((DijagramView)MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
         }
-
-        //dijagramView.setLine(new Pair<>(new Point(-1,-1), new Point(0,0)));
-        //dijagramView.repaint();
     }
 
     @Override

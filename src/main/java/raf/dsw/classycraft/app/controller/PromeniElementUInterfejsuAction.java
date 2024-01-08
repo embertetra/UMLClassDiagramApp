@@ -14,7 +14,6 @@ import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.Interfe
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
 
 public class PromeniElementUInterfejsuAction extends AbstractClassyAction{
 

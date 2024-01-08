@@ -1,6 +1,5 @@
 package raf.dsw.classycraft.app.controller;
 
-import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Package;
@@ -10,10 +9,8 @@ import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
-import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.gui.swing.view.PackageView;
-import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

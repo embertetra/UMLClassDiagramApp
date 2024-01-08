@@ -1,6 +1,5 @@
 package raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter;
 
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Connection;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.Interclass;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Agregacija;
@@ -12,7 +11,6 @@ import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
 
 import java.awt.*;
 import java.awt.geom.GeneralPath;
-import java.util.Iterator;
 
 public class AgregacijaPainter extends ConnectionPainter {
     public AgregacijaPainter(DijagramElement element) {

@@ -1,6 +1,5 @@
 package raf.dsw.classycraft.app.commands;
 
-import raf.dsw.classycraft.app.commands.implementation.MultipleDeleteCommand;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 import java.util.ArrayList;
@@ -44,13 +43,5 @@ public class CommandManager {
 
     public void setCommands(List<AbstractCommand> commands) {
         this.commands = commands;
-    }
-
-    public int getCurrentCommand() {
-        return currentCommand;
-    }
-
-    public void setCurrentCommand(int currentCommand) {
-        this.currentCommand = currentCommand;
     }
 }

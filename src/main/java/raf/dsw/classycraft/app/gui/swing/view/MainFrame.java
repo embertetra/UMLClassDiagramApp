@@ -110,12 +110,6 @@ public class MainFrame extends JFrame implements ISubscriber {
         return instance;
     }
 
-    public ToolBarStates getToolBarStates() {
-        if(toolBarStates != null)
-            return toolBarStates;
-        else return new ToolBarStates();
-    }
-
     public GalleryTemplates getGalleryTemplates() {
         return galleryTemplates;
     }

@@ -6,7 +6,6 @@ import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposi
 import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Atributi;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.EnumElement;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.classContent.Metode;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Agregacija;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Asocijacija;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Generalizacija;

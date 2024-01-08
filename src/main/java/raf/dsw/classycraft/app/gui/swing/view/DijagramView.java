@@ -122,9 +122,6 @@ public class DijagramView extends JPanel implements ISubscriber {
         for (ElementPainter x : elementPainterList) {
             x.draw(g2);
         }
-
-        //System.out.println("Izvrsen paintComponent");
-        //((Graphics2D) g).setTransform(save);
     }
 
     public void exportImage(){

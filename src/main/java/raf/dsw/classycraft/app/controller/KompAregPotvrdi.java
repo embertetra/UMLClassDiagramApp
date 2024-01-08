@@ -67,13 +67,6 @@ public class KompAregPotvrdi extends AbstractClassyAction{
         prozor.setVisible(false);
     }
 
-    public KompAgregProzor getProzor() {
-        return prozor;
-    }
-
-    public void setProzor(KompAgregProzor kompAgregProzor) {
-        this.prozor = kompAgregProzor;
-    }
 
     public ConnectionPainter getConnectionPainter() {
         return connectionPainter;

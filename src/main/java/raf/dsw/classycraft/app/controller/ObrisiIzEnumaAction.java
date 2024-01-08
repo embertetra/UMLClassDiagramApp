@@ -35,13 +35,6 @@ public class ObrisiIzEnumaAction extends AbstractClassyAction{
             ApplicationFramework.getInstance().getMessageGenerator().GenerateMessage("Nije odabran element koji se brise!", MessageType.ERROR);
             return;
         }
-    /*
-        ((EnumM) enumPainter.getElement()).getListEnuma().remove(MainFrame.getInstance().getEnumProzor().getLista().getSelectedValue());
-        ((EnumM) enumPainter.getElement()).projectChanged();
-        MainFrame.getInstance().getEnumProzor().setEnumMList(((EnumM) enumPainter.getElement()).getListEnuma());
-        dijagramView.repaint();
-
-     */
         ((EnumM) enumPainter.getElement()).projectChanged();
         AbstractCommand command = new DeleteContentCommand((EnumM) enumPainter.getElement(), dijagramView);
         ((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);

@@ -50,8 +50,6 @@ public class DodajUEnumAction extends AbstractClassyAction{
             return;
         }
 
-        //((EnumM) enumPainter.getElement()).getListEnuma().add(naziv);
-        //dijagramView.repaint();
         AbstractCommand command = new AddContentCommand(null, null, naziv, (EnumM) enumPainter.getElement(), dijagramView);
         ((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
 

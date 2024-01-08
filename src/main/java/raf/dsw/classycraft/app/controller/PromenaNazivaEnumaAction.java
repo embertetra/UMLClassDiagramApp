@@ -55,12 +55,6 @@ public class PromenaNazivaEnumaAction extends AbstractClassyAction{
                 }
             }
         }
-        /*
-        //menjanje imena
-        ((EnumM) enumPainter.getElement()).setNaziv(MainFrame.getInstance().getEnumProzor().getTfIme().getText());
-        ((EnumM) enumPainter.getElement()).projectChanged();
-        dijagramView.repaint();
-        */
         AbstractCommand command = new AddNameCommand(MainFrame.getInstance().getEnumProzor().getTfIme().getText(), ((EnumM) enumPainter.getElement()).getNaziv(), (EnumM) enumPainter.getElement(), dijagramView);
         ((DijagramView)MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
 

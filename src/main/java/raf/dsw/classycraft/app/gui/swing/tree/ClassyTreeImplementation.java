@@ -3,13 +3,6 @@ package raf.dsw.classycraft.app.gui.swing.tree;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Agregacija;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Generalizacija;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Kompozicija;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Zavisnost;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.EnumM;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Interfejs;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.interclass.Klasa;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Package;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
@@ -20,22 +13,10 @@ import raf.dsw.classycraft.app.errorHandler.MessageType;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.tree.model.childFactory.FactoryUtils;
 import raf.dsw.classycraft.app.gui.swing.tree.view.ClassyTreeView;
-import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
-import raf.dsw.classycraft.app.gui.swing.view.PackageView;
-import raf.dsw.classycraft.app.gui.swing.view.painters.ConnectionPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.AgregacijaPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.GeneralizacijaPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.KompozicijaPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.connectionPainter.ZavisnostPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.EnumPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.InterfejsPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.KlasaPainter;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
 public class ClassyTreeImplementation implements ClassyTree {

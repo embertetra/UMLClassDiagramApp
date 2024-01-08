@@ -1,8 +1,6 @@
 package raf.dsw.classycraft.app.controller.MouseListeners.dvoklikNaPaket;
 
-import com.sun.tools.javac.Main;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.DijagramElement;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Agregacija;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Generalizacija;
 import raf.dsw.classycraft.app.classyCraftRepository.composite.dijagramElementi.connection.Kompozicija;
@@ -14,7 +12,6 @@ import raf.dsw.classycraft.app.classyCraftRepository.implementation.Dijagram;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Package;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.ProjectExplorer;
-import raf.dsw.classycraft.app.controller.MouseListeners.MouseController;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.tree.view.ClassyTreeView;
@@ -33,8 +30,6 @@ import raf.dsw.classycraft.app.gui.swing.view.painters.interclassPainter.KlasaPa
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MouseListener {
 

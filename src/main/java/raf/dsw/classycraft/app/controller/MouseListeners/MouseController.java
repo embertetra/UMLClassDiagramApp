@@ -3,7 +3,6 @@ package raf.dsw.classycraft.app.controller.MouseListeners;
 import raf.dsw.classycraft.app.gui.swing.view.DijagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
-import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.NoninvertibleTransformException;
 import java.awt.geom.Point2D;

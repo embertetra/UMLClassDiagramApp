@@ -29,7 +29,6 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class SingleDeleteCommand extends AbstractCommand {
 

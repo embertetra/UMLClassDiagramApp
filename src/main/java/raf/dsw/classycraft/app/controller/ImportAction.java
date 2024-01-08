@@ -1,8 +1,6 @@
 package raf.dsw.classycraft.app.controller;
 
 import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNode;
-import raf.dsw.classycraft.app.classyCraftRepository.composite.ClassyNodeComposite;
-import raf.dsw.classycraft.app.classyCraftRepository.implementation.Package;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.Project;
 import raf.dsw.classycraft.app.classyCraftRepository.implementation.ProjectExplorer;
 import raf.dsw.classycraft.app.core.ApplicationFramework;

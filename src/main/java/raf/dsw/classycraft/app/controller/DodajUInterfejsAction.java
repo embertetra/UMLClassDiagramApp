@@ -81,8 +81,6 @@ public class DodajUInterfejsAction extends AbstractClassyAction{
 
         Metode m = new Metode(vidljivost, tip, naziv);
 
-        //((Interfejs) interfejsPainter.getElement()).getMetodeList().add(new Metode(vidljivost, tip, naziv));
-        //dijagramView.repaint();
         AbstractCommand command = new AddContentCommand(null, m, null, (Interfejs) interfejsPainter.getElement(), dijagramView);
         ((DijagramView) MainFrame.getInstance().getPackageView().getjTabbedPane().getSelectedComponent()).getCommandManager().addCommand(command);
 

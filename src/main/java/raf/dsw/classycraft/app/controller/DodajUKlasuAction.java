@@ -90,14 +90,6 @@ public class DodajUKlasuAction extends AbstractClassyAction{
                 MainFrame.getInstance().getKlasaProzor().getTfNaziv().setText("");
                 return;
             }
-        /*
-        if(MainFrame.getInstance().getKlasaProzor().getAtribut().isSelected()) {
-            ((Klasa) klasaPainter.getElement()).getClassContentList().add(new Atributi(vidljivost, tip, naziv));
-        }
-        else if(MainFrame.getInstance().getKlasaProzor().getMetoda().isSelected()) {
-            ((Klasa) klasaPainter.getElement()).getClassContentList().add(new Metode(vidljivost, tip, naziv));
-        } dijagramView.repaint();
-        */
 
         AbstractCommand command = null;
         if(MainFrame.getInstance().getKlasaProzor().getAtribut().isSelected()) {

@@ -1,6 +1,5 @@
 package raf.dsw.classycraft.app.gui.swing.view;
 
-import raf.dsw.classycraft.app.controller.SingleTemplateAction;
 
 import javax.swing.*;
 
